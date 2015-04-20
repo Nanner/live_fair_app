@@ -1,4 +1,4 @@
-# Live Fair
+# Live Fair App
 
 Consumer and trade fairs should be an opportunity to bring people closer to the companies that make their lives better. However, this is not always the case - complicated showrooms, coupled with large crowds and exhibition booths that lack in appeal often make people avoid interaction.
 
