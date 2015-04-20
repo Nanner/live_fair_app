@@ -1,0 +1,29 @@
+<ion-view title="'Login'">
+    <ion-content scroll='true'>
+        
+        <!-- Template content -->
+        <div class="login" ng-controller="loginCtrl">       
+            <h1 class="loginTitle"> <span class="ion-person"></span> Login </h1>   
+            <div class="loginForm">
+                <div class="form-list list-insert">
+                    <label class="item item-input">
+                        <i class="form-icon ion-android-contact placeholder-icon"></i>
+                        <input type="text" placeholder="Username" ng-model="username">
+                    </label>
+                </div>
+
+                <div class="form-list list-insert">
+                    <label class="item item-input">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" placeholder="Password" ng-model="password">
+                    </label>
+                </div>
+            </div>
+
+            <div class="loginBtnContainer">
+                <button ng-click="" class="loginBtn button button-calm"> <strong> Login </strong> </button>
+            </div>    
+        </div>
+        
+    </ion-content>
+</ion-view>
