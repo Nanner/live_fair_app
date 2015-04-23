@@ -21,8 +21,26 @@ module.config(function($stateProvider, $urlRouterProvider) {
 				controller: "loginCtrl"
 			}
 		}
+	})
+    .state('menu.register', {
+		url: "/register",
+		views: {
+			'menuContent' :{
+				templateUrl: "templates/register.html",
+				controller: "registerCtrl"
+			}
+		}
+	})
+    .state('menu.fair', {
+		url: "/fair",
+		views: {
+			'menuContent' :{
+				templateUrl: "templates/fair.html",
+				controller: "fairCtrl"
+			}
+		}
 	});
     
     //Default startup screen
     $urlRouterProvider.otherwise("/menu/login");
-});
+}); 

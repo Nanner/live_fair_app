@@ -1,0 +1,44 @@
+<ion-view title="'Fair'">
+    <ion-content scroll='true'>
+
+        <!-- Content -->
+        <div class="fair-container" ng-init="loadFairProfile()">
+            <h2 class="fair-title"> {{fair.name}} </h2>
+            <h4 class="fair-subtitle"> em {{fair.place}} </h4>
+        </div>
+        
+        <div class="card">
+          <div class="item item-divider">
+            Informações
+          </div>
+          <div class="item item-text-wrap">
+            <p> <b> Data: </b> de {{fair.startDay}} a {{fair.endDay}} de {{month}} </p>
+            <p> <b> Abertura: </b> {{fair.openingTime}}h </p>
+            <p> <b> Encerramento: </b> {{fair.closingTime}}h </p>
+            <p> <b> Morada: </b> {{fair.address}} </p>
+            <p ng-show={{description}}> <b> Descrição: </b> {{fair.description}} </p>
+          </div>
+        </div>
+        
+        <div class="fair-map-container" ng-show={{map}}>
+            <img class="fair-map" ng-src="{{fair.map}}"/>
+        </div>
+        
+        <div class="fair-btn-Container-1">
+            <button class="myBtn button button-clear button-outline button-positive">
+                Ver programa da feira
+            </button>
+        </div>
+        <div class="fair-btn-Container">
+            <button class="myBtn button button-clear button-outline button-positive">
+                Ver stand presentes
+            </button>
+        </div>
+        <div class="fair-btn-Container-3">
+            <button ng-click="chooseInterests()" class="myBtn button button-positive">
+                Aderir
+            </button>
+        </div>
+        
+    </ion-content>
+</ion-view>

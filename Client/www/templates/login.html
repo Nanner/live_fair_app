@@ -2,13 +2,13 @@
     <ion-content scroll='true'>
         
         <!-- Template content -->
-        <div class="login" ng-controller="loginCtrl">       
-            <h1 class="loginTitle"> <span class="ion-person"></span> Login </h1>   
+        <div class="login-container" ng-controller="loginCtrl">       
+            <h1 class="login-title"> <span class="ion-person"></span> Login </h1>   
             <div class="loginForm">
                 <div class="form-list list-insert">
                     <label class="item item-input">
                         <i class="form-icon ion-android-contact placeholder-icon"></i>
-                        <input type="text" placeholder="Username" ng-model="username">
+                        <input type="text" placeholder="Utilizador" ng-model="username">
                     </label>
                 </div>
 
@@ -20,8 +20,8 @@
                 </div>
             </div>
 
-            <div class="loginBtnContainer">
-                <button ng-click="" class="loginBtn button button-calm"> <strong> Login </strong> </button>
+            <div class="myBtn-Container">
+                <button nav-clear ng-click="submitLogin()" class="myBtn button button-calm"> <strong> Entrar </strong> </button>
             </div>    
         </div>
         

@@ -1,0 +1,50 @@
+<ion-view title="'Register'">
+    <ion-content scroll='true'>
+        
+        <!-- Content -->
+        <div class="register-container" ng-controller="registerCtrl">
+            
+            <h1 class="register-title"> <span class="ion-person-add"></span> Registo </h1>
+            
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" ng-model="name" placeholder="Nome">
+                </label>
+                <label ng-hide="{{usertype}}" usertype class="item item-input">
+                    <input type="text" ng-model="lastName" placeholder="Apelido">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="username" placeholder="Nome de utilizador">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="password" placeholder="Password">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="confirmPassword" placeholder="Confirmação password">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="email" placeholder="Email">
+                </label>
+                <label ng-show="{{usertype}}" class="item item-input">
+                    <input type="text" ng-model="website" placeholder="Website">
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="phone" placeholder="Contacto">
+                </label> 
+                <label ng-show="{{usertype}}" class="item item-input">
+                    <input type="text" ng-model="address" placeholder="Morada">
+                </label>              
+            </div>
+            
+            <div class="acceptTerms-container">
+                <ion-toggle class="myBtn" ng-model="termsAcceptance" toggle-class="toggle-calm"> <p> Declaro que li e aceito os termos </p> </ion-toggle>
+            </div>
+            
+            <div class="myBtn-Container">
+                <button nav-clear ng-click="submitRegister()" class="myBtn button button-calm"> <strong> Registo </strong> </button>
+            </div>              
+
+        </div>
+        
+    </ion-content>
+</ion-view>

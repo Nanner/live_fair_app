@@ -23,8 +23,8 @@
 		 		</div>
   			</a>
 	        <ion-list ng-repeat="x in items">
-	          <ion-item nav-clear menu-close ng-click="selectItem(0)">
-	            {{ x }}
+	          <ion-item nav-clear menu-close ng-click="selectItem({{x.id}})">
+	            {{ x.name }}
 	          </ion-item>
 	        </ion-list>
 	      </ion-side-menu>

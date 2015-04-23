@@ -3,7 +3,7 @@ var module = angular.module('starter');
 module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state, $stateParams) {
     
     $scope.username = "AMT Consulting";
-    $scope.items = ['login', 'registo', 'feiras'];
+    $scope.items = [{name: "Login", id: 0}, {name: "Registo", id: 1}, {name: "Feira", id: 2}, {name: "Feiras", id: 3}];
     
     $scope.toggleLeft = function() {
 		$ionicSideMenuDelegate.toggleLeft();
@@ -15,9 +15,12 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state,
                 $state.go('menu.login');
                 break;
             case 1: //registo
-                $state.go('menu.login');
+                $state.transitionTo('menu.register', $stateParams, { reload: true, inherit: false, notify: true });
                 break;
-            case 2: //feiras
+            case 2: //feira
+                $state.transitionTo('menu.fair', $stateParams, { reload: true, inherit: false, notify: true });
+                break;
+            case 3: //feiras
                 $state.go('menu.login');
                 break;
             default: 
