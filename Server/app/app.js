@@ -119,7 +119,7 @@ var LiveFair = sequelize.define('liveFair', {
     type: Sequelize.STRING
   },
   date: {
-    type: Sequelize.DATEONLY
+    type: Sequelize.DATE
   },
   liveFairLocation: {
     type: Sequelize.STRING
