@@ -88,26 +88,61 @@ var Organizer = sequelize.define('organizer', {
 });
 
 var Company = sequelize.define('company', {
-  username: {
+  companyName: {
     type: Sequelize.STRING,
   },
-  password: {
+  logoImage: {
     type: Sequelize.STRING
   },
-  type: {
+  website: {
     type: Sequelize.STRING
   },
-  contact: {
-    type: Sequelize.STRING
-  },
-  address: {
-    type: Sequelize.TEXT
+  visitorCounter: {
+    type: Sequelize.INTEGER
+  }
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+var Visitor = sequelize.define('visitor', {
+  Photo: {
+    type: Sequelize.STRING,
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+var LiveFair = sequelize.define('liveFair', {
+  name: {
+    type: Sequelize.STRING,
   },
   description: {
+    type: Sequelize.STRING
+  },
+  date: {
+    type: Sequelize.DATEONLY
+  },
+  liveFairLocation: {
+    type: Sequelize.STRING
+  },
+  map: {
+    type: Sequelize.STRING
+  }
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+var LiveFairEvents = sequelize.define('liveFairEvents', {
+  eventLocation: {
+    type: Sequelize.STRING,
+  },
+  time: {
+    type: Sequelize.DATE
+  },
+  Speakers: {
     type: Sequelize.TEXT
   },
-  blocked: {
-    type: Sequelize.BOOLEAN
+  Subject: {
+    type: Sequelize.TEXT
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
