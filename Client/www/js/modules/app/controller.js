@@ -20,8 +20,8 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state,
             case 2: //feira
                 $state.transitionTo('menu.fair', $stateParams, { reload: true, inherit: false, notify: true });
                 break;
-            case 3: //feiras
-                $state.go('menu.login');
+            case 3: //listar feiras
+                $state.transitionTo('menu.listfairs', $stateParams, { reload: true, inherit: false, notify: true });
                 break;
             default: 
                 break;

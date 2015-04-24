@@ -39,7 +39,18 @@ module.config(function($stateProvider, $urlRouterProvider) {
 				controller: "fairCtrl"
 			}
 		}
-	});
+	})
+
+    .state('menu.listfairs',{
+        url: "/listfairs",
+        views:{
+            'menuContent' :{
+                templateUrl: "templates/listfairs.html",
+                controller: "fairCtrl"
+            }
+        }
+    })
+    ;
     
     //Default startup screen
     $urlRouterProvider.otherwise("/menu/login");
