@@ -20,7 +20,7 @@ server.route({
     method: 'GET',
     path: '/lifefairs',
     handler: function (request, reply) {
-      reply(LiveFair.findAll({order: 'liveFairID DESC'}).then(function(liveFairs)
+      reply(LiveFair.findAll({order:'liveFairID DESC'}).then(function(liveFairs)
       {
         JSON.stringify(liveFairs);
       }));
@@ -35,9 +35,6 @@ server.route({
       {
         JSON.stringify(liveFair);
       }));
-    }
-    handler: function (request, reply) {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
     }
 });
 
