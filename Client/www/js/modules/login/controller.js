@@ -6,6 +6,7 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams) {
     $scope.password = "";
     
     $scope.submitLogin = function() {
+        var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
         console.log("tapped submit button");
     }
 });

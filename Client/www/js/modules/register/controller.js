@@ -209,6 +209,8 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
             if(!$scope.termsAcceptance) {
                 utils.showAlert(messages[8], 'Termos de uso'); 
             } else {
+                var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
+                console.log(passwordEncrypted);
                 console.log("all good, time to submit");   
             }
          }
