@@ -1,0 +1,2 @@
+relações ternárias
+não posso validar modelo (at least one needs a function when adding)

@@ -1,0 +1,7 @@
+npm install --save hapi
+npm install --save good
+npm install --save good-console
+npm install --save sequelize
+npm install --save pg pg-hstore
+npm install hapi-swagger --save
+npm install joi --save
