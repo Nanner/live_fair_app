@@ -40,7 +40,6 @@ module.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	})
-
     .state('menu.listfairs',{
         url: "/listfairs",
         views:{
@@ -50,7 +49,15 @@ module.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     })
-    ;
+    .state('menu.presentStands', {
+		url: "/presentStands",
+		views: {
+			'menuContent' :{
+				templateUrl: "templates/presentStands.html",
+				controller: "fairCtrl"
+			}
+		}
+	});
     
     //Default startup screen
     $urlRouterProvider.otherwise("/menu/login");
