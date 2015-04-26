@@ -1,7 +1,7 @@
 var module = angular.module('starter');
 
-module.factory('utils', function ($http, $q) {
-	
+module.factory('utils', function ($http, $q, $ionicPopup) {
+    
     return {
         
         getMonthName: function(month) {
@@ -45,7 +45,14 @@ module.factory('utils', function ($http, $q) {
                 default: 
                     break;
             }    
+        },
+ 
+        showAlert: function(message, title) {
+            var alertPopup = $ionicPopup.alert({
+             title: title,
+             template: message
+           }); 
         }
-        
+    
     };
 });

@@ -8,31 +8,40 @@
             
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" ng-model="name" placeholder="Nome">
+                    <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
+                    <input type="text" ng-model="name" placeholder="Nome" ng-change="validateNamesCallback('nome')">
                 </label>
                 <label ng-hide="{{usertype}}" usertype class="item item-input">
-                    <input type="text" ng-model="lastName" placeholder="Apelido">
+                    <i class="form-icon ion-android-contact placeholder-icon {{valLastname}}"></i>
+                    <input type="text" ng-model="lastName" placeholder="Apelido" ng-change="validateNamesCallback('apelido')">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="username" placeholder="Nome de utilizador">
+                    <i class="form-icon ion-person placeholder-icon"></i>
+                    <input type="text" ng-model="username" placeholder="Nome de utilizador" ng-change="usernameCallback()">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="password" placeholder="Password">
+                    <i class="form-icon ion-help-circled placeholder-icon {{valPassword}}"></i>
+                    <input type="password" ng-model="password" placeholder="Password" ng-change="passwordCallback()">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="confirmPassword" placeholder="Confirmação password">
+                    <i class="form-icon ion-help-circled placeholder-icon {{valConfirmPassword}}"></i>
+                    <input type="password" ng-model="confirmPassword" placeholder="Confirmação password" ng-change="confirmPasswordCallback()">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="email" placeholder="Email">
+                    <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
+                    <input type="text" ng-model="email" placeholder="Email" ng-change="validateEmailCallback()">
                 </label>
                 <label ng-show="{{usertype}}" class="item item-input">
-                    <input type="text" ng-model="website" placeholder="Website">
+                    <i class="form-icon ion-at placeholder-icon {{valWebsite}}"></i>
+                    <input type="text" ng-model="website" placeholder="Website" ng-change="validateWebsiteCallback()">
                 </label>
                 <label class="item item-input">
-                    <input type="text" ng-model="phone" placeholder="Contacto">
+                    <i class="form-icon ion-ios-telephone placeholder-icon {{valPhone}}"></i>
+                    <input type="text" ng-model="phone" placeholder="Contacto" ng-change="validatePhoneCallback()">
                 </label> 
                 <label ng-show="{{usertype}}" class="item item-input">
-                    <input type="text" ng-model="address" placeholder="Morada">
+                    <i class="form-icon ion-map placeholder-icon"></i>
+                    <input type="text" ng-model="address" placeholder="Morada" ng-change="validateAddressCallback()">
                 </label>              
             </div>
             
@@ -43,7 +52,6 @@
             <div class="myBtn-Container">
                 <button nav-clear ng-click="submitRegister()" class="myBtn button button-calm"> <strong> Registo </strong> </button>
             </div>              
-
         </div>
         
     </ion-content>

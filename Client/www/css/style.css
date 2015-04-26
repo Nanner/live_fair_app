@@ -76,6 +76,17 @@
     margin-right: 3%;
 }
 
+.green-icon {
+  color : green;
+}
+
+.red-icon {
+  color: red;
+}
+
+.neutral-icon {
+}
+
 /********** Fair ***********/
 
 .fair-container {
