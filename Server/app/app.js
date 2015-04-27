@@ -22,7 +22,7 @@ server.route({
     handler: function (request, reply) {
       reply(LiveFair.findAll({order:'liveFairID DESC'}).then(function(liveFairs)
       {
-        JSON.stringify(liveFairs);
+        return JSON.stringify(liveFairs);
       }));
     }
 });
@@ -33,7 +33,20 @@ server.route({
     handler: function (request, reply) {
       reply(LiveFair.find({request.params.id}).then(function(liveFair)
       {
-        JSON.stringify(liveFair);
+        return JSON.stringify(liveFair);
+      }));
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/lifefairs/schedule/{id}',
+    handler: function (request, reply) {
+      reply(LiveFairEvents.find({where:
+                                      { liveFairEventsID:
+                                        {request.params.id}}}).then(function(liveFairEvents)
+                                        {
+        return JSON.stringify(liveFairEvents);
       }));
     }
 });
@@ -205,19 +218,44 @@ var CompanyEvents = sequelize.define('companyEvents', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
+var Stands = sequelize.define('stands', {
+  standLocation:{
+    type: Sequelize.TEXT
+  },
+  approved:{
+    type: Sequelize.BOOLEAN
+  }
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+Company.belongsToMany(LiveFair, {through: "stands"});
+LiveFair.belongsToMany(Company , {through: "stands"});
+
+var Connection = sequelize.define('connection', {
+  like:{
+    type: Sequelize.BOOLEAN
+  }
+}, {
+  freezeTableName: true // Model tableName will be the same as the model name
+});
+
+Company.belongsToMany(Visitor, {through: "connection"});
+Visitor.belongsToMany(Company, {through: "connection"});
+
 //Ternary relation definition Company-CompanyEvents-LiveFair
-Company.belongsToMany(LiveFair, {through: "company_companyEvents_liveFair"});
-CompanyEvents.belongsToMany(LiveFair, {through: "company_companyEvents_liveFair"});
-CompanyEvents.belongsToMany(Visitor, {through: "company_companyEvents_liveFair"});
+Company.belongsToMany(LiveFair, {through: "liveFairCompanyEvents"});
+CompanyEvents.belongsToMany(LiveFair, {through: "liveFairCompanyEvents"});
+CompanyEvents.belongsToMany(Visitor, {through: "liveFairCompanyEvents"});
 
 //Ternary relation definition Company-Interest-LiveFair
-Company.belongsToMany(LiveFair, {through: "company_interest_liveFair"});
-Interest.belongsToMany(LiveFair, {through: "company_interest_liveFair"});
-Interest.belongsToMany(Company, {through: "company_interest_liveFair"});
+Company.belongsToMany(LiveFair, {through: "liveFairCompanyInterest"});
+Interest.belongsToMany(LiveFair, {through: "liveFairCompanyInterest"});
+Interest.belongsToMany(Company, {through: "liveFairCompanyInterest"});
 
 //Ternary relation definition Visitor-Interest-LiveFair
-Visitor.belongsToMany(LiveFair, {through: "visitor_interest_liveFair"});
-Interest.belongsToMany(Visitor, {through: "visitor_interest_liveFair"});
-Interest.belongsToMany(LiveFair, {through: "visitor_interest_liveFair"});
+Visitor.belongsToMany(LiveFair, {through: "liveFairVisitorInterest"});
+Interest.belongsToMany(Visitor, {through: "liveFairVisitorInterest"});
+Interest.belongsToMany(LiveFair, {through: "liveFairVisitorInterest"});
 
 sequelize.sync({force: true});
