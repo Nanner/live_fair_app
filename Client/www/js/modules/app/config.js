@@ -57,6 +57,15 @@ module.config(function($stateProvider, $urlRouterProvider) {
 				controller: "fairCtrl"
 			}
 		}
+	})
+	.state('menu.fairProgram', {
+		url: "/fairprogram",
+		views: {
+			'menuContent' :{
+				templateUrl: "templates/fairProgram.html",
+				controller: "fairCtrl"
+			}
+		}
 	});
     
     //Default startup screen
