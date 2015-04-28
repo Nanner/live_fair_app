@@ -2,7 +2,7 @@ var Hapi = require('hapi');
 var Good = require('good');
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('PostgreSQL 9.4', 'admin', 'coisas', {
+var sequelize = new Sequelize('liveFairAppDB', 'postgres', 'coisas', {
   host: 'localhost',
   dialect: 'postgres',
 
@@ -31,7 +31,8 @@ server.route({
     method: 'GET',
     path: '/lifefairs/{id}',
     handler: function (request, reply) {
-      reply(LiveFair.find({request.params.id}).then(function(liveFair)
+        var liveFairId=request.params.id;
+        reply(LiveFair.find(liveFairId).then(function(liveFair)
       {
         return JSON.stringify(liveFair);
       }));
@@ -42,9 +43,10 @@ server.route({
     method: 'GET',
     path: '/lifefairs/schedule/{id}',
     handler: function (request, reply) {
+      var liveFairId=request.params.id;
       reply(LiveFairEvents.find({where:
-                                      { liveFairEventsID:
-                                        {request.params.id}}}).then(function(liveFairEvents)
+                                      { liveFairEventsID: liveFairId
+                                          }}).then(function(liveFairEvents)
                                         {
         return JSON.stringify(liveFairEvents);
       }));
