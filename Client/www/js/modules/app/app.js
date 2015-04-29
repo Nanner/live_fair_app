@@ -9,6 +9,7 @@ angular.module('starter',
     'loginModule',
     'registerModule',
     'fairModule',
-    'ionic'
+    'ionic',
+    'ngCordova'
   ]
 );
