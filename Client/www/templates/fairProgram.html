@@ -1,27 +1,27 @@
 <ion-view title="'ListFairs'">
     <ion-content scroll='true'>
 
-    	<div class="program-title-container">
-    		<h1 class="program-title">Programa</h1>
-    		<h4 class="program-subtitle"> {{events.name}} </h4>
-    	</div>
+        <div class="program-title-container">
+            <h1 class="program-title">Programa</h1>
+            <h4 class="program-subtitle"> {{events.name}} </h4>
+        </div>
 
-    	<div class="program-container">
-    		<table class="program-table">
-    			<thead>
-    				<tr class="program-tr">
-    					<th class="program-th">Horas</th>
-    					<th class="program-th">Eventos</th>
-    				</tr>
-    			</thead>	
-				<tbody ng-repeat = "item in events.hours">
-					<tr class="program-tr" ng-repeat = "event in item.events" ng-click="loadEvent(event.id, event.name, event.fairName, event.startTime, event.endTime, event.place)">					
-						<td class="program-td"><strong> <span ng-if="$first"> {{item.hour}}h </span></strong></td>
-						<td class="program-td"> {{event.name}} </td>
-					</tr>
-				</tbody>
-    		</table>	
-    	</div>
+        <div class="program-container">
+            <table class="program-table">
+                <thead>
+                    <tr class="program-tr">
+                        <th class="program-th">Horas</th>
+                        <th class="program-th">Eventos</th>
+                    </tr>
+                </thead>    
+                <tbody ng-repeat = "item in events.hours">
+                    <tr class="program-tr" ng-repeat = "event in item.events" ng-click="loadEvent(event.id, event.name, event.fairName, event.startTime, event.endTime, event.day, event.month, event.year, event.place)">                  
+                        <td class="program-td"><strong> <span ng-if="$first"> {{item.hour}}h </span></strong></td>
+                        <td class="program-td"> {{event.name}} </td>
+                    </tr>
+                </tbody>
+            </table>    
+        </div>
 
     </ion-content>
 </ion-view>

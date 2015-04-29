@@ -16,21 +16,21 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     $scope.events = {name: "FEUP CARRER FAIR", hours: [
         {hour: 9, events: [ 
-            {id: 1, name: "Evento 1", fairName: "FEUP CARRER FAIR", startTime: 9, endTime: 11, place: "A001"},
-            {id: 2, name: "Evento 2", fairName: "FEUP CARRER FAIR", startTime: 9, endTime: 10, place: "B001"}
+            {id: 1, name: "Evento 1", fairName: "FEUP CARRER FAIR", startTime: 9, endTime: 11, day: 15, month: 4, year:2015, place: "A001"},
+            {id: 2, name: "Evento 2", fairName: "FEUP CARRER FAIR", startTime: 9, endTime: 10, day: 15, month: 4, year:2015, place: "B001"}
             ] 
         }, 
         {hour: 10, events: [ 
-            {id: 3, name: "Evento 3", fairName: "FEUP CARRER FAIR", startTime: 10, endTime: 12, place: "B002"}
+            {id: 3, name: "Evento 3", fairName: "FEUP CARRER FAIR", startTime: 10, endTime: 12, day: 15, month: 4, year:2015, place: "B002"}
             ] 
         }, 
         {hour: 11, events: [
-            {id: 4, name: "Evento 4", fairName: "FEUP CARRER FAIR", startTime: 11, endTime: 13, place: "B001"},
-            {id: 5, name: "Evento 5", fairName: "FEUP CARRER FAIR", startTime: 11, endTime: 12, place: "A001" }
+            {id: 4, name: "Evento 4", fairName: "FEUP CARRER FAIR", startTime: 11, endTime: 13, day: 15, month: 4, year:2015, place: "B001"},
+            {id: 5, name: "Evento 5", fairName: "FEUP CARRER FAIR", startTime: 11, endTime: 12, day: 15, month: 4, year:2015, place: "A001" }
             ]
         },
         {hour: 12, events: [
-            {id: 6, name: "Evento 6", fairName: "FEUP CARRER FAIR", startTime: 12, endTime: 14, place: "B003"}
+            {id: 6, name: "Evento 6", fairName: "FEUP CARRER FAIR", startTime: 12, endTime: 14, day: 15, month: 4, year:2015, place: "B003"}
             ]
         }
     ]};
@@ -51,20 +51,20 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     $scope.chooseInterests = function() {
         var myPopup = $ionicPopup.show({
-	    template: '<div class="list"><div class="item item-divider">Escolha os seus interesses</div><ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle></div>',
-	    title: 'Adesão',
-	    scope: $scope,
-	    buttons: [ 
-	      { text: 'Cancelar' },
-	      {
-	        text: '<b>Selecionar</b>',
-	        type: 'button-positive',
-	        onTap: function(e) {
+        template: '<div class="list"><div class="item item-divider">Escolha os seus interesses</div><ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle></div>',
+        title: 'Adesão',
+        scope: $scope,
+        buttons: [ 
+          { text: 'Cancelar' },
+          {
+            text: '<b>Selecionar</b>',
+            type: 'button-positive',
+            onTap: function(e) {
                 console.log("tapped submit button");
-	        }
-	      },
-	    ]
-	  });  
+            }
+          },
+        ]
+      });  
     }
     
     $scope.loadStands = function() {
@@ -75,14 +75,23 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $state.transitionTo('menu.fairProgram', $stateParams, { reload: true, inherit: false, notify: true });      
     }
 
-    $scope.loadEvent = function(id, eventName, fairName, startTime, endTime, place) {
-        $scope.event = {id: id, eventName: eventName, fairName: fairName, startTime: startTime, endTime: endTime, place: place};
+    $scope.loadEvent = function(id, eventName, fairName, startTime, endTime, day, month, year, place) {
+
+        $scope.event = {id: id, eventName: eventName, fairName: fairName, startTime: startTime, endTime: endTime, day: day, month: month, year: year, place: place};
 
         var myPopup = $ionicPopup.show({
-        template: '<div class="list list-inset"><div class="item item-divider event-title"><strong>{{event.eventName}}</strong></div><div class="item event-subtitle"><strong>inicio:</strong><span class="event-info">{{event.startTime}}</span></div><div class="item event-subtitle"><strong>fim:</strong><span class="event-info">{{event.endTime}}</span></div><div class="item event-subtitle"><strong>Local:</strong><span class="event-info">{{event.place}}</span></div></div>',
+        template: '<div class="list list-inset"><div class="item item-divider event-title"><strong>{{event.eventName}}</strong></div><div class="item event-subtitle"><strong>inicio:</strong><span class="event-info" ng-if="event.startTime < 10">0{{event.startTime}}h</span><span class="event-info" ng-if="event.startTime >= 10">{{event.startTime}}h</span></div><div class="item event-subtitle"><strong>fim:</strong><span class="event-info" ng-if="event.endTime < 10">0{{event.endTime}}h</span><span class="event-info" ng-if="event.endTime >= 10">{{event.endTime}}h</span></div><div class="item event-subtitle"><strong>data:</strong><span class="event-info">{{event.day}}/{{event.month}}/{{event.year}}</span></div><div class="item event-subtitle"><strong>Local:</strong><span class="event-info">{{event.place}}</span></div></div>',
         title: fairName,
         scope: $scope,
         buttons: [ 
+          {
+            text: '<b>Sync</b>',
+            type: 'button-balanced',
+            onTap: function(e) {
+                //Create event in phone's calendar
+                alert("fim");
+            }
+          },
           {
             text: '<b>Ok</b>',
             type: 'button-positive',
