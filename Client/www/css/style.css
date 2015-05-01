@@ -45,6 +45,18 @@
     padding-bottom: 5%;
 }
 
+/********** Home **********/
+
+.home-container {
+    padding-top: 15%;
+}
+
+.home-title {
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 3%;
+}
+
 /********** Login **********/
 
 .login-container {
