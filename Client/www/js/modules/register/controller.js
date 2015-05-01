@@ -76,8 +76,10 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
     }
     
     $scope.passwordCallback = function() {
-        if($scope.password.length === 0)
+        if($scope.password.length === 0) {
+            $scope.valPassword = "neutral-icon";
             emptyFields[3] = 1;
+        }
         else {
             emptyFields[3] = 0;
             if($scope.password.length >= 8) {

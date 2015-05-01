@@ -72,7 +72,21 @@ module.factory('calendar', function ($http, $q, $ionicPopup, $cordovaCalendar) {
             }, function (err) {
                 console.error("There was an error: " + err);
             });
-        }
- 
+        },
+        
+        createEventInteractively: function(eventTitle, eventLocation, eventNotes, year, month, day, startHour, startMinute, endHour, endMinute) {
+            $cordovaCalendar.createEventInteractively({
+                title: eventTitle,
+                location: eventLocation,
+                notes: eventNotes,
+                startDate: new Date(year, month, day, startHour, startMinute, 0, 0, 0),
+                endDate: new Date(year, month, day, endHour, endMinute, 0, 0, 0)
+            }).then(function (result) {
+                console.log("Event created successfully");
+            }, function (err) {
+                console.error("There was an error: " + err);
+            });
+        }        
+    
     };
 });

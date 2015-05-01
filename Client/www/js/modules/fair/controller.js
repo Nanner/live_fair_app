@@ -118,9 +118,9 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
             type: 'button-balanced',
             onTap: function(e) {
                 //Create event in phone's calendar
+                
                 var monthToSend = month - 1;
-                calendar.createEvent(eventName, fairName, "Participar", year, monthToSend, day, starHour, startMinute, endHour, endMinute);
-                alert("fim");
+                calendar.createEventInteractively(eventName, fairName, "Participar", year, monthToSend, day, starHour, startMinute, endHour, endMinute);
             }
           },
           {
