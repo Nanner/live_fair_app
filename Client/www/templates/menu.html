@@ -23,7 +23,7 @@
 		 		</div>
   			</a>
 	        <ion-list ng-repeat="x in items">
-	          <ion-item nav-clear menu-close ng-click="selectItem({{x.id}})">
+	          <ion-item nav-clear menu-close ng-click="selectItem($index)">
 	            {{ x.name }}
 	          </ion-item>
 	        </ion-list>
