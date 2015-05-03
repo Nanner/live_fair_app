@@ -45,7 +45,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
         views:{
             'menuContent' :{
                 templateUrl: "templates/listfairs.html",
-                controller: "fairCtrl"
+                controller: "listFairsCtrl"
             }
         }
     })
@@ -54,7 +54,7 @@ module.config(function($stateProvider, $urlRouterProvider) {
 		views: {
 			'menuContent' :{
 				templateUrl: "templates/presentStands.html",
-				controller: "fairCtrl"
+				controller: "presentStrandCtrl"
 			}
 		}
 	})
@@ -63,7 +63,16 @@ module.config(function($stateProvider, $urlRouterProvider) {
 		views: {
 			'menuContent' :{
 				templateUrl: "templates/fairProgram.html",
-				controller: "fairCtrl"
+				controller: "fairProgramCtrl"
+			}
+		}
+	})
+	.state('menu.profile', {
+		url: "/profile",
+		views: {
+			'menuContent' :{
+				templateUrl: "templates/profile.html",
+				controller: "profileCtrl"
 			}
 		}
 	});
