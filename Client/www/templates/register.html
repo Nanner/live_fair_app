@@ -9,16 +9,8 @@
             <div class="list">
                 <label class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
-                    <input type="text" ng-model="name" placeholder="Nome" ng-change="validateNamesCallback('nome')">
-                </label>
-                <label ng-hide="{{usertype}}" usertype class="item item-input">
-                    <i class="form-icon ion-android-contact placeholder-icon {{valLastname}}"></i>
-                    <input type="text" ng-model="lastName" placeholder="Apelido" ng-change="validateNamesCallback('apelido')">
-                </label>
-                <label class="item item-input">
-                    <i class="form-icon ion-person placeholder-icon"></i>
-                    <input type="text" ng-model="username" placeholder="Nome de utilizador" ng-change="usernameCallback()">
-                </label>
+                    <input type="text" ng-model="name" placeholder="Nome" ng-change="validateNameCallback()">
+                </label>               
                 <label class="item item-input">
                     <i class="form-icon ion-help-circled placeholder-icon {{valPassword}}"></i>
                     <input type="password" ng-model="password" placeholder="Password" ng-change="passwordCallback()">
@@ -29,18 +21,14 @@
                 </label>
                 <label class="item item-input">
                     <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
-                    <input type="text" ng-model="email" placeholder="Email" ng-change="validateEmailCallback()">
-                </label>
+                    <input type="text" ng-model="mail" placeholder="Email" ng-change="validateEmailCallback()">
+                </label> 
                 <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-at placeholder-icon {{valWebsite}}"></i>
                     <input type="text" ng-model="website" placeholder="Website" ng-change="validateWebsiteCallback()">
                 </label>
-                <label class="item item-input">
-                    <i class="form-icon ion-ios-telephone placeholder-icon {{valPhone}}"></i>
-                    <input type="text" ng-model="phone" placeholder="Contacto" ng-change="validatePhoneCallback()">
-                </label> 
                 <label ng-show="{{usertype}}" class="item item-input">
-                    <i class="form-icon ion-map placeholder-icon"></i>
+                    <i class="form-icon ion-map placeholder-icon {{valAddress}}"></i>
                     <input type="text" ng-model="address" placeholder="Morada" ng-change="validateAddressCallback()">
                 </label>              
             </div>
