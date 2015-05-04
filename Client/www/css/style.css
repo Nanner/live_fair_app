@@ -272,3 +272,45 @@
 .event-info {
     float: right;
 }
+
+/****** Profile *******/
+
+.profile-img-container {
+    max-width: 50%;
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-title-container {
+    text-align: center;
+}
+
+.profile-name {
+    font-weight: bold;
+}
+
+.stand-website {
+    color: #11C1F3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.profile-btn-Container-1 {
+    margin-top: 2%;
+    position: relative;
+    text-align: center;
+}
+
+.profile-btn-Container {
+    margin-top: 1%;
+    position: relative;
+    text-align: center;
+}
+
+.profile-btn-Container-2 {
+    margin-top: 1%;
+    position: relative;
+    text-align: center;
+    padding-bottom: 1%;
+}

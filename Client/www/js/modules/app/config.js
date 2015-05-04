@@ -37,33 +37,24 @@ module.config(function($stateProvider, $urlRouterProvider) {
 				'menuContent' :{
 					templateUrl: "templates/register.html",
 					controller: "registerCtrl"
-				}
-			}
-		})
-		.state('menu.fair', {
-			url: "/fair",
-			views: {
-				'menuContent' :{
-					templateUrl: "templates/fair.html",
-					controller: "fairCtrl"
-				}
-			}
-		})
-		.state('menu.listfairs',{
-			url: "/listfairs",
-			views:{
-				'menuContent' :{
-					templateUrl: "templates/listfairs.html",
-					controller: "fairCtrl"
-				}
-			}
-		})
-		.state('menu.presentStands', {
+                }
+            }
+        })
+	    .state('menu.listfairs',{
+	        url: "/listfairs",
+	        views:{
+	            'menuContent' :{
+	                templateUrl: "templates/listfairs.html",
+	                controller: "listFairsCtrl"
+	            }
+	        }
+	    })
+	    .state('menu.presentStands', {
 			url: "/presentStands",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/presentStands.html",
-					controller: "fairCtrl"
+					controller: "presentStrandCtrl"
 				}
 			}
 		})
@@ -72,6 +63,24 @@ module.config(function($stateProvider, $urlRouterProvider) {
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/fairProgram.html",
+					controller: "fairProgramCtrl"
+				}
+			}
+		})
+		.state('menu.profile', {
+			url: "/profile",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/profile.html",
+					controller: "profileCtrl"
+				}
+			}
+		})
+		.state('menu.fair', {
+			url: "/fair",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/fair.html",
 					controller: "fairCtrl"
 				}
 			}
