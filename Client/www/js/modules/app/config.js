@@ -180,6 +180,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         'cancel': 'Cancel'
 	});
 
-	$translateProvider.preferredLanguage('en');
+	$translateProvider.preferredLanguage('pt');
 
 }); 
