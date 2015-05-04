@@ -44,7 +44,7 @@ var User = sequelize.define('user', {
     type: Sequelize.UUID,
     primaryKey: true
   },
-  username: {
+  email: {
     type: Sequelize.STRING, unique: true
   },
   password: {
@@ -54,7 +54,7 @@ var User = sequelize.define('user', {
     type: Sequelize.STRING
   },
   contact: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING
   },
   address: {
     type: Sequelize.TEXT, unique: true
