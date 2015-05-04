@@ -91,13 +91,67 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
 	//dealing with languages
 	$translateProvider.translations('pt', {
-		'TITLE': 'Ola',
-		'FOO': 'Isto é um paragrafo'
+		'existingUser': 'Utilizador existente?',
+		'enter': 'Entrar',
+		'register': 'Registar',
+		'enterAsVisitor': 'Entrar como visitante',
+		'user': 'Utilizador',
+		'name': 'Nome',
+		'confPassword': 'Confirmação password',
+		'address': 'Morada',
+		'terms': 'Declaro que li e aceito os termos',
+		'listfairs': 'Lista de Feiras',
+		'date': 'Data',
+		'opening': 'Abertura',
+		'em': 'em',
+		'ending': 'Encerramento',
+		'description': 'Descrição',
+		'btnProgram': 'Ver programa da feira',
+		'btnStands': 'Ver stands presentes',
+		'btnAderir': 'Aderir',
+		'program': 'Programa',
+		'hours': 'Horas',
+		'events': 'Eventos',
+		'starting': 'Início',
+		'ending': 'Fim',
+		'place': 'Local',
+		'adherence': 'Adesão',
+		'chooseInterests': 'Escolha os seus intereses',
+		'select': 'Selecionar',
+		'menuFair': 'Feira',
+		'menuFairs': 'Feiras'
 	});
 
 	$translateProvider.translations('en', {
-		'TITLE': 'Hello',
-		'FOO': 'This is a paragraph'
+		'existingUser': 'Already a member?',
+		'enter': 'Login',
+		'register': 'Register',
+		'enterAsVisitor': 'Enter as visitor',
+		'user': 'User',
+		'name': 'Name',
+		'confPassword': 'Confirm Password',
+		'address': 'Address',
+		'terms': 'I declare that i read and accept the terms', 
+		'listfairs': 'Fairs List',
+		'date': 'Date',
+		'opening': 'Opening time',
+		'em': 'in',
+		'ending': 'Closing time',
+		'description': 'Description',
+		'btnProgram': 'Consult fair program',
+		'btnStands': 'Consult attending stands',
+		'btnAderir': 'Subscribe',
+		'program': 'Program',
+		'hours': 'Hours',
+		'events': 'Events',
+		'starting': 'Start time',
+		'ending': 'Ending time',
+		'place': 'Place',
+		'adherence': 'Adherence',
+		'chooseInterests': 'Choose your interests',	
+		'select': 'Submit',
+		'menuFair': 'Fair',
+		'menuFairs': 'Fairs'
 	});
 
 	$translateProvider.preferredLanguage('pt');
