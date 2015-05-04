@@ -3,7 +3,7 @@
 
         <!-- Content -->
         <div class="fair-container" ng-init="formatMonth()">
-            <h1 class="fair-title">Lista de Feiras</h1>
+            <h1 class="fair-title">{{ 'listfairs' | translate }}</h1>
         </div>
 
         <div ng-repeat="fair in listfairs">
@@ -13,9 +13,9 @@
                     <h2> {{fair.name}} </h2>
                 </div>
                 <div class="item item-text-wrap">
-                    <p> <b> Data: </b> de {{fair.startDay}} a {{fair.endDay}} de {{fair.month}} </p>
-                    <p> <b> Abertura: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
-                    <p> <b> Morada: </b> {{fair.address}} </p>
+                    <p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{fair.month}} </p>
+                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
+                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>
                 </div>
             </div>
 

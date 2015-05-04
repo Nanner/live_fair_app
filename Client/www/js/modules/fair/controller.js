@@ -68,7 +68,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
         $scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
 
         var myPopup = $ionicPopup.show({
-        template: '<div class="list list-inset"><div class="item item-divider event-title"><strong>{{event.eventName}}</strong></div><div class="item event-subtitle"><strong>inicio:</strong><span class="event-info">{{event.startHour}}:{{event.startMinute}}h</span></div><div class="item event-subtitle"><strong>fim:</strong><span class="event-info">{{event.endHour}}:{{event.endMinute}}h</span></div><div class="item event-subtitle"><strong>data:</strong><span class="event-info">{{event.day}}/{{event.month}}/{{event.year}}</span></div><div class="item event-subtitle"><strong>Local:</strong><span class="event-info">{{event.place}}</span></div></div>',
+        template: '<div class="list list-inset"><div class="item item-divider event-title"><strong>{{event.eventName}}</strong></div><div class="item event-subtitle"><strong>{{ \'starting\' | translate }}:</strong><span class="event-info">{{event.startHour}}:{{event.startMinute}}h</span></div><div class="item event-subtitle"><strong>{{ \'ending\' | translate }}:</strong><span class="event-info">{{event.endHour}}:{{event.endMinute}}h</span></div><div class="item event-subtitle"><strong>{{ \'date\' | translate }}:</strong><span class="event-info">{{event.day}}/{{event.month}}/{{event.year}}</span></div><div class="item event-subtitle"><strong>{{ \'place\' | translate }}:</strong><span class="event-info">{{event.place}}</span></div></div>',
         title: fairName,
         scope: $scope,
         buttons: [ 
@@ -117,7 +117,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.month = ""; 
     $scope.description = true;
     
-    $scope.fair = {name: "FEUP CARRER FAIR", place: "FEUP", startDay: 18, endDay: 20, month: 11, openingTime: 9, closingTime: 18, address: "Rua Doutor Roberto Frias", description: "A CAREER FAIR tem como principal objetivo reunir na FEUP empresas nacionais e internacionais interessadas em divulgarem as suas ofertas de emprego ou estágios e em recrutarem estudantes, recém-graduados e alumni FEUP.", map: "img/liveFair-Map.png"};
+    $scope.fair = {name: "FEUP CARRER FAIR", place: "FEUP", startDay: 18, endDay: 20, month: 11, startHour: 9, startMinute: 30, closingHour: 18, closingMinute: 30, address: "Rua Doutor Roberto Frias", description: "A CAREER FAIR tem como principal objetivo reunir na FEUP empresas nacionais e internacionais interessadas em divulgarem as suas ofertas de emprego ou estágios e em recrutarem estudantes, recém-graduados e alumni FEUP.", map: "img/liveFair-Map.png"};
     
     $scope.interestsList = [{name: "Sap", checked: false},{name: "Informática", checked: false},{name: "Programação", checked: false},{name: "Empreendedorismo", checked: false}];
 
@@ -133,7 +133,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     $scope.chooseInterests = function() {
         var myPopup = $ionicPopup.show({
-        template: '<div class="list"><div class="item item-divider">Escolha os seus interesses</div><ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle></div>',
+        template: '<div class="list"><div class="item item-divider">{{ \'chooseInterests\' | translate }}</div><ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle></div>',
         title: 'Adesão',
         scope: $scope,
         buttons: [ 

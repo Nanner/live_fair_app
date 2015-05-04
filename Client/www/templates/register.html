@@ -4,12 +4,12 @@
         <!-- Content -->
         <div class="register-container" ng-controller="registerCtrl">
             
-            <h1 class="register-title"> <span class="ion-person-add"></span> Registo </h1>
+            <h1 class="register-title"> <span class="ion-person-add"></span> {{ 'register' | translate }} </h1>
             
             <div class="list">
                 <label class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
-                    <input type="text" ng-model="name" placeholder="Nome" ng-change="validateNameCallback()">
+                    <input type="text" ng-model="name" placeholder="{{ 'name' | translate }}" ng-change="validateNameCallback()">
                 </label>               
                 <label class="item item-input">
                     <i class="form-icon ion-help-circled placeholder-icon {{valPassword}}"></i>
@@ -17,7 +17,7 @@
                 </label>
                 <label class="item item-input">
                     <i class="form-icon ion-help-circled placeholder-icon {{valConfirmPassword}}"></i>
-                    <input type="password" ng-model="confirmPassword" placeholder="Confirmação password" ng-change="confirmPasswordCallback()">
+                    <input type="password" ng-model="confirmPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
                 </label>
                 <label class="item item-input">
                     <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
@@ -29,16 +29,16 @@
                 </label>
                 <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-map placeholder-icon {{valAddress}}"></i>
-                    <input type="text" ng-model="address" placeholder="Morada" ng-change="validateAddressCallback()">
+                    <input type="text" ng-model="address" placeholder="{{ 'address' | translate }}" ng-change="validateAddressCallback()">
                 </label>              
             </div>
             
             <div class="acceptTerms-container">
-                <ion-toggle class="myBtn" ng-model="termsAcceptance" toggle-class="toggle-calm"> <p> Declaro que li e aceito os termos </p> </ion-toggle>
+                <ion-toggle class="myBtn" ng-model="termsAcceptance" toggle-class="toggle-calm"> <p> {{ 'terms' | translate }} </p> </ion-toggle>
             </div>
             
             <div class="myBtn-Container">
-                <button nav-clear ng-click="submitRegister()" class="myBtn button button-calm"> <strong> Registo </strong> </button>
+                <button nav-clear ng-click="submitRegister()" class="myBtn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
             </div>              
         </div>
         

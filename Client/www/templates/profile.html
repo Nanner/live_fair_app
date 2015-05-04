@@ -7,23 +7,23 @@
         
         <div class="profile-title-container">
             <h4 class="profile-name"> {{standProfileInfo.name}} </h4>
-            <a class="stand-website" href="{{standProfileInfo.website}}">Página web</a>
+            <a class="stand-website" href="{{standProfileInfo.website}}">{{ 'webpage' | translate }}</a>
         </div>
         
         <div class="card">
           <div class="item item-divider">
-            Informações
+            {{ 'info' | translate }}
           </div>
           <div class="item item-text-wrap">
-            <p> <b> Sobre nós: </b> {{standProfileInfo.description}} </p>
-            <p> <b> Teleforne: </b> {{standProfileInfo.phone}} </p>
-            <p> <b> Morada: </b> {{standProfileInfo.address}} </p>
+            <p> <b> {{ 'aboutus' | translate }}: </b> {{standProfileInfo.description}} </p>
+            <p> <b> {{ 'phone' | translate }}: </b> {{standProfileInfo.phone}} </p>
+            <p> <b> {{ 'address' | translate }}: </b> {{standProfileInfo.address}} </p>
           </div>
         </div>
         
         <div class="card">
           <div class="item item-divider">
-            Interesses
+            {{ 'interests' | translate }}
           </div>
           <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
             <p><span class="ion-android-radio-button-on"> {{interest.name}} </span> </p>
@@ -32,17 +32,17 @@
         
         <div class="profile-btn-Container-1">
             <button nav-clear class="myBtn button button-clear button-outline button-positive">
-                Ver stands recomendados 
+                {{ 'btnRecomendedStands' | translate }} 
             </button>
         </div>
         <div class="profile-btn-Container">
             <button nav-clear class="myBtn button button-balanced">
-                Ver eventos deste stand
+                {{ 'btnStandEvents' | translate }} 
             </button>
         </div>
         <div class="profile-btn-Container-2">
             <button ng-click="saveContact()" class="myBtn button button-positive">
-                Guardar contacto
+                {{ 'saveContact' | translate }} 
             </button>
         </div>
              

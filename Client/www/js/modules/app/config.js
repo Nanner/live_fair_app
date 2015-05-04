@@ -113,13 +113,26 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'hours': 'Horas',
 		'events': 'Eventos',
 		'starting': 'Início',
-		'ending': 'Fim',
 		'place': 'Local',
 		'adherence': 'Adesão',
 		'chooseInterests': 'Escolha os seus intereses',
 		'select': 'Selecionar',
 		'menuFair': 'Feira',
-		'menuFairs': 'Feiras'
+		'menuFairs': 'Feiras',
+        'de': 'de',
+        'a': 'a',
+        'e': 'e',
+        'attendingStands': 'Stands Presentes',
+        'info': 'Informações',
+        'webpage': 'Página Web',
+        'aboutus': 'Sobre nós',
+        'phone': 'Telefone',
+        'interests': 'Interesses',
+        'btnRecomendedStands': 'Ver stands recomendados',
+        'btnStandEvents': 'Ver eventos deste stand',
+        'saveContact': 'Guardar contacto',
+        'sync': 'Sync',
+        'cancel': 'Cancelar'
 	});
 
 	$translateProvider.translations('en', {
@@ -131,7 +144,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'name': 'Name',
 		'confPassword': 'Confirm Password',
 		'address': 'Address',
-		'terms': 'I declare that i read and accept the terms', 
+		'terms': 'Declare that read and accept the terms', 
 		'listfairs': 'Fairs List',
 		'date': 'Date',
 		'opening': 'Opening time',
@@ -145,15 +158,28 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'hours': 'Hours',
 		'events': 'Events',
 		'starting': 'Start time',
-		'ending': 'Ending time',
 		'place': 'Place',
 		'adherence': 'Adherence',
 		'chooseInterests': 'Choose your interests',	
 		'select': 'Submit',
 		'menuFair': 'Fair',
-		'menuFairs': 'Fairs'
+		'menuFairs': 'Fairs',
+        'de': 'from',
+        'a': 'to',
+        'e': 'and',
+        'attendingStands': 'Attending stands',
+        'info': 'Infomations',
+        'webpage': 'Webpage',
+        'aboutus': 'About us',
+        'phone': 'Telephone',
+        'interests': 'Interests',
+        'btnRecomendedStands': 'Consult recommended stands',
+        'btnStandEvents': 'Consult stand\'s events',
+        'saveContact': 'Save contact',
+        'sync': 'Sync',
+        'cancel': 'Cancel'
 	});
 
-	$translateProvider.preferredLanguage('pt');
+	$translateProvider.preferredLanguage('en');
 
 }); 

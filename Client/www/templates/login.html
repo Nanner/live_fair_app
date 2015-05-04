@@ -8,7 +8,7 @@
                 <div class="form-list list-insert">
                     <label class="item item-input">
                         <i class="form-icon ion-android-contact placeholder-icon"></i>
-                        <input type="text" placeholder="Utilizador" ng-model="username">
+                        <input type="text" placeholder="{{ 'user' | translate }}" ng-model="username">
                     </label>
                 </div>
 
@@ -21,7 +21,7 @@
             </div>
 
             <div class="myBtn-Container">
-                <button nav-clear ng-click="submitLogin()" class="myBtn button button-calm"> <strong> Entrar </strong> </button>
+                <button nav-clear ng-click="submitLogin()" class="myBtn button button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
             </div>    
         </div>
         

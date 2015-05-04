@@ -4,7 +4,7 @@
         <!-- Content -->
         <div class="fair-container" ng-init="loadFairProfile()">
             <h2 class="fair-title"> {{fair.name}} </h2>
-            <h4 class="fair-subtitle"> em {{fair.place}} </h4>
+            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.place}} </h4>
         </div>
         
         <div class="card">
@@ -12,11 +12,11 @@
             Informações
           </div>
           <div class="item item-text-wrap">
-            <p> <b> Data: </b> de {{fair.startDay}} a {{fair.endDay}} de {{month}} </p>
-            <p> <b> Abertura: </b> {{fair.openingTime}}h </p>
-            <p> <b> Encerramento: </b> {{fair.closingTime}}h </p>
-            <p> <b> Morada: </b> {{fair.address}} </p>
-            <p ng-show={{description}}> <b> Descrição: </b> {{fair.description}} </p>
+            <p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{month}} </p>
+            <p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
+            <p> <b> {{ 'ending' | translate }}: </b> {{fair.closingHour}}:{{fair.closingMinute}}h </p>
+            <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>
+            <p ng-show={{description}}> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
           </div>
         </div>
         
@@ -26,17 +26,17 @@
         
         <div class="fair-btn-Container-1">
             <button nav-clear ng-click="loadEvents()" class="myBtn button button-clear button-outline button-positive">
-                Ver programa da feira
+                {{ 'btnProgram' | translate }}
             </button>
         </div>
         <div class="fair-btn-Container">
             <button nav-clear ng-click="loadStands()" class="myBtn button button-clear button-outline button-positive">
-                Ver stand presentes
+                {{ 'btnStands' | translate }}
             </button>
         </div>
         <div class="fair-btn-Container-3">
             <button ng-click="chooseInterests()" class="myBtn button button-positive">
-                Aderir
+                {{ 'btnAderir' | translate }}
             </button>
         </div>
         

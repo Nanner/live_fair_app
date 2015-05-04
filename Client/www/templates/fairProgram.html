@@ -2,7 +2,7 @@
     <ion-content scroll='true'>
 
         <div class="program-title-container">
-            <h1 class="program-title">Programa</h1>
+            <h1 class="program-title"> {{ 'program' | translate }} </h1>
             <h4 class="program-subtitle"> {{events.name}} </h4>
         </div>
 
@@ -10,8 +10,8 @@
             <table class="program-table">
                 <thead>
                     <tr class="program-tr">
-                        <th class="program-th">Horas</th>
-                        <th class="program-th">Eventos</th>
+                        <th class="program-th">{{ 'hours' | translate }}</th>
+                        <th class="program-th">{{ 'events' | translate }}</th>
                     </tr>
                 </thead>    
                 <tbody ng-repeat = "item in events.hours">
