@@ -70,6 +70,11 @@ var User = sequelize.define('user', {
 });
 
 var Organizer = sequelize.define('organizer', {
+  organizerID:{
+    type: Sequelize.UUID,
+    primaryKey: true,
+    allowNull: false
+  },
   organizerName: {
   type: Sequelize.STRING, 
   unique: true
