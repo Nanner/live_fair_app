@@ -1,6 +1,6 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
 	$stateProvider
 		.state('menu', {
@@ -88,4 +88,18 @@ module.config(function($stateProvider, $urlRouterProvider) {
 
 	//Default startup screen
 	$urlRouterProvider.otherwise("/menu/home");
+
+	//dealing with languages
+	$translateProvider.translations('pt', {
+		'TITLE': 'Ola',
+		'FOO': 'Isto é um paragrafo'
+	});
+
+	$translateProvider.translations('en', {
+		'TITLE': 'Hello',
+		'FOO': 'This is a paragraph'
+	});
+
+	$translateProvider.preferredLanguage('pt');
+
 }); 

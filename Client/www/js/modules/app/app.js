@@ -15,6 +15,7 @@ angular.module('starter',
         'fairModule',
         'ionic',
         'ngCordova',
-        'ngResource'
+        'ngResource',
+        'pascalprecht.translate'
     ]
 );

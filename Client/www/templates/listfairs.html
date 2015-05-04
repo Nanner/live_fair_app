@@ -2,7 +2,7 @@
     <ion-content scroll='true'>
 
         <!-- Content -->
-        <div class="fair-container">
+        <div class="fair-container" ng-init="formatMonth()">
             <h1 class="fair-title">Lista de Feiras</h1>
         </div>
 
@@ -13,7 +13,7 @@
                     <h2> {{fair.name}} </h2>
                 </div>
                 <div class="item item-text-wrap">
-                    <p> <b> Data: </b> de {{fair.startDay}} a {{fair.endDay}} de {{month}} </p>
+                    <p> <b> Data: </b> de {{fair.startDay}} a {{fair.endDay}} de {{fair.month}} </p>
                     <p> <b> Abertura: </b> {{fair.openingTime}}h </p>
                     <p> <b> Morada: </b> {{fair.address}} </p>
                 </div>
