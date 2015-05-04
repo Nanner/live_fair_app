@@ -45,13 +45,13 @@ var User = sequelize.define('user', {
     primaryKey: true
   },
   email: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING, unique: true, allowNull: false
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   },
   type: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   },
   contact: {
     type: Sequelize.STRING
@@ -71,7 +71,8 @@ var User = sequelize.define('user', {
 
 var Organizer = sequelize.define('organizer', {
   organizerName: {
-  type: Sequelize.STRING, unique: true
+  type: Sequelize.STRING, 
+  unique: true
 }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -82,16 +83,17 @@ Organizer.belongsTo(User, {foreignKey: 'organizerID'});
 var Company = sequelize.define('company', {
   companyID:{
     type: Sequelize.UUID,
-    primaryKey: true
+    primaryKey: true, 
+    allowNull: false
   },
   companyName: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING, unique: true, allowNull: false
   },
   logoImage: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING, unique: true, allowNull: false
   },
   website: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING, unique: true, allowNull: false
   },
   visitorCounter: {
     type: Sequelize.INTEGER
@@ -105,7 +107,8 @@ Company.belongsTo(User, {foreignKey: 'companyID'});
 var Visitor = sequelize.define('visitor', {
   visitorID:{
     type: Sequelize.UUID,
-    primaryKey: true
+    primaryKey: true,
+    allowNull: false
   },
   Photo: {
     type: Sequelize.STRING, unique: true
@@ -122,19 +125,19 @@ var LiveFair = sequelize.define('liveFair', {
     primaryKey: true
   },
   name: {
-    type: Sequelize.STRING, unique: true
+    type: Sequelize.STRING, unique: true, allowNull: false
   },
   description: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   },
   date: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE, allowNull: false
   },
   location: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   },
   map: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -146,16 +149,16 @@ Organizer.hasMany(LiveFair);
 
 var LiveFairEvents = sequelize.define('liveFairEvents', {
   eventLocation: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   },
   time: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE, allowNull: false
   },
   Speakers: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT, allowNull: false
   },
   Subject: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -169,7 +172,7 @@ var Interest = sequelize.define('interest', {
     primaryKey: true
   },
   interest:{
-    type: Sequelize.STRING
+    type: Sequelize.STRING, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -181,13 +184,13 @@ var CompanyEvents = sequelize.define('companyEvents', {
     primaryKey: true
   },
   location:{
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT, allowNull: false
   },
   time:{
-    type: Sequelize.DATE
+    type: Sequelize.DATE, allowNull: false
   },
   speakers:{
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -195,10 +198,10 @@ var CompanyEvents = sequelize.define('companyEvents', {
 
 var Stands = sequelize.define('stands', {
   standLocation:{
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT, allowNull: false
   },
   approved:{
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -209,7 +212,7 @@ LiveFair.belongsToMany(Company , {through: "stands"});
 
 var Connection = sequelize.define('connection', {
   like:{
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN, allowNull: false
   }
 }, {
   freezeTableName: true // Model tableName will be the same as the model name
@@ -239,7 +242,7 @@ var LiveFairCompanyEvents = sequelize.define('liveFairCompanyEvents', {
 });
 
 var LiveCompanyInterest = sequelize.define('liveFairCompanyInterest', {
-    liveFAirIDref: {
+    liveFairIDref: {
     type: Sequelize.UUID,
     references: LiveFair, // Can be both a string representing the table name, or a reference to the model
     referencesKey: "liveFairID",
@@ -291,20 +294,5 @@ Visitor.belongsToMany(Company, {through: "connection"});
 //connection between LiveFair and Interest
 Interest.belongsTo(LiveFair, {through: "liveFairInterest"});
 LiveFair.belongsToMany(Interest, {through: "liveFairInterest"});
-
-//Ternary relation definition Company-CompanyEvents-LiveFair
-/*Company.belongsToMany(LiveFair, {through: "liveFairCompanyEvents"});
-CompanyEvents.belongsTo(Company, {through: "liveFairCompanyEvents"});
-CompanyEvents.belongsTo(LiveFair, {through: "liveFairCompanyEvents"});
-
-//Ternary relation definition Company-Interest-LiveFair
-Company.belongsToMany(LiveFair, {through: "liveFairCompanyInterest"});
-Interest.belongsToMany(Company, {through: "liveFairCompanyInterest"});
-Interest.belongsTo(LiveFair, {through: "liveFairCompanyInterest"});
-
-//Ternary relation definition Visitor-Interest-LiveFair
-Visitor.belongsToMany(LiveFair, {through: "liveFairVisitorInterest"});
-Interest.belongsToMany(Visitor, {through: "liveFairVisitorInterest"});
-Interest.belongsTo(LiveFair, {through: "liveFairVisitorInterest"});*/
 
 sequelize.sync({force: true});
