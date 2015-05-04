@@ -165,7 +165,7 @@ var LiveFair = sequelize.define('liveFair', {
   date: {
     type: Sequelize.DATE
   },
-  liveFairLocation: {
+  location: {
     type: Sequelize.STRING
   },
   map: {
