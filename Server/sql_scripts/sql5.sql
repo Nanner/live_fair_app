@@ -605,304 +605,304 @@ INSERT INTO "public"."liveFairInterest" ("createdAt","updatedAt","liveFairLiveFa
 
 
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (1,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','53165a04-6a60-e39e-1393-76898a31a202','10.08.2002 09:38:00','21.03.2007 05:27:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (1,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','53165a04-6a60-e39e-1393-76898a31a202','10.08.2002 09:38:00','21.03.2007 05:27:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (2,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','9c94e2d3-717d-0715-203a-16c41e94cbec','12.08.2013 02:36:00','05.10.2003 07:19:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (2,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','9c94e2d3-717d-0715-203a-16c41e94cbec','12.08.2013 02:36:00','05.10.2003 07:19:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (3,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','9c94e2d3-717d-0715-203a-16c41e94cbec','05.12.2007 03:24:00','11.01.2008 09:47:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (3,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','9c94e2d3-717d-0715-203a-16c41e94cbec','05.12.2007 03:24:00','11.01.2008 09:47:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (4,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','93dfe80e-2643-f57b-7165-61f4e81d8a2d','9c94e2d3-717d-0715-203a-16c41e94cbec','02.11.2009 07:15:00','05.12.2006 09:26:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (4,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','93dfe80e-2643-f57b-7165-61f4e81d8a2d','9c94e2d3-717d-0715-203a-16c41e94cbec','02.11.2009 07:15:00','05.12.2006 09:26:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (5,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','93dfe80e-2643-f57b-7165-61f4e81d8a2d','a1186dc4-84ec-6bfa-c8f9-376243f34ebf','20.08.2009 00:19:00','14.03.2010 09:06:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (5,'eff1cceb-023c-9fe6-a4be-ef7fd7afafb9','93dfe80e-2643-f57b-7165-61f4e81d8a2d','a1186dc4-84ec-6bfa-c8f9-376243f34ebf','20.08.2009 00:19:00','14.03.2010 09:06:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (6,NULL,NULL,'d301dbcc-0898-6170-7472-a4418d285da9','25.12.2000 05:44:00','10.03.2000 07:17:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (6,NULL,NULL,'d301dbcc-0898-6170-7472-a4418d285da9','25.12.2000 05:44:00','10.03.2000 07:17:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (7,NULL,'8b9f9d0c-a4c8-c1bd-1057-a05b7c5dedfb','d301dbcc-0898-6170-7472-a4418d285da9','22.07.2006 07:19:00','06.11.2002 03:36:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (7,NULL,'8b9f9d0c-a4c8-c1bd-1057-a05b7c5dedfb','d301dbcc-0898-6170-7472-a4418d285da9','22.07.2006 07:19:00','06.11.2002 03:36:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (8,NULL,'6391f9f6-6f53-e1b8-2910-b824aebb9289','d301dbcc-0898-6170-7472-a4418d285da9','25.05.2013 03:51:00','06.12.2003 09:17:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (8,NULL,'6391f9f6-6f53-e1b8-2910-b824aebb9289','d301dbcc-0898-6170-7472-a4418d285da9','25.05.2013 03:51:00','06.12.2003 09:17:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (9,'736ae666-a86d-92a5-c28a-3dde84bcda11','6391f9f6-6f53-e1b8-2910-b824aebb9289','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','30.01.2010 00:55:00','22.02.2010 06:42:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (9,'736ae666-a86d-92a5-c28a-3dde84bcda11','6391f9f6-6f53-e1b8-2910-b824aebb9289','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','30.01.2010 00:55:00','22.02.2010 06:42:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (10,'ccca180b-ef57-8c64-37c3-9d0c6b54b092','6391f9f6-6f53-e1b8-2910-b824aebb9289',NULL,'22.03.2006 10:30:00','26.01.2001 07:03:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (10,'ccca180b-ef57-8c64-37c3-9d0c6b54b092','6391f9f6-6f53-e1b8-2910-b824aebb9289',NULL,'22.03.2006 10:30:00','26.01.2001 07:03:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (11,'ccca180b-ef57-8c64-37c3-9d0c6b54b092','24d09b7f-4944-b9bd-ea73-8fcecdd17220','9cb3592e-58a2-682f-881a-000e28bb0e97','21.12.2007 00:02:00','11.12.2009 02:27:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (11,'ccca180b-ef57-8c64-37c3-9d0c6b54b092','24d09b7f-4944-b9bd-ea73-8fcecdd17220','9cb3592e-58a2-682f-881a-000e28bb0e97','21.12.2007 00:02:00','11.12.2009 02:27:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (12,NULL,'24d09b7f-4944-b9bd-ea73-8fcecdd17220','2748ded3-bd5f-966b-25b3-0e6cef93182e','23.05.2014 04:00:00','23.04.2007 04:36:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (12,NULL,'24d09b7f-4944-b9bd-ea73-8fcecdd17220','2748ded3-bd5f-966b-25b3-0e6cef93182e','23.05.2014 04:00:00','23.04.2007 04:36:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (13,NULL,'178035b2-99a4-6b81-0b91-a017ef5a8adc','2748ded3-bd5f-966b-25b3-0e6cef93182e','09.06.2006 04:43:00','01.01.2006 04:52:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (13,NULL,'178035b2-99a4-6b81-0b91-a017ef5a8adc','2748ded3-bd5f-966b-25b3-0e6cef93182e','09.06.2006 04:43:00','01.01.2006 04:52:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (14,'726ef3b3-d8b0-834d-cfa7-146430a2c0a3','23b890b7-2c24-c6de-f799-4cad54447947','8f042308-92d0-a3fa-0245-31eef6729dc1','01.08.2008 00:08:00','26.06.2007 05:03:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (14,'726ef3b3-d8b0-834d-cfa7-146430a2c0a3','23b890b7-2c24-c6de-f799-4cad54447947','8f042308-92d0-a3fa-0245-31eef6729dc1','01.08.2008 00:08:00','26.06.2007 05:03:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (15,'726ef3b3-d8b0-834d-cfa7-146430a2c0a3','23b890b7-2c24-c6de-f799-4cad54447947','8f042308-92d0-a3fa-0245-31eef6729dc1','08.01.2011 03:48:00','08.04.2009 03:31:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (15,'726ef3b3-d8b0-834d-cfa7-146430a2c0a3','23b890b7-2c24-c6de-f799-4cad54447947','8f042308-92d0-a3fa-0245-31eef6729dc1','08.01.2011 03:48:00','08.04.2009 03:31:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (16,'0bd824b7-f4bd-7ac5-2e02-cae6d39d86be',NULL,'8f042308-92d0-a3fa-0245-31eef6729dc1','06.11.2014 05:23:00','05.05.2009 04:06:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (16,'0bd824b7-f4bd-7ac5-2e02-cae6d39d86be',NULL,'8f042308-92d0-a3fa-0245-31eef6729dc1','06.11.2014 05:23:00','05.05.2009 04:06:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (17,NULL,NULL,'7ad4249c-d81a-408f-9b31-66f179cd2eca','17.09.2000 02:24:00','13.12.2011 09:50:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (17,NULL,NULL,'7ad4249c-d81a-408f-9b31-66f179cd2eca','17.09.2000 02:24:00','13.12.2011 09:50:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (18,NULL,NULL,'6f35a65b-a44a-a0bf-1474-194afebdd09f','27.01.2007 01:46:00','30.09.2010 02:00:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (18,NULL,NULL,'6f35a65b-a44a-a0bf-1474-194afebdd09f','27.01.2007 01:46:00','30.09.2010 02:00:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (19,'c2123889-899a-c69d-8928-5236b7911f66','236518c6-3293-2807-0e4c-0485936b1e71','6f35a65b-a44a-a0bf-1474-194afebdd09f','02.07.2008 00:40:00','09.03.2013 06:01:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (19,'c2123889-899a-c69d-8928-5236b7911f66','236518c6-3293-2807-0e4c-0485936b1e71','6f35a65b-a44a-a0bf-1474-194afebdd09f','02.07.2008 00:40:00','09.03.2013 06:01:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (20,'c2123889-899a-c69d-8928-5236b7911f66','68571685-fae3-1738-5178-a81373daf97d',NULL,'23.12.2012 00:44:00','17.07.2013 06:18:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (20,'c2123889-899a-c69d-8928-5236b7911f66','68571685-fae3-1738-5178-a81373daf97d',NULL,'23.12.2012 00:44:00','17.07.2013 06:18:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (21,'c2123889-899a-c69d-8928-5236b7911f66','68571685-fae3-1738-5178-a81373daf97d',NULL,'18.11.2012 04:36:00','14.11.2014 10:40:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (21,'c2123889-899a-c69d-8928-5236b7911f66','68571685-fae3-1738-5178-a81373daf97d',NULL,'18.11.2012 04:36:00','14.11.2014 10:40:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (22,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'09.04.2003 05:00:00','31.10.2004 07:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (22,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'09.04.2003 05:00:00','31.10.2004 07:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (23,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'22.03.2008 01:56:00','19.09.2002 04:20:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (23,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'22.03.2008 01:56:00','19.09.2002 04:20:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (24,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'09.04.2013 01:34:00','17.10.2010 08:13:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (24,'02d4bebb-a3b6-cd3e-1c27-6834ea4c4d6e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'09.04.2013 01:34:00','17.10.2010 08:13:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (25,'a7a50a62-3983-968a-d479-89dc641b0805',NULL,NULL,'15.11.2010 08:38:00','19.02.2002 04:41:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (25,'a7a50a62-3983-968a-d479-89dc641b0805',NULL,NULL,'15.11.2010 08:38:00','19.02.2002 04:41:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (26,'ef9d0f50-2ff1-c590-0c26-4fb782dafa1f',NULL,'b476e03e-6b13-00d8-66a9-a33943269585','04.05.2000 09:17:00','14.08.2000 04:57:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (26,'ef9d0f50-2ff1-c590-0c26-4fb782dafa1f',NULL,'b476e03e-6b13-00d8-66a9-a33943269585','04.05.2000 09:17:00','14.08.2000 04:57:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (27,'ef9d0f50-2ff1-c590-0c26-4fb782dafa1f','78d82a6f-ff64-2d4d-1a6a-40c6702f76b2','ad0e924d-5ad5-783e-1258-278289930698','23.07.2007 07:47:00','09.02.2004 02:56:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (27,'ef9d0f50-2ff1-c590-0c26-4fb782dafa1f','78d82a6f-ff64-2d4d-1a6a-40c6702f76b2','ad0e924d-5ad5-783e-1258-278289930698','23.07.2007 07:47:00','09.02.2004 02:56:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (28,'279d5f46-a0da-aa26-145f-268773d4131b','78d82a6f-ff64-2d4d-1a6a-40c6702f76b2','ad0e924d-5ad5-783e-1258-278289930698','09.06.2003 00:05:00','30.03.2015 01:17:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (28,'279d5f46-a0da-aa26-145f-268773d4131b','78d82a6f-ff64-2d4d-1a6a-40c6702f76b2','ad0e924d-5ad5-783e-1258-278289930698','09.06.2003 00:05:00','30.03.2015 01:17:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (29,'279d5f46-a0da-aa26-145f-268773d4131b','7fbcafcc-7d45-83d0-871a-3912c394ec93','808c034c-f661-1236-540a-d8c1bf46d6f0','13.04.2012 00:04:00','11.10.2001 07:05:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (29,'279d5f46-a0da-aa26-145f-268773d4131b','7fbcafcc-7d45-83d0-871a-3912c394ec93','808c034c-f661-1236-540a-d8c1bf46d6f0','13.04.2012 00:04:00','11.10.2001 07:05:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (30,'f9ebfc60-33ff-e822-f4f7-719b7a395cf6','8e9a6c58-9c87-f0b4-e2a6-6ff297a9b718','808c034c-f661-1236-540a-d8c1bf46d6f0','22.07.2014 07:47:00','11.10.2009 04:42:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (30,'f9ebfc60-33ff-e822-f4f7-719b7a395cf6','8e9a6c58-9c87-f0b4-e2a6-6ff297a9b718','808c034c-f661-1236-540a-d8c1bf46d6f0','22.07.2014 07:47:00','11.10.2009 04:42:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (31,'f9ebfc60-33ff-e822-f4f7-719b7a395cf6','8e9a6c58-9c87-f0b4-e2a6-6ff297a9b718','808c034c-f661-1236-540a-d8c1bf46d6f0','07.05.2008 05:02:00','27.07.2001 07:04:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (31,'f9ebfc60-33ff-e822-f4f7-719b7a395cf6','8e9a6c58-9c87-f0b4-e2a6-6ff297a9b718','808c034c-f661-1236-540a-d8c1bf46d6f0','07.05.2008 05:02:00','27.07.2001 07:04:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (32,'a3f22474-8b03-01d8-1e9c-ae6bfe90361d','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','d238db11-f18b-807b-66d2-6659fad7a929','25.06.2006 00:35:00','11.12.2000 04:00:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (32,'a3f22474-8b03-01d8-1e9c-ae6bfe90361d','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','d238db11-f18b-807b-66d2-6659fad7a929','25.06.2006 00:35:00','11.12.2000 04:00:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (33,'d68afc89-e347-286b-f711-318ffe66d909','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','d238db11-f18b-807b-66d2-6659fad7a929','06.04.2009 01:58:00','08.03.2005 03:47:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (33,'d68afc89-e347-286b-f711-318ffe66d909','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','d238db11-f18b-807b-66d2-6659fad7a929','06.04.2009 01:58:00','08.03.2005 03:47:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (34,'d68afc89-e347-286b-f711-318ffe66d909','7d639444-f686-1c2e-4221-c15d0f4bd97c','d238db11-f18b-807b-66d2-6659fad7a929','17.07.2005 01:20:00','15.06.2002 07:00:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (34,'d68afc89-e347-286b-f711-318ffe66d909','7d639444-f686-1c2e-4221-c15d0f4bd97c','d238db11-f18b-807b-66d2-6659fad7a929','17.07.2005 01:20:00','15.06.2002 07:00:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (35,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','d124fd96-45a4-b20b-7008-d1c1ff3d2c2d','04.11.2000 06:57:00','19.05.2003 06:47:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (35,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','d124fd96-45a4-b20b-7008-d1c1ff3d2c2d','04.11.2000 06:57:00','19.05.2003 06:47:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (36,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','d124fd96-45a4-b20b-7008-d1c1ff3d2c2d','18.09.2011 00:21:00','27.02.2013 05:06:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (36,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','d124fd96-45a4-b20b-7008-d1c1ff3d2c2d','18.09.2011 00:21:00','27.02.2013 05:06:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (37,'cce6fe8c-f0d1-b868-3758-4f2a432a1eb2','b9391b73-2ef5-4952-3315-ef32e80a6f61','b60a2fa9-3d2d-bd3a-a473-4ee2060e59d4','09.01.2002 08:15:00','10.04.2002 04:55:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (37,'cce6fe8c-f0d1-b868-3758-4f2a432a1eb2','b9391b73-2ef5-4952-3315-ef32e80a6f61','b60a2fa9-3d2d-bd3a-a473-4ee2060e59d4','09.01.2002 08:15:00','10.04.2002 04:55:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (38,'cce6fe8c-f0d1-b868-3758-4f2a432a1eb2','4818530e-7f1c-9a43-94b7-1deb425fc200','b60a2fa9-3d2d-bd3a-a473-4ee2060e59d4','26.06.2012 03:15:00','31.01.2013 10:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (38,'cce6fe8c-f0d1-b868-3758-4f2a432a1eb2','4818530e-7f1c-9a43-94b7-1deb425fc200','b60a2fa9-3d2d-bd3a-a473-4ee2060e59d4','26.06.2012 03:15:00','31.01.2013 10:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (39,'baea576d-be08-00a7-451f-d6f43cffdcea','4818530e-7f1c-9a43-94b7-1deb425fc200','5fcca806-910f-a920-02f9-d708f54b9659','16.12.2007 07:24:00','11.12.2007 02:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (39,'baea576d-be08-00a7-451f-d6f43cffdcea','4818530e-7f1c-9a43-94b7-1deb425fc200','5fcca806-910f-a920-02f9-d708f54b9659','16.12.2007 07:24:00','11.12.2007 02:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (40,'103676e8-d5ad-a8e4-d0cf-c2b82339021e','9bfcb6e5-1ae3-a276-2591-2f97e5f098a3','5fcca806-910f-a920-02f9-d708f54b9659','19.04.2006 04:37:00','23.01.2007 02:51:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (40,'103676e8-d5ad-a8e4-d0cf-c2b82339021e','9bfcb6e5-1ae3-a276-2591-2f97e5f098a3','5fcca806-910f-a920-02f9-d708f54b9659','19.04.2006 04:37:00','23.01.2007 02:51:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (41,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf',NULL,'5fcca806-910f-a920-02f9-d708f54b9659','12.07.2002 04:57:00','19.06.2012 02:22:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (41,'1e19b8ec-2f40-0b40-a4b9-894f7877f3bf',NULL,'5fcca806-910f-a920-02f9-d708f54b9659','12.07.2002 04:57:00','19.06.2012 02:22:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (42,'7dffcab1-d68e-ff1e-6eb0-90b798214eaf',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','06.04.2000 10:36:00','07.02.2007 10:48:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (42,'7dffcab1-d68e-ff1e-6eb0-90b798214eaf',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','06.04.2000 10:36:00','07.02.2007 10:48:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (43,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','19.04.2006 02:03:00','26.03.2014 06:12:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (43,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','19.04.2006 02:03:00','26.03.2014 06:12:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (44,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','12.02.2002 08:27:00','15.02.2001 04:50:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (44,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'fd0a45e2-c9e7-6e7a-acce-026a91f4f12d','12.02.2002 08:27:00','15.02.2001 04:50:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (45,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'c180e3af-a438-1276-279c-1b6f9fb9ff10','04.08.2002 08:20:00','03.05.2002 02:29:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (45,'79973ff1-b8ea-9d8e-fc6c-65cff529e1a0',NULL,'c180e3af-a438-1276-279c-1b6f9fb9ff10','04.08.2002 08:20:00','03.05.2002 02:29:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (46,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'c180e3af-a438-1276-279c-1b6f9fb9ff10','22.03.2008 05:53:00','09.07.2005 04:18:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (46,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'c180e3af-a438-1276-279c-1b6f9fb9ff10','22.03.2008 05:53:00','09.07.2005 04:18:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (47,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'38fe5024-6162-dbb7-ac9c-f147abb06368','23.06.2001 06:53:00','05.11.2007 07:17:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (47,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'38fe5024-6162-dbb7-ac9c-f147abb06368','23.06.2001 06:53:00','05.11.2007 07:17:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (48,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'77c44bbe-897f-40a0-e76d-1a677a99599c','28.10.2002 09:58:00','06.07.2007 04:47:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (48,'a754fa3f-c26e-27e4-6af7-64cefbd2d9fc',NULL,'77c44bbe-897f-40a0-e76d-1a677a99599c','28.10.2002 09:58:00','06.07.2007 04:47:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (49,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b',NULL,'77c44bbe-897f-40a0-e76d-1a677a99599c','14.11.2007 07:29:00','31.03.2008 01:38:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (49,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b',NULL,'77c44bbe-897f-40a0-e76d-1a677a99599c','14.11.2007 07:29:00','31.03.2008 01:38:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (50,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','805a1972-ffa9-33ef-b977-bea4205087e4','25.05.2011 07:13:00','21.11.2001 07:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (50,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','805a1972-ffa9-33ef-b977-bea4205087e4','25.05.2011 07:13:00','21.11.2001 07:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (51,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','805a1972-ffa9-33ef-b977-bea4205087e4','18.11.2013 03:43:00','03.08.2014 10:05:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (51,'a505bcd5-1ba5-2af4-e619-8b35c451ad5b','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','805a1972-ffa9-33ef-b977-bea4205087e4','18.11.2013 03:43:00','03.08.2014 10:05:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (52,'5c4174bf-135c-23ed-df3b-2d6d6b1fb447','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','5ec972f9-44e5-c345-9681-7ea47d85aa92','19.08.2000 09:43:00','11.08.2014 04:55:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (52,'5c4174bf-135c-23ed-df3b-2d6d6b1fb447','05800fa9-2a42-ad06-b4a1-3253b0bce9f4','5ec972f9-44e5-c345-9681-7ea47d85aa92','19.08.2000 09:43:00','11.08.2014 04:55:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (53,'5c4174bf-135c-23ed-df3b-2d6d6b1fb447',NULL,'5ec972f9-44e5-c345-9681-7ea47d85aa92','22.04.2002 05:42:00','12.09.2005 09:14:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (53,'5c4174bf-135c-23ed-df3b-2d6d6b1fb447',NULL,'5ec972f9-44e5-c345-9681-7ea47d85aa92','22.04.2002 05:42:00','12.09.2005 09:14:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (54,NULL,NULL,'d301dbcc-0898-6170-7472-a4418d285da9','09.01.2004 02:33:00','19.10.2001 09:11:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (54,NULL,NULL,'d301dbcc-0898-6170-7472-a4418d285da9','09.01.2004 02:33:00','19.10.2001 09:11:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (55,NULL,'91569159-7f7c-fe04-eab5-bf5577442420',NULL,'20.08.2000 02:22:00','29.04.2012 10:12:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (55,NULL,'91569159-7f7c-fe04-eab5-bf5577442420',NULL,'20.08.2000 02:22:00','29.04.2012 10:12:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (56,'c5883181-809c-2e5d-ce84-454d8d04ee56',NULL,NULL,'02.12.2011 07:20:00','14.03.2005 06:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (56,'c5883181-809c-2e5d-ce84-454d8d04ee56',NULL,NULL,'02.12.2011 07:20:00','14.03.2005 06:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (57,NULL,NULL,NULL,'22.01.2009 04:42:00','28.02.2004 07:16:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (57,NULL,NULL,NULL,'22.01.2009 04:42:00','28.02.2004 07:16:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (58,NULL,NULL,NULL,'05.03.2009 04:58:00','12.05.2004 00:14:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (58,NULL,NULL,NULL,'05.03.2009 04:58:00','12.05.2004 00:14:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (59,'5ff9738e-8e04-7a03-842f-b9f358c906e1',NULL,NULL,'05.08.2007 08:04:00','28.07.2005 01:38:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (59,'5ff9738e-8e04-7a03-842f-b9f358c906e1',NULL,NULL,'05.08.2007 08:04:00','28.07.2005 01:38:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (60,'5ff9738e-8e04-7a03-842f-b9f358c906e1',NULL,NULL,'29.12.2008 03:24:00','08.09.2001 00:33:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (60,'5ff9738e-8e04-7a03-842f-b9f358c906e1',NULL,NULL,'29.12.2008 03:24:00','08.09.2001 00:33:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (61,'5ff9738e-8e04-7a03-842f-b9f358c906e1','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da',NULL,'16.12.2000 08:49:00','16.09.2001 05:55:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (61,'5ff9738e-8e04-7a03-842f-b9f358c906e1','f16ef1e4-5f6e-8793-dbc2-385aaa26e8da',NULL,'16.12.2000 08:49:00','16.09.2001 05:55:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (62,NULL,'f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','7443502f-b072-e57d-9158-4eff495333e4','13.04.2008 03:12:00','13.10.2005 01:11:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (62,NULL,'f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','7443502f-b072-e57d-9158-4eff495333e4','13.04.2008 03:12:00','13.10.2005 01:11:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (63,NULL,'f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','f646c295-2f03-aa8b-d52d-3e0b2ca70c0a','02.02.2007 02:15:00','05.06.2009 05:06:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (63,NULL,'f16ef1e4-5f6e-8793-dbc2-385aaa26e8da','f646c295-2f03-aa8b-d52d-3e0b2ca70c0a','02.02.2007 02:15:00','05.06.2009 05:06:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (64,NULL,'73e76d98-c228-bdf4-7d5a-8ad7a22627e2','ec307125-1b75-4cb1-5632-9b369649c51b','17.05.2001 09:22:00','15.12.2001 07:28:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (64,NULL,'73e76d98-c228-bdf4-7d5a-8ad7a22627e2','ec307125-1b75-4cb1-5632-9b369649c51b','17.05.2001 09:22:00','15.12.2001 07:28:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (65,NULL,'73e76d98-c228-bdf4-7d5a-8ad7a22627e2','ec307125-1b75-4cb1-5632-9b369649c51b','11.08.2003 10:18:00','19.05.2004 09:06:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (65,NULL,'73e76d98-c228-bdf4-7d5a-8ad7a22627e2','ec307125-1b75-4cb1-5632-9b369649c51b','11.08.2003 10:18:00','19.05.2004 09:06:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (66,NULL,'93dfe80e-2643-f57b-7165-61f4e81d8a2d','9967970b-b11f-519c-5185-782a574e5918','17.09.2004 05:48:00','10.03.2005 07:28:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (66,NULL,'93dfe80e-2643-f57b-7165-61f4e81d8a2d','9967970b-b11f-519c-5185-782a574e5918','17.09.2004 05:48:00','10.03.2005 07:28:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (67,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9967970b-b11f-519c-5185-782a574e5918','13.06.2004 08:57:00','06.07.2013 03:30:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (67,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9967970b-b11f-519c-5185-782a574e5918','13.06.2004 08:57:00','06.07.2013 03:30:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (68,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9967970b-b11f-519c-5185-782a574e5918','27.05.2001 02:17:00','06.10.2013 10:09:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (68,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9967970b-b11f-519c-5185-782a574e5918','27.05.2001 02:17:00','06.10.2013 10:09:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (69,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9a9ebe86-7f60-f33d-d2b5-9fa66369e6b6','11.03.2007 03:38:00','22.07.2014 02:30:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (69,NULL,'3dd2a523-a0d6-5134-2cc5-b4b4ceaeaab0','9a9ebe86-7f60-f33d-d2b5-9fa66369e6b6','11.03.2007 03:38:00','22.07.2014 02:30:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (70,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d','982f3052-55a4-4fde-548a-0cbde3e2c174',NULL,'28.09.2009 01:31:00','26.02.2001 05:25:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (70,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d','982f3052-55a4-4fde-548a-0cbde3e2c174',NULL,'28.09.2009 01:31:00','26.02.2001 05:25:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (71,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d',NULL,NULL,'14.03.2012 02:52:00','03.01.2006 09:50:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (71,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d',NULL,NULL,'14.03.2012 02:52:00','03.01.2006 09:50:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (72,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d','6d6d731c-6142-4c4d-ea1e-01b634ef0693',NULL,'20.04.2012 04:57:00','26.07.2004 01:05:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (72,'a06f8b05-7a5c-b24d-8d9d-8308066dc54d','6d6d731c-6142-4c4d-ea1e-01b634ef0693',NULL,'20.04.2012 04:57:00','26.07.2004 01:05:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (73,NULL,'6d6d731c-6142-4c4d-ea1e-01b634ef0693','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','15.08.2014 02:38:00','10.05.2008 06:24:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (73,NULL,'6d6d731c-6142-4c4d-ea1e-01b634ef0693','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','15.08.2014 02:38:00','10.05.2008 06:24:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (74,NULL,'6391f9f6-6f53-e1b8-2910-b824aebb9289','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','09.07.2002 05:53:00','10.12.2004 05:57:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (74,NULL,'6391f9f6-6f53-e1b8-2910-b824aebb9289','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','09.07.2002 05:53:00','10.12.2004 05:57:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (75,NULL,'779e5c16-ed20-2478-ddf6-d7a970a63695','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','25.02.2001 01:37:00','04.10.2009 08:36:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (75,NULL,'779e5c16-ed20-2478-ddf6-d7a970a63695','2d4ad0a5-5102-216e-f01e-513ebf79b4c1','25.02.2001 01:37:00','04.10.2009 08:36:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (76,'1d97437b-dc0a-a40d-f3e4-5dbd48b7c679','779e5c16-ed20-2478-ddf6-d7a970a63695','145182ee-f5f4-644b-4b47-db573392b6c5','31.05.2005 05:17:00','12.12.2014 01:44:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (76,'1d97437b-dc0a-a40d-f3e4-5dbd48b7c679','779e5c16-ed20-2478-ddf6-d7a970a63695','145182ee-f5f4-644b-4b47-db573392b6c5','31.05.2005 05:17:00','12.12.2014 01:44:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (77,'1d97437b-dc0a-a40d-f3e4-5dbd48b7c679','a482cbc2-ba75-23eb-6114-786bf3db857a','145182ee-f5f4-644b-4b47-db573392b6c5','03.12.2005 10:34:00','10.10.2003 08:20:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (77,'1d97437b-dc0a-a40d-f3e4-5dbd48b7c679','a482cbc2-ba75-23eb-6114-786bf3db857a','145182ee-f5f4-644b-4b47-db573392b6c5','03.12.2005 10:34:00','10.10.2003 08:20:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (78,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','a482cbc2-ba75-23eb-6114-786bf3db857a',NULL,'02.08.2005 00:54:00','15.01.2008 05:53:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (78,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','a482cbc2-ba75-23eb-6114-786bf3db857a',NULL,'02.08.2005 00:54:00','15.01.2008 05:53:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (79,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','236518c6-3293-2807-0e4c-0485936b1e71',NULL,'14.08.2001 10:10:00','02.10.2012 08:01:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (79,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','236518c6-3293-2807-0e4c-0485936b1e71',NULL,'14.08.2001 10:10:00','02.10.2012 08:01:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (80,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'28.07.2012 08:50:00','24.11.2010 00:14:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (80,'9e4df3d4-a991-9458-c8bc-721bdc3c921e','91aeae75-d857-4484-d2ae-88e5b14b73dc',NULL,'28.07.2012 08:50:00','24.11.2010 00:14:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (81,'a7a50a62-3983-968a-d479-89dc641b0805','91aeae75-d857-4484-d2ae-88e5b14b73dc','f3025f22-0112-ef04-b0cc-22908c7a37d5','03.12.2005 04:48:00','26.10.2007 05:52:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (81,'a7a50a62-3983-968a-d479-89dc641b0805','91aeae75-d857-4484-d2ae-88e5b14b73dc','f3025f22-0112-ef04-b0cc-22908c7a37d5','03.12.2005 04:48:00','26.10.2007 05:52:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (82,NULL,'91aeae75-d857-4484-d2ae-88e5b14b73dc','5fcca806-910f-a920-02f9-d708f54b9659','20.04.2002 07:08:00','05.12.2003 06:55:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (82,NULL,'91aeae75-d857-4484-d2ae-88e5b14b73dc','5fcca806-910f-a920-02f9-d708f54b9659','20.04.2002 07:08:00','05.12.2003 06:55:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (83,'95b5f365-7695-cd1e-b3b2-12a0cdebab6b','201f5a3a-6389-601b-8856-ef1dbc7cadb6','5fcca806-910f-a920-02f9-d708f54b9659','10.07.2008 04:42:00','30.04.2006 09:04:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (83,'95b5f365-7695-cd1e-b3b2-12a0cdebab6b','201f5a3a-6389-601b-8856-ef1dbc7cadb6','5fcca806-910f-a920-02f9-d708f54b9659','10.07.2008 04:42:00','30.04.2006 09:04:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (84,'95b5f365-7695-cd1e-b3b2-12a0cdebab6b','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','5fcca806-910f-a920-02f9-d708f54b9659','21.12.2009 04:36:00','05.11.2013 04:34:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (84,'95b5f365-7695-cd1e-b3b2-12a0cdebab6b','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','5fcca806-910f-a920-02f9-d708f54b9659','21.12.2009 04:36:00','05.11.2013 04:34:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (85,'00f5ded5-0201-7ea6-88d5-ed0e3cc76919','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','334f5982-4c18-6929-3e15-a464c59b34e1','25.09.2011 08:11:00','24.12.2000 02:28:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (85,'00f5ded5-0201-7ea6-88d5-ed0e3cc76919','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','334f5982-4c18-6929-3e15-a464c59b34e1','25.09.2011 08:11:00','24.12.2000 02:28:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (86,'00f5ded5-0201-7ea6-88d5-ed0e3cc76919','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','334f5982-4c18-6929-3e15-a464c59b34e1','25.03.2007 10:27:00','27.08.2011 04:00:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (86,'00f5ded5-0201-7ea6-88d5-ed0e3cc76919','5a8f385c-ded0-72e7-8e2c-eb5430ea621d','334f5982-4c18-6929-3e15-a464c59b34e1','25.03.2007 10:27:00','27.08.2011 04:00:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (87,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc',NULL,'06.10.2006 02:38:00','01.06.2009 00:45:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (87,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc',NULL,'06.10.2006 02:38:00','01.06.2009 00:45:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (88,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc','614f3244-7cad-c2e5-28bf-42a616bb02ae','23.10.2000 06:45:00','11.02.2013 10:57:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (88,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc','614f3244-7cad-c2e5-28bf-42a616bb02ae','23.10.2000 06:45:00','11.02.2013 10:57:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (89,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc','614f3244-7cad-c2e5-28bf-42a616bb02ae','16.05.2002 04:16:00','26.09.2011 04:00:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (89,NULL,'b9ac6d6a-da25-b92a-8f89-429c03f40cbc','614f3244-7cad-c2e5-28bf-42a616bb02ae','16.05.2002 04:16:00','26.09.2011 04:00:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (90,'711421bc-3a68-6780-3fbb-20e2b103a16f',NULL,'614f3244-7cad-c2e5-28bf-42a616bb02ae','08.06.2000 04:16:00','17.07.2001 00:10:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (90,'711421bc-3a68-6780-3fbb-20e2b103a16f',NULL,'614f3244-7cad-c2e5-28bf-42a616bb02ae','08.06.2000 04:16:00','17.07.2001 00:10:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (91,'711421bc-3a68-6780-3fbb-20e2b103a16f',NULL,'53165a04-6a60-e39e-1393-76898a31a202','08.11.2006 02:13:00','23.03.2007 03:43:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (91,'711421bc-3a68-6780-3fbb-20e2b103a16f',NULL,'53165a04-6a60-e39e-1393-76898a31a202','08.11.2006 02:13:00','23.03.2007 03:43:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (92,'d68afc89-e347-286b-f711-318ffe66d909','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','6c8e0c63-74b7-479e-5d1a-5337b241d30c','19.12.2007 03:39:00','02.04.2015 08:13:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (92,'d68afc89-e347-286b-f711-318ffe66d909','e5ca5da3-ddbb-d8de-4d7a-0438ad32bbeb','6c8e0c63-74b7-479e-5d1a-5337b241d30c','19.12.2007 03:39:00','02.04.2015 08:13:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (93,'d68afc89-e347-286b-f711-318ffe66d909','a8db82a0-dcab-5823-3304-18c6bfd4a3d1','6c8e0c63-74b7-479e-5d1a-5337b241d30c','16.01.2010 03:31:00','09.02.2009 06:09:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (93,'d68afc89-e347-286b-f711-318ffe66d909','a8db82a0-dcab-5823-3304-18c6bfd4a3d1','6c8e0c63-74b7-479e-5d1a-5337b241d30c','16.01.2010 03:31:00','09.02.2009 06:09:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (94,'d68afc89-e347-286b-f711-318ffe66d909','7d639444-f686-1c2e-4221-c15d0f4bd97c','e6bff9d1-64ca-fbc2-6508-525c77db289a','08.05.2004 03:21:00','05.09.2012 04:07:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (94,'d68afc89-e347-286b-f711-318ffe66d909','7d639444-f686-1c2e-4221-c15d0f4bd97c','e6bff9d1-64ca-fbc2-6508-525c77db289a','08.05.2004 03:21:00','05.09.2012 04:07:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (95,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','5ec972f9-44e5-c345-9681-7ea47d85aa92','17.08.2011 09:12:00','08.02.2004 02:03:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (95,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','5ec972f9-44e5-c345-9681-7ea47d85aa92','17.08.2011 09:12:00','08.02.2004 02:03:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (96,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','7443502f-b072-e57d-9158-4eff495333e4','24.10.2009 10:37:00','18.10.2014 04:07:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (96,'ddf4b160-3a63-2936-14b9-5957a6d5692a','7d639444-f686-1c2e-4221-c15d0f4bd97c','7443502f-b072-e57d-9158-4eff495333e4','24.10.2009 10:37:00','18.10.2014 04:07:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (97,NULL,'8d7de4a0-3328-0fee-3cec-56c8a6dd15a4','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','10.10.2012 00:18:00','15.03.2009 10:22:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (97,NULL,'8d7de4a0-3328-0fee-3cec-56c8a6dd15a4','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','10.10.2012 00:18:00','15.03.2009 10:22:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (98,NULL,NULL,'81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','25.09.2010 03:16:00','25.12.2006 04:55:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (98,NULL,NULL,'81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','25.09.2010 03:16:00','25.12.2006 04:55:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (99,NULL,'a41f2c4c-3fa4-caa4-2f01-e9941ced9721','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','26.02.2008 02:45:00','14.05.2001 06:14:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (99,NULL,'a41f2c4c-3fa4-caa4-2f01-e9941ced9721','81b6a0c9-d1d7-ddf0-0b82-d6e75435ed1c','26.02.2008 02:45:00','14.05.2001 06:14:00');
  
  
-INSERT INTO "public"."liveFaircompanyinterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (100,'ca9dabbe-5839-5405-0493-c67c45882d8a','a41f2c4c-3fa4-caa4-2f01-e9941ced9721','5225480e-6d1b-7c4b-b9af-874097f4057c','26.07.2004 06:26:00','31.01.2004 06:38:00');
+INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") VALUES (100,'ca9dabbe-5839-5405-0493-c67c45882d8a','a41f2c4c-3fa4-caa4-2f01-e9941ced9721','5225480e-6d1b-7c4b-b9af-874097f4057c','26.07.2004 06:26:00','31.01.2004 06:38:00');
  
 
 
