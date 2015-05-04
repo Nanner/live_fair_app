@@ -116,7 +116,7 @@ var Visitor = sequelize.define('visitor', {
 
 Visitor.belongsTo(User, {foreignKey: 'visitorID'});
 
-var LiveFair = sequelize.define('liveFair', {
+var LiveFair = sequelize.define('livefair', {
   liveFairID:{
     type: Sequelize.UUID,
     primaryKey: true
@@ -140,11 +140,11 @@ var LiveFair = sequelize.define('liveFair', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-Visitor.belongsToMany(LiveFair, {through: "visitor_liveFair"});
-LiveFair.belongsToMany(Visitor, {through: "visitor_liveFair"});
+Visitor.belongsToMany(LiveFair, {through: "visitor_livefair"});
+LiveFair.belongsToMany(Visitor, {through: "visitor_livefair"});
 Organizer.hasMany(LiveFair);
 
-var LiveFairEvents = sequelize.define('liveFairEvents', {
+var LiveFairEvents = sequelize.define('livefairevents', {
   eventLocation: {
     type: Sequelize.STRING
   },
@@ -161,7 +161,7 @@ var LiveFairEvents = sequelize.define('liveFairEvents', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-LiveFair.hasMany(LiveFairEvents, {foreignKey: 'liveFairEventsID'});
+LiveFair.hasMany(LiveFairEvents, {foreignKey: 'livefaireventsID'});
 
 var Interest = sequelize.define('interest', {
   interestID:{
@@ -175,7 +175,7 @@ var Interest = sequelize.define('interest', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-var CompanyEvents = sequelize.define('companyEvents', {
+var CompanyEvents = sequelize.define('companyevents', {
   companyEventsID:{
     type: Sequelize.UUID,
     primaryKey: true
@@ -215,7 +215,7 @@ var Connection = sequelize.define('connection', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-var LiveFairCompanyEvents = sequelize.define('liveFairCompanyEvents', {
+var LiveFairCompanyEvents = sequelize.define('livefaircompanyevents', {
   liveFairIDref: {
     type: Sequelize.UUID,
     references: LiveFair, // Can be both a string representing the table name, or a reference to the model
@@ -238,7 +238,7 @@ var LiveFairCompanyEvents = sequelize.define('liveFairCompanyEvents', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-var LiveCompanyInterest = sequelize.define('liveFairCompanyInterest', {
+var LiveCompanyInterest = sequelize.define('livefaircompanyinterest', {
     liveFAirIDref: {
     type: Sequelize.UUID,
     references: LiveFair, // Can be both a string representing the table name, or a reference to the model
@@ -261,7 +261,7 @@ var LiveCompanyInterest = sequelize.define('liveFairCompanyInterest', {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 
-var Connection = sequelize.define('liveFairVisitorInterest', {
+var Connection = sequelize.define('livefairvisitorinterest', {
     liveFairIDref: {
     type: Sequelize.UUID,
     references: LiveFair, // Can be both a string representing the table name, or a reference to the model
@@ -289,8 +289,8 @@ Company.belongsToMany(Visitor, {through: "connection"});
 Visitor.belongsToMany(Company, {through: "connection"});
 
 //connection between LiveFair and Interest
-Interest.belongsTo(LiveFair, {through: "liveFairInterest"});
-LiveFair.belongsToMany(Interest, {through: "liveFairInterest"});
+Interest.belongsTo(LiveFair, {through: "livefairinterest"});
+LiveFair.belongsToMany(Interest, {through: "livefairinterest"});
 
 //Ternary relation definition Company-CompanyEvents-LiveFair
 /*Company.belongsToMany(LiveFair, {through: "liveFairCompanyEvents"});
