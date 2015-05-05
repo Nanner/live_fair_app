@@ -89,6 +89,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 	//Default startup screen
 	$urlRouterProvider.otherwise("/menu/home");
 
+	//Activate variable content escaping (for more security)
+	$translateProvider.useSanitizeValueStrategy('escaped');
+
 	//dealing with languages
 	$translateProvider.translations('pt', {
 		'existingUser': 'Utilizador existente?',
