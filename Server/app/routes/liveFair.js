@@ -5,7 +5,7 @@ module.exports = function(server){
         method: 'GET',
         path: '/lifefairs',
         handler: function (request, reply) {
-            reply(LiveFair.findAll({order:'liveFairID DESC'}).then(function(liveFairs)
+            reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
             {
                 return JSON.stringify(liveFairs);
             }));
