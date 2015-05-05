@@ -95,10 +95,11 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
    
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils) {
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
-    $scope.listfairs = [{name: "derp1", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"},{name: "derp2", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua de Exemplo"},{name: "derp3", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"}];
-    
+    //$scope.listfairs = [{name: "derp1", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"},{name: "derp2", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua de Exemplo"},{name: "derp3", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"}];
+    $scope.listfairs = liveFairApi.getLiveFairs();
+
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
             $scope.listfairs[i].month = utils.getMonthName($scope.listfairs[i].month);
