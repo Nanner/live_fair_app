@@ -135,7 +135,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         'btnStandEvents': 'Ver eventos deste stand',
         'saveContact': 'Guardar contacto',
         'sync': 'Sync',
-        'cancel': 'Cancelar'
+        'cancel': 'Cancelar',
+        'recoverPassword': 'Recuperar password',
+        'socialNetworksLogin': 'Entrar com facebook'
 	});
 
 	$translateProvider.translations('en', {
@@ -180,7 +182,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         'btnStandEvents': 'Consult stand\'s events',
         'saveContact': 'Save contact',
         'sync': 'Sync',
-        'cancel': 'Cancel'
+        'cancel': 'Cancel',
+        'recoverPassword': 'Recover password',
+        'socialNetworksLogin': 'Login with facebook'
 	});
 
 	$translateProvider.preferredLanguage('pt');
