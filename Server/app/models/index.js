@@ -29,7 +29,8 @@ var models = [
     'Connection',
     'LiveFairVisitorInterest',
     'LiveFairCompanyEvents',
-    'LiveFairCompanyInterest'
+    'LiveFairCompanyInterest',
+    'LiveFairInterest'
 ];
 models.forEach(function(model) {
     module.exports[model] = sequelize.import(__dirname + '/' + model);
