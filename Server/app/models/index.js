@@ -1,5 +1,7 @@
 "use strict";
 
+var FORCE_SEQUELIZE_SYNC = true;
+
 var Sequelize = require('sequelize');
 
 // initialize database connection
@@ -29,7 +31,8 @@ var models = [
     'Connection',
     'LiveFairVisitorInterest',
     'LiveFairCompanyEvents',
-    'LiveFairCompanyInterest'
+    'LiveFairCompanyInterest',
+    'LiveFairInterest'
 ];
 models.forEach(function(model) {
     module.exports[model] = sequelize.import(__dirname + '/' + model);
@@ -61,7 +64,7 @@ models.forEach(function(model) {
     m.LiveFair.belongsToMany(m.Interest, {through: "liveFairInterest"});
 })(module.exports);
 
-sequelize.sync({force: true});
+sequelize.sync({force: FORCE_SEQUELIZE_SYNC});
 
 // export connection
 module.exports.sequelize = sequelize;
