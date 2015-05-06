@@ -16,7 +16,7 @@
             <p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
             <p> <b> {{ 'ending' | translate }}: </b> {{fair.closingHour}}:{{fair.closingMinute}}h </p>
             <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>
-            <p ng-show={{description}}> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
+            <p ng-show="$scope.description"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
           </div>
         </div>
         
