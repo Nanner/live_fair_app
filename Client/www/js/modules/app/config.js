@@ -137,7 +137,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         'sync': 'Sync',
         'cancel': 'Cancelar',
         'recoverPassword': 'Recuperar password',
-        'socialNetworksLogin': 'Entrar com facebook'
+        'socialNetworksLogin': 'Entrar com LinkedIn'
 	});
 
 	$translateProvider.translations('en', {
@@ -184,7 +184,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
         'sync': 'Sync',
         'cancel': 'Cancel',
         'recoverPassword': 'Recover password',
-        'socialNetworksLogin': 'Login with facebook'
+        'socialNetworksLogin': 'Login with LinkedIn'
 	});
 
 	$translateProvider.preferredLanguage('pt');
