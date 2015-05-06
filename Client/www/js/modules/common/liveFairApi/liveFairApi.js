@@ -5,8 +5,13 @@ module.factory('liveFairApi', function($resource, server) {
         {liveFairID:'@liveFairID'});
 
     var api = {
+
         getLiveFairs: function() {
             return LiveFair.query();
+        },
+
+        getLiveFair: function(fairID) {
+            return LiveFair.get({liveFairID: fairID});
         }
     }
 

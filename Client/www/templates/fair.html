@@ -4,26 +4,29 @@
         <!-- Content -->
         <div class="fair-container" ng-init="loadFairProfile()">
             <h2 class="fair-title"> {{fair.name}} </h2>
-            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.place}} </h4>
+            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.location}} </h4>
         </div>
-        
+
         <div class="card">
-          <div class="item item-divider">
-            Informações
-          </div>
-          <div class="item item-text-wrap">
-            <p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{month}} </p>
-            <p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
-            <p> <b> {{ 'ending' | translate }}: </b> {{fair.closingHour}}:{{fair.closingMinute}}h </p>
-            <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>
-            <p ng-show="$scope.description"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
-          </div>
+            <div class="item item-divider">
+                Informações
+            </div>
+            <div class="item item-text-wrap">
+                <!--<p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{month}} </p>-->
+                <!--<p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>-->
+                <!--<p> <b> {{ 'ending' | translate }}: </b> {{fair.closingHour}}:{{fair.closingMinute}}h </p>-->
+                <!--<p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>-->
+                <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
+                <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
+                <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
+                <p ng-show="fair.description != null"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
+            </div>
         </div>
-        
-        <div class="fair-map-container" ng-show={{map}}>
-            <img class="fair-map" ng-src="{{fair.map}}"/>
+
+        <div class="fair-map-container" ng-show="fair.map != null">
+            <img no-image class="fair-map" ng-src="{{fair.map}}"/>
         </div>
-        
+
         <div class="fair-btn-Container-1">
             <button nav-clear ng-click="loadEvents()" class="myBtn button button-clear button-outline button-positive">
                 {{ 'btnProgram' | translate }}
@@ -39,6 +42,6 @@
                 {{ 'btnAderir' | translate }}
             </button>
         </div>
-        
+
     </ion-content>
 </ion-view>

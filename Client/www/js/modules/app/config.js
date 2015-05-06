@@ -37,19 +37,19 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 				'menuContent' :{
 					templateUrl: "templates/register.html",
 					controller: "registerCtrl"
-                }
-            }
-        })
-	    .state('menu.listfairs',{
-	        url: "/listfairs",
-	        views:{
-	            'menuContent' :{
-	                templateUrl: "templates/listfairs.html",
-	                controller: "listFairsCtrl"
-	            }
-	        }
-	    })
-	    .state('menu.presentStands', {
+				}
+			}
+		})
+		.state('menu.listfairs',{
+			url: "/fairs",
+			views:{
+				'menuContent' :{
+					templateUrl: "templates/listfairs.html",
+					controller: "listFairsCtrl"
+				}
+			}
+		})
+		.state('menu.presentStands', {
 			url: "/presentStands",
 			views: {
 				'menuContent' :{
@@ -76,8 +76,17 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 				}
 			}
 		})
-		.state('menu.fair', {
+		.state('menu.fairTest', {
 			url: "/fair",
+			views: {
+				'menuContent': {
+					templateUrl: "templates/fair.html",
+					controller: "fairCtrl"
+				}
+			}
+		})
+		.state('menu.fair', {
+			url: "/fairs/:fairID",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/fair.html",
@@ -122,22 +131,22 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'select': 'Selecionar',
 		'menuFair': 'Feira',
 		'menuFairs': 'Feiras',
-        'de': 'de',
-        'a': 'a',
-        'e': 'e',
-        'attendingStands': 'Stands Presentes',
-        'info': 'Informações',
-        'webpage': 'Página Web',
-        'aboutus': 'Sobre nós',
-        'phone': 'Telefone',
-        'interests': 'Interesses',
-        'btnRecomendedStands': 'Ver stands recomendados',
-        'btnStandEvents': 'Ver eventos deste stand',
-        'saveContact': 'Guardar contacto',
-        'sync': 'Sync',
-        'cancel': 'Cancelar',
-        'recoverPassword': 'Recuperar password',
-        'socialNetworksLogin': 'Entrar com LinkedIn'
+		'de': 'de',
+		'a': 'a',
+		'e': 'e',
+		'attendingStands': 'Stands Presentes',
+		'info': 'Informações',
+		'webpage': 'Página Web',
+		'aboutus': 'Sobre nós',
+		'phone': 'Telefone',
+		'interests': 'Interesses',
+		'btnRecomendedStands': 'Ver stands recomendados',
+		'btnStandEvents': 'Ver eventos deste stand',
+		'saveContact': 'Guardar contacto',
+		'sync': 'Sync',
+		'cancel': 'Cancelar',
+		'recoverPassword': 'Recuperar password',
+		'socialNetworksLogin': 'Entrar com LinkedIn'
 	});
 
 	$translateProvider.translations('en', {
@@ -149,7 +158,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'name': 'Name',
 		'confPassword': 'Confirm Password',
 		'address': 'Address',
-		'terms': 'Declare that read and accept the terms', 
+		'terms': 'Declare that read and accept the terms',
 		'listfairs': 'Fairs List',
 		'date': 'Date',
 		'opening': 'Opening time',
@@ -165,26 +174,26 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'starting': 'Start time',
 		'place': 'Place',
 		'adherence': 'Adherence',
-		'chooseInterests': 'Choose your interests',	
+		'chooseInterests': 'Choose your interests',
 		'select': 'Submit',
 		'menuFair': 'Fair',
 		'menuFairs': 'Fairs',
-        'de': 'from',
-        'a': 'to',
-        'e': 'and',
-        'attendingStands': 'Attending stands',
-        'info': 'Infomations',
-        'webpage': 'Webpage',
-        'aboutus': 'About us',
-        'phone': 'Telephone',
-        'interests': 'Interests',
-        'btnRecomendedStands': 'Consult recommended stands',
-        'btnStandEvents': 'Consult stand\'s events',
-        'saveContact': 'Save contact',
-        'sync': 'Sync',
-        'cancel': 'Cancel',
-        'recoverPassword': 'Recover password',
-        'socialNetworksLogin': 'Login with LinkedIn'
+		'de': 'from',
+		'a': 'to',
+		'e': 'and',
+		'attendingStands': 'Attending stands',
+		'info': 'Infomations',
+		'webpage': 'Webpage',
+		'aboutus': 'About us',
+		'phone': 'Telephone',
+		'interests': 'Interests',
+		'btnRecomendedStands': 'Consult recommended stands',
+		'btnStandEvents': 'Consult stand\'s events',
+		'saveContact': 'Save contact',
+		'sync': 'Sync',
+		'cancel': 'Cancel',
+		'recoverPassword': 'Recover password',
+		'socialNetworksLogin': 'Login with LinkedIn'
 	});
 
 	$translateProvider.preferredLanguage('pt');

@@ -9,7 +9,7 @@
         <div ng-repeat="fair in listfairs">
 
             <div class="card">
-                <div class="item item-divider" ng-click="loadFair()">
+                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
                     <h2> {{fair.name}} </h2>
                 </div>
                 <div class="item item-text-wrap">
