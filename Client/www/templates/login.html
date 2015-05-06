@@ -3,26 +3,41 @@
         
         <!-- Template content -->
         <div class="login-container" ng-controller="loginCtrl">       
-            <h1 class="login-title"> <span class="ion-person"></span> Login </h1> 
-            <div class="loginForm">
-                <div class="form-list list-insert">
+            <div class="login-logo item-image">
+                <img src="img/livefair.png"> 
+            </div>
+            <div>
+                <div class="list list-inset">
                     <label class="item item-input">
                         <i class="form-icon ion-android-contact placeholder-icon"></i>
                         <input type="text" placeholder="{{ 'user' | translate }}" ng-model="username">
                     </label>
                 </div>
 
-                <div class="form-list list-insert">
+                <div class="list list-inset">
                     <label class="item item-input">
-                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <i class="form-icon ion-android-lock placeholder-icon"></i>
                         <input type="password" placeholder="Password" ng-model="password">
                     </label>
                 </div>
             </div>
 
             <div class="myBtn-Container">
-                <button nav-clear ng-click="submitLogin()" class="myBtn button button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
-            </div>    
+                <button nav-clear ng-click="submitLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
+                <a class="login-recover-password" href="">{{ 'recoverPassword' | translate }}</a>
+            </div>
+            
+            <!-- Register div -->
+            <div class="login-register-container">
+                <div class="login-resgisterbtn-Container">
+                    <button nav-clear class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
+                </div>
+                
+                <!-- scoial networks -->
+                <button class="button button-full button-positive"> <strong> {{ 'socialNetworksLogin' | translate }} </strong> </button>
+                
+            </div>
+            
         </div>
         
     </ion-content>
