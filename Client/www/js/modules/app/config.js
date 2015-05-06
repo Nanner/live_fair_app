@@ -58,6 +58,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 				}
 			}
 		})
+		.state('menu.fairStands', {
+			url: "/fairs/:fairID/stands",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/fairStands.html",
+					controller: "fairStandsCtrl"
+				}
+			}
+		})
 		.state('menu.fairProgram', {
 			url: "/fairprogram",
 			views: {

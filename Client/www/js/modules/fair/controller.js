@@ -1,5 +1,18 @@
 var module = angular.module('fairModule');
 
+module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, liveFairApi) {
+    var liveFairID = $stateParams.fairID;
+    var liveFairStands = liveFairApi.getLiveFairStands(liveFairID);
+    console.log(liveFairStands);
+
+
+    $scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
+
+    $scope.loadProfile = function(id) {
+        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
+    }
+
+});
 
 module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
 
@@ -157,8 +170,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
       });  
     }
     
-    $scope.loadStands = function() {
-       $state.transitionTo('menu.presentStands', $stateParams, { reload: true, inherit: false, notify: true });
+    $scope.loadStands = function(fairID) {
+       $state.go('menu.fairStands', {fairID: fairID});
     }
 
     $scope.loadEvents = function() {
