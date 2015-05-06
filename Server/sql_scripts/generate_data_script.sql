@@ -1,4 +1,4 @@
- 
+﻿ 
 INSERT INTO "public"."user" ("userID","email","password","type","contact","address","description","blocked","createdAt","updatedAt") VALUES ('5af3b227-79fd-3f5f-3557-9ca9167f3274','GGrote@telefonica.co.uk','3FY8l04UI6VX0NnMDLGyil0sLF1HEkfY7IEKqo6Q3Z78eHUF0bJfee7ZtRuNpWYvsXo4cZjDEnCGuL5XbUT1IxLzqY2wbAyQZpcRinXUCIKoypHl61ug1ppenqZGnN0dRM3vWZuQUYCx5TrG8bPODcrVh1HHxKqT1iDS2mZnIxRKYNDPOs','company',NULL,'07 Linden Ridge Dr.','This is a description 6229404',False,'31.08.2012 04:57:00','26.09.2009 08:52:00');
  
  
@@ -3838,7 +3838,7 @@ INSERT INTO "public"."liveFairEvents" ("id","eventLocation","time","Speakers","S
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","time","Speakers","Subject","createdAt","updatedAt","liveFairEventsID") VALUES (73,'41WkNo65ahAqEpwfBeUBQiFDTin5tXuufTe5Rx7luTO65vicBJijXlGBEFSaN1y7hEFjAxxRvgz2ZI5j','20.11.2004 08:09:00','nCjASvEgbUE1d1K4i803ST0T0Z3FbfbGb6bzQYm1TfWOdwkjZHpffSF8wbHtYFuZvu5cyJYVKx4eSRKe1KWe7y2LxDDruDIobkLnGu73y5CI4SdxmPARH2LcTZm6stGnC5oWf7bum8q8an3ZOytBpeLR4N3XjRhAyCfA0SLgjgCq1v0hVm8UhHNKNCr','b4tda0JfGWmtqhv5yA6cVwixM8xYdv7VueKaiA2MV5fbLWfBvBe6OK2oVf','15.03.2014 10:24:00','17.11.2013 06:29:00','ddf4b160-3a63-2936-14b9-5957a6d5692a');
  
  
-INSERT INTO "public"."liveFairEvents" ("id","eventLocation","time","Speakers","Subject","createdAt","updatedAt","liveFairEventsID") VALUES (74,'xGk0lt2bVhVQcDzwwL2VeUlWoVnhvd5vRgspvsiy6XBDJgyzn6OrkZS4oSiYdTH','10.06.2013 04:22:00','HZt7COBczIU2b0UI1OjuReW8k1Sg2FPblZaEkWKb8GcQSyTDC6Wa4fkiStGfFjCQPk7O1JUyJwL6j3duaZyqySG','NWkIPM5a2DK5JR3tg2XWonNkDeOXFtKPANWRL1RuEdxXEM4aHpX288YkTr4y2x8y7FcgakXQxIUJUJoRRxklZI','07.05.2014 04:57:00','27.03.2005 02:38:00',NULL);
+INSERT INTO "public"."liveFairEvents" ("id","eventLocation","time","Speakers","Subject","createdAt","updatedAt","liveFairEventsID") VALUES (74,'xGk0lt2bVhVQcDzwwL2VeUlWoVnhvd5vRgspvsiy6XBDJgyzn6OrkZS4oSiYdTH','10.06.2013 04:22:00','HZt7COBczIU2b0UI1OjuReW8k1Sg2FPblZaEkWKb8GcQSyTDC6Wa4fkiStGfFjCQPk7O1JUyJwL6j3duaZyqySG','NWkIPM5a2DK5JR3tg2XWonNkDeOXFtKPANWRL1RuEdxXEM4aHpX288YkTr4y2x8y7FcgakXQxIUJUJoRRxklZI','07.05.2014 04:57:00','27.03.2005 02:38:00','2ca2617d-8557-b588-4728-4c68d44d95d2');
  
  
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","time","Speakers","Subject","createdAt","updatedAt","liveFairEventsID") VALUES (75,'yoxipcvF8Z3InbDeJblE6u5y0cJMufJ8l0LMrfYXzSpSORB7u42CHZ8YgwLVmXrisGUoFW5F5orf1dvdOYljh','28.08.2003 06:07:00','BIguJeqsdfnVCP8iXTjvtav6MDykEFp7KtzY3dcPaMgzzIxKw2COo8XGbTGONKUEBV8Ap8j4oc84pP7ojXyliieAJzQpdOH1BNOlwXQ1o','Ep28hIgr7D7HHxIzQWjwTt5TGsz3OQaozHVAi8yeWa0Ca0GRW5mnWBNQkTrVRes1tx0LyWWs5hoPiYKOpjZY','30.11.2010 06:42:00','15.04.2007 01:24:00','2ca2617d-8557-b588-4728-4c68d44d95d2');
