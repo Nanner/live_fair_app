@@ -94,7 +94,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
     $scope.validateEmailCallback = function() {
         var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
-        if($scope.mail.length === 0) {
+        if(!$scope.mail || $scope.mail.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[3] = 0;
             emptyFields[3] = 1;
