@@ -1,6 +1,6 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, contacts) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, contacts, camera) {
     
     $scope.profileOwner = true;
     $scope.standProfileInfo = {name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E", interestsList: [{name: "Informática"}, {name: "Electrotécnica"}, {name: "Empreendedorismo"}]};
@@ -113,7 +113,11 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
 
     //TODO
     $scope.uploadPhoto = function() {
-
+        camera.getPicture().then(function(imageURI) {
+            console.log(imageURI);
+        }, function(err) {
+            console.err(err);
+        });
     }
 
     //TODO

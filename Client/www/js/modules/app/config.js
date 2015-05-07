@@ -1,6 +1,6 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider) {
 
 	$stateProvider
 		.state('menu', {
@@ -218,4 +218,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
 	$translateProvider.preferredLanguage('pt');
 
+	//camera stuff
+	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 }); 
