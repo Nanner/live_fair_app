@@ -1,7 +1,5 @@
 <ion-view title="'editProfile'">
 	<ion-content scroll='true'>
-    
-        <span class="edit-profile" ng-click="uploadPhoto()"><i class="fa fa-camera fa-2x"></i></span>
 
 	    <div class="profile-img-container" ng-init="validateFields()">
             <img ng-src="{{standProfileInfo.logo}}">
@@ -49,6 +47,11 @@
 			    </label>
 			</div>
         </div>	
+
+        <div class="editProfile-btnsContainer">
+	        <span class="editProfile-photo-btn" ng-click="uploadPhoto()"><i class="fa fa-camera fa-2x"></i></span>
+	        <span class="editProfile-password-btn" ng-click="changePassword()"><i class="fa fa-lock fa-2x"></i></span>        	
+        </div>
 
         <div class="editProfile-saveChanges-btnContainer">
             <button nav-clear ng-click="saveChanges()" class="myBtn button button-calm"> <strong> {{ 'saveChanges' | translate }} </strong> </button>

@@ -360,3 +360,16 @@
     text-align: center;
     padding-bottom: 3%;
 }
+
+.editProfile-btnsContainer {
+    margin-top: 3%;
+    text-align: center;
+}
+
+.editProfile-photo-btn {
+    padding-right: 5%;
+}
+
+.editProfile-password-btn {
+    padding-left: 5%;
+}
