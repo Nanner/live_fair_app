@@ -345,3 +345,18 @@
     text-align: center;
     padding-bottom: 1%;
 }
+
+.edit-profile {
+    padding-top: 5%;
+    float: right;
+    padding-right: 3%;
+}
+
+/****** Edit-Profile *******/
+
+.editProfile-saveChanges-btnContainer {
+    margin-top: 3%;
+    position: relative;
+    text-align: center;
+    padding-bottom: 3%;
+}

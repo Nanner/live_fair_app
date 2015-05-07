@@ -85,6 +85,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 				}
 			}
 		})
+		.state('menu.editProfile', {
+			url: "/editProfile",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/editProfile.html",
+					controller: "profileCtrl"
+				}
+			}
+		})
 		.state('menu.fairTest', {
 			url: "/fair",
 			views: {
@@ -155,7 +164,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'sync': 'Sync',
 		'cancel': 'Cancelar',
 		'recoverPassword': 'Recuperar password',
-		'socialNetworksLogin': 'Entrar com LinkedIn'
+		'socialNetworksLogin': 'Entrar com LinkedIn',
+		'saveChanges': 'Guardar alterações'
 	});
 
 	$translateProvider.translations('en', {
@@ -202,7 +212,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 		'sync': 'Sync',
 		'cancel': 'Cancel',
 		'recoverPassword': 'Recover password',
-		'socialNetworksLogin': 'Login with LinkedIn'
+		'socialNetworksLogin': 'Login with LinkedIn',
+		'saveChanges': 'Save changes'
 	});
 
 	$translateProvider.preferredLanguage('pt');

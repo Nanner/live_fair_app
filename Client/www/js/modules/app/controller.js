@@ -8,7 +8,8 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state,
         {path: "menu.login", name: "Login"},
         {path: "menu.register", name: "Registo"},
         {path: "menu.fair", name: "Feira"},
-        {path: "menu.listfairs", name: "Feiras"}];
+        {path: "menu.listfairs", name: "Feiras"},
+        {path: "menu.profile", name: "Profile"}];
 
     $scope.toggleLeft = function() {
 		$ionicSideMenuDelegate.toggleLeft();

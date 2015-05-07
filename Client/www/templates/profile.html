@@ -1,6 +1,8 @@
 <ion-view title="'Profile'">
 	<ion-content scroll='true'>
 
+        <span ng-show="profileOwner" class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
+
         <div class="profile-img-container">
             <img ng-src="{{standProfileInfo.logo}}">
         </div>

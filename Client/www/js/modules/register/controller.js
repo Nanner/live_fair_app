@@ -27,7 +27,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
     
     /* Fields validation */
     $scope.validateNameCallback = function() {
-        var pattern = /^[A-Za-z]+$/;
+        var pattern = /^[A-Za-z][A-Za-z -]*[A-Za-z]$/;
         if($scope.name.length === 0) {
             $scope.valName = "neutral-icon";
             messageToDisplay[0] = 0;
@@ -149,7 +149,6 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
          for(var i = 0; i < emptyFields.length; i++) {
              if(emptyFields[i] === 1) {
                  existsEmptyField = true;
-                 console.log("Empty field: " + i);
                  utils.showAlert(messages[5], 'Informação errada');
                  break;
              }
