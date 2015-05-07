@@ -95,7 +95,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
             $scope.valAddress = "green-icon";
             emptyFields[3] = 0;
         }
-    }
+    } 
 
     $scope.validatePhoneCallback = function() {
     	var pattern = /^[0-9]{9}$/;
