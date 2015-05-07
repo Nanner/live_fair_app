@@ -113,8 +113,25 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
 
     //TODO
     $scope.uploadPhoto = function() {
-        camera.getPicture().then(function(imageURI) {
-            console.log(imageURI);
+        var options = {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,// gets base64-encoded image
+          //destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          allowEdit: false,
+          encodingType: Camera.EncodingType.JPEG,
+          targetWidth: 200,
+          targetHeight: 100,
+          popoverOptions: CameraPopoverOptions,
+          saveToPhotoAlbum: false,
+          mediaType: Camera.MediaType.ALLMEDIA
+        };
+
+        camera.getPicture().then(function(result) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + result;
+            console.log(result);
+            $scope.standProfileInfo.logo = result;
         }, function(err) {
             console.err(err);
         });
