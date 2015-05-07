@@ -121,17 +121,15 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
           allowEdit: false,
           encodingType: Camera.EncodingType.JPEG,
           targetWidth: 200,
-          targetHeight: 100,
+          targetHeight: 200,
           popoverOptions: CameraPopoverOptions,
           saveToPhotoAlbum: false,
           mediaType: Camera.MediaType.ALLMEDIA
         };
 
         camera.getPicture().then(function(result) {
-            var image = document.getElementById('myImage');
-            image.src = "data:image/jpeg;base64," + result;
-            console.log(result);
-            $scope.standProfileInfo.logo = result;
+            alert(result);
+            //$scope.standProfileInfo.logo = result; //commented because .css is not adjusting the new image correctly
         }, function(err) {
             console.err(err);
         });
