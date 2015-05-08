@@ -2,11 +2,10 @@ var module = angular.module('fairModule');
 
 module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, liveFairApi) {
     var liveFairID = $stateParams.fairID;
-    var liveFairStands = liveFairApi.getLiveFairStands(liveFairID);
-    console.log(liveFairStands);
+    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
 
-    $scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
+    //$scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
 
     $scope.loadProfile = function(id) {
         $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
@@ -24,7 +23,9 @@ module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
    
 });
 
-module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar) {
+module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi) {
+    var liveFairID = $stateParams.fairID;
+    var liveFairSchedule = liveFairApi.getLiveFairSchedule(liveFairID);
     
     $scope.events = {name: "FEUP CARRER FAIR", hours: [
         {hour: 9, events: [ 
