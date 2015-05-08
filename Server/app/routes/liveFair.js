@@ -1,3 +1,5 @@
+var Promise = require("bluebird");
+
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
 var Stands = require('../models').Stands;
@@ -35,7 +37,7 @@ module.exports = function(server){
         handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(LiveFairEvents.findAll({where:
-                { 
+                {
                     liveFairEventsID: liveFairId
                 }}).then(function(liveFairEvents)
             {
@@ -49,26 +51,15 @@ module.exports = function(server){
         path: '/livefairs/{id}/companies',
         handler: function (request, reply) {
             var liveFairId=request.params.id;
-            reply(Stands.findAll({where:
-                { 
-                    liveFairLiveFairID: liveFairId
-                }}).then(function(liveFairCompanies)
-            {
-                var answer = [];
-                
-                liveFairCompanies.forEach(function(element) {
-                    
-                    Company.find({where:
-                    {
-                        companyID: element.dataValues.companyCompanyID
-                    }}).then(function(company){
-                        answer.push(company);
-                    });
-                   
-                }, this);
-                
-                return JSON.stringify(answer);
-            }));
+            reply(
+                Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
+                    .map(function(company) {
+                        return Company.find({where: {companyID: company.companyCompanyID}});
+                    })
+                    .then(function(companies) {
+                        return JSON.stringify(companies);
+                    })
+            );
         }
     });
     
