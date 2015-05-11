@@ -110,4 +110,22 @@ module.exports = function(server){
             }));
         }
     });
+	
+	server.route({
+       method: 'GET',
+       path: '/livefairs/search/date/{DateStart}/{DateEnd}',
+       handler: function (request, reply) {
+           var LiveFairDateStart=request.params.DateStart;
+           var LiveFairDateEnd=request.params.DateEnd;
+		   
+           reply(LiveFair.findAll(
+               { 
+                  where: ['"date"::date >= ? AND "date"::date <= ?', LiveFairDateStart, LiveFairDateEnd] 
+                  
+               }).then(function(liveFair)
+           {
+               return JSON.stringify(liveFair);
+           }));
+       }
+   });
 };
