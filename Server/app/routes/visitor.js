@@ -11,8 +11,8 @@ module.exports = function(server){
 			var liveFairID=request.params.liveFairID;
 			reply(
 				visitorLiveFair.upsert({
-						liveFairLiveFairID: liveFairId;
-						visitorVisitorID: visitorID;
+						liveFairLiveFairID: liveFairId,
+						visitorVisitorID: visitorID
 					})
 					.then(function(result) {
 						return JSON.stringify(result);
