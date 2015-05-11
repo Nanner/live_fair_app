@@ -10,7 +10,7 @@ module.exports = function(server){
 			var visitorID=request.params.id;
 			var liveFairID=request.params.liveFairID;
 			reply(
-				var result = visitorLiveFair.upsert({
+				visitorLiveFair.upsert({
 						liveFairLiveFairID: liveFairId;
 						visitorVisitorID: visitorID;
 					})
