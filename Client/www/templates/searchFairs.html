@@ -12,14 +12,18 @@
 			<div class="bar bar-header item-input-inset">
 			  <label class="item-input-wrapper">
 			    <i class="icon ion-ios-search placeholder-icon"></i>
-			    <input type="search" placeholder="{{ 'search' | translate }}" ng-model="searchName" ng-change="search()">
+			    <input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">
+			  </label>
+			  <label class="item-input-wrapper left-search-btn">
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">
 			  </label>
 			  <button nav-clear ng-click="filterByDate()" class="button button-clear">
 			  		<i class="icon ion-calendar"></i>
 			  </button>
 			</div>
 
-	        <div ng-repeat="fair in listfairs | filter: {name: searchName}">
+	        <div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
 	            <div class="card">
 	                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
 	                    <h2> {{fair.name}} </h2>

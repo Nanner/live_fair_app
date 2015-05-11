@@ -178,7 +178,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'search': 'Pesquisa',
 		'filterByDate': 'Filter by date',
 		'startDate': 'Data início',
-		'endDate': 'Data Fim'
+		'endDate': 'Data Fim',
+		'searchLocation': 'Localização'
 	});
 
 	$translateProvider.translations('en', {
@@ -230,7 +231,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'search': 'Search',
 		'filterByDate': 'Filtrar por data',
 		'startDate': 'Start date',
-		'endDate': 'End Date' 
+		'endDate': 'End Date',
+		'searchLocation': 'Location'
 	});
 
 	$translateProvider.preferredLanguage('pt');
