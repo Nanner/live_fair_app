@@ -128,8 +128,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
 
     var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
-    
+    $scope.fair = liveFairApi.getLiveFair(liveFairID);   
     $scope.hideMap = false;
     $scope.month = ""; 
     $scope.description = true;
@@ -184,6 +183,11 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
     $scope.startDate = "";
     $scope.endDate = "";
+    $scope.searchName = "";
+    $scope.searchLocation = "";
+    //$scope.listfairs = liveFairApi.getLiveFairs();
+    $scope.listfairs = [{name: "massa", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "ruaceninhasetal"},{name: "atum", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "coisasgordas"},{name: "cenoura", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "basexaltura"}];
+
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
     var month = actualDate.getMonth() + 1;
@@ -233,6 +237,14 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                 $scope.endDate = year + "-" + month + "-" + day;
             }
         }
+    }
+
+    $scope.loadFair = function(fairID){
+        $state.go('menu.fair', {fairID: fairID});
+    }
+
+    $scope.search = function() {
+        $scope.searchLocation = $scope.searchName;
     }
 
 });
