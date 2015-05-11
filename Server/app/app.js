@@ -15,6 +15,7 @@ server.connection({ port: 3000 });
 server.app.models = require('./models');
 
 require('./routes/liveFair')(server);
+require('./routes/visitor')(server);
 
 server.register({
     register: require('yar'),
