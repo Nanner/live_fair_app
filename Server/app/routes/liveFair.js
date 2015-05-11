@@ -131,7 +131,7 @@ module.exports = function(server){
 	
 	server.route({
        method: 'GET',
-       path: '/livefairs/search/date/{DateStart}/{DateEnd}',
+       path: '/livefairs/search/date/{DateStart}&{DateEnd}',
        handler: function (request, reply) {
            var LiveFairDateStart=request.params.DateStart;
            var LiveFairDateEnd=request.params.DateEnd;
