@@ -111,7 +111,6 @@ module.exports = function(server){
             );
         }
     });
-<<<<<<< HEAD
 	
 	server.route({
        method: 'GET',
@@ -147,24 +146,6 @@ module.exports = function(server){
             );
         }
     });
-=======
-    
-	server.route({
-	method: 'POST',
-	path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/{Interests}',
-	handler: function (request, reply) {
-		var liveFairId=request.params.id;
-		reply(
-			LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
-				.map(function(interest) {
-					return Interest.find({where: {interestID: interest.interestInterestID}});
-				})
-				.then(function(companies) {
-					return JSON.stringify(companies);
-				})
-			);
-		}
-	});
 	
 	server.route({
 	method: 'GET',
@@ -183,5 +164,4 @@ module.exports = function(server){
 			}));
 		}
 	});
->>>>>>> origin/master
 };
