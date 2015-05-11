@@ -1,6 +1,6 @@
 var Hapi = require('hapi');
 var Good = require('good');
-var Yar = require('yar');
+var Auth = require('hapi-auth-cookie');
 
 var server = new Hapi.Server({
     connections: {
@@ -15,18 +15,17 @@ server.connection({ port: 3000 });
 server.app.models = require('./models');
 
 require('./routes/liveFair')(server);
+require('./routes/user')(server);
 
-server.register({
-    register: require('yar'),
-        options: {
-            cookieOptions: {
-                password: 'password'
-            }
-        }
-    }, function (err) {
-    if (err) {
-        throw err; // something bad happened loading the plugin
-    }    
+server.register(Auth, function (err) {
+
+    server.auth.default('session', 'cookie',true, {
+        scheme: 'cookie',
+        password: 'diogoeumteamleadermaisoumenos',
+        cookie: 'alettuceeporreira',
+        clearInvalid: true,
+        isSecure: false
+    });
 });
 
 server.register({
