@@ -111,6 +111,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "fairCtrl"
 				}
 			}
+		})
+		.state('menu.searchFairs', {
+			url: "/searchFairs",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/searchFairs.html",
+					controller: "searchFairCtrl"
+				}
+			}
 		});
 
 	//Default startup screen
@@ -165,7 +174,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cancel': 'Cancelar',
 		'recoverPassword': 'Recuperar password',
 		'socialNetworksLogin': 'Entrar com LinkedIn',
-		'saveChanges': 'Guardar alterações'
+		'saveChanges': 'Guardar alterações',
+		'search': 'Pesquisa',
+		'filterByDate': 'Filter by date',
+		'startDate': 'Data início',
+		'endDate': 'Data Fim'
 	});
 
 	$translateProvider.translations('en', {
@@ -213,7 +226,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cancel': 'Cancel',
 		'recoverPassword': 'Recover password',
 		'socialNetworksLogin': 'Login with LinkedIn',
-		'saveChanges': 'Save changes'
+		'saveChanges': 'Save changes',
+		'search': 'Search',
+		'filterByDate': 'Filtrar por data',
+		'startDate': 'Start date',
+		'endDate': 'End Date' 
 	});
 
 	$translateProvider.preferredLanguage('pt');

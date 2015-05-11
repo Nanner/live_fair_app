@@ -179,3 +179,36 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     }
     
 });
+
+module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
+
+    $scope.startDate = "";
+    $scope.endDate = "";
+    $scope.actualDate = new Date();
+
+    $scope.filterByDate = function() {
+        var myPopup = $ionicPopup.show({
+            template: '<div class="list"><div class="item item-divider filter-date-title"><strong>{{ \'filterByDate\' | translate }}</strong></div><div class="list list-inset"><label class="item item-input"><i class="form-icon ion-ios-calendar placeholder-icon"></i><input placeholder="{{ \'startDate\' | translate }}" class="textbox-n" type="text" onfocus="(this.type=\'date\')" onblur="(this.type=\'text\')" ng-model="startDate" max={{actualDate}}></label></div><div class="list list-inset"><label class="item item-input"><i class="form-icon ion-ios-calendar placeholder-icon"></i><input placeholder="{{ \'endDate\' | translate }}" class="textbox-n" type="text" onfocus="(this.type=\'date\')" onblur="(this.type=\'text\')" ng-model="endDate" max={{actualDate}}></label></div></div>',
+            scope: $scope,
+            buttons: [
+              { text: 'Cancelar' },
+              {
+                text: '<b>Ok</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                    console.log("tapped submit button");
+                }
+              },
+            ]
+        });   
+    }
+
+    $scope.verifyDate = function(field) {
+        if(field === "startDate") {
+
+        } else if(field === "endDate") {
+            
+        }
+    }
+
+});
