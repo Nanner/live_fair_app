@@ -10,12 +10,12 @@ module.exports = function(server){
 			var visitorID=request.params.id;
 			var liveFairID=request.params.liveFairID;
 			reply(
-				var visitorLiveFair.upsert({
+				var result = visitorLiveFair.upsert({
 						liveFairLiveFairID: liveFairId;
 						visitorVisitorID: visitorID;
 					})
-					.then(function(visitorLiveFair) {
-						return JSON.stringify(visitorLiveFair);
+					.then(function(result) {
+						return JSON.stringify(result);
 					})
 				);
 			}
