@@ -15,7 +15,11 @@ server.connection({ port: 3000 });
 server.app.models = require('./models');
 
 require('./routes/liveFair')(server);
+<<<<<<< HEAD
 require('./routes/user')(server);
+=======
+require('./routes/visitor')(server);
+>>>>>>> origin/master
 
 server.register(Auth, function (err) {
 

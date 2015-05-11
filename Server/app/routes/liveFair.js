@@ -111,6 +111,7 @@ module.exports = function(server){
             );
         }
     });
+<<<<<<< HEAD
 	
 	server.route({
        method: 'GET',
@@ -146,4 +147,41 @@ module.exports = function(server){
             );
         }
     });
+=======
+    
+	server.route({
+	method: 'POST',
+	path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/{Interests}',
+	handler: function (request, reply) {
+		var liveFairId=request.params.id;
+		reply(
+			LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
+				.map(function(interest) {
+					return Interest.find({where: {interestID: interest.interestInterestID}});
+				})
+				.then(function(companies) {
+					return JSON.stringify(companies);
+				})
+			);
+		}
+	});
+	
+	server.route({
+	method: 'GET',
+	path: '/livefairs/search/date/{DateStart}&{DateEnd}',
+	handler: function (request, reply) {
+		var LiveFairDateStart=request.params.DateStart;
+		var LiveFairDateEnd=request.params.DateEnd;
+	   
+		reply(LiveFair.findAll(
+			{ 
+				where: ['"date"::date >= ? AND "date"::date <= ?', LiveFairDateStart, LiveFairDateEnd] 
+				
+			}).then(function(liveFair)
+			{
+				return JSON.stringify(liveFair);
+			}));
+		}
+	});
+>>>>>>> origin/master
 };
