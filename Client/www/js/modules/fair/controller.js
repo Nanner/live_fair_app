@@ -175,7 +175,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     }
 
     $scope.loadEvents = function() {
-        $state.transitionTo('menu.fairProgram', $stateParams, { reload: true, inherit: false, notify: true });      
+        $state.transitionTo('menu.fairProgram', $staiteParams, { reload: true, inherit: false, notify: true });      
     }
     
 });
@@ -184,7 +184,10 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
     $scope.startDate = "";
     $scope.endDate = "";
-    $scope.actualDate = new Date();
+    var actualDate = new Date();
+    var day = actualDate.getUTCDate();
+    var month = actualDate.getMonth() + 1;
+    var year = actualDate.getFullYear();
 
     $scope.filterByDate = function() {
         var myPopup = $ionicPopup.show({
@@ -204,6 +207,32 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     }
 
     $scope.verifyDate = function() {
-        console.log($scope.startDate);
+        actualDateConverted = Number(actualDate);
+        if($scope.startDate !== "") {
+            startDateConverted = Number(new Date($scope.startDate));
+            if(startDateConverted < actualDateConverted) { //shit happened
+                if(day < 10 && (day.length < 2 || day.length === undefined)) {
+                    day = "0" + day;
+                }
+                if(month < 10 && (month.length < 2 || month.length === undefined)) {
+                    month = "0" + month;
+                }
+                $scope.startDate = year + "-" + month + "-" + day;
+            }
+        }
+
+        if($scope.endDate !== "") {
+            endDateConverted = Number(new Date($scope.endDate));
+            if(endDateConverted < actualDateConverted) { //shit happened
+                if(day < 10 && (day.length < 2 || day.length === undefined)) {
+                    day = "0" + day;
+                }
+                if(month < 10 && (month.length < 2 || month.length === undefined)) {
+                    month = "0" + month;
+                }
+                $scope.endDate = year + "-" + month + "-" + day;
+            }
+        }
     }
+
 });
