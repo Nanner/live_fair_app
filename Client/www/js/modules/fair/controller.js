@@ -185,8 +185,8 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
-    //$scope.listfairs = liveFairApi.getLiveFairs();
-    $scope.listfairs = [{name: "massa", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "ruaceninhasetal"},{name: "atum", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "coisasgordas"},{name: "cenoura", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "basexaltura"}];
+    $scope.listfairs = liveFairApi.getLiveFairs();
+    //$scope.listfairs = [{name: "massa", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "ruaceninhasetal"},{name: "atum", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "coisasgordas"},{name: "cenoura", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "basexaltura"}];
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
@@ -241,10 +241,6 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
-    }
-
-    $scope.search = function() {
-        $scope.searchLocation = $scope.searchName;
     }
 
 });
