@@ -1,0 +1,4 @@
+<div class="list">
+	<div class="item item-divider">{{ 'chooseInterests' | translate }}</div>
+	<ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle>
+</div>

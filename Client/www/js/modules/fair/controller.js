@@ -81,7 +81,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
         $scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
 
         var myPopup = $ionicPopup.show({
-        template: '<div class="list list-inset"><div class="item item-divider event-title"><strong>{{event.eventName}}</strong></div><div class="item event-subtitle"><strong>{{ \'starting\' | translate }}:</strong><span class="event-info">{{event.startHour}}:{{event.startMinute}}h</span></div><div class="item event-subtitle"><strong>{{ \'ending\' | translate }}:</strong><span class="event-info">{{event.endHour}}:{{event.endMinute}}h</span></div><div class="item event-subtitle"><strong>{{ \'date\' | translate }}:</strong><span class="event-info">{{event.day}}/{{event.month}}/{{event.year}}</span></div><div class="item event-subtitle"><strong>{{ \'place\' | translate }}:</strong><span class="event-info">{{event.place}}</span></div></div>',
+        templateUrl: "templates/eventPopup.html",
         title: fairName,
         scope: $scope,
         buttons: [ 
@@ -154,7 +154,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     $scope.chooseInterests = function() {
         var myPopup = $ionicPopup.show({
-        template: '<div class="list"><div class="item item-divider">{{ \'chooseInterests\' | translate }}</div><ion-toggle ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.name}}</ion-toggle></div>',
+        templateUrl: "templates/chooseInterests.html",
         title: 'Adesão',
         scope: $scope,
         buttons: [ 
@@ -188,7 +188,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
     $scope.filterByDate = function() {
         var myPopup = $ionicPopup.show({
-            template: '<div class="list"><div class="item item-divider filter-date-title"><strong>{{ \'filterByDate\' | translate }}</strong></div><div class="list list-inset"><label class="item item-input"><i class="form-icon ion-ios-calendar placeholder-icon"></i><input placeholder="{{ \'startDate\' | translate }}" class="textbox-n" type="text" onfocus="(this.type=\'date\')" onblur="(this.type=\'text\')" ng-model="startDate" max={{actualDate}}></label></div><div class="list list-inset"><label class="item item-input"><i class="form-icon ion-ios-calendar placeholder-icon"></i><input placeholder="{{ \'endDate\' | translate }}" class="textbox-n" type="text" onfocus="(this.type=\'date\')" onblur="(this.type=\'text\')" ng-model="endDate" max={{actualDate}}></label></div></div>',
+            templateUrl: "templates/searchFairs-datePopUp.html",
             scope: $scope,
             buttons: [
               { text: 'Cancelar' },
@@ -203,12 +203,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
         });   
     }
 
-    $scope.verifyDate = function(field) {
-        if(field === "startDate") {
-
-        } else if(field === "endDate") {
-            
-        }
+    $scope.verifyDate = function() {
+        console.log($scope.startDate);
     }
-
 });
