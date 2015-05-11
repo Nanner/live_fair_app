@@ -99,15 +99,33 @@ module.exports = function(server){
         method: 'GET',
         path: '/livefairs/{id}/interests',
         handler: function (request, reply) {
-            var LiveFairID=request.params.id;
-            reply(LiveFair.findAll(
-                { 
-                   where: ['"location" LIKE ?','%'+LiveFairID+'%'] 
-                   
-                }).then(function(liveFair)
-            {
-                return JSON.stringify(liveFair);
-            }));
+            var liveFairId=request.params.id;
+            reply(
+                LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
+                    .map(function(interest) {
+                        return Interest.find({where: {interestID: interest.interestInterestID}});
+                    })
+                    .then(function(companies) {
+                        return JSON.stringify(companies);
+                    })
+            );
+        }
+    });
+    
+        server.route({
+        method: 'POST',
+        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/{Interests}',
+        handler: function (request, reply) {
+            var liveFairId=request.params.id;
+            reply(
+                LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
+                    .map(function(interest) {
+                        return Interest.find({where: {interestID: interest.interestInterestID}});
+                    })
+                    .then(function(companies) {
+                        return JSON.stringify(companies);
+                    })
+            );
         }
     });
 	
