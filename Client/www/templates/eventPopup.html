@@ -1,0 +1,21 @@
+<div class="list list-inset" ng-controller="fairProgramCtrl">
+	<div class="item item-divider event-title">
+		<strong>{{event.eventName}}</strong>
+	</div>
+	<div class="item event-subtitle">
+		<strong>{{ 'starting' | translate }}:</strong>
+		<span class="event-info">{{event.startHour}}:{{event.startMinute}}h</span>
+	</div>
+	<div class="item event-subtitle">
+		<strong>{{ 'ending' | translate }}:</strong>
+		<span class="event-info">{{event.endHour}}:{{event.endMinute}}h</span>
+	</div>
+	<div class="item event-subtitle">
+		<strong>{{ 'date' | translate }}:</strong>
+		<span class="event-info">{{event.day}}/{{event.month}}/{{event.year}}</span>
+	</div>
+	<div class="item event-subtitle">
+		<strong>{{ 'place' | translate }}:</strong>
+		<span class="event-info">{{event.place}}</span>
+	</div>
+</div>

@@ -373,3 +373,34 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/****** Search *******/
+
+.searchFairs-container {
+    padding-top: 15%;
+}
+
+.searchFairs-container1 {
+    padding-top: 15%;
+    padding-bottom: 5%;
+}
+
+.searchFaris-logo-container {
+    background-color: #28A3D4;
+}
+
+.searchFairs-logo {
+    width: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.filter-date-title {
+    text-align: center;
+}
+
+.left-search-btn {
+    margin-left: 2%;
+}
