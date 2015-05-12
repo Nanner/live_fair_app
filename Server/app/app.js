@@ -9,7 +9,7 @@ var server = new Hapi.Server({
         }
     }
 });
-    
+
 server.connection({ port: 3000 });
 
 server.app.models = require('./models');
@@ -18,16 +18,16 @@ require('./routes/liveFair')(server);
 require('./routes/user')(server);
 require('./routes/visitor')(server);
 
-server.register(Auth, function (err) {
-
-    server.auth.default('session', 'cookie',true, {
-        scheme: 'cookie',
-        password: 'diogoeumteamleadermaisoumenos',
-        cookie: 'alettuceeporreira',
-        clearInvalid: true,
-        isSecure: false
-    });
-});
+//server.register(Auth, function (err) {
+//
+//    server.auth.default('session', 'cookie',true, {
+//        scheme: 'cookie',
+//        password: 'diogoeumteamleadermaisoumenos',
+//        cookie: 'alettuceeporreira',
+//        clearInvalid: true,
+//        isSecure: false
+//    });
+//});
 
 server.register({
     register: Good,

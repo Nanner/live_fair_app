@@ -12,44 +12,48 @@ module.exports = function(server){
                 if (request.auth.isAuthenticated) {
                     return reply.redirect('/');
                 }
-                
+
                 var message = '';
                 var account = null;
-                
+
                 if (request.method === 'post') {
+                    if (!request.payload.username ||
+                        !request.payload.password) {
+                        message = 'Missing username or password';
+                    }
+                    else {
+                        User.find({where:
+                        {
+                            email: request.payload.username
+                        }}).then(function(account) {
+                            if(!account) {
+                                message = 'Invalid username or password';
+                            }
+                            else {
+                                var hash = crypto.createHash('sha512');
+                                hash.update(account.password);
+                                if (hash.digest() !== request.payload.password) {
+                                    message = 'Invalid username or password';
+                                }
+                                else {
+                                    request.auth.session.set(account);
+                                }
+                            }
+                        });
+                    }
+                }
 
-        if (!request.payload.username ||
-            !request.payload.password) {
+                return JSON.stringify("temporary");
 
-            message = 'Missing username or password';
-        }
-        else {
-            account = User.find({where:
-                {
-                    email: request.payload.username
-                }});
-                var hash = crypto.createHash('sha512');
-                hash.update(account.password);
-            if (!account ||
-                hash.digest() !== request.payload.password) {
-
-                message = 'Invalid username or password';
-            }
-        }
-    }
-
-        request.auth.session.set(account);
-        return reply.redirect('/');
-    
             },
             plugins: {
-              'hapi-auth-cookie': {
-              redirectTo: false
+                'hapi-auth-cookie': {
+                    redirectTo: false
+                }
             }
-         }
-    }
+        }
     });
-    
+
     server.route({
         method: 'GET',
         path: '/logout',
