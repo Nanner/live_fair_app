@@ -18,6 +18,8 @@ angular.module('starter',
         'ionic',
         'ngCordova',
         'ngResource',
-        'pascalprecht.translate'
+        'pascalprecht.translate',
+        'ui.unique'
     ]
-);
+)
+    .constant('_', _);
