@@ -3,6 +3,8 @@ var module = angular.module('starter');
 module.factory('liveFairApi', function($resource, server) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
+    var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
+
     var Stands = $resource(server.url + '/livefairs/:liveFairID/companies', {liveFairID: '@liveFairID'});
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
@@ -14,6 +16,9 @@ module.factory('liveFairApi', function($resource, server) {
         },
         getLiveFair: function(fairID) {
             return LiveFair.get({liveFairID: fairID});
+        },
+        getLiveFairInterests: function(fairID) {
+            return LiveFairInterests.query({liveFairID: fairID});
         },
         getLiveFairStands: function(fairID) {
             return Stands.query({liveFairID: fairID});

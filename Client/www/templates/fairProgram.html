@@ -1,26 +1,67 @@
 <ion-view title="'ListFairs'">
     <ion-content scroll='true'>
 
-        <div class="program-title-container">
-            <h1 class="program-title"> {{ 'program' | translate }} </h1>
-            <h4 class="program-subtitle"> {{events.name}} </h4>
-        </div>
-
         <div class="program-container">
-            <table class="program-table">
-                <thead>
-                    <tr class="program-tr">
-                        <th class="program-th">{{ 'hours' | translate }}</th>
-                        <th class="program-th">{{ 'events' | translate }}</th>
-                    </tr>
-                </thead>    
-                <tbody ng-repeat = "item in events.hours">
-                    <tr class="program-tr" ng-repeat = "event in item.events" ng-click="loadEvent(event.id, event.name, event.fairName, event.startHour, event.startMinute, event.endHour, event.endMinute, event.day, event.month, event.year, event.place)">                  
-                        <td class="program-td"><strong> <span ng-if="$first"> {{item.hour}}h </span></strong></td>
-                        <td class="program-td"> {{event.name}} </td>
-                    </tr>
-                </tbody>
-            </table>    
+            <div class="program-title-container">
+                <h3 class="program-subtitle"> {{fair.name}} </h3>
+                <h4 class="program-title"> {{ 'program' | translate }} </h4>
+            </div>
+            <!--<table class="program-table">-->
+                <!--<thead>-->
+                    <!--<tr class="program-tr">-->
+                        <!--<th class="program-th">{{ 'hours' | translate }}</th>-->
+                        <!--<th class="program-th">{{ 'events' | translate }}</th>-->
+                    <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody ng-repeat = "(key, events) in schedule">-->
+                    <!--<tr class="program-tr" ng-repeat = "event in events" ng-click="loadEvent(event.id, event.name, event.fairName, event.startHour, event.startMinute, event.endHour, event.endMinute, event.day, event.month, event.year, event.place)">-->
+                        <!--<td class="program-td" rowspan="{{events.length}}"><strong> <span ng-if="$first"> {{key | date:'dd-MM-yyyy HH:mm'}} </span></strong></td>-->
+                        <!--<td class="program-td"> {{event.Subject}} </td>-->
+                    <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <!--<div class="row">-->
+                <!--<div class="col"><strong> <span>{{ 'hours' | translate }}</span></strong></div>-->
+                <!--<div class="col"><strong> <span>{{ 'events' | translate }}</span></strong></div>-->
+            <!--</div>-->
+            <!--<div class="row" ng-repeat = "(key, events) in schedule">-->
+                <!--<div class="col"> <span> {{key | date:'dd-MM-yyyy HH:mm'}} </span></div>-->
+                <!--<div class="col" ng-repeat = "event in events"><span> {{event.Subject}} </span></div>-->
+            <!--</div>-->
+            <div class="list">
+                <label class="item item-input item-select item-positive">
+                    <div class="input-label">
+                        {{ 'programDay' | translate }}
+                    </div>
+                    <select ng-model="selectedDay">
+                        <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
+                    </select>
+                </label>
+                <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                    <div class="item item-divider item-calm item-borderless">
+                        {{eventTime.eventTime | date:'HH:mm'}}
+                    </div>
+                    <div ng-repeat="event in eventTime.eventTimeEvents">
+                        <div class="item item-text-wrap">
+                            {{event.Subject}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="list card" ng-repeat = "(key, events) in schedule">-->
+                <!--<div class="item item-divider">-->
+                    <!--{{key | date:'dd-MM-yyyy HH:mm'}}-->
+                <!--</div>-->
+                <!--<div ng-repeat = "event in events">-->
+                    <!--<div class="item item-text-wrap">-->
+                        <!--<h2>{{ 'subject' | translate }}:</h2>-->
+                        <!--{{event.Subject}}-->
+                        <!--<br><br>-->
+                        <!--<h2>{{ 'speakers' | translate }}:</h2>-->
+                        <!--{{event.Speakers}}-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
 
     </ion-content>

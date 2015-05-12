@@ -23,30 +23,49 @@ module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
    
 });
 
-module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi) {
-    var liveFairID = $stateParams.fairID;
-    var liveFairSchedule = liveFairApi.getLiveFairSchedule(liveFairID);
-    
-    $scope.events = {name: "FEUP CARRER FAIR", hours: [
-        {hour: 9, events: [ 
-            {id: 1, name: "Evento 1", fairName: "FEUP CARRER FAIR", startHour: 9, startMinute: 0, endHour: 11, endMinute: 0, day: 15, month: 4, year:2015, place: "A001"},
-            {id: 2, name: "Evento 2", fairName: "FEUP CARRER FAIR", startHour: 9, startMinute: 0, endHour: 10, endMinute: 0, day: 15, month: 4, year:2015, place: "B001"}
-            ] 
-        }, 
-        {hour: 10, events: [ 
-            {id: 3, name: "Evento 3", fairName: "FEUP CARRER FAIR", startHour: 10, startMinute:30, endHour: 12, endMinute: 0, day: 15, month: 4, year:2015, place: "B002"}
-            ] 
-        }, 
-        {hour: 11, events: [
-            {id: 4, name: "Evento 4", fairName: "FEUP CARRER FAIR", startHour: 11, startMinute: 0, endHour: 13, endMinute: 30, day: 15, month: 4, year:2015, place: "B001"},
-            {id: 5, name: "Evento 5", fairName: "FEUP CARRER FAIR", startHour: 11, startMinute: 0, endHour: 12, endMinute: 0, day: 15, month: 4, year:2015, place: "A001" }
-            ]
-        },
-        {hour: 12, events: [
-            {id: 6, name: "Evento 6", fairName: "FEUP CARRER FAIR", startHour: 12, startMinute: 0, endHour: 14, endMinute: 0, day: 15, month: 4, year:2015, place: "B003"}
-            ]
+module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
+    var getEventsFromSameDateMillis = function(millis, events) {
+        var date = new Date(millis);
+        var eventsFromSameDate = [];
+        var eventTimes = _.keys(events);
+        for(var i = 0; i < eventTimes.length; i++) {
+            var eventTime = eventTimes[i];
+            var eventDate = new Date(eventTime);
+            if(eventDate.getDate() == date.getDate() && eventDate.getMonth() == date.getMonth() && eventDate.getFullYear() == date.getFullYear()) {
+                eventsFromSameDate.push({eventTime: eventTime, eventTimeEvents: events[eventTime]});
+            }
         }
-    ]};    
+        return eventsFromSameDate;
+    };
+
+    var liveFairID = $stateParams.fairID;
+    $scope.fair = liveFairApi.getLiveFair(liveFairID);
+
+    $scope.schedule = _.chain(schedule)
+        .sortBy(function(event) {
+            return event.time;
+        })
+        .groupBy(function(event) {
+            return event.time;
+        }).value();
+
+    $scope.scheduleDays = _.chain(schedule)
+        .sortBy(function(event) {
+            return event.time;
+        })
+        .map(function(event) {
+            var time = new Date(event.time);
+            return (Date.parse(utils.getDayMonthYearDate(time)));
+        })
+        .unique()
+        .value();
+
+    $scope.scheduleOrganizedByDay = [];
+    _.forEach($scope.scheduleDays, function(day) {
+        return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
+    });
+
+    $scope.selectedDay = $scope.scheduleDays[0];
    
     $scope.loadEvent = function(id, eventName, fairName, starHour, startMinute, endHour, endMinute, day, month, year, place) {
 
@@ -137,7 +156,9 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     //$scope.fair = {name: "FEUP CARRER FAIR", place: "FEUP", startDay: 18, endDay: 20, month: 11, startHour: 9, startMinute: 30, closingHour: 18, closingMinute: 30, address: "Rua Doutor Roberto Frias", description: "A CAREER FAIR tem como principal objetivo reunir na FEUP empresas nacionais e internacionais interessadas em divulgarem as suas ofertas de emprego ou estágios e em recrutarem estudantes, recém-graduados e alumni FEUP.", map: "img/liveFair-Map.png"};
     
-    $scope.interestsList = [{name: "Sap", checked: false},{name: "Informática", checked: false},{name: "Programação", checked: false},{name: "Empreendedorismo", checked: false}];
+    //$scope.interestsList = [{name: "Sap", checked: false},{name: "Informática", checked: false},{name: "Programação", checked: false},{name: "Empreendedorismo", checked: false}];
+    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+    console.log($scope.interestsList);
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
@@ -175,8 +196,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
        $state.go('menu.fairStands', {fairID: fairID});
     }
 
-    $scope.loadEvents = function() {
-        $state.transitionTo('menu.fairProgram', $stateParams, { reload: true, inherit: false, notify: true });      
+    $scope.loadEvents = function(fairID) {
+        $state.go('menu.fairProgram', {fairID: fairID});
     }
     
 });

@@ -3,7 +3,24 @@ var module = angular.module('starter');
 module.factory('utils', function ($http, $q, $ionicPopup) {
     
     return {
-        
+
+        getDayMonthYearDate: function(time) {
+            var month = time.getUTCMonth(); //months from 1-12
+            var day = time.getUTCDate();
+            var year = time.getUTCFullYear();
+
+            return new Date(year, month, day);
+        },
+
+        getDayMonthYearString: function(time) {
+            var month = time.getUTCMonth() + 1; //months from 1-12
+            var day = time.getUTCDate();
+            var year = time.getUTCFullYear();
+
+            var newdate = year + "/" + month + "/" + day;
+            return newdate;
+        },
+
         getMonthName: function(month) {
             switch(month) {
                 case 1:

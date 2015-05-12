@@ -64,15 +64,21 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				'menuContent' :{
 					templateUrl: "templates/fairStands.html",
 					controller: "fairStandsCtrl"
+
 				}
 			}
 		})
 		.state('menu.fairProgram', {
-			url: "/fairprogram",
+			url: "/fairs/:fairID/program",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/fairProgram.html",
 					controller: "fairProgramCtrl"
+				}
+			},
+			resolve: {
+				schedule: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise;
 				}
 			}
 		})
@@ -165,7 +171,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cancel': 'Cancelar',
 		'recoverPassword': 'Recuperar password',
 		'socialNetworksLogin': 'Entrar com LinkedIn',
-		'saveChanges': 'Guardar alterações'
+		'saveChanges': 'Guardar alterações',
+		'subject': 'Assunto',
+		'location': 'Localização',
+		'local': 'Local',
+		'programDay': 'Dia do evento:'
 	});
 
 	$translateProvider.translations('en', {
@@ -213,7 +223,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cancel': 'Cancel',
 		'recoverPassword': 'Recover password',
 		'socialNetworksLogin': 'Login with LinkedIn',
-		'saveChanges': 'Save changes'
+		'saveChanges': 'Save changes',
+		'subject': 'Subject',
+		'location': 'Location',
+		'local': 'Location',
+		'programDay': 'Select day:'
 	});
 
 	$translateProvider.preferredLanguage('pt');
