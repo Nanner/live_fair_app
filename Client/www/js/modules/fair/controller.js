@@ -256,7 +256,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
         actualDateConverted = Number(actualDate);
         if($scope.startDate !== "") {
             startDateConverted = Number(new Date($scope.startDate));
-            if(startDateConverted < actualDateConverted) { //shit happened
+            if(startDateConverted < actualDateConverted) {
                 if(day < 10 && (day.length < 2 || day.length === undefined)) {
                     day = "0" + day;
                 }
@@ -272,7 +272,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
         if($scope.endDate !== "") {
             endDateConverted = Number(new Date($scope.endDate));
-            if(endDateConverted < actualDateConverted) { //shit happened
+            if(endDateConverted < actualDateConverted) {
                 if(day < 10 && (day.length < 2 || day.length === undefined)) {
                     day = "0" + day;
                 }
