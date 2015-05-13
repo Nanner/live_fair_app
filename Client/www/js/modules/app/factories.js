@@ -1,6 +1,9 @@
 var module = angular.module('starter');
 
 module.factory('utils', function ($http, $q, $ionicPopup) {
+
+    var filtersStartDate;
+    var filtersEndDate;
     
     return {
 
@@ -69,6 +72,22 @@ module.factory('utils', function ($http, $q, $ionicPopup) {
              title: title,
              template: message
            }); 
+        },
+
+        setStartDate: function(startDate) {
+            filtersStartDate = startDate;
+        },
+
+        setEndDate: function(endDate) {
+            filtersEndDate = endDate;
+        },
+
+        getStartDate: function() {
+            return filtersStartDate;
+        },
+
+        getEndDate: function() {
+            return filtersEndDate;
         }
     };
 });

@@ -207,8 +207,8 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
-    $scope.listfairs = liveFairApi.getLiveFairs();
-    //$scope.listfairs = [{name: "massa", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "ruaceninhasetal"},{name: "atum", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "coisasgordas"},{name: "cenoura", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, location: "basexaltura"}];
+    $scope.listfairs = "";
+    $scope.existingFairs = liveFairApi.getLiveFairs();
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
@@ -220,12 +220,32 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
             templateUrl: "templates/searchFairs-datePopUp.html",
             scope: $scope,
             buttons: [
-              { text: 'Cancelar' },
+              {
+                text: '<b>Limpar</b>',
+                onTap: function(e) { //lets clean date filters
+                    $scope.listfairs = $scope.existingFairs;
+                    $scope.startDate = "";
+                    $scope.endDate = "";
+                }
+              },
               {
                 text: '<b>Ok</b>',
                 type: 'button-positive',
-                onTap: function(e) {
-                    console.log("tapped submit button");
+                onTap: function(e) { //lets filter this stuff
+                    var tempArray = [];
+                    $scope.listfairs = $scope.existingFairs;
+                    $scope.startDate = utils.getStartDate();
+                    $scope.endDate = utils.getEndDate();
+                    startDateConverted = Number(new Date($scope.startDate));
+                    endDateConverted = Number(new Date($scope.endDate));
+                    for(var i = 0; i < $scope.listfairs.length; i++) {
+                        fairDate = $scope.listfairs[i].date.substring(0,10);
+                        fairDateConverted = Number(new Date(fairDate));
+                        if(fairDateConverted >= startDateConverted && fairDateConverted <= endDateConverted) {
+                            tempArray.push($scope.listfairs[i]);                        
+                        }
+                    }
+                    $scope.listfairs = tempArray;
                 }
               },
             ]
@@ -244,6 +264,9 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                     month = "0" + month;
                 }
                 $scope.startDate = year + "-" + month + "-" + day;
+                utils.setStartDate($scope.startDate);
+            } else {
+                utils.setStartDate($scope.startDate);
             }
         }
 
@@ -257,12 +280,19 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                     month = "0" + month;
                 }
                 $scope.endDate = year + "-" + month + "-" + day;
+                utils.setEndDate($scope.endDate);
+            } else {
+                utils.setEndDate($scope.endDate);
             }
         }
     }
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
+    }
+
+    $scope.getFairs = function() {
+        $scope.listfairs = $scope.existingFairs;
     }
 
 });
