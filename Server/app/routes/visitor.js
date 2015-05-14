@@ -4,20 +4,28 @@ var visitorLiveFair = require('../models').visitorLiveFair;
 
 module.exports = function(server){
 	server.route({
-		method: 'GET',
-		path: '/visitor/joinLiveFair/{id}/{liveFairID}',
+		method: 'POST',
+		path: '/visitor/joinLiveFair',
 		handler: function (request, reply) {
-			var visitorID=request.params.id;
-			var liveFairID=request.params.liveFairID;
-			reply(
-				visitorLiveFair.upsert({
-						liveFairLiveFairID: liveFairId,
-						visitorVisitorID: visitorID
-					})
-					.then(function(result) {
-						return JSON.stringify(result);
-					})
-				);
+			
+			if(!request.payload.userid || !request.payload.livefairid)
+			{
+				reply(JSON.stringify('Invalid Parameters'));
 			}
-		});
+			else
+			{
+				var visitorID=request.payload.userid;
+				var liveFairID=request.payload.livefairid;
+				reply(
+					visitorLiveFair.create({
+							'liveFairLiveFairID': livefairid,
+							'visitorVisitorID': userid
+						})
+						.then(function(result) {
+							return JSON.stringify('Adesão à LiveFair concluída com sucesso!');
+						})
+					);
+			}
+		}
+	});
 };
