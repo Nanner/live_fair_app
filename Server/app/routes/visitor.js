@@ -1,6 +1,6 @@
 var Promise = require("bluebird");
 
-var visitorLiveFair = require('../models').visitorLiveFair;
+var visitorLiveFair = require('../models').VisitorLiveFair;
 
 module.exports = function(server){
 	server.route({
