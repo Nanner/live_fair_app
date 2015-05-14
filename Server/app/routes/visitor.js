@@ -6,8 +6,7 @@ module.exports = function(server){
 	server.route({
 		method: 'POST',
 		path: '/visitor/joinLiveFair',
-		handler: function (request, reply) {
-			
+		handler: function (request, reply) {			
 			if(!request.payload.userid || !request.payload.livefairid)
 			{
 				reply(JSON.stringify('Invalid Parameters'));
