@@ -17,8 +17,8 @@ module.exports = function(server){
 				var liveFairID=request.payload.livefairid;
 				reply(
 					visitorLiveFair.create({
-							'liveFairLiveFairID': livefairid,
-							'visitorVisitorID': userid
+							'liveFairLiveFairID': liveFairID,
+							'visitorVisitorID': visitorID
 						})
 						.then(function(result) {
 							return JSON.stringify('Adesão à LiveFair concluída com sucesso!');
