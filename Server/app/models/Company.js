@@ -8,13 +8,13 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         companyName: {
-            type: DataTypes.STRING, unique: true, allowNull: false
+            type: DataTypes.STRING, unique: true
         },
         logoImage: {
-            type: DataTypes.STRING, unique: true, allowNull: false
+            type: DataTypes.STRING, unique: true
         },
         website: {
-            type: DataTypes.STRING, unique: true, allowNull: false
+            type: DataTypes.STRING, unique: true
         },
         visitorCounter: {
             type: DataTypes.INTEGER
