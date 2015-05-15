@@ -32,7 +32,8 @@ var models = [
     'LiveFairVisitorInterest',
     'LiveFairCompanyEvents',
     'LiveFairCompanyInterest',
-    'LiveFairInterest'
+    'LiveFairInterest',
+	'VisitorLiveFair'
 ];
 models.forEach(function(model) {
     module.exports[model] = sequelize.import(__dirname + '/' + model);
