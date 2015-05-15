@@ -7,10 +7,14 @@
             <h1 class="register-title"> <span class="ion-person-add"></span> {{ 'register' | translate }} </h1>
             
             <div class="list">
-                <label class="item item-input">
+                <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
                     <input type="text" ng-model="name" placeholder="{{ 'name' | translate }}" ng-change="validateNameCallback()">
-                </label>               
+                </label>
+                <label class="item item-input">
+                    <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
+                    <input type="email" ng-model="mail" placeholder="Email" ng-change="validateEmailCallback()">
+                </label>                
                 <label class="item item-input">
                     <i class="form-icon ion-help-circled placeholder-icon {{valPassword}}"></i>
                     <input type="password" ng-model="password" placeholder="Password" ng-change="passwordCallback()">
@@ -18,11 +22,7 @@
                 <label class="item item-input">
                     <i class="form-icon ion-help-circled placeholder-icon {{valConfirmPassword}}"></i>
                     <input type="password" ng-model="confirmPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
-                </label>
-                <label class="item item-input">
-                    <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
-                    <input type="email" ng-model="mail" placeholder="Email" ng-change="validateEmailCallback()">
-                </label> 
+                </label><label ng-hide="{{usertype}}" class="item item-input"></label>
                 <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-at placeholder-icon {{valWebsite}}"></i>
                     <input type="text" ng-model="website" placeholder="Website" ng-change="validateWebsiteCallback()">

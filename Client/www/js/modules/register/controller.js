@@ -2,7 +2,7 @@ var module = angular.module('registerModule');
 
 module.controller('registerCtrl', function ($scope, $state, $stateParams, utils) {
     
-    $scope.usertype = true; //true -> empresa, false -> visitante
+    $scope.usertype = false; //true -> empresa, false -> visitante
     $scope.name = "";
     $scope.password = "";
     $scope.confirmPassword = "";
@@ -142,6 +142,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
          var existsNotValidField = false;
          
          if($scope.usertype !== true) { //visitante
+            emptyFields[0] = 0;
             emptyFields[4] = 0;
             emptyFields[5] = 0;
          } 
