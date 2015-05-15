@@ -9,6 +9,8 @@ module.factory('liveFairApi', function($resource, server) {
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
+    var Register = $resource(server.url + '/register', {email: '@email', password: '@password', type: '@type', address: '@address', compayName: '@companyName', website: '@website'});
+
     var api = {
 
         getLiveFairs: function() {
@@ -25,6 +27,9 @@ module.factory('liveFairApi', function($resource, server) {
         },
         getLiveFairSchedule: function(fairID) {
             return Schedule.query({liveFairID: fairID});
+        },
+        postRegister: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
+            return Register.save({email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, companyName: companyNameToSend, website: websiteToSend});
         }
     };
 

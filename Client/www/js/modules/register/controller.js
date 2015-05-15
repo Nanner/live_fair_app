@@ -1,6 +1,6 @@
 var module = angular.module('registerModule');
 
-module.controller('registerCtrl', function ($scope, $state, $stateParams, utils) {
+module.controller('registerCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
     
     $scope.usertype = false; //true -> empresa, false -> visitante
     $scope.name = "";
@@ -171,7 +171,14 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils)
             } else {
                 var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
                 console.log(passwordEncrypted);
-                console.log("all good, time to submit");   
+                console.log("all good, time to submit");
+
+                var usertype = "";
+                if($scope.usertype)
+                    usertype = 'company';
+                else
+                    usertype = 'visitor';
+                liveFairApi.postRegister($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website);  
             }
          }
     }
