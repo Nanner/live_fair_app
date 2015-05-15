@@ -96,13 +96,13 @@ module.factory('calendar', function ($http, $q, $ionicPopup, $cordovaCalendar) {
     
     return {
 
-        createEvent: function(eventTitle, eventLocation, eventNotes, year, month, day, startHour, startMinute, endHour, endMinute) {
+        createEvent: function(eventTitle, eventLocation, eventNotes, startDate, endDate) {
             $cordovaCalendar.createEvent({
                 title: eventTitle,
                 location: eventLocation,
                 notes: eventNotes,
-                startDate: new Date(year, month, day, startHour, startMinute, 0, 0, 0),
-                endDate: new Date(year, month, day, endHour, endMinute, 0, 0, 0)
+                startDate: startDate,
+                endDate: endDate
             }).then(function (result) {
                 console.log("Event created successfully");
             }, function (err) {
@@ -110,13 +110,13 @@ module.factory('calendar', function ($http, $q, $ionicPopup, $cordovaCalendar) {
             });
         },
         
-        createEventInteractively: function(eventTitle, eventLocation, eventNotes, year, month, day, startHour, startMinute, endHour, endMinute) {
+        createEventInteractively: function(eventTitle, eventLocation, eventNotes, startDate, endDate) {
             $cordovaCalendar.createEventInteractively({
                 title: eventTitle,
                 location: eventLocation,
                 notes: eventNotes,
-                startDate: new Date(year, month, day, startHour, startMinute, 0, 0, 0),
-                endDate: new Date(year, month, day, endHour, endMinute, 0, 0, 0)
+                startDate: startDate,
+                endDate: endDate
             }).then(function (result) {
                 console.log("Event created successfully");
             }, function (err) {

@@ -114,9 +114,8 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
                     type: 'button-balanced',
                     onTap: function(e) {
                         //Create event in phone's calendar
-
-                        var monthToSend = month - 1;
-                        calendar.createEventInteractively(eventName, fairName, "Participar", year, monthToSend, day, starHour, startMinute, endHour, endMinute);
+                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.Speakers;
+                        calendar.createEventInteractively($scope.liveFairEvent.Subject, $scope.liveFairEvent.Speakers, $scope.liveFairEvent.time, $scope.liveFairEvent.endTime);
                     }
                 },
                 {
