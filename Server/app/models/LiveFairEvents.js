@@ -2,6 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
     var LiveFairEvents = sequelize.define('liveFairEvents', {
+        liveFairEventID:{
+            type: DataTypes.UUID,
+            primaryKey: true
+        },
         eventLocation: {
             type: DataTypes.STRING, allowNull: false
         },
