@@ -40,10 +40,21 @@ module.exports = function(server){
               
               switch (request.payload.type){
                   case 'company':
-                        Company.create({
+                        var obj = {
                             'companyID':ID,
                             'visitorCounter': 0
-                        });
+                        };
+                        
+                        if(request.payload.address)
+                            obj['address']=request.payload.address;
+                            
+                        if(request.payload.companyName)
+                            obj['companyName']=request.payload.companyName;
+                            
+                        if(request.payload.website)
+                            obj['website']=request.payload.website;
+                            
+                        Company.create(obj);
                         reply(JSON.stringify('Registo Bem Sucedido'));
                         break;
                   case 'visitor':
