@@ -189,7 +189,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'filterByDate': 'Filter by date',
 		'startDate': 'Data início',
 		'endDate': 'Data Fim',
-		'searchLocation': 'Localização'
+		'searchLocation': 'Localização',
+		'speakers': 'Oradores'
 	});
 
 	$translateProvider.translations('en', {
@@ -246,7 +247,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'filterByDate': 'Filtrar por data',
 		'startDate': 'Start date',
 		'endDate': 'End Date',
-		'searchLocation': 'Location'
+		'searchLocation': 'Location',
+		'speakers': 'Speakers'
 	});
 
 	$translateProvider.preferredLanguage('pt');

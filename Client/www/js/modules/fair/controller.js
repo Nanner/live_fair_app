@@ -22,6 +22,9 @@ module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
     }
    
 });
+module.controller('popupCtrl', function ($scope, $state, $stateParams) {
+  console.log($stateParams);
+});
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
     var getEventsFromSameDateMillis = function(millis, events) {
@@ -67,63 +70,64 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
     $scope.selectedDay = $scope.scheduleDays[0];
    
-    $scope.loadEvent = function(id, eventName, fairName, starHour, startMinute, endHour, endMinute, day, month, year, place) {
+    $scope.loadEvent = function(fairName, event) {
 
-        var ihour;
-        var fhour;
-        var iminute;
-        var fminute;
+        //var ihour;
+        //var fhour;
+        //var iminute;
+        //var fminute;
+        //
+        //if(starHour < 10) {
+        //    ihour = "0" + starHour;
+        //} else {
+        //    ihour = "" + starHour;
+        //}
+        //
+        //if(startMinute < 10) {
+        //    iminute = "0" + startMinute;
+        //} else {
+        //    iminute = "" + startMinute;
+        //}
+        //
+        //if(endHour < 10) {
+        //    fhour = "0" + endHour;
+        //} else {
+        //    fhour = "" + endHour;
+        //}
+        //
+        //if(endMinute < 10) {
+        //    fminute = "0" + endMinute;
+        //} else {
+        //    fminute = "" + endMinute;
+        //}
 
-        if(starHour < 10) {
-            ihour = "0" + starHour;
-        } else {
-            ihour = "" + starHour;
-        }
-
-        if(startMinute < 10) {
-            iminute = "0" + startMinute;
-        } else {
-            iminute = "" + startMinute;
-        }
-
-        if(endHour < 10) {
-            fhour = "0" + endHour;
-        } else {
-            fhour = "" + endHour;
-        }
-
-        if(endMinute < 10) {
-            fminute = "0" + endMinute;
-        } else {
-            fminute = "" + endMinute;
-        }
-
-        $scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
+        //$scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
+        $scope.liveFairEvent = event;
 
         var myPopup = $ionicPopup.show({
-        templateUrl: "templates/eventPopup.html",
-        title: fairName,
-        scope: $scope,
-        buttons: [ 
-          {
-            text: '<b>Sync</b>',
-            type: 'button-balanced',
-            onTap: function(e) {
-                //Create event in phone's calendar
-                
-                var monthToSend = month - 1;
-                calendar.createEventInteractively(eventName, fairName, "Participar", year, monthToSend, day, starHour, startMinute, endHour, endMinute);
-            }
-          },
-          {
-            text: '<b>Ok</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                console.log("tapped button");
-            }
-          },
-        ]
-      }); 
+            templateUrl: "eventPopup.html",
+            title: fairName,
+            scope: $scope,
+            buttons: [
+                {
+                    text: '<b>Sync</b>',
+                    type: 'button-balanced',
+                    onTap: function(e) {
+                        //Create event in phone's calendar
+
+                        var monthToSend = month - 1;
+                        calendar.createEventInteractively(eventName, fairName, "Participar", year, monthToSend, day, starHour, startMinute, endHour, endMinute);
+                    }
+                },
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        console.log("tapped button");
+                    }
+                },
+            ]
+        });
     }
    
 });
