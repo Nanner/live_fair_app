@@ -31,30 +31,32 @@ module.exports = function(server){
                var ID=uuid.v4();
                passHash.update(request.payload.password);
                User.create({
-                   'userID':ID,
+                    'userID':ID,
                     'email':request.payload.email,
                     'password':passHash.digest(),
                     'type':request.payload.type
                     } 
                );
-              reply(JSON.stringify('Registo Bem Sucedido'));
               
               switch (request.payload.type){
                   case 'company':
-                        Company.Create({
+                        Company.create({
                             'companyID':ID,
                             'visitorCounter': 0
                         });
+                        reply(JSON.stringify('Registo Bem Sucedido'));
                         break;
                   case 'visitor':
-                        Visitor.Create({
+                        Visitor.create({
                            'visitorID':ID 
                         });
+                        reply(JSON.stringify('Registo Bem Sucedido'));
                         break;
                   case 'organizer':
-                        Organizer.Create({
+                        Organizer.create({
                            'visitorID':ID 
                         });
+                        reply(JSON.stringify('Registo Bem Sucedido'));
                         break;
               }
            }

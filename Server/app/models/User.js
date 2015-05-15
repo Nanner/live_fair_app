@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('user', {
         userID:{
             type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
         email: {
@@ -17,9 +18,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         contact: {
             type: DataTypes.STRING
-        },
-        address: {
-            type: DataTypes.TEXT, unique: true
         },
         description: {
             type: DataTypes.TEXT

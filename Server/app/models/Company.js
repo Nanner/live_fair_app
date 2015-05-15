@@ -13,6 +13,9 @@ module.exports = function(sequelize, DataTypes) {
         logoImage: {
             type: DataTypes.STRING, unique: true
         },
+        address: {
+            type: DataTypes.TEXT
+        },
         website: {
             type: DataTypes.STRING, unique: true
         },
