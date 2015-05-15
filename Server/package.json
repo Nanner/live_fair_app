@@ -29,6 +29,7 @@
   "dependencies": {
     "bell": "^2.7.1",
     "bluebird": "^2.9.25",
+    "boom": "^2.7.1",
     "crypto": "0.0.3",
     "good": "^6.1.2",
     "good-console": "^5.0.0",
