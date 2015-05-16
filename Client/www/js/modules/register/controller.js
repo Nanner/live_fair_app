@@ -2,7 +2,7 @@ var module = angular.module('registerModule');
 
 module.controller('registerCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
     
-    $scope.usertype = false; //true -> empresa, false -> visitante
+    $scope.usertype = true; //true -> empresa, false -> visitante
     $scope.name = "";
     $scope.password = "";
     $scope.confirmPassword = "";
