@@ -2,8 +2,14 @@
     <ion-content scroll='true'>
     
         <div class="fair-container">
-            <h1 class="fair-title">{{ 'attendingStands' | translate }}</h1>
-            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fairStands.name}} </h4>
+            <h3 class="fair-title">{{fair.name}}</h3>
+            <h4 class="fair-subtitle">{{ 'attendingStands' | translate }}</h4>
+        </div>
+
+        <div class="card" ng-hide="fairStands.length">
+            <div class="item item-positive item-placeholder item-text-wrap text-center">
+                {{ 'noStands' | translate }}
+            </div>
         </div>
         
         <div class="list stands-list">

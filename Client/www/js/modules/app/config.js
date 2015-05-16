@@ -167,7 +167,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'de': 'de',
 		'a': 'a',
 		'e': 'e',
-		'attendingStands': 'Stands Presentes',
+		'attendingStands': 'Stands presentes',
 		'info': 'Informações',
 		'webpage': 'Página Web',
 		'aboutus': 'Sobre nós',
@@ -192,7 +192,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'searchLocation': 'Localização',
 		'speakers': 'Oradores',
 		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
-		'noEvents': 'Não existem eventos agendados proximamente'
+		'noEvents': 'Não existem eventos agendados proximamente',
+		'noStands': 'Não existem ainda stands confirmados'
 	});
 
 	$translateProvider.translations('en', {
@@ -252,7 +253,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'searchLocation': 'Location',
 		'speakers': 'Speakers',
 		'noInterests': 'The interest list has not been defined yet',
-		'noEvents': 'Currently, there are no scheduled events'
+		'noEvents': 'Currently, there are no scheduled events',
+		'noStands': 'Currently, no attending stand has been confirmed'
 	});
 
 	$translateProvider.preferredLanguage('pt');

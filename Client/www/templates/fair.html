@@ -50,7 +50,7 @@
             <!--</div>-->
             <ul class="list">
                 <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
-                <li class="item item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
+                <li class="item item-stable item-placeholder item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
                 <li class="item item-checkbox" ng-repeat="item in interestsList">
                     <label class="checkbox">
                         <input type="checkbox">
