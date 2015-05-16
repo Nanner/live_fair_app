@@ -18,10 +18,10 @@ server.connection({ port: 3000 });
 
 server.app.models = require('./models');
 
+require('./routes/login')(server);
 require('./routes/liveFair')(server);
 require('./routes/user')(server);
 require('./routes/visitor')(server);
-require('./routes/login')(server);
 
 server.register(Auth, function (err) {
 
