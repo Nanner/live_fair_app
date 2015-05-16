@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($resource, $http, $q, server) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -15,6 +15,49 @@ module.factory('liveFairApi', function($resource, $http, $q, server) {
 
     var api = {
 
+        login: function(username, password) {
+            $http.post(server.url + '/login', { username: username, password: password }, { ignoreAuthModule: true })
+                .success(function (data, status, headers, config) {
+
+                    console.log("Bearer " + data.token);
+                    $http.defaults.headers.common.Authorization = "Bearer " + data.token;  // Step 1
+                    $localStorage.set('token', data.token);
+                    $localStorage.set('userID', data.userID);
+                    $localStorage.set('userEmail', data.email);
+                    $localStorage.set('userType', data.type);
+
+                    //
+                    //// Need to inform the http-auth-interceptor that
+                    //// the user has logged in successfully.  To do this, we pass in a function that
+                    //// will configure the request headers with the authorization token so
+                    //// previously failed requests(aka with status == 401) will be resent with the
+                    //// authorization token placed in the header
+                    //authService.loginConfirmed(data, function(config) {  // Step 2 & 3
+                    //    config.headers.Authorization = "Bearer " + data.authorizationToken;
+                    //    $localStorage.set('authorizationToken', data.authorizationToken);
+                    //    $localStorage.set('userID', data.userID);
+                    //    $localStorage.set('userEmail', data.email);
+                    //    $localStorage.set('userType', data.type);
+                    //    console.log("lol");
+                    //    console.log($localStorage.get('userID'));
+                    //    return config;
+                    //});
+                })
+                .error(function (data, status, headers, config) {
+                    $rootScope.$broadcast('event:auth-login-failed', status);
+                });
+        },
+        logout: function(user) {
+            $http.post('https://logout', {}, { ignoreAuthModule: true })
+                .finally(function(data) {
+                    $localStorage.remove('authorizationToken');
+                    delete $http.defaults.headers.common.Authorization;
+                    $rootScope.$broadcast('event:auth-logout-complete');
+                });
+        },
+        loginCancelled: function() {
+            authService.loginCancelled();
+        },
         getLiveFairs: function() {
             return LiveFair.query();
         },

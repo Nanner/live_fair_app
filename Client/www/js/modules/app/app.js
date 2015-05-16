@@ -19,7 +19,7 @@ angular.module('starter',
         'ngCordova',
         'ngResource',
         'pascalprecht.translate',
-        'ui.unique'
+        'http-auth-interceptor'
     ]
 )
     .constant('_', _);

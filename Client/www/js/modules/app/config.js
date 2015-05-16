@@ -1,6 +1,8 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider) {
+
+	$httpProvider.interceptors.push('authInterceptor');
 
 	$stateProvider
 		.state('menu', {
