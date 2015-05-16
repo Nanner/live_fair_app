@@ -6,7 +6,14 @@
                 <h3 class="program-subtitle"> {{fair.name}} </h3>
                 <h4 class="program-title"> {{ 'program' | translate }} </h4>
             </div>
-            <div class="list">
+
+            <div class="card" ng-hide="scheduleOrganizedByDay.length">
+                <div class="item item-text-wrap text-center">
+                    {{ 'noEvents' | translate }}
+                </div>
+            </div>
+
+            <div class="list" ng-hide="!scheduleOrganizedByDay.length">
                 <label class="item item-input item-select item-positive">
                     <div class="input-label">
                         {{ 'programDay' | translate }}

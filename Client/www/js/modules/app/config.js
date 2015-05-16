@@ -191,7 +191,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'endDate': 'Data Fim',
 		'searchLocation': 'Localização',
 		'speakers': 'Oradores',
-		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento'
+		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
+		'noEvents': 'Não existem eventos agendados proximamente'
 	});
 
 	$translateProvider.translations('en', {
@@ -250,7 +251,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'endDate': 'End Date',
 		'searchLocation': 'Location',
 		'speakers': 'Speakers',
-		'noInterests': 'The interest list has not been defined yet'
+		'noInterests': 'The interest list has not been defined yet',
+		'noEvents': 'Currently, there are no scheduled events'
 	});
 
 	$translateProvider.preferredLanguage('pt');
