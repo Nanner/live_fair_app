@@ -20,7 +20,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     $scope.valWebsite = "neutral-icon";
     $scope.valAddress = "neutral-icon";
     
-    var messages = ["Nome só pode conter letras", "A password tem que ter no mínimo 8 caracteres", "As passwords não correspondem", "Email com formato inválido", "URL do website é inválido", "Por favor preencha todos os campos", "Para prosseguir deverá aceitar os termos de uso"];
+    var messages = ["Nome só pode conter letras", "A password tem que ter no mínimo 8 caracteres", "As passwords não correspondem", "Email com formato inválido", "URL do website é inválido", "Por favor preencha todos os campos", "Para prosseguir deverá aceitar os termos de uso", "Lamentamos mas não foi possível realizar o registo com sucesso"];
     
     var messageToDisplay = [0,0,0,0,0,0,0,0];
     var emptyFields = [1,1,1,1,1,1];
@@ -178,7 +178,14 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
                     usertype = 'company';
                 else
                     usertype = 'visitor';
-                liveFairApi.postRegister($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website);  
+
+                liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
+                    then(function(data) {
+                        utils.showAlert(data, "Sucesso");
+                        $state.go('menu.login');
+                    }, function(error) {
+                        utils.showAlert(messages[7], "Erro");
+                }); 
             }
          }
     }
