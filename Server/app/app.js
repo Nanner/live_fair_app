@@ -21,6 +21,7 @@ server.app.models = require('./models');
 require('./routes/liveFair')(server);
 require('./routes/user')(server);
 require('./routes/visitor')(server);
+require('./routes/login')(server);
 
 server.register(Auth, function (err) {
 
@@ -63,65 +64,65 @@ server.register({
     });
 });
 
+//server.route({
+//    method: 'POST',
+//    path: '/login',
+//    config:{
+//        auth: {
+//            mode: 'try',
+//            strategy: 'session'
+//        },
+//        handler: function (request, reply) {
+//
+//            if (request.method === 'post') {
+//                if (!request.payload.username ||
+//                    !request.payload.password) {
+//                    reply(JSON.stringify('Missing username or password'));
+//                }
+//                else {
+//                    User.find({where:
+//                    {
+//                        email: request.payload.username
+//                    }}).then(function(account) {
+//                        if(!account) {
+//                            reply(JSON.stringify('Invalid username or password'));
+//                        }
+//                        else {
+//                            var hash = crypto.createHash('sha512');
+//                            hash.update(account.password);
+//                            if (account.password !== request.payload.password) {
+//                                reply(JSON.stringify('Invalid username or password'));
+//                            }
+//                            else {
+//                                var cookie = crypto.createHash('sha512'),temp;
+//                                cookie.update(account.email+new Date().toString());
+//                                temp=cookie.digest('base64');
+//                                request.auth.session.set(account);
+//                                request.auth.session.set(account.userID,temp);
+//                                reply(JSON.stringify(temp));
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//
+//        },
+//        plugins: {
+//            'hapi-auth-cookie': {
+//                redirectTo: false
+//            }
+//        }
+//    }
+//});
+
 server.route({
-        method: 'POST',
-        path: '/login',
-        config:{
-            auth: {
-                mode: 'try',
-                strategy: 'session'
-            },
-            handler: function (request, reply) {
+    method: '*',
+    path: '/login/linkedin',
+    config: {
+        auth: 'linkedin',
+        handler: function (request, reply) {
 
-                if (request.method === 'post') {
-                    if (!request.payload.username ||
-                        !request.payload.password) {
-                        reply(JSON.stringify('Missing username or password'));
-                    }
-                    else {
-                        User.find({where:
-                        {
-                            email: request.payload.username
-                        }}).then(function(account) {
-                            if(!account) {
-                                reply(JSON.stringify('Invalid username or password'));
-                            }
-                            else {
-                                var hash = crypto.createHash('sha512');
-                                hash.update(account.password);
-                                if (account.password !== request.payload.password) {
-                                    reply(JSON.stringify('Invalid username or password'));
-                                }
-                                else {
-                                    var cookie = crypto.createHash('sha512'),temp;
-                                    cookie.update(account.email+new Date().toString());
-                                    temp=cookie.digest('base64');
-                                    request.auth.session.set(account);
-                                    request.auth.session.set(account.userID,temp);
-                                    reply(JSON.stringify(temp));
-                                }
-                            }
-                        });
-                    }
-                }
-
-            },
-            plugins: {
-                'hapi-auth-cookie': {
-                    redirectTo: false
-                }
-            }
+            reply('<pre>' + JSON.stringify(request.auth.credentials, null, 4) + '</pre>');
         }
-    });
-
-    server.route({
-        method: '*',
-        path: '/login/linkedin',
-        config: {
-            auth: 'linkedin',
-            handler: function (request, reply) {
-
-                reply('<pre>' + JSON.stringify(request.auth.credentials, null, 4) + '</pre>');
-            }
-        }
-    });
+    }
+});
