@@ -2,6 +2,7 @@ var module = angular.module('fairModule');
 
 module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, liveFairApi) {
     var liveFairID = $stateParams.fairID;
+    $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
 
@@ -131,10 +132,9 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi) {
 
-    //$scope.listfairs = [{name: "derp1", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"},{name: "derp2", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua de Exemplo"},{name: "derp3", startHour: 10, startMinute: 30, startDay: 5, endDay: 8, month: 3, address: "Rua Exemplo"}];
-    $scope.listfairs = liveFairApi.getLiveFairs();
+    $scope.listfairs = listfairs;
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {

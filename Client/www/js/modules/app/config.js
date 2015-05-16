@@ -47,6 +47,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/listfairs.html",
 					controller: "listFairsCtrl"
 				}
+			},
+			resolve: {
+				listfairs: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairs().$promise;
+				}
 			}
 		})
 		.state('menu.presentStands', {
@@ -193,7 +198,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'speakers': 'Oradores',
 		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
 		'noEvents': 'Não existem eventos agendados proximamente',
-		'noStands': 'Não existem ainda stands confirmados'
+		'noStands': 'Não existem ainda stands confirmados',
+		'noLiveFairs': 'Não foi encontrada nenhuma live fair'
 	});
 
 	$translateProvider.translations('en', {
@@ -254,7 +260,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'speakers': 'Speakers',
 		'noInterests': 'The interest list has not been defined yet',
 		'noEvents': 'Currently, there are no scheduled events',
-		'noStands': 'Currently, no attending stand has been confirmed'
+		'noStands': 'Currently, no attending stand has been confirmed',
+		'noLiveFairs': 'No live fairs were found'
 	});
 
 	$translateProvider.preferredLanguage('pt');
