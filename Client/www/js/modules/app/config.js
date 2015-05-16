@@ -50,7 +50,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			},
 			resolve: {
 				listfairs: function(liveFairApi, $stateParams) {
-					return liveFairApi.getLiveFairs().$promise;
+					return liveFairApi.getLiveFairs().$promise
+						.then(function(liveFairs) {
+							return liveFairs;
+						}, function(error) {
+							return [];
+						});
 				}
 			}
 		})
@@ -83,7 +88,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			},
 			resolve: {
 				schedule: function(liveFairApi, $stateParams) {
-					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise;
+					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
+						.then(function(schedule) {
+							return schedule;
+						}, function(error) {
+							return [];
+						});
 				}
 			}
 		})
