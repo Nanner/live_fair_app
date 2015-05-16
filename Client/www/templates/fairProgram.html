@@ -7,13 +7,13 @@
                 <h4 class="program-title"> {{ 'program' | translate }} </h4>
             </div>
 
-            <div class="card" ng-hide="scheduleOrganizedByDay.length">
+            <div class="card" ng-hide="scheduleDays.length">
                 <div class="item item-positive item-placeholder item-text-wrap text-center">
                     {{ 'noEvents' | translate }}
                 </div>
             </div>
 
-            <div class="list" ng-hide="!scheduleOrganizedByDay.length">
+            <div class="list" ng-hide="!scheduleDays.length">
                 <label class="item item-input item-select item-positive">
                     <div class="input-label">
                         {{ 'programDay' | translate }}
