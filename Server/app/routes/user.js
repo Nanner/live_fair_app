@@ -37,7 +37,7 @@ module.exports = function(server){
                     return User.create({
                         'userID':ID,
                         'email':request.payload.email,
-                        'password':passHash.digest(),
+                        'password':passHash.digest('hex'),
                         'type':request.payload.type
                     }, {transaction: t})
                         .then(function(user) {
