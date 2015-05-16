@@ -2,18 +2,27 @@
     <ion-content scroll='true'>
 
         <div class="program-container">
-            <div class="program-title-container">
+            <div class="program-title-container" ng-hide="failedToResolve">
                 <h3 class="program-subtitle"> {{fair.name}} </h3>
                 <h4 class="program-title"> {{ 'program' | translate }} </h4>
             </div>
 
-            <div class="card" ng-hide="scheduleDays.length">
+            <div ng-show="failedToResolve">
+                <br>
+                <div class="card">
+                    <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                        {{ 'failedToResolve' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" ng-hide="scheduleDays.length || failedToResolve">
                 <div class="item item-positive item-placeholder item-text-wrap text-center">
                     {{ 'noEvents' | translate }}
                 </div>
             </div>
 
-            <div class="list" ng-hide="!scheduleDays.length">
+            <div class="list" ng-hide="!scheduleDays.length || failedToResolve">
                 <label class="item item-input item-select item-positive">
                     <div class="input-label">
                         {{ 'programDay' | translate }}

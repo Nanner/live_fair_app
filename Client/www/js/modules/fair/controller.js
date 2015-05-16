@@ -39,6 +39,10 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
         return eventsFromSameDate;
     };
 
+    $scope.failedToResolve = schedule == "failed to resolve";
+    if($scope.failedToResolve)
+        return;
+
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
 
@@ -130,6 +134,10 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi) {
+
+    $scope.failedToResolve = listfairs == "failed to resolve";
+    if($scope.failedToResolve)
+        return;
 
     $scope.listfairs = listfairs;
 

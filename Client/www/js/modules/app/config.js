@@ -54,7 +54,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 						.then(function(liveFairs) {
 							return liveFairs;
 						}, function(error) {
-							return [];
+							return "failed to resolve";
 						});
 				}
 			}
@@ -92,7 +92,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 						.then(function(schedule) {
 							return schedule;
 						}, function(error) {
-							return [];
+							return "failed to resolve";
 						});
 				}
 			}
@@ -209,7 +209,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
 		'noEvents': 'Não existem eventos agendados proximamente',
 		'noStands': 'Não existem ainda stands confirmados',
-		'noLiveFairs': 'Não foi encontrada nenhuma live fair'
+		'noLiveFairs': 'Não foi encontrada nenhuma live fair',
+		'failedToResolve': "Falha a ligar ao servidor, por favor verifique a sua ligação à rede."
 	});
 
 	$translateProvider.translations('en', {
@@ -271,7 +272,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'noInterests': 'The interest list has not been defined yet',
 		'noEvents': 'Currently, there are no scheduled events',
 		'noStands': 'Currently, no attending stand has been confirmed',
-		'noLiveFairs': 'No live fairs were found'
+		'noLiveFairs': 'No live fairs were found',
+		'failedToResolve': 'Failed to connect to the server, please check your network connection.'
 	});
 
 	$translateProvider.preferredLanguage('pt');
