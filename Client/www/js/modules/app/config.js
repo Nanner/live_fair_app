@@ -190,7 +190,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startDate': 'Data início',
 		'endDate': 'Data Fim',
 		'searchLocation': 'Localização',
-		'speakers': 'Oradores'
+		'speakers': 'Oradores',
+		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento'
 	});
 
 	$translateProvider.translations('en', {
@@ -248,7 +249,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startDate': 'Start date',
 		'endDate': 'End Date',
 		'searchLocation': 'Location',
-		'speakers': 'Speakers'
+		'speakers': 'Speakers',
+		'noInterests': 'The interest list has not been defined yet'
 	});
 
 	$translateProvider.preferredLanguage('pt');

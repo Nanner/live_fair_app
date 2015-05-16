@@ -16,14 +16,14 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
 module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
 
     $scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
-    
+
     $scope.loadProfile = function(id) {
-        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });      
+        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
     }
-   
+
 });
 module.controller('popupCtrl', function ($scope, $state, $stateParams) {
-  console.log($stateParams);
+    console.log($stateParams);
 });
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
@@ -69,7 +69,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
     });
 
     $scope.selectedDay = $scope.scheduleDays[0];
-   
+
     $scope.loadEvent = function(fairName, event) {
 
         //var ihour;
@@ -128,7 +128,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
             ]
         });
     }
-   
+
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
@@ -148,16 +148,16 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 });
 
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi,$translate) {
 
     var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);   
+    $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.hideMap = false;
-    $scope.month = ""; 
+    $scope.month = "";
     $scope.description = true;
-    
+
     //$scope.fair = {name: "FEUP CARRER FAIR", place: "FEUP", startDay: 18, endDay: 20, month: 11, startHour: 9, startMinute: 30, closingHour: 18, closingMinute: 30, address: "Rua Doutor Roberto Frias", description: "A CAREER FAIR tem como principal objetivo reunir na FEUP empresas nacionais e internacionais interessadas em divulgarem as suas ofertas de emprego ou estágios e em recrutarem estudantes, recém-graduados e alumni FEUP.", map: "img/liveFair-Map.png"};
-    
+
     //$scope.interestsList = [{name: "Sap", checked: false},{name: "Informática", checked: false},{name: "Programação", checked: false},{name: "Empreendedorismo", checked: false}];
     $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
     console.log($scope.interestsList);
@@ -168,40 +168,40 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadFairProfile = function() {
         $scope.month = utils.getMonthName($scope.fair.month);
-        
+
         /*if($scope.fair.description == null)
-            $scope.showDescription = false;
-        
-        if($scope.fair.map == null)
-            $scope.showMap = false;*/
+         $scope.showDescription = false;
+
+         if($scope.fair.map == null)
+         $scope.showMap = false;*/
     };
-    
+
     $scope.chooseInterests = function() {
         var myPopup = $ionicPopup.show({
-        templateUrl: "interestsPopup.html",
-        title: 'Adesão',
-        scope: $scope,
-        buttons: [ 
-          { text: 'Cancelar' },
-          {
-            text: '<b>Selecionar</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                console.log("tapped submit button");
-            }
-          },
-        ]
-      });  
-    }
-    
+            templateUrl: "interestsPopup.html",
+            title: 'Adesão',
+            scope: $scope,
+            buttons: [
+                { text: $translate.instant('cancel') },
+                {
+                    text: '<b>' + $translate.instant('btnAderir') + '</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        console.log("tapped submit button");
+                    }
+                }
+            ]
+        });
+    };
+
     $scope.loadStands = function(fairID) {
-       $state.go('menu.fairStands', {fairID: fairID});
-    }
+        $state.go('menu.fairStands', {fairID: fairID});
+    };
 
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
     }
-    
+
 });
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
@@ -223,36 +223,36 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
             templateUrl: "templates/searchFairs-datePopUp.html",
             scope: $scope,
             buttons: [
-              {
-                text: '<b>Limpar</b>',
-                onTap: function(e) { //lets clean date filters
-                    $scope.listfairs = $scope.existingFairs;
-                    $scope.startDate = "";
-                    $scope.endDate = "";
-                }
-              },
-              {
-                text: '<b>Ok</b>',
-                type: 'button-positive',
-                onTap: function(e) { //lets filter this stuff
-                    var tempArray = [];
-                    $scope.listfairs = $scope.existingFairs;
-                    $scope.startDate = utils.getStartDate();
-                    $scope.endDate = utils.getEndDate();
-                    startDateConverted = Number(new Date($scope.startDate));
-                    endDateConverted = Number(new Date($scope.endDate));
-                    for(var i = 0; i < $scope.listfairs.length; i++) {
-                        fairDate = $scope.listfairs[i].date.substring(0,10);
-                        fairDateConverted = Number(new Date(fairDate));
-                        if(fairDateConverted >= startDateConverted && fairDateConverted <= endDateConverted) {
-                            tempArray.push($scope.listfairs[i]);                        
-                        }
+                {
+                    text: '<b>Limpar</b>',
+                    onTap: function(e) { //lets clean date filters
+                        $scope.listfairs = $scope.existingFairs;
+                        $scope.startDate = "";
+                        $scope.endDate = "";
                     }
-                    $scope.listfairs = tempArray;
-                }
-              },
+                },
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
+                    onTap: function(e) { //lets filter this stuff
+                        var tempArray = [];
+                        $scope.listfairs = $scope.existingFairs;
+                        $scope.startDate = utils.getStartDate();
+                        $scope.endDate = utils.getEndDate();
+                        startDateConverted = Number(new Date($scope.startDate));
+                        endDateConverted = Number(new Date($scope.endDate));
+                        for(var i = 0; i < $scope.listfairs.length; i++) {
+                            fairDate = $scope.listfairs[i].date.substring(0,10);
+                            fairDateConverted = Number(new Date(fairDate));
+                            if(fairDateConverted >= startDateConverted && fairDateConverted <= endDateConverted) {
+                                tempArray.push($scope.listfairs[i]);
+                            }
+                        }
+                        $scope.listfairs = tempArray;
+                    }
+                },
             ]
-        });   
+        });
     }
 
     $scope.verifyDate = function() {
