@@ -178,7 +178,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     
     $scope.chooseInterests = function() {
         var myPopup = $ionicPopup.show({
-        templateUrl: "templates/chooseInterests.html",
+        templateUrl: "interestsPopup.html",
         title: 'Adesão',
         scope: $scope,
         buttons: [ 
