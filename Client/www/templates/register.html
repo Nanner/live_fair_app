@@ -6,6 +6,13 @@
             
             <h1 class="register-title"> <span class="ion-person-add"></span> {{ 'register' | translate }} </h1>
             
+            <li class="item item-checkbox register-checkbox">
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="isCompany" ng-change="userTypeChanged()">
+                </label>
+                {{ 'register-usertype' | translate }}
+            </li>
+
             <div class="list">
                 <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>

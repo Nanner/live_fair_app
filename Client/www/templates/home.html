@@ -6,21 +6,20 @@
             <h1 class="home-title ion-ios-body"></h1>
             <h1 class="home-title"> Live Fair </h1>
 
-            <div class="padding-top">
-                <span class="padding-top center"> {{ 'existingUser' | translate }} </span>
+            <div class="home-existing-user">
+                <span class="center"> {{ 'existingUser' | translate }} </span>
                 <div class="myBtn-Container">
                     <button class="myBtn button button-outline button-positive" ng-click="loadLogin()"> <strong> {{ 'enter' | translate }} </strong> </button>
                 </div>
             </div>
 
-            <div class="padding-left">
-                <button class="button button-clear button-calm" ng-click="loadRegistration()"> <strong> {{ 'register' | translate }} </strong> </button>
+            <div class="home-registerBtn-container">
+                <button class="myBtn button button-outline button-assertive" ng-click="loadRegistration()"> <strong> {{ 'register' | translate }} </strong> </button>
             </div>
 
-        </div>
-
-        <div class="bar-footer bar" style="padding-top: 0px;">
-            <button class="button button-block button-stable" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>
+            <div class="bar-footer bar" style="padding-top: 0px;">
+                <button class="button button-block button-stable" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>
+            </div>
         </div>
 
     </ion-content>

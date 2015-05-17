@@ -48,13 +48,23 @@
 /********** Home **********/
 
 .home-container {
-    padding-top: 15%;
+    padding-top: 20%;
 }
 
 .home-title {
     text-align: center;
     font-weight: bolder;
     margin-bottom: 3%;
+}
+
+.home-registerBtn-container {
+    position: relative;
+    text-align: center;
+    padding-bottom: 20%;
+}
+
+.home-existing-user {
+    padding-top: 5%;
 }
 
 /********** Login **********/
@@ -103,7 +113,7 @@
 /******** Register *********/
 
 .register-container {
-    padding-top: 15%;   
+    padding-top: 20%;   
 }
 
 .register-title {
@@ -117,6 +127,10 @@
     position: relative;
     margin-left: 3%;
     margin-right: 3%;
+}
+
+.register-checkbox {
+    padding-bottom: 5%;
 }
 
 .green-icon {
