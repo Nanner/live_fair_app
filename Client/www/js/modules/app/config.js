@@ -213,7 +213,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'noStands': 'Não existem ainda stands confirmados',
 		'noLiveFairs': 'Não foi encontrada nenhuma live fair',
 		'failedToResolve': "Falha a ligar ao servidor, por favor verifique a sua ligação à rede.",
-		'register-usertype': "Sou uma empresa"
+		'register-usertype': "Sou uma empresa",
+		'submit': "Submeter",
+		"editInterests": "Editar interesses"
 	});
 
 	$translateProvider.translations('en', {
@@ -277,7 +279,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'noStands': 'Currently, no attending stand has been confirmed',
 		'noLiveFairs': 'No live fairs were found',
 		'failedToResolve': 'Failed to connect to the server, please check your network connection.',
-		'register-usertype': 'I\'m a company'
+		'register-usertype': 'I\'m a company',
+		'submit': "Submit",
+		"editInterests": "Edit interests"
 	});
 
 	$translateProvider.preferredLanguage('pt');
