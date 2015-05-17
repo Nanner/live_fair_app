@@ -215,7 +215,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'failedToResolve': "Falha a ligar ao servidor, por favor verifique a sua ligação à rede.",
 		'register-usertype': "Sou uma empresa",
 		'submit': "Submeter",
-		"editInterests": "Editar interesses"
+		"editInterests": "Editar interesses",
+		"changePassword": "Alterar a password",
+		"newPassword": "Password nova",
+		"oldPassword": "Password antiga"
+
 	});
 
 	$translateProvider.translations('en', {
@@ -281,7 +285,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'failedToResolve': 'Failed to connect to the server, please check your network connection.',
 		'register-usertype': 'I\'m a company',
 		'submit': "Submit",
-		"editInterests": "Edit interests"
+		"editInterests": "Edit interests",
+		"changePassword": "Change password",
+		"newPassword": "New password",
+		"oldPassword": "Password antiga"
+
 	});
 
 	$translateProvider.preferredLanguage('pt');

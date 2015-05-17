@@ -1,6 +1,6 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, contacts, camera) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera) {
     
     $scope.profileOwner = true;
     $scope.standProfileInfo = {name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E", interestsList: [{name: "Informática"}, {name: "Electrotécnica"}, {name: "Empreendedorismo"}]};
@@ -16,6 +16,11 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
     $scope.valWebsite = "neutral-icon";
     $scope.valAddress = "neutral-icon";
     $scope.valPhone = "neutral-icon";
+
+    //Change password
+    $scope.oldPassword = "";
+    $scope.newPassword = "";
+    $scope.confirmNewPassword = "";
 
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
@@ -137,7 +142,41 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
 
     //TODO
     $scope.changePassword = function() {
+        var myPopup = $ionicPopup.show({
+            templateUrl: "templates/changePassword.html",
+            title: $translate.instant('changePassword'),
+            scope: $scope,
+            buttons: [
+                { text: $translate.instant('cancel') },
+                {
+                    text: '<b>' + $translate.instant('submit') + '</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        //verificar se password actual corresponde
+                        //fazer pedido ao servidor para mudar password
+                        console.log("tapped submit button");
+                    }
+                }
+            ]
+        });
+    }
 
+    $scope.editInterests = function() {
+        var myPopup = $ionicPopup.show({
+            templateUrl: "interestsPopup.html",
+            title: $translate.instant('editInterests'),
+            scope: $scope,
+            buttons: [
+                { text: $translate.instant('cancel') },
+                {
+                    text: '<b>' + $translate.instant('submit') + '</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        console.log("tapped submit button");
+                    }
+                }
+            ]
+        });
     }
 
     $scope.saveChanges = function() {
