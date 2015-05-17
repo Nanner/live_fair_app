@@ -2,7 +2,7 @@
     <ion-content scroll='true'>
         
         <!-- Content -->
-        <div class="register-container" ng-controller="registerCtrl">
+        <div class="register-container" ng-controller="registerCtrl" ng-init="fetchUsertype()">
             
             <h1 class="register-title"> <span class="ion-person-add"></span> {{ 'register' | translate }} </h1>
             
