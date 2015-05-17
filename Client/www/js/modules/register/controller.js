@@ -139,12 +139,14 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     }
 
     $scope.userTypeChanged = function() { //reload current state
+        console.log("Mudar usertype: " + $scope.isCompany);
         utils.setUserType($scope.isCompany);
-        $state.go('menu.register');
+        $state.go('menu.login');
+        //$state.go($state.$current, null, { reload: true });
     }
 
     $scope.fetchUsertype = function() {
-        console.log(utils.getUsertype());
+        console.log("Registo: " + utils.getUsertype());
         $scope.isCompany = utils.getUsertype();
         $scope.usertype = utils.getUsertype();
     }
