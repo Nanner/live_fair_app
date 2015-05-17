@@ -13,7 +13,7 @@
                 <p> {{ 'register-usertype' | translate }} </p>
             </li>
 
-            <div class="list">
+            <div id="cenas" class="list">
                 <label ng-show="{{usertype}}" class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
                     <input type="text" ng-model="name" placeholder="{{ 'name' | translate }}" ng-change="validateNameCallback()">

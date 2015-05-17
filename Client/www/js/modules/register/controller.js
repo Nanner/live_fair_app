@@ -141,8 +141,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     $scope.userTypeChanged = function() { //reload current state
         console.log("Mudar usertype: " + $scope.isCompany);
         utils.setUserType($scope.isCompany);
-        $state.go('menu.login');
-        //$state.go($state.$current, null, { reload: true });
+        //Falta fazer refresh ao ecra ASAP
     }
 
     $scope.fetchUsertype = function() {
