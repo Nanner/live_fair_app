@@ -42,7 +42,7 @@
 
             <div class="list list-fair-container">
 
-                <a class="item list-fair-item" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
+                <a class="item list-fair-item" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
                     <!--para adicionar avatar: item-avatar-->
                     <!--<img src="http://upload.wikimedia.org/wikipedia/en/thumb/9/97/San_Diego_Comic-Con_International_logo.svg/829px-San_Diego_Comic-Con_International_logo.svg.png">-->
                     <span class="list-fair-item-name"><b>{{fair.name}}</b></span>
