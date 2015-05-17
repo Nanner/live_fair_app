@@ -404,3 +404,36 @@
 .left-search-btn {
     margin-left: 2%;
 }
+
+.fair-search-button-container{
+    background-color: #28A3D4;
+}
+
+.fair-search-button-container > button{
+    border-top-right-radius: 25px;
+}
+
+.search-options-container {
+    float:right;
+}
+
+.search-options-container > button{
+    /*colocar os button alinhados com o fundo da div*/
+}
+
+
+.list-fair-item-name{
+    float: left;
+    color: darkblue;
+
+}
+
+.list-fair-item-from-to{
+    float: right;
+    color: darkblue;
+}
+
+.list-fair-item-local{
+    float: right;
+    color: #28A3D4;
+}
