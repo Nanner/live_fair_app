@@ -245,13 +245,15 @@ module.exports = function(server){
             }
             else{
                 var UserID = request.params.UserID;
-                User.update({
+                Company.update({
                     'logoImage':request.payload.logoImage
                 },{
                     where:{
                         userID:UserID
                     }
-                });
+                }).catch(function(error) {
+                    reply(Boom.badRequest(error.message));
+                });;
             }
         }}
     });
@@ -271,7 +273,9 @@ module.exports = function(server){
                 }}).then(function(company){
                     Company.update({
                        'visitorCounter':company.visitorCounter+1
-                    });
+                    },{where:{
+                        companyID:CompanyID
+                    }});
                 });
         }}
     });

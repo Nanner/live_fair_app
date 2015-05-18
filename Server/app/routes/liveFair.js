@@ -3,9 +3,11 @@ var Promise = require("bluebird");
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
 var Stands = require('../models').Stands;
+var Users = require('../models').User;
 var Company = require('../models').Company;
 var Interest = require('../models').Interest;
 var LiveFairInterest = require('../models').LiveFairInterest;
+var LiveFairCompanyInterest = require('../models').LiveFairCompanyInterest;
 
 module.exports = function(server){
     server.route({
@@ -78,6 +80,29 @@ module.exports = function(server){
                     })
                     .then(function(companies) {
                         return JSON.stringify(companies);
+                    })
+            );
+        }}
+    });
+    
+        server.route({
+        method: 'GET',
+        path: '/livefairs/{LiveFairID}/companies/{CompanyID}',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+            var liveFairId=request.params.LiveFairID;
+            var CompanyID = request.params.CompanyID;
+            reply(
+                Users.find({where: {userID: CompanyID}})
+                    .then(function(user) {
+                        return Company.find({where: {companyID: CompanyID}});
+                    })
+                    .then(function(company) {
+                        return LiveFairCompanyInterest.findAll({where:{liveFairIDref:liveFairId,companyIDref:CompanyID}});
                     })
             );
         }}
