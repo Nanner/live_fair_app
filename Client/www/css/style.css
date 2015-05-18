@@ -361,9 +361,17 @@
 }
 
 .edit-profile {
-    padding-top: 5%;
+    float: left;
+    padding-left: 4%;
+}
+
+.profile-stats {
     float: right;
-    padding-right: 3%;
+    padding-right: 4%;
+}
+
+.profile-owner-icons {
+    padding-top: 15%;
 }
 
 /****** Edit-Profile *******/

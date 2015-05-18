@@ -162,6 +162,10 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         liveFairApi.incrementCounter(id);
     }
 
+    $scope.openStats = function() {
+        console.log("Clicked statistics button");
+    }
+
     $scope.saveChanges = function() {
     	var existsEmptyField = false;
         var existsNotValidField = false;
