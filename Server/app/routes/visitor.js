@@ -1,4 +1,5 @@
 var Promise = require("bluebird");
+var Boom = require('boom');
 
 var visitorLiveFair = require('../models').VisitorLiveFair;
 
@@ -9,7 +10,7 @@ module.exports = function(server){
 		handler: function (request, reply) {			
 			if(!request.payload.userid || !request.payload.livefairid)
 			{
-				reply(JSON.stringify('Invalid Parameters'));
+                    reply(Boom.badRequest("Invalid Parameters"));
 			}
 			else
 			{

@@ -73,7 +73,7 @@ module.exports = function(server){
 
                                     break;
                             }
-                        })
+                        });
                 }})
                 .then(function(result) {
                     reply(JSON.stringify('Registo Bem Sucedido'));
@@ -81,6 +81,94 @@ module.exports = function(server){
                 .catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 });
+        }
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/Users/{UserID}',
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            User.find({where:
+                {
+                    userID: UserID
+                }}).then(function(UserProfile)
+            {
+                console.log(UserProfile.type);
+                switch(UserProfile.type){
+                    case 'visitor':
+                        Visitor.find({where:
+                        {
+                            visitorID: UserID
+                        }}).then(function(VisitorProfile) {
+                            console.log(VisitorProfile);
+                            reply (JSON.stringify([UserProfile,VisitorProfile]));
+                        });
+                        break;
+                    case 'company':
+                        Company.find({where:
+                        {
+                            companyID: UserID
+                        }}).then(function(CompanyProfile) {
+                            console.log(CompanyProfile);
+                            reply (JSON.stringify([UserProfile,CompanyProfile]));
+                        });
+                        break;
+                    case 'organizer':
+                        Organizer.find({where:
+                        {
+                            organizerID: UserID
+                        }}).then(function(OrganizerProfile) {
+                            console.log(OrganizerProfile);
+                            reply (JSON.stringify([UserProfile,OrganizerProfile]));
+                        }); 
+                        break;
+                }
+            });
+        }
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/update',
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            User.find({where:
+                {
+                    userID: UserID
+                }}).then(function(UserProfile)
+            {
+                console.log(UserProfile.type);
+                switch(UserProfile.type){
+                    case 'visitor':
+                        Visitor.find({where:
+                        {
+                            visitorID: UserID
+                        }}).then(function(VisitorProfile) {
+                            console.log(VisitorProfile);
+                            reply (JSON.stringify([UserProfile,VisitorProfile]));
+                        });
+                        break;
+                    case 'company':
+                        Company.find({where:
+                        {
+                            companyID: UserID
+                        }}).then(function(CompanyProfile) {
+                            console.log(CompanyProfile);
+                            reply (JSON.stringify([UserProfile,CompanyProfile]));
+                        });
+                        break;
+                    case 'organizer':
+                        Organizer.find({where:
+                        {
+                            organizerID: UserID
+                        }}).then(function(OrganizerProfile) {
+                            console.log(OrganizerProfile);
+                            reply (JSON.stringify([UserProfile,OrganizerProfile]));
+                        }); 
+                        break;
+                }
+            });
         }
     });
 };
