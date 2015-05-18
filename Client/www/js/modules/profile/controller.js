@@ -161,24 +161,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    $scope.editInterests = function() {
-        var myPopup = $ionicPopup.show({
-            templateUrl: "interestsPopup.html",
-            title: $translate.instant('editInterests'),
-            scope: $scope,
-            buttons: [
-                { text: $translate.instant('cancel') },
-                {
-                    text: '<b>' + $translate.instant('submit') + '</b>',
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        console.log("tapped submit button");
-                    }
-                }
-            ]
-        });
-    }
-
     $scope.saveChanges = function() {
     	var existsEmptyField = false;
         var existsNotValidField = false;

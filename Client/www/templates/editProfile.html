@@ -54,29 +54,8 @@
         </div>
 
         <div class="fair-btn-Container-1">
-            <button nav-clear ng-click="editInterests()" class="myBtn button button-outline button-positive"> <strong> {{ 'editInterests' | translate }} </strong> </button>
-        </div>   
-
-        <div class="fair-btn-Container-1">
             <button nav-clear ng-click="saveChanges()" class="myBtn button button-calm"> <strong> {{ 'submit' | translate }} </strong> </button>
         </div>
-
-        <script id="interestsPopup.html" type="text/ng-template">
-            <!--<div class="list">-->
-                <!--<div class="item item-divider">{{ 'chooseInterests' | translate }}</div>-->
-                <!--&lt;!&ndash;<ion-toggle class="item-text-wrap" ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.interest}}</ion-toggle>&ndash;&gt;-->
-            <!--</div>-->
-            <ul class="list">
-                <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
-                <li class="item item-stable item-placeholder item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
-                <li class="item item-checkbox" ng-repeat="item in interestsList">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                    {{item.interest}}
-                </li>
-            </ul>
-        </script>        
 
     </ion-content>
 </ion-view>
