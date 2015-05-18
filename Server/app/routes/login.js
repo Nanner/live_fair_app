@@ -64,13 +64,13 @@ module.exports = function(server) {
                                     return reply(Boom.unauthorized('Invalid username or password'));
                                 }
                                 else {
-                                    var token = jwt.sign(account, privateKey);
+                                    var token = jwt.sign(account.email, privateKey);
                                     return reply({userID: account.userID, email: account.email, type: account.type, token: token});
                                 }
                             }
                         }).catch(function(error) {
                             return reply(Boom.badImplementation(error));
-                        })
+                        });
                     }
                 }
 

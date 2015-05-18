@@ -73,7 +73,7 @@ module.exports = function(server){
 
                                     break;
                             }
-                        })
+                        });
                 }})
                 .then(function(result) {
                     reply(JSON.stringify('Registo Bem Sucedido'));
@@ -81,6 +81,106 @@ module.exports = function(server){
                 .catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 });
+        }
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/Users/{UserID}',
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            User.find({where:
+                {
+                    userID: UserID
+                }}).then(function(UserProfile)
+            {
+                switch(UserProfile.type){
+                    case 'visitor':
+                        Visitor.find({where:
+                        {
+                            visitorID: UserID
+                        }}).then(function(VisitorProfile) {
+                            reply (JSON.stringify([UserProfile,VisitorProfile]));
+                        });
+                        break;
+                    case 'company':
+                        Company.find({where:
+                        {
+                            companyID: UserID
+                        }}).then(function(CompanyProfile) {
+                            reply (JSON.stringify([UserProfile,CompanyProfile]));
+                        });
+                        break;
+                    case 'organizer':
+                        Organizer.find({where:
+                        {
+                            organizerID: UserID
+                        }}).then(function(OrganizerProfile) {
+                            reply (JSON.stringify([UserProfile,OrganizerProfile]));
+                        }); 
+                        break;
+                }
+            });
+        }
+    });
+    
+    server.route({
+        method: ['GET','POST'],
+        path: '/Users/{UserID}/update',
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            if (request.method === 'post') {
+                return sequelize.transaction(function(t) {
+                if(!request.payload.email || !request.payload.companyName || !request.payload.address || !request.payload.website || !request.payload.contact || !request.payload.description){
+                    throw new Error('Missing critical fields');
+                }
+                else{
+                    return User.update({
+                        'email':request.payload.email,
+                        'description':request.payload.description,
+                        'contact':request.payload.contact
+                    }, {transaction: t,
+                        where:{
+                            userID : UserID
+                        }})
+                        .then(function(user) {
+
+                           return Company.update({
+                               'companyName':request.payload.companyName,
+                                'address':request.payload.address,
+                                'website':request.payload.website,
+                           }, {transaction: t,
+                           where:{
+                               companyID: UserID
+                           }});
+
+                        });
+                }})
+                .then(function(result) {
+                    reply(JSON.stringify('Alteração Registo Bem Sucedida'));
+                })
+                .catch(function(error) {
+                    reply(Boom.badRequest(error.message));
+                });
+        }
+        else if (request.method === 'get') {
+            
+            User.find({where:
+                {
+                    userID: UserID
+                }}).then(function(UserProfile)
+            {
+              Company.find({where:
+              {
+                  companyID: UserID
+              }}).then(function(CompanyProfile) {
+                   reply (JSON.stringify([UserProfile,CompanyProfile]));
+              });
+                
+            }).catch(function(error) {
+                return reply(Boom.badRequest(error));
+            });
+        }
         }
     });
 };
