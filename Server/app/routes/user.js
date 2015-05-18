@@ -31,6 +31,7 @@ module.exports = function(server){
         path: '/register',
         config:{
             auth: {
+                mode: 'optional',
                strategy: 'token'
            },
         handler: function(request, reply) {
@@ -97,6 +98,7 @@ module.exports = function(server){
         path: '/Users/{UserID}',
         config:{
             auth: {
+                mode: 'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
