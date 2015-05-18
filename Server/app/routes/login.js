@@ -70,7 +70,7 @@ module.exports = function(server) {
                             }
                         }).catch(function(error) {
                             return reply(Boom.badImplementation(error));
-                        })
+                        });
                     }
                 }
 
