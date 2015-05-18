@@ -183,4 +183,50 @@ module.exports = function(server){
         }
         }
     });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/update/password',
+        handler: function (request, reply) {
+            if(!request.payload.password){
+                    throw new Error('Missing critical fields');
+            }
+            else{
+                var UserID = request.params.UserID;
+                var passHash=crypto.createHash('sha512');
+                var oldPassHash=crypto.createHash('sha512');
+                passHash.update(request.payload.password);
+                User.update({
+                    'password':passHash.digest('hex')
+                },{
+                    where:{
+                        userID:UserID,
+                        password:oldPassHash.digest('hex')
+                    }
+                }).catch(function(error) {
+                    reply(Boom.badRequest(error.message));
+                });
+            }
+        }
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/update/image',
+        handler: function (request, reply) {
+            if(!request.payload.logoImage){
+               throw new Error('Missing critical fields');
+            }
+            else{
+                var UserID = request.params.UserID;
+                User.update({
+                    'logoImage':request.payload.logoImage
+                },{
+                    where:{
+                        userID:UserID
+                    }
+                });
+            }
+        }
+    });
 };
