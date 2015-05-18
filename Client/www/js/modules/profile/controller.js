@@ -58,8 +58,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     }
 
     $scope.validateEmailCallback = function() {
-        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
+        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;    
         if($scope.standProfileInfo.email.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[1] = 0;
@@ -103,7 +102,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     } 
 
     $scope.validatePhoneCallback = function() {
-    	var pattern = /^[0-9]{9}$/;
+    	var pattern = /(^\+\d{12}$)|(^\d{9,10}$)/;
     	if($scope.standProfileInfo.phone.length === 0) {
     		$scope.valPhone = "neutral-icon";
     		messageToDisplay[3] = 0;
@@ -116,7 +115,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     	}
     }
 
-    //TODO
     $scope.uploadPhoto = function() {
         var options = {
           quality: 50,
@@ -140,7 +138,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    //TODO
     $scope.changePassword = function() {
         var myPopup = $ionicPopup.show({
             templateUrl: "templates/changePassword.html",
