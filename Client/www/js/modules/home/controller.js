@@ -2,10 +2,6 @@ var module = angular.module('homeModule');
 
 module.controller('homeCtrl', function ($scope, $state, $stateParams, utils){
 
-	$scope.resetUsertype = function() {
-		utils.resetUserType();
-	}
-
     $scope.loadLogin = function() {
         $state.go('menu.login');
     };

@@ -4,7 +4,6 @@ module.factory('utils', function ($http, $q, $ionicPopup) {
 
     var filtersStartDate;
     var filtersEndDate;
-    var usertype;
 
     return {
 
@@ -89,18 +88,6 @@ module.factory('utils', function ($http, $q, $ionicPopup) {
 
         getEndDate: function() {
             return filtersEndDate;
-        },
-
-        getUsertype: function() {
-            return usertype
-        },
-
-        setUserType: function(newUsertype) {
-            usertype = newUsertype;
-        },
-
-        resetUserType: function() {
-            usertype = false;
         }
     };
 });

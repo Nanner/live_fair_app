@@ -14,7 +14,7 @@
             </li>
 
             <div id="cenas" class="list">
-                <label ng-show="{{usertype}}" class="item item-input">
+                <label ng-show="usertype" class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
                     <input type="text" ng-model="name" placeholder="{{ 'name' | translate }}" ng-change="validateNameCallback()">
                 </label>
@@ -30,14 +30,14 @@
                     <i class="form-icon ion-help-circled placeholder-icon {{valConfirmPassword}}"></i>
                     <input type="password" ng-model="confirmPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
                 </label>
-                <label ng-show="{{usertype}}" class="item item-input">
+                <label ng-show="usertype" class="item item-input">
                     <i class="form-icon ion-at placeholder-icon {{valWebsite}}"></i>
                     <input type="text" ng-model="website" placeholder="Website" ng-change="validateWebsiteCallback()">
                 </label>
-                <label ng-show="{{usertype}}" class="item item-input">
+                <label ng-show="usertype" class="item item-input">
                     <i class="form-icon ion-map placeholder-icon {{valAddress}}"></i>
                     <input type="text" ng-model="address" placeholder="{{ 'address' | translate }}" ng-change="validateAddressCallback()">
-                </label>              
+                </label>
             </div>
             
             <div class="acceptTerms-container">
