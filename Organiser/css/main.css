@@ -11,6 +11,20 @@
     margin-bottom: 10%;
 }
 
+.img-footer {
+    margin: 0 auto;
+    margin-bottom: -10%;
+    margin-top: -10%;
+}
+
+.top-5{
+	margin-top: -5%;
+}
+
+.left-5{
+	margin-left: 5%;
+}
+
 .white-box{
 	background-color: white !important;
 }
