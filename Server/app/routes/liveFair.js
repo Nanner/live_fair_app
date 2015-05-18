@@ -11,29 +11,44 @@ module.exports = function(server){
     server.route({
         method: 'GET',
         path: '/livefairs',
-        handler: function (request, reply) {
+        config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
             reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
             {
                 return JSON.stringify(liveFairs);
             }));
-        }
+        }}
     });
 
     server.route({
         method: 'GET',
         path: '/livefairs/{id}',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(LiveFair.find(liveFairId).then(function(liveFair)
             {
                 return JSON.stringify(liveFair);
             }));
-        }
+        }}
     });
 
     server.route({
         method: 'GET',
         path: '/livefairs/{id}/schedule',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(LiveFairEvents.findAll({where:
@@ -43,12 +58,17 @@ module.exports = function(server){
             {
                 return JSON.stringify(liveFairEvents);
             }));
-        }
+        }}
     });
     
     server.route({
         method: 'GET',
         path: '/livefairs/{id}/companies',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(
@@ -60,12 +80,17 @@ module.exports = function(server){
                         return JSON.stringify(companies);
                     })
             );
-        }
+        }}
     });
     
     server.route({
         method: 'GET',
         path: '/livefairs/search/date/{Date}',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var LiveFairDate=request.params.Date;
             reply(LiveFair.findAll(
@@ -76,12 +101,17 @@ module.exports = function(server){
             {
                 return JSON.stringify(liveFair);
             }));
-        }
+        }}
     });
     
     server.route({
         method: 'GET',
         path: '/livefairs/search/location/{Location}',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var LiveFairLocation=request.params.Location;
             reply(LiveFair.findAll(
@@ -92,12 +122,17 @@ module.exports = function(server){
             {
                 return JSON.stringify(liveFair);
             }));
-        }
+        }}
     });
     
     server.route({
         method: 'GET',
         path: '/livefairs/{id}/interests',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(
@@ -109,12 +144,17 @@ module.exports = function(server){
                         return JSON.stringify(companies);
                     })
             );
-        }
+        }}
     });
 	
 	server.route({
        method: 'GET',
        path: '/livefairs/search/date/{DateStart}/{DateEnd}',
+        config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
        handler: function (request, reply) {
            var LiveFairDateStart=request.params.DateStart;
            var LiveFairDateEnd=request.params.DateEnd;
@@ -127,13 +167,17 @@ module.exports = function(server){
            {
                return JSON.stringify(liveFair);
            }));
-       }
+       }}
    });
    
    server.route({
         method: 'POST',
         path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/{Interests}',
-        handler: function (request, reply) {
+         config:{
+            auth: {
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
             var liveFairId=request.params.id;
             reply(
                 LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
@@ -144,12 +188,17 @@ module.exports = function(server){
                         return JSON.stringify(companies);
                     })
             );
-        }
+        }}
     });
 	
 	server.route({
 	method: 'GET',
 	path: '/livefairs/search/date/{DateStart}&{DateEnd}',
+     config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
 	handler: function (request, reply) {
 		var LiveFairDateStart=request.params.DateStart;
 		var LiveFairDateEnd=request.params.DateEnd;
@@ -162,6 +211,6 @@ module.exports = function(server){
 			{
 				return JSON.stringify(liveFair);
 			}));
-		}
+		}}
 	});
 };

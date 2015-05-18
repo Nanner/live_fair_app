@@ -16,15 +16,23 @@ module.exports = function(server){
     server.route({
         method: 'GET',
         path: '/logout',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             request.auth.session.clear();
             return JSON.stringify('Logout bem sucedido');
-        }
+        }}
     });
 
     server.route({
         method: 'POST',
         path: '/register',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
         handler: function(request, reply) {
             return sequelize.transaction(function(t) {
                 if(!request.payload.email || !request.payload.password || !request.payload.type){
@@ -81,12 +89,16 @@ module.exports = function(server){
                 .catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 });
-        }
+        }}
     });
     
     server.route({
         method: 'GET',
         path: '/Users/{UserID}',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var UserID = request.params.UserID;
             User.find({where:
@@ -121,12 +133,16 @@ module.exports = function(server){
                         break;
                 }
             });
-        }
+        }}
     });
     
     server.route({
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             var UserID = request.params.UserID;
             if (request.method === 'post') {
@@ -181,12 +197,16 @@ module.exports = function(server){
                 return reply(Boom.badRequest(error));
             });
         }
-        }
+        }}
     });
     
     server.route({
         method: 'POST',
         path: '/Users/{UserID}/update/password',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
         handler: function (request, reply) {
             if(!request.payload.password){
                     throw new Error('Missing critical fields');
@@ -207,13 +227,17 @@ module.exports = function(server){
                     reply(Boom.badRequest(error.message));
                 });
             }
-        }
+        }}
     });
     
     server.route({
         method: 'POST',
         path: '/Users/{UserID}/update/image',
-        handler: function (request, reply) {
+         config:{
+            auth: {
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
             if(!request.payload.logoImage){
                throw new Error('Missing critical fields');
             }
@@ -227,6 +251,26 @@ module.exports = function(server){
                     }
                 });
             }
-        }
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{CompanyID}/counter',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.CompanyID;
+                Company.find({where:{
+                   companyID:CompanyID
+                }}).then(function(company){
+                    Company.Update({
+                       'visitorCounter':company.visitorCounter+1
+                    });
+                });
+        }}
     });
 };
