@@ -99,12 +99,40 @@ module.exports = function(server){
             reply(
                 Users.find({where: {userID: CompanyID}})
                     .then(function(user) {
-                        return Company.find({where: {companyID: CompanyID}});
-                    })
-                    .then(function(company) {
-                        return LiveFairCompanyInterest.findAll({where:{liveFairIDref:liveFairId,companyIDref:CompanyID}});
-                    })
-            );
+                        return Company.find({where: {companyID: CompanyID}}).then(function(company) {
+                        return LiveFairCompanyInterest.findAll({where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
+                            return Interest.find({
+                                where:{
+                                    interestID:interest.interestIDref
+                                }
+                            }).then(function(interests){
+                                return JSON.stringify([user,company,interests]);
+                            });
+                        });
+                    });
+              }));
+        }}
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/livefairs/{LiveFairID}/companies/{CompanyID}/counter',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.CompanyID;
+                Company.find({where:{
+                   companyID:CompanyID
+                }}).then(function(company){
+                    Company.update({
+                       'visitorCounter':company.visitorCounter+1
+                    },{where:{
+                        companyID:CompanyID
+                    }});
+                });
         }}
     });
     
