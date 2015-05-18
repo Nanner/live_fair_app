@@ -9,7 +9,7 @@
         
         <div class="profile-title-container">
             <h4 class="profile-name"> {{standProfileInfo.name}} </h4>
-            <a class="stand-website" href="{{standProfileInfo.website}}">{{ 'webpage' | translate }}</a>
+            <a class="stand-website" href="{{standProfileInfo.website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
         </div>
         
         <div class="card">

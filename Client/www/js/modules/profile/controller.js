@@ -1,9 +1,9 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera, liveFairApi) {
     
     $scope.profileOwner = true;
-    $scope.standProfileInfo = {name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
+    $scope.standProfileInfo = {id: "097c5870-b8fd-db03-f026-7deb9edf9939", name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
 
     $scope.saveContact = function() {
         contacts.addContact($scope.standProfileInfo.name, $scope.standProfileInfo.phone, $scope.standProfileInfo.email, $scope.standProfileInfo.website, $scope.standProfileInfo.address);
@@ -156,6 +156,10 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                 }
             ]
         });
+    }
+
+    $scope.incrementCounter = function(id) {
+        liveFairApi.incrementCounter(id);
     }
 
     $scope.saveChanges = function() {

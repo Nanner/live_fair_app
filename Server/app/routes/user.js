@@ -269,7 +269,7 @@ module.exports = function(server){
                 Company.find({where:{
                    companyID:CompanyID
                 }}).then(function(company){
-                    Company.Update({
+                    Company.update({
                        'visitorCounter':company.visitorCounter+1
                     });
                 });

@@ -11,7 +11,11 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
+    /* Not being used
     var Register = $resource(server.url + '/register', {email: '@email', password: '@password', type: '@type', address: '@address', compayName: '@companyName', website: '@website'});
+    */
+
+    var IncrementCounter = $resource(server.url + '/Users/:companyID/counter', {companyID: '@companyID'});
 
     var api = {
 
@@ -91,6 +95,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     return $q.reject(response.data);
                 }
             );
+        },
+
+        incrementCounter: function(companyId) {
+            return IncrementCounter.save({companyID: companyId});
         }
     };
 
