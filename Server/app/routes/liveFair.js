@@ -97,21 +97,16 @@ module.exports = function(server){
             var liveFairId=request.params.LiveFairID;
             var CompanyID = request.params.CompanyID;
             reply(
-                Users.find({where: {userID: CompanyID}})
-                    .then(function(user) {
-                        return Company.find({where: {companyID: CompanyID}}).then(function(company) {
-                            return LiveFairCompanyInterest.findAll({
-                                where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
-                                return Interest.find({
-                                    where:{
-                                        interestID:interest.interestIDref
-                                    }
-                            }).then(function(interests){
-                                return JSON.stringify(interests);
-                            });
-                        });
-                    });
-              }));
+                LiveFairCompanyInterest.findAll({
+                where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
+                     return Interest.find({
+                     where:{
+                        interestID:interest.interestIDref
+                     }
+                 }).then(function(interests){
+                    return JSON.stringify(interests);
+                  });
+                }));
         }}
     });
     
