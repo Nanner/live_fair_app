@@ -43,6 +43,26 @@ module.exports = function(server){
         }}
     });
 
+        server.route({
+        method: 'GET',
+        path: '/livefairs/{id}/map',
+        config:{
+            auth: {
+                mode: 'optional',
+               strategy: 'token'
+           },
+        handler: function (request, reply) {
+            var LiveFairID = request.params.UserID;
+            LiveFair.find({where:
+                {
+                    map: LiveFairID
+                }}).then(function(livefair)
+            {
+                reply.file('./images/'+livefair.map);
+            });
+        }}
+    });
+
     server.route({
         method: 'GET',
         path: '/livefairs/{id}/schedule',

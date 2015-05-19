@@ -179,6 +179,26 @@ module.exports = function(server){
     });
     
     server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/image',
+        config:{
+            auth: {
+                mode: 'optional',
+               strategy: 'token'
+           },
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            Company.find({where:
+                {
+                    companyID: UserID
+                }}).then(function(company)
+            {
+                reply.file('./images/'+company.logoImage);
+            });
+        }}
+    });
+    
+    server.route({
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
         config:{
