@@ -2,6 +2,7 @@ var Promise = require("bluebird");
 var crypto = require("crypto");
 var uuid = require('node-uuid');
 var Joi = require('joi');
+var fs = require('fs');
 
 var sequelize = require('../models').sequelize;
 
@@ -290,20 +291,31 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/image',
          config:{
             auth: {
+                mode: 'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
-            if(!request.payload.logoImage){
+            if(!request.payload.image || !request.payload.imageName){
                throw new Error('Missing critical fields');
             }
             else{
                 var UserID = request.params.UserID;
                 reply (Company.update({
-                    'logoImage':request.payload.logoImage
+                    'logoImage':request.payload.imageName
                 },{
                     where:{
-                        userID:UserID
+                        companyID:UserID
                     }
+                }).then(function(company){
+                    console.log("teste");
+                    fs.writeFile("./images/"+request.payload.imageName,request.payload.image,function(err){
+                        if(err)
+                        {
+                            return Boom.badRequest(err.message);
+                        }
+                            
+                    });
+                    return JSON.stringify('Ficheiro Guardado com sucesso');
                 }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 }));
