@@ -58,7 +58,7 @@ module.exports = function(server){
                     map: LiveFairID
                 }}).then(function(livefair)
             {
-                reply.file('./images/'+livefair.map);
+                reply.file('./images/maps/'+livefair.map);
             });
         }}
     });
@@ -140,16 +140,24 @@ module.exports = function(server){
            },
             handler: function (request, reply) {
                 var CompanyID = request.params.CompanyID;
-                Company.find({where:{
+                reply(Company.find({where:{
                    companyID:CompanyID
                 }}).then(function(company){
                     Company.update({
                        'visitorCounter':company.visitorCounter+1
                     },{where:{
                         companyID:CompanyID
-                    }});
-                });
-        }}
+                    }}).then(function(numCompany){
+                        Stands.find({
+                            where:{companyCompanyID:CompanyID}
+                        }).then(function(stand){
+                           Stands.update({
+                              'visitorCounter':stand.visitorCounter+1 
+                           },{where:{companyCompanyID:CompanyID}}); 
+                        });
+                    });
+                }));
+           }}
     });
     
     server.route({

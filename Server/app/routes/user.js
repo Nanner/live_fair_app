@@ -193,7 +193,7 @@ module.exports = function(server){
                     companyID: UserID
                 }}).then(function(company)
             {
-                reply.file('./images/'+company.logoImage);
+                reply.file('./images/profiles/'+company.logoImage);
             });
         }}
     });
@@ -327,7 +327,7 @@ module.exports = function(server){
                     }
                 }).then(function(company){
                     console.log("teste");
-                    fs.writeFile("./images/"+request.payload.imageName,request.payload.image,function(err){
+                    fs.writeFile("./images/profiles/"+request.payload.imageName,request.payload.image,function(err){
                         if(err)
                         {
                             return Boom.badRequest(err.message);
