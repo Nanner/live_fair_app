@@ -117,6 +117,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.companyStats', {
+			url: "/companyStats",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/companyStats.html",
+					controller: "profileCtrl"
+				}
+			}
+		})
 		.state('menu.fairTest', {
 			url: "/fair",
 			views: {
@@ -218,7 +227,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"editInterests": "Editar interesses",
 		"changePassword": "Alterar a password",
 		"newPassword": "Password nova",
-		"oldPassword": "Password antiga"
+		"oldPassword": "Password antiga",
+		"stats": "Estatísticas"
 
 	});
 
@@ -288,7 +298,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"editInterests": "Edit interests",
 		"changePassword": "Change password",
 		"newPassword": "New password",
-		"oldPassword": "Password antiga"
+		"oldPassword": "Password antiga",
+		"stats": "Statistics"
 
 	});
 

@@ -163,7 +163,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     }
 
     $scope.openStats = function() {
-        console.log("Clicked statistics button");
+        $state.go('menu.companyStats');
     }
 
     $scope.saveChanges = function() {

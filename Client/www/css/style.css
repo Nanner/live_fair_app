@@ -426,3 +426,31 @@
 .left-search-btn {
     margin-left: 2%;
 }
+
+/****** Statistics *******/
+
+.stats-container1 {
+    padding-top: 15%;
+    padding-bottom: 5%;
+}
+
+.stats-logo-container {
+    background-color: #28A3D4;
+}
+
+.stats-logo {
+    width: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.stats-company-name {
+    text-align: center;
+    color: white;
+}
+
+.stats-container {
+    padding-top: 15%;
+}
