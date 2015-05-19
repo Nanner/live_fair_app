@@ -218,14 +218,14 @@ module.exports = function(server){
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
                 passHash.update(request.payload.password);
-                User.update({
+                reply(User.update({
                     'password':passHash.digest('hex')
                 },{
                     where:{
                         userID:UserID,
                         password:oldPassHash.digest('hex')
                     }
-                }).catch(function(error) {
+                })).catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 });
             }
@@ -245,7 +245,7 @@ module.exports = function(server){
             }
             else{
                 var UserID = request.params.UserID;
-                Company.update({
+                reply (Company.update({
                     'logoImage':request.payload.logoImage
                 },{
                     where:{
@@ -253,7 +253,7 @@ module.exports = function(server){
                     }
                 }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
-                });;
+                }));
             }
         }}
     });
@@ -268,7 +268,7 @@ module.exports = function(server){
            },
             handler: function (request, reply) {
                 var CompanyID = request.params.CompanyID;
-                Company.find({where:{
+                reply (Company.find({where:{
                    companyID:CompanyID
                 }}).then(function(company){
                     Company.update({
@@ -276,7 +276,8 @@ module.exports = function(server){
                     },{where:{
                         companyID:CompanyID
                     }});
-                });
-        }}
+                })
+                );
+           }}
     });
 };

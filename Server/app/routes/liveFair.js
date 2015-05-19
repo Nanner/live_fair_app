@@ -85,7 +85,7 @@ module.exports = function(server){
         }}
     });
     
-        server.route({
+    server.route({
         method: 'GET',
         path: '/livefairs/{LiveFairID}/companies/{CompanyID}',
          config:{
@@ -100,13 +100,14 @@ module.exports = function(server){
                 Users.find({where: {userID: CompanyID}})
                     .then(function(user) {
                         return Company.find({where: {companyID: CompanyID}}).then(function(company) {
-                        return LiveFairCompanyInterest.findAll({where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
-                            return Interest.find({
-                                where:{
-                                    interestID:interest.interestIDref
-                                }
+                            return LiveFairCompanyInterest.findAll({
+                                where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
+                                return Interest.find({
+                                    where:{
+                                        interestID:interest.interestIDref
+                                    }
                             }).then(function(interests){
-                                return JSON.stringify([user,company,interests]);
+                                return JSON.stringify(interests);
                             });
                         });
                     });
