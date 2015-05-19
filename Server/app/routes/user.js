@@ -291,7 +291,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/image',
          config:{
             auth: {
-                mode: 'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
