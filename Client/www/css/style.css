@@ -360,6 +360,10 @@
     padding-right: 3%;
 }
 
+.save-contact-btn{
+    width: 95%;
+}
+
 /****** Edit-Profile *******/
 
 .editProfile-btnsContainer {

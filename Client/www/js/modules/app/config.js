@@ -189,7 +189,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'filterByDate': 'Filter by date',
 		'startDate': 'Data início',
 		'endDate': 'Data Fim',
-		'searchLocation': 'Localização'
+		'searchLocation': 'Localização',
+        'upcomingFairs' : 'Próximas feiras',
+        'sortByDate' : 'Data',
+        'termsAndConditions' : 'Termos & Condições'
 	});
 
 	$translateProvider.translations('en', {
@@ -246,7 +249,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'filterByDate': 'Filtrar por data',
 		'startDate': 'Start date',
 		'endDate': 'End Date',
-		'searchLocation': 'Location'
+		'searchLocation': 'Location',
+        'upcomingFairs' : 'Upcoming Fairs',
+        'sortByDate' : 'Date',
+        'termsAndConditions' : 'Terms & Conditions'
 	});
 
 	$translateProvider.preferredLanguage('pt');

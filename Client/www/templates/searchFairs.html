@@ -11,7 +11,7 @@
 
         <div class="fair-search-button-container">
             <button class="button button-light">
-                Próximas Feiras
+                {{ 'upcomingFairs' | translate}}
             </button>
 
             <div class="search-options-container">
@@ -20,7 +20,7 @@
                 </button>
 
                 <button class="button button-small button-calm button-Recente" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
-                    Recente
+                    {{ 'sortByDate' | translate }}
                 </button>
             </div>
         </div>
@@ -42,17 +42,19 @@
 
             <div class="list list-fair-container">
 
-                <a class="item list-fair-item" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
+                <div class="item item-text-wrap" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
                     <!--para adicionar avatar: item-avatar-->
                     <!--<img src="http://upload.wikimedia.org/wikipedia/en/thumb/9/97/San_Diego_Comic-Con_International_logo.svg/829px-San_Diego_Comic-Con_International_logo.svg.png">-->
-                    <span class="list-fair-item-name"><b>{{fair.name}}</b></span>
+                    <div>
+                    <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.date | date:'dd/MM'}} - {{fair.date | date:'dd/MM/yy'}}</strong></p>
 
-                    <span class="list-fair-item-from-to"><b>{{fair.date | date:'dd-MM-yyyy'}} - {{fair.date | date:'dd-MM-yyyy'}}<br></b>
-                    <span class="list-fair-item-local"><b>{{fair.local}}</b></span>
-                    </span>
+                    <!--<p class=""><b>{{fair.date | date:'dd-MM-yyyy'}} - {{fair.date | date:'dd-MM-yyyy'}}<br></b>-->
+                    <p class="text-right calm"><strong class="calm">{{fair.location}}</strong></p>
 
 
-                </a>
+                    </div>
+
+                </div>
             </div>
 
 
