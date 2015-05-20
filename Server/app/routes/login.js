@@ -31,11 +31,25 @@ module.exports = function(server) {
         });
     };
 
+
+
     server.register(require('hapi-auth-jwt'), function (error) {
         server.auth.strategy('token', 'jwt', {
             key: privateKey,
             validateFunc: validate
         });
+        //server.auth.strategy('visitorValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: visitorValidate
+        //});
+        //server.auth.strategy('companyValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: companyValidate
+        //});
+        //server.auth.strategy('organizerValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: organizerValidate
+        //});
     });
 
     server.route({
