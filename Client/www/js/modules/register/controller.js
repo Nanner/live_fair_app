@@ -194,5 +194,11 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
         }
      }
     }
-    
+
+
+    $scope.readTerms = function(){
+        utils.showAlert( "Todas estas questões, devidamente ponderadas, levantam dúvidas sobre se a execução dos pontos do programa nos obriga à análise do retorno esperado a longo prazo. Caros amigos, o entendimento das metas propostas aponta para a melhoria dos relacionamentos verticais entre as hierarquias. No entanto, não podemos esquecer que a adoção de políticas descentralizadoras garante a contribuição de um grupo importante na determinação do investimento em reciclagem técnica. Pensando mais a longo prazo, o desenvolvimento contínuo de distintas formas de atuação agrega valor ao estabelecimento das posturas dos órgãos dirigentes com relação às suas atribuições. " +
+            " É importante questionar o quanto a estrutura atual da organização estende o alcance e a importância das posturas dos órgãos dirigentes com relação às suas atribuições. Do mesmo modo, o consenso sobre a necessidade de qualificação deve passar por modificações independentemente do investimento em reciclagem técnica. As experiências acumuladas demonstram que o julgamento imparcial das eventualidades assume importantes posições no estabelecimento da gestão inovadora da qual fazemos parte."
+            ,"Terms & Conditions");
+    }
 });

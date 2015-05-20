@@ -119,14 +119,15 @@
 .register-title {
     text-align: center;
     font-weight: bolder;
-    margin-bottom: 3%;    
+    margin-bottom: 3%;
+    color: darkblue;
 }
 
 .acceptTerms-container {
-    width: 100%;
+   /* width: 95%;
     position: relative;
     margin-left: 3%;
-    margin-right: 3%;
+    margin-right: 3%;*/
 }
 
 .register-checkbox {
@@ -142,6 +143,13 @@
 }
 
 .neutral-icon {
+}
+
+.register-btn {
+    width: 95%;
+}
+
+.terms-icon{
 }
 
 /********** Fair ***********/
@@ -425,6 +433,38 @@
 
 .left-search-btn {
     margin-left: 2%;
+}
+
+.fair-search-button-container{
+    background-color: #28A3D4;
+}
+
+.fair-search-button-container > button{
+    border-top-right-radius: 25px;
+}
+
+.search-options-container {
+    float:right;
+}
+
+.search-options-container > button{
+    /*colocar os button alinhados com o fundo da div*/
+}
+
+.list-fair-item-name{
+    float: left;
+    color: darkblue;
+
+}
+
+.list-fair-item-from-to{
+    float: right;
+    color: darkblue;
+}
+
+.list-fair-item-local{
+    float: right;
+    color: #28A3D4;
 }
 
 /****** Statistics *******/

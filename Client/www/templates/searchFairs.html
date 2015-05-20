@@ -1,5 +1,5 @@
 <ion-view title="'searchFairs'">
-	<ion-content scroll='true' ng-init="getFairs()">
+	<ion-content scroll='true'>
 
 		<div class="searchFaris-logo-container">
 			<div class="searchFairs-container1">
@@ -9,32 +9,90 @@
             </div>
         </div>
 
-		<div class="bar bar-header item-input-inset">
-		  <label class="item-input-wrapper">
-		    <i class="icon ion-ios-search placeholder-icon"></i>
-		    <input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">
-		  </label>
-		  <label class="item-input-wrapper left-search-btn">
-		    <i class="icon ion-ios-search placeholder-icon"></i>
-		    <input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">
-		  </label>
-		  <button nav-clear ng-click="filterByDate()" class="button button-clear">
-		  		<i class="icon ion-calendar"></i>
-		  </button>
-		</div>
+		<!--<div class="bar bar-header item-input-inset">-->
+		  <!--<label class="item-input-wrapper">-->
+		    <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
+		    <!--<input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">-->
+		  <!--</label>-->
+		  <!--<label class="item-input-wrapper left-search-btn">-->
+		    <!--<i class="icon ion-ios-search placeholder-icon"></i>-->
+		    <!--<input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">-->
+		  <!--</label>-->
+		  <!--<button nav-clear ng-click="filterByDate()" class="button button-clear">-->
+		  		<!--<i class="icon ion-calendar"></i>-->
+		  <!--</button>-->
+		<!--</div>-->
 
-        <div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
-            <div class="card">
-                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
-                    <h2> {{fair.name}} </h2>
-                </div>
-                <div class="item item-text-wrap">
-                    <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
-                </div>
+        <!--<div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">-->
+            <!--<div class="card">-->
+                <!--<div class="item item-divider" ng-click="loadFair(fair.liveFairID)">-->
+                    <!--<h2> {{fair.name}} </h2>-->
+                <!--</div>-->
+                <!--<div class="item item-text-wrap">-->
+                    <!--<p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>-->
+                    <!--<p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>-->
+                    <!--<p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>				-->
+
+        <div class="fair-search-button-container">
+            <button class="button button-light">
+                Próximas Feiras
+            </button>
+
+            <div class="search-options-container">
+                <button class="button button-small button-calm button-AZ" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                    A-Z
+                </button>
+
+                <button class="button button-small button-calm button-Recente" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                    Recente
+                </button>
             </div>
-        </div>				
+        </div>
+
+			<div class="bar bar-header item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">
+			  </label>
+			  <label class="item-input-wrapper left-search-btn">
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">
+			  </label>
+			  <button nav-clear ng-click="filterByDate()" class="button button-clear">
+			  		<i class="icon ion-calendar"></i>
+			  </button>
+			</div>
+
+
+            <div class="list list-fair-container">
+
+                <a class="item list-fair-item" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
+                    <!--para adicionar avatar: item-avatar-->
+                    <!--<img src="http://upload.wikimedia.org/wikipedia/en/thumb/9/97/San_Diego_Comic-Con_International_logo.svg/829px-San_Diego_Comic-Con_International_logo.svg.png">-->
+                    <span class="list-fair-item-name"><b>{{fair.name}}</b></span>
+
+                    <span class="list-fair-item-from-to"><b>{{fair.date | date:'dd-MM-yyyy'}} - {{fair.date | date:'dd-MM-yyyy'}}<br></b>
+                    <span class="list-fair-item-local"><b>{{fair.local}}</b></span>
+                    </span>
+
+
+                </a>
+            </div>
+
+
+        <!--<div class="card">-->
+        <!--<div class="item item-divider" ng-click="loadFair(fair.liveFairID)">-->
+        <!--<h2> {{fair.name}} </h2>-->
+        <!--</div>-->
+        <!--<div class="item item-text-wrap">-->
+        <!--<p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>-->
+        <!--<p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>-->
+        <!--<p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>-->
+        <!--</div>-->
+        <!--</div>-->
     
     </ion-content>
 </ion-view>

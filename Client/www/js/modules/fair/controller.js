@@ -6,6 +6,7 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
     $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
 
+
     //$scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
 
     $scope.loadProfile = function(id) {
@@ -211,6 +212,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     $scope.searchLocation = "";
     $scope.listfairs = "";
     $scope.existingFairs = liveFairApi.getLiveFairs();
+    $scope.sortOption = 0;
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
@@ -294,7 +296,60 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     }
 
     $scope.getFairs = function() {
-        $scope.listfairs = $scope.existingFairs;
+        //{
+        //    $scope.listfairs = $scope.existingFairs;
+        //}
+        //
+
+        $scope.listfairs = [
+             {
+                name: "afeira1",
+                date: "15.07.2015",
+                 local: "porto"
+            },
+            {
+                name: "cfeira2",
+                date: "12.06.2015",
+                local: "lisboa"
+            },
+            {
+                name: "zfeira3",
+                date: "12.06.2014",
+                local: "braga"
+            },
+            {
+                name: "bfeira3",
+                date: "16.05.2015",
+                local: "coimbra"
+            }
+        ]
+
+        $scope.sortOption = 0;
+
+    }
+
+    $scope.sortFairsByName = function(){
+
+        if($scope.sortOption === 1){
+            $scope.listfairs.reverse();
+        }else{
+            $scope.sortOption = 1;
+            $scope.listfairs =  _.sortBy($scope.listfairs, "name");
+        }
+    };
+
+    $scope.sortFairsByDate = function(){
+
+        if($scope.sortOption === 2) {
+            $scope.listfairs.reverse();
+        }else{
+            $scope.sortOption = 2;
+            $scope.listfairs = _.sortBy( $scope.listfairs, function(fair) {
+                var dateOnly = fair.date.split(" ");
+                var parts = dateOnly[0].split(".");
+                return (new Date(+parts[2], parts[1]-1, +parts[0])).getTime();
+            });
+        }
     }
 
 });
