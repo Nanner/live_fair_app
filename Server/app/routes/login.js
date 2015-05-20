@@ -20,7 +20,7 @@ module.exports = function(server) {
     var validate = function(decodedToken, callback) {
         var error;
         User.find({
-            where: {email: decodedToken.email}
+            where: {email: decodedToken}
         }).then(function(account) {
             if(!account) {
                 return callback(error, false, {});
