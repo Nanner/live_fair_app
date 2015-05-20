@@ -15,8 +15,8 @@ var Boom = require('boom');
 
 var RegisterSchema = Joi.object().keys({
     email: Joi.string().email().required(),
-    password: Joi.string().alphanum().min(8).max(20).required(),
-    tipo: Joi.string().regex(/visitor|company|organizer/).required(),
+    password: Joi.string().alphanum().required(),
+    type: Joi.string().regex(/visitor|company|organizer/).required(),
     address: Joi.string(),
     website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/),
     companyName: Joi.string()
@@ -63,8 +63,9 @@ module.exports = function(server){
                 var Schematest={
                     email:request.payload.email,
                     password:request.payload.password,
-                    tipo:request.payload.type
+                    type:request.payload.type
                 };
+                console.log(request.payload);
                 if(request.payload.address)
                     Schematest['address']=request.payload.address;
 
@@ -77,7 +78,7 @@ module.exports = function(server){
                 var validate = Joi.validate(Schematest,RegisterSchema);
 
                 if(validate.error!==null){
-                    throw new Error('Missing critical fields');
+                    throw new Error(validate.error.message);
                 }
                 else{
                     var passHash=crypto.createHash('sha512');
@@ -87,10 +88,10 @@ module.exports = function(server){
                         'userID':ID,
                         'email':Schematest.email,
                         'password':passHash.digest('hex'),
-                        'type':Schematest.tipo
+                        'type':Schematest.type
                     }, {transaction: t})
                         .then(function(user) {
-                            switch (Schematest.tipo){
+                            switch (Schematest.type){
                                 case 'company':
                                     var obj = {
                                         'companyID':user.userID,
@@ -128,7 +129,8 @@ module.exports = function(server){
                     reply(JSON.stringify('Registo Bem Sucedido'));
                 })
                 .catch(function(error) {
-                    reply(Boom.badRequest(error.message));
+                    console.log(error);
+                    reply(Boom.badRequest(error));
                 });
         }}
     });
@@ -222,7 +224,7 @@ module.exports = function(server){
                 
                 return sequelize.transaction(function(t) {
                 if(validate.error!==null){
-                    throw new Error('Missing critical fields');
+                    throw new Error(validate.error.message);
                 }
                 else{
                     return User.update({
@@ -285,7 +287,7 @@ module.exports = function(server){
             var validateSchema={password:request.payload.password};
             var result=validateSchema.validate();
             if(result.error!==null){
-                    throw new Error('Missing critical fields');
+                    throw new Error(result.error.message);
             }
             else{
                 var UserID = request.params.UserID;
