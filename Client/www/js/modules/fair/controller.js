@@ -135,8 +135,10 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils) {
     $scope.failedToResolve = listfairs == "failed to resolve";
-    if($scope.failedToResolve)
+    if($scope.failedToResolve) {
+        utils.hideLoadingPopup();
         return;
+    }
 
     $scope.listfairs = listfairs;
 
@@ -207,14 +209,20 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
 });
 
-module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
+module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, listfairs) {
 
     $scope.startDate = "";
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
     $scope.listfairs = "";
-    $scope.existingFairs = liveFairApi.getLiveFairs();
+    $scope.failedToResolve = listfairs == "failed to resolve";
+    if($scope.failedToResolve) {
+        utils.hideLoadingPopup();
+        return;
+    }
+
+    $scope.existingFairs = listfairs;
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();

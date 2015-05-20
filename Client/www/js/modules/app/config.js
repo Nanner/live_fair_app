@@ -151,6 +151,16 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/searchFairs.html",
 					controller: "searchFairCtrl"
 				}
+			},
+			resolve: {
+				listfairs: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairs().$promise
+						.then(function(liveFairs) {
+							return liveFairs;
+						}, function(error) {
+							return "failed to resolve";
+						});
+				}
 			}
 		});
 

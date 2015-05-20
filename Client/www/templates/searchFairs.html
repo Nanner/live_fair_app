@@ -23,6 +23,21 @@
 		  </button>
 		</div>
 
+		<div ng-show="failedToResolve">
+            <br><br>
+            <div class="card">
+                <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                    {{ 'failedToResolve' | translate }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="!existingFairs.length && !failedToResolve">
+            <div class="item item-positive item-placeholder item-text-wrap text-center">
+                {{ 'noLiveFairs' | translate }}
+            </div>
+        </div>
+
         <div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
             <div class="card">
                 <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
