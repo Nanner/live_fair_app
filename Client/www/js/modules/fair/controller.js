@@ -149,6 +149,10 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
     }
+
+    $scope.closeLoading = function() {
+         utils.hideLoadingPopup();  
+    }
 });
 
 
@@ -297,4 +301,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
         $scope.listfairs = $scope.existingFairs;
     }
 
+    $scope.closeLoading = function() {
+         utils.hideLoadingPopup();  
+    }
 });

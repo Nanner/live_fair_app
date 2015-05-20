@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, utils) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -63,6 +63,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             authService.loginCancelled();
         },
         getLiveFairs: function() {
+            utils.showLoadingPopup();
             return LiveFair.query();
         },
         getLiveFair: function(fairID) {
