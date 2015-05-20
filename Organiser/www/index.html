@@ -72,6 +72,7 @@
 	    					<button class="btn btn-primary"  btn-radio="'Left'">Past Fairs</button>
 	    					<button class="btn btn-primary"  btn-radio="'Middle'">Current Fairs</button>
 	    					<button class="btn btn-primary"  btn-radio="'Right'">Next Fairs</button>
+	    					<button class="btn btn-success" data-toggle="modal" data-target="#newFairModal">New Fair</button>
 	    				</div>
 	    			</div>
 	    		</div>
@@ -82,44 +83,61 @@
 	    			<div class="col-md-3 portfolio-item">
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">FEUP Carreer Fair</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
+	    					<div class="panel-heading" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">FEUP Carreer Fair</div>	    				
+	    					<div class="panel-body collapse" id="collapseExample">
+	    						<div>
+	    							<p><b>Data:</b> 20/05/2015 - 22/05/2015 </p>
+	    							<p><b>Local:</b> FEUP - Rua Roberto Frias</p>
+	    							<p><b>Descrição:</b> De 18 a 20 de novembro de 2014 realizar-se-á mais uma edição da FEUP CAREER FAIR, este ano com o apoio do BEST PORTO. As empresas podem participar nas diferentes atividades da feira nos dias 18 e 19 de novembro, sendo o dia 20 de novembro dedicado a sessões sobre emprego e carreira, destinadas apenas a estudantes e alumni FEUP.</p>
+	    							<div class="text-center">
+	    								<div class="btn-group" >
+	    									<button class="btn btn-primary btn-xs"  btn-radio="'Left'">Visiantes</button>
+	    									<button class="btn btn-primary btn-xs"  btn-radio="'Middle'">Programa</button>
+	    									<button class="btn btn-primary btn-xs"  btn-radio="'Right'">Empresas</button>
+	    								</div>
+	    							</div>
+	    						</div>
+	    					</div>				
 	    				</div>
 	    			</div>
 	    			<div class="col-md-3 portfolio-item">
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
 	    					<div class="panel-heading">Porto Tech Hub</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
+	    					<div class="panel-body collapse" id="collapseExample">
+	    						<div>
+	    							Live Fair Info
+	    						</div>
+	    					</div>		
 	    				</div>
 	    			</div>
 	    			<div class="col-md-3 portfolio-item">
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
 	    					<div class="panel-heading">Wine Porto Fair</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
+	    					<div class="panel-body collapse" id="collapseExample">
+	    						<div>
+	    							Live Fair Info
+	    						</div>
+	    					</div>		
 	    				</div>
 	    			</div>
 	    			<div class="col-md-3 portfolio-item">
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Panel heading</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
+	    					<div class="panel-heading">Live Fair Name</div>
+	    					<div class="panel-body collapse" id="collapseExample">
+	    						<div>
+	    							Live Fair Info
+	    						</div>
+	    					</div>		
 	    				</div>
 	    			</div>
 	    		</div>
 	    		<!-- /.row -->
 
 
-	    		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    		<div class="modal fade" id="newFairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    			<div class="modal-dialog">
 	    				<div class="modal-content">
 	    					<div class="modal-header">
@@ -148,11 +166,6 @@
 	    								<label>Website</label>
 	    								<input type="url" class="form-control" placeholder="Live Fair Website">
 	    							</div>
-	    							<div class="form-group">
-	    								<label for="exampleInputFile">Logo</label>
-	    								<input type="file" id="logoFile">
-	    							</div>
-
 	    							<div class="form-group">
 	    								<label for="exampleInputFile">Map</label>
 	    								<input type="file" id="mapFile">
@@ -223,9 +236,8 @@
 	    	<!-- Bootstrap Core JavaScript -->
 	    	<script src="js/bootstrap.min.js"></script>
 
-			<!-- Angular -->
+	    	<!-- Angular -->
 	    	<script src="../node_modules/angular/angular.js"></script>
-	    	<script src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
 	    	<script src="js/modules/app/app.js"></script>
 	    	<script src="js/modules/app/config.js"></script>
 	    	<script src="js/modules/config/config.js"></script>
