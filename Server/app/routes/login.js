@@ -20,7 +20,7 @@ module.exports = function(server) {
     var validate = function(decodedToken, callback) {
         var error;
         User.find({
-            where: {email: decodedToken.email}
+            where: {email: decodedToken}
         }).then(function(account) {
             if(!account) {
                 return callback(error, false, {});
@@ -31,11 +31,25 @@ module.exports = function(server) {
         });
     };
 
+
+
     server.register(require('hapi-auth-jwt'), function (error) {
         server.auth.strategy('token', 'jwt', {
             key: privateKey,
             validateFunc: validate
         });
+        //server.auth.strategy('visitorValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: visitorValidate
+        //});
+        //server.auth.strategy('companyValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: companyValidate
+        //});
+        //server.auth.strategy('organizerValidation', 'jwt', {
+        //    key: privateKey,
+        //    validateFunc: organizerValidate
+        //});
     });
 
     server.route({
