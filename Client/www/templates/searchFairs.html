@@ -1,40 +1,40 @@
 <ion-view title="'searchFairs'">
 	<ion-content scroll='true' ng-init="getFairs()">
 
-			<div class="searchFaris-logo-container">
-				<div class="searchFairs-container1">
-		            <div class="searchFairs-logo item-image">
-		                <img src="img/livefair.png"> 
-		            </div>
+		<div class="searchFaris-logo-container">
+			<div class="searchFairs-container1">
+	            <div class="searchFairs-logo item-image">
+	                <img src="img/livefair.png"> 
 	            </div>
             </div>
+        </div>
 
-			<div class="bar bar-header item-input-inset">
-			  <label class="item-input-wrapper">
-			    <i class="icon ion-ios-search placeholder-icon"></i>
-			    <input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">
-			  </label>
-			  <label class="item-input-wrapper left-search-btn">
-			    <i class="icon ion-ios-search placeholder-icon"></i>
-			    <input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">
-			  </label>
-			  <button nav-clear ng-click="filterByDate()" class="button button-clear">
-			  		<i class="icon ion-calendar"></i>
-			  </button>
-			</div>
+		<div class="bar bar-header item-input-inset">
+		  <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" placeholder="{{ 'name' | translate }}" ng-model="searchName">
+		  </label>
+		  <label class="item-input-wrapper left-search-btn">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input type="search" placeholder="{{ 'searchLocation' | translate }}" ng-model="searchLocation">
+		  </label>
+		  <button nav-clear ng-click="filterByDate()" class="button button-clear">
+		  		<i class="icon ion-calendar"></i>
+		  </button>
+		</div>
 
-	        <div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
-	            <div class="card">
-	                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
-	                    <h2> {{fair.name}} </h2>
-	                </div>
-	                <div class="item item-text-wrap">
-	                    <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
-	                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
-	                    <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
-	                </div>
-	            </div>
-	        </div>				
+        <div ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}">
+            <div class="card">
+                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
+                    <h2> {{fair.name}} </h2>
+                </div>
+                <div class="item item-text-wrap">
+                    <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
+                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
+                    <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
+                </div>
+            </div>
+        </div>				
     
     </ion-content>
 </ion-view>

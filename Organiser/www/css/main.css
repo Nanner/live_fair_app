@@ -1,0 +1,64 @@
+.login {
+	background: #1a3d58 !important;
+}
+
+.blue-navbar{
+	background-color: #1a3d58 !important;
+}
+
+.img-responsive {
+    margin: 0 auto;
+    margin-bottom: 10%;
+}
+
+.img-footer {
+    margin: 0 auto;
+    margin-bottom: -10%;
+    margin-top: -10%;
+}
+
+.top-5{
+	margin-top: -5%;
+}
+
+.left-5{
+	margin-left: 5%;
+}
+
+.white-box{
+	background-color: white !important;
+}
+
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .form-signin-heading {
+  margin-bottom: 10px;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

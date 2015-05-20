@@ -48,13 +48,23 @@
 /********** Home **********/
 
 .home-container {
-    padding-top: 15%;
+    padding-top: 20%;
 }
 
 .home-title {
     text-align: center;
     font-weight: bolder;
     margin-bottom: 3%;
+}
+
+.home-registerBtn-container {
+    position: relative;
+    text-align: center;
+    padding-bottom: 20%;
+}
+
+.home-existing-user {
+    padding-top: 5%;
 }
 
 /********** Login **********/
@@ -103,7 +113,7 @@
 /******** Register *********/
 
 .register-container {
-    padding-top: 15%;   
+    padding-top: 20%;   
 }
 
 .register-title {
@@ -117,6 +127,10 @@
     position: relative;
     margin-left: 3%;
     margin-right: 3%;
+}
+
+.register-checkbox {
+    padding-bottom: 5%;
 }
 
 .green-icon {
@@ -347,9 +361,17 @@
 }
 
 .edit-profile {
-    padding-top: 5%;
+    float: left;
+    padding-left: 4%;
+}
+
+.profile-stats {
     float: right;
-    padding-right: 3%;
+    padding-right: 4%;
+}
+
+.profile-owner-icons {
+    padding-top: 15%;
 }
 
 /****** Edit-Profile *******/
@@ -403,4 +425,37 @@
 
 .left-search-btn {
     margin-left: 2%;
+}
+
+/****** Statistics *******/
+
+.stats-container1 {
+    padding-top: 15%;
+    padding-bottom: 5%;
+}
+
+.stats-logo-container {
+    background-color: #28A3D4;
+}
+
+.stats-logo {
+    width: 15%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.stats-company-name {
+    text-align: center;
+    color: white;
+}
+
+.stats-container {
+    padding-top: 5%;
+    text-align: center;
+}
+
+.stats-popKeywords-container {
+    text-align: center;
 }

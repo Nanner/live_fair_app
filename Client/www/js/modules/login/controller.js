@@ -38,6 +38,10 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairA
     
     $scope.username = "";
     $scope.password = "";
+
+    $scope.letMeRegister = function() {
+        $state.transitionTo('menu.register', $stateParams, { reload: true, inherit: false, notify: true });
+    }
     
     $scope.submitLogin = function() {
         var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();

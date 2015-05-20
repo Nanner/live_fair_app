@@ -1,9 +1,10 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, contacts, camera) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera, liveFairApi) {
     
     $scope.profileOwner = true;
-    $scope.standProfileInfo = {name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E", interestsList: [{name: "Informática"}, {name: "Electrotécnica"}, {name: "Empreendedorismo"}]};
+    $scope.standProfileInfo = {id: "06be5ca6-9993-7e3a-ce6c-3efd89e6cae4", name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
+    $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
     $scope.saveContact = function() {
         contacts.addContact($scope.standProfileInfo.name, $scope.standProfileInfo.phone, $scope.standProfileInfo.email, $scope.standProfileInfo.website, $scope.standProfileInfo.address);
@@ -16,6 +17,11 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
     $scope.valWebsite = "neutral-icon";
     $scope.valAddress = "neutral-icon";
     $scope.valPhone = "neutral-icon";
+
+    //Change password
+    $scope.oldPassword = "";
+    $scope.newPassword = "";
+    $scope.confirmNewPassword = "";
 
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
@@ -53,8 +59,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
     }
 
     $scope.validateEmailCallback = function() {
-        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
+        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;    
         if($scope.standProfileInfo.email.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[1] = 0;
@@ -98,7 +103,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
     } 
 
     $scope.validatePhoneCallback = function() {
-    	var pattern = /^[0-9]{9}$/;
+    	var pattern = /(^\+\d{12}$)|(^\d{9,10}$)/;
     	if($scope.standProfileInfo.phone.length === 0) {
     		$scope.valPhone = "neutral-icon";
     		messageToDisplay[3] = 0;
@@ -111,7 +116,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
     	}
     }
 
-    //TODO
     $scope.uploadPhoto = function() {
         var options = {
           quality: 50,
@@ -135,9 +139,32 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, utils, 
         });
     }
 
-    //TODO
     $scope.changePassword = function() {
+        var myPopup = $ionicPopup.show({
+            templateUrl: "templates/changePassword.html",
+            title: $translate.instant('changePassword'),
+            scope: $scope,
+            buttons: [
+                { text: $translate.instant('cancel') },
+                {
+                    text: '<b>' + $translate.instant('submit') + '</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        //verificar se password actual corresponde
+                        //fazer pedido ao servidor para mudar password
+                        console.log("tapped submit button");
+                    }
+                }
+            ]
+        });
+    }
 
+    $scope.incrementCounter = function(id) {
+        liveFairApi.incrementCounter(id);
+    }
+
+    $scope.openStats = function() {
+        $state.go('menu.companyStats');
     }
 
     $scope.saveChanges = function() {

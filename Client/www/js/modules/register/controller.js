@@ -2,6 +2,7 @@ var module = angular.module('registerModule');
 
 module.controller('registerCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
     
+    $scope.isCompany = false;
     $scope.usertype = false; //true -> empresa, false -> visitante
     $scope.name = "";
     $scope.password = "";
@@ -136,58 +137,62 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
             emptyFields[5] = 0;
         }
     }
-    
-     $scope.submitRegister = function() {
-         var existsEmptyField = false;
-         var existsNotValidField = false;
-         
-         if($scope.usertype !== true) { //visitante
-            emptyFields[0] = 0;
-            emptyFields[4] = 0;
-            emptyFields[5] = 0;
-         } 
 
-         for(var i = 0; i < emptyFields.length; i++) {
-             if(emptyFields[i] === 1) {
-                 existsEmptyField = true;
-                 utils.showAlert(messages[5], 'Informação errada');
-                 break;
-             }
+    $scope.userTypeChanged = function() {
+        $scope.usertype = $scope.isCompany;
+    }
+
+    $scope.submitRegister = function() {
+     var existsEmptyField = false;
+     var existsNotValidField = false;
+     
+     if($scope.usertype !== true) { //visitante
+        emptyFields[0] = 0;
+        emptyFields[4] = 0;
+        emptyFields[5] = 0;
+     } 
+
+     for(var i = 0; i < emptyFields.length; i++) {
+         if(emptyFields[i] === 1) {
+             existsEmptyField = true;
+             utils.showAlert(messages[5], 'Informação errada');
+             break;
          }
-         
-         if(!existsEmptyField) {
-            for(var i = 0; i < messageToDisplay.length; i++) {
-                if(messageToDisplay[i] === 1) {
-                    existsNotValidField = true;
-                    utils.showAlert(messages[i], 'Informação errada');
-                    break;
-                }
+     }
+     
+     if(!existsEmptyField) {
+        for(var i = 0; i < messageToDisplay.length; i++) {
+            if(messageToDisplay[i] === 1) {
+                existsNotValidField = true;
+                utils.showAlert(messages[i], 'Informação errada');
+                break;
             }
-         }
-         
-         if(!existsNotValidField && !existsEmptyField) {
-            if(!$scope.termsAcceptance) {
-                utils.showAlert(messages[6], 'Termos de uso'); 
-            } else {
-                var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
-                console.log(passwordEncrypted);
-                console.log("all good, time to submit");
+        }
+     }
+     
+     if(!existsNotValidField && !existsEmptyField) {
+        if(!$scope.termsAcceptance) {
+            utils.showAlert(messages[6], 'Termos de uso'); 
+        } else {
+            var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
+            console.log(passwordEncrypted);
+            console.log("all good, time to submit");
 
-                var usertype = "";
-                if($scope.usertype)
-                    usertype = 'company';
-                else
-                    usertype = 'visitor';
+            var usertype = "";
+            if($scope.usertype)
+                usertype = 'company';
+            else
+                usertype = 'visitor';
 
-                liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
-                    then(function(data) {
-                        utils.showAlert(data, "Sucesso");
-                        $state.go('menu.login');
-                    }, function(error) {
-                        utils.showAlert(messages[7], "Erro");
-                }); 
-            }
-         }
+            liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
+                then(function(data) {
+                    utils.showAlert(data, "Sucesso");
+                    $state.go('menu.login');
+                }, function(error) {
+                    utils.showAlert(messages[7], "Erro");
+            }); 
+        }
+     }
     }
     
 });

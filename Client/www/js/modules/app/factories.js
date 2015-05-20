@@ -4,7 +4,7 @@ module.factory('utils', function ($http, $q, $ionicPopup) {
 
     var filtersStartDate;
     var filtersEndDate;
-    
+
     return {
 
         getDayMonthYearDate: function(time) {

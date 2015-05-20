@@ -1,4 +1,5 @@
 var Promise = require("bluebird");
+var Boom = require('boom');
 
 var visitorLiveFair = require('../models').VisitorLiveFair;
 
@@ -6,10 +7,14 @@ module.exports = function(server){
 	server.route({
 		method: 'POST',
 		path: '/visitor/joinLiveFair',
+		config:{
+            auth: {
+               strategy: 'token'
+           },
 		handler: function (request, reply) {			
 			if(!request.payload.userid || !request.payload.livefairid)
 			{
-				reply(JSON.stringify('Invalid Parameters'));
+                    reply(Boom.badRequest("Invalid Parameters"));
 			}
 			else
 			{
@@ -25,6 +30,6 @@ module.exports = function(server){
 						})
 					);
 			}
-		}
+		}}
 	});
 };

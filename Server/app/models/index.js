@@ -1,6 +1,6 @@
 "use strict";
 
-var FORCE_SEQUELIZE_SYNC = true;
+var FORCE_SEQUELIZE_SYNC = false;
 
 var Sequelize = require('sequelize');
 

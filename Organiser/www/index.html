@@ -1,0 +1,251 @@
+	<!DOCTYPE html>
+	<html lang="en" ng-app="appStarter">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Live Fair App</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link href="css/4-col-portfolio.css" rel="stylesheet">
+
+		<!-- Main CSS -->
+		<link href="css/main.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	        <![endif]-->
+
+	    </head>
+
+	    <body>
+
+	    	<!-- Navigation -->
+	    	<nav class="navbar navbar-inverse navbar-fixed-top  blue-navbar" role="navigation">
+	    		<div class="container">
+	    			<!-- Brand and toggle get grouped for better mobile display -->
+	    			<div class="navbar-header">
+	    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	    					<span class="sr-only">Toggle navigation</span>
+	    					<span class="icon-bar"></span>
+	    					<span class="icon-bar"></span>
+	    					<span class="icon-bar"></span>
+	    				</button>
+	    				<a class="navbar-brand" href="#">Live Fair App</a>
+	    			</div>
+	    			<!-- Collect the nav links, forms, and other content for toggling -->
+	    			<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+	    				<ul class="nav navbar-nav">
+	    					<li>
+	    						<a href="#">Live Fairs</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">Visitantes</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">Empresas</a>
+	    					</li>
+	    				</ul>
+	    			</div>
+	    			<!-- /.navbar-collapse -->
+	    		</div>
+	    		<!-- /.container -->
+	    	</nav>
+
+	    	<!-- Page Content -->
+	    	<div class="container">
+	    		<!-- Page Heading -->
+	    		<div class="row page-header">
+	    			<div class="col-lg-12 text-center">
+	    				<div class="btn-group top-5" >
+	    					<button class="btn btn-primary"  btn-radio="'Left'">Past Fairs</button>
+	    					<button class="btn btn-primary"  btn-radio="'Middle'">Current Fairs</button>
+	    					<button class="btn btn-primary"  btn-radio="'Right'">Next Fairs</button>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<!-- /.row -->
+
+	    		<!-- Projects Row -->
+	    		<div class="row" ng-controller="FairsController">
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">{{  }}</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Porto Tech Hub</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Panel heading</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div class="row">
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Feup Carreer Fair</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Porto Tech Hub</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Panel heading</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<!-- /.row -->
+
+
+	    		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    			<div class="modal-dialog">
+	    				<div class="modal-content">
+	    					<div class="modal-header">
+	    						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	    						<h4 class="modal-title" id="myModalLabel">Nova Live Fair</h4>
+	    					</div>
+	    					<div class="modal-body">
+	    						<form>
+	    							<div class="form-group">
+	    								<label>Nome</label>
+	    								<input type="text" class="form-control" placeholder="Live Fair Name">
+	    							</div>
+	    							<div class="form-group">
+	    								<label>Local</label>
+	    								<input type="text" class="form-control" placeholder="Live Fair Addres">
+	    							</div>
+	    							<div class="form-group">
+	    								<label>Data Início</label>
+	    								<input type="date" class="form-control">
+	    							</div>
+	    							<div class="form-group">
+	    								<label>Data Fim</label>
+	    								<input type="date" class="form-control">
+	    							</div>
+	    							<div class="form-group">
+	    								<label>Website</label>
+	    								<input type="url" class="form-control" placeholder="Live Fair Website">
+	    							</div>
+	    							<div class="form-group">
+	    								<label for="exampleInputFile">Logo</label>
+	    								<input type="file" id="logoFile">
+	    							</div>
+
+	    							<div class="form-group">
+	    								<label for="exampleInputFile">Map</label>
+	    								<input type="file" id="mapFile">
+	    							</div>
+
+	    							<div class="modal-footer">
+	    								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	    								<button type="button" class="btn btn-primary">Criar</button>
+	    							</div>
+	    						</form>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+
+
+	    		<hr>
+
+	    		<!-- Pagination -->
+	    		<div class="row text-center">
+	    			<div class="col-lg-12">
+	    				<ul class="pagination">
+	    					<li>
+	    						<a href="#">&laquo;</a>
+	    					</li>
+	    					<li class="active">
+	    						<a href="#">1</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">2</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">3</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">4</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">5</a>
+	    					</li>
+	    					<li>
+	    						<a href="#">&raquo;</a>
+	    					</li>
+	    				</ul>
+	    			</div>
+	    		</div>
+	    		<!-- /.row -->
+
+	    		<hr>
+
+	    		<!-- Footer -->
+	    		<footer>
+	    			<div class="row text-center">
+	    				<div class="col-lg-12">
+	    					<img class="img-footer" src="images\LiveFair.jpg" alt="" width="80" height="60">
+	    					<img class="img-footer left-5" src="images\Lettuce.jpg" alt="" width="60" height="60">
+	    				</div>
+	    			</div>
+	    			<!-- /.row -->
+	    		</footer>
+
+	    	</div>
+	    	<!-- /.container -->
+
+	    	<!-- jQuery -->
+	    	<script src="js/jquery.js"></script>
+
+	    	<!-- Bootstrap Core JavaScript -->
+	    	<script src="js/bootstrap.min.js"></script>
+
+			<!-- Angular -->
+	    	<script src="../node_modules/angular/angular.js"></script>
+	    	<script src="js/modules/app/app.js"></script>
+
+	    </body>
+	    </html>
