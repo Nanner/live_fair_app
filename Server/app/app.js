@@ -22,6 +22,7 @@ require('./routes/login')(server);
 require('./routes/liveFair')(server);
 require('./routes/user')(server);
 require('./routes/visitor')(server);
+require('./routes/stats')(server);
 
 server.register(Auth, function (err) {
 

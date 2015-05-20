@@ -43,6 +43,26 @@ module.exports = function(server){
         }}
     });
 
+        server.route({
+        method: 'GET',
+        path: '/livefairs/{id}/map',
+        config:{
+            auth: {
+                mode: 'optional',
+               strategy: 'token'
+           },
+        handler: function (request, reply) {
+            var LiveFairID = request.params.UserID;
+            LiveFair.find({where:
+                {
+                    map: LiveFairID
+                }}).then(function(livefair)
+            {
+                reply.file('./images/maps/'+livefair.map);
+            });
+        }}
+    });
+
     server.route({
         method: 'GET',
         path: '/livefairs/{id}/schedule',
@@ -97,21 +117,16 @@ module.exports = function(server){
             var liveFairId=request.params.LiveFairID;
             var CompanyID = request.params.CompanyID;
             reply(
-                Users.find({where: {userID: CompanyID}})
-                    .then(function(user) {
-                        return Company.find({where: {companyID: CompanyID}}).then(function(company) {
-                            return LiveFairCompanyInterest.findAll({
-                                where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
-                                return Interest.find({
-                                    where:{
-                                        interestID:interest.interestIDref
-                                    }
-                            }).then(function(interests){
-                                return JSON.stringify(interests);
-                            });
-                        });
-                    });
-              }));
+                LiveFairCompanyInterest.findAll({
+                where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
+                     return Interest.find({
+                     where:{
+                        interestID:interest.interestIDref
+                     }
+                 }).then(function(interests){
+                    return JSON.stringify(interests);
+                  });
+                }));
         }}
     });
     
@@ -125,16 +140,24 @@ module.exports = function(server){
            },
             handler: function (request, reply) {
                 var CompanyID = request.params.CompanyID;
-                Company.find({where:{
+                reply(Company.find({where:{
                    companyID:CompanyID
                 }}).then(function(company){
                     Company.update({
                        'visitorCounter':company.visitorCounter+1
                     },{where:{
                         companyID:CompanyID
-                    }});
-                });
-        }}
+                    }}).then(function(numCompany){
+                        Stands.find({
+                            where:{companyCompanyID:CompanyID}
+                        }).then(function(stand){
+                           Stands.update({
+                              'visitorCounter':stand.visitorCounter+1 
+                           },{where:{companyCompanyID:CompanyID}}); 
+                        });
+                    });
+                }));
+           }}
     });
     
     server.route({

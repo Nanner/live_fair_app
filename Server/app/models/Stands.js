@@ -7,10 +7,13 @@ module.exports = function(sequelize, DataTypes) {
         },
         approved:{
             type: DataTypes.BOOLEAN, allowNull: false
+        },
+        visitorCounter:{
+            type: DataTypes.INTEGER, allowNull:false
         }
     }, {
         freezeTableName: true // Model tableName will be the same as the model name
     });
 
     return Stands;
-}
+};

@@ -1,6 +1,8 @@
 var Promise = require("bluebird");
 var crypto = require("crypto");
 var uuid = require('node-uuid');
+var Joi = require('joi');
+var fs = require('fs');
 
 var sequelize = require('../models').sequelize;
 
@@ -10,6 +12,28 @@ var Company = require('../models').Company;
 var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
 var Boom = require('boom');
+
+var RegisterSchema = Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().alphanum().min(8).max(20).required(),
+    tipo: Joi.string().regex(/visitor|company|organizer/).required(),
+    address: Joi.string(),
+    website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/),
+    companyName: Joi.string()
+});
+
+var EditSchema = Joi.object().keys({
+    email: Joi.string().email().required(),
+    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/).required(),
+    address: Joi.string().required(),
+    website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
+    companyName: Joi.string().required(),
+    description:Joi.string()
+});
+
+var ChangePasswordSchema = Joi.object().keys({
+    password: Joi.string().alphanum().min(8).max(20).required()
+});
 
 module.exports = function(server){
 
@@ -36,7 +60,23 @@ module.exports = function(server){
            },
         handler: function(request, reply) {
             return sequelize.transaction(function(t) {
-                if(!request.payload.email || !request.payload.password || !request.payload.type){
+                var Schematest={
+                    email:request.payload.email,
+                    password:request.payload.password,
+                    tipo:request.payload.type
+                };
+                if(request.payload.address)
+                    Schematest['address']=request.payload.address;
+
+                if(request.payload.companyName)
+                    Schematest['companyName']=request.payload.companyName;
+
+                if(request.payload.website)
+                    Schematest['website']=request.payload.website;
+
+                var validate = Joi.validate(Schematest,RegisterSchema);
+
+                if(validate.error!==null){
                     throw new Error('Missing critical fields');
                 }
                 else{
@@ -45,26 +85,26 @@ module.exports = function(server){
                     passHash.update(request.payload.password);
                     return User.create({
                         'userID':ID,
-                        'email':request.payload.email,
+                        'email':Schematest.email,
                         'password':passHash.digest('hex'),
-                        'type':request.payload.type
+                        'type':Schematest.tipo
                     }, {transaction: t})
                         .then(function(user) {
-                            switch (request.payload.type){
+                            switch (Schematest.tipo){
                                 case 'company':
                                     var obj = {
                                         'companyID':user.userID,
                                         'visitorCounter': 0
                                     };
 
-                                    if(request.payload.address)
-                                        obj['address']=request.payload.address;
+                                    if(Schematest.address)
+                                        obj['address']=Schematest.address;
 
-                                    if(request.payload.companyName)
-                                        obj['companyName']=request.payload.companyName;
+                                    if(Schematest.companyName)
+                                        obj['companyName']=Schematest.companyName;
 
-                                    if(request.payload.website)
-                                        obj['website']=request.payload.website;
+                                    if(Schematest.website)
+                                        obj['website']=Schematest.website;
 
                                     return Company.create(obj, {transaction: t});
 
@@ -139,6 +179,26 @@ module.exports = function(server){
     });
     
     server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/image',
+        config:{
+            auth: {
+                mode: 'optional',
+               strategy: 'token'
+           },
+        handler: function (request, reply) {
+            var UserID = request.params.UserID;
+            Company.find({where:
+                {
+                    companyID: UserID
+                }}).then(function(company)
+            {
+                reply.file('./images/profiles/'+company.logoImage);
+            });
+        }}
+    });
+    
+    server.route({
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
         config:{
@@ -148,8 +208,20 @@ module.exports = function(server){
         handler: function (request, reply) {
             var UserID = request.params.UserID;
             if (request.method === 'post') {
+                
+                var Schematest={
+                    email:request.payload.email,
+                    contact:request.payload.contact,
+                    address:request.payload.address,
+                    website:request.payload.website,
+                    companyName:request.payload.companyName,
+                    description:request.payload.description
+                };
+                
+                var validate = Joi.validate(Schematest,EditSchema);
+                
                 return sequelize.transaction(function(t) {
-                if(!request.payload.email || !request.payload.companyName || !request.payload.address || !request.payload.website || !request.payload.contact || !request.payload.description){
+                if(validate.error!==null){
                     throw new Error('Missing critical fields');
                 }
                 else{
@@ -210,7 +282,9 @@ module.exports = function(server){
                strategy: 'token'
            },
         handler: function (request, reply) {
-            if(!request.payload.password){
+            var validateSchema={password:request.payload.password};
+            var result=validateSchema.validate();
+            if(result.error!==null){
                     throw new Error('Missing critical fields');
             }
             else{
@@ -240,17 +314,27 @@ module.exports = function(server){
                strategy: 'token'
            },
             handler: function (request, reply) {
-            if(!request.payload.logoImage){
+            if(!request.payload.image || !request.payload.imageName){
                throw new Error('Missing critical fields');
             }
             else{
                 var UserID = request.params.UserID;
                 reply (Company.update({
-                    'logoImage':request.payload.logoImage
+                    'logoImage':request.payload.imageName
                 },{
                     where:{
-                        userID:UserID
+                        companyID:UserID
                     }
+                }).then(function(company){
+                    console.log("teste");
+                    fs.writeFile("./images/profiles/"+request.payload.imageName,request.payload.image,function(err){
+                        if(err)
+                        {
+                            return Boom.badRequest(err.message);
+                        }
+                            
+                    });
+                    return JSON.stringify('Ficheiro Guardado com sucesso');
                 }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 }));
