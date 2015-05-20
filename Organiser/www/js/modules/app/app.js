@@ -1,6 +1,9 @@
-var app = angular.module("appStarter", []);
+angular.module('configModule', []);
+angular.module('fairModule', []);
 
-
-app.controller('FairsController',function(){
-    
-}); 
+angular.module('starter',
+    [
+        'configModule',
+        'fairModule'
+    ]
+);

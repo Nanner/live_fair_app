@@ -1,5 +1,5 @@
 	<!DOCTYPE html>
-	<html lang="en" ng-app="appStarter">
+	<html lang="en" ng-app="starter">
 
 	<head>
 
@@ -48,13 +48,13 @@
 	    			<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
 	    				<ul class="nav navbar-nav">
 	    					<li>
-	    						<a href="#">Live Fairs</a>
+	    						<a href="index.html">My Live Fairs</a>
 	    					</li>
 	    					<li>
-	    						<a href="#">Visitantes</a>
+	    						<a href="users.html">Visitantes</a>
 	    					</li>
 	    					<li>
-	    						<a href="#">Empresas</a>
+	    						<a href="companies.html">Empresas</a>
 	    					</li>
 	    				</ul>
 	    			</div>
@@ -78,40 +78,11 @@
 	    		<!-- /.row -->
 
 	    		<!-- Projects Row -->
-	    		<div class="row" ng-controller="FairsController">
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">{{  }}</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
-	    				</div>
-	    			</div>
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Porto Tech Hub</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
-	    				</div>
-	    			</div>
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Panel heading</div>
-	    					<div class="panel-body">
-	    						<p>...</p>
-	    					</div>
-	    				</div>
-	    			</div>
-	    		</div>
 	    		<div class="row">
 	    			<div class="col-md-3 portfolio-item">
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Feup Carreer Fair</div>
+	    					<div class="panel-heading">FEUP Carreer Fair</div>
 	    					<div class="panel-body">
 	    						<p>...</p>
 	    					</div>
@@ -121,6 +92,15 @@
 	    				<div class="panel panel-primary">
 	    					<!-- Default panel contents -->
 	    					<div class="panel-heading">Porto Tech Hub</div>
+	    					<div class="panel-body">
+	    						<p>...</p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-md-3 portfolio-item">
+	    				<div class="panel panel-primary">
+	    					<!-- Default panel contents -->
+	    					<div class="panel-heading">Wine Porto Fair</div>
 	    					<div class="panel-body">
 	    						<p>...</p>
 	    					</div>
@@ -245,7 +225,12 @@
 
 			<!-- Angular -->
 	    	<script src="../node_modules/angular/angular.js"></script>
+	    	<script src="../node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
 	    	<script src="js/modules/app/app.js"></script>
+	    	<script src="js/modules/app/config.js"></script>
+	    	<script src="js/modules/config/config.js"></script>
+	    	<script src="js/modules/common/liveFairApi.js"></script>
+	    	<script src="js/modules/fair/controller.js"></script>
 
 	    </body>
 	    </html>
