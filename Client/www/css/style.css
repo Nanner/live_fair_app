@@ -452,5 +452,10 @@
 }
 
 .stats-container {
-    padding-top: 15%;
+    padding-top: 5%;
+    text-align: center;
+}
+
+.stats-popKeywords-container {
+    text-align: center;
 }

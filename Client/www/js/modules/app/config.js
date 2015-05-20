@@ -228,8 +228,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"changePassword": "Alterar a password",
 		"newPassword": "Password nova",
 		"oldPassword": "Password antiga",
-		"stats": "Estatísticas"
-
+		"stats": "Estatísticas",
+		"matches": "Matches",
+		"matchpercentage": "Percentagem de matches",
+		"clicks": "Cliques",
+		"contactsEstablished": "Contactos estabelecidos",
+		"popKeywords": "Keywords mais populares"
 	});
 
 	$translateProvider.translations('en', {
@@ -299,7 +303,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"changePassword": "Change password",
 		"newPassword": "New password",
 		"oldPassword": "Password antiga",
-		"stats": "Statistics"
+		"stats": "Statistics",
+		"matches": "Matches",
+		"matchpercentage": "Match percentage",
+		"clicks": "Clicks",
+		"contactsEstablished": "Established contacts",
+		"popKeywords": "Most popular keywords"
 
 	});
 

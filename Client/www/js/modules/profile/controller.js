@@ -4,6 +4,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     
     $scope.profileOwner = true;
     $scope.standProfileInfo = {id: "06be5ca6-9993-7e3a-ce6c-3efd89e6cae4", name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
+    $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
     $scope.saveContact = function() {
         contacts.addContact($scope.standProfileInfo.name, $scope.standProfileInfo.phone, $scope.standProfileInfo.email, $scope.standProfileInfo.website, $scope.standProfileInfo.address);

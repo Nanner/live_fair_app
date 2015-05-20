@@ -7,18 +7,51 @@
 	                <img src="img/livefair.png"> 
 	            </div>
 	            <div class="stats-company-name">
-	            	<strong>{{standProfileInfo.name}}</strong>
+	            	<strong>{{statsScreen.name}}</strong>
 	            </div>
 	            <div class="stats-company-name">
-	            	<strong>{{ 'stats' | translate }}</strong>
+	            	<strong><span class="ion-stats-bars"></span>  {{ 'stats' | translate }} </strong>
 	            </div>
 	        </div>
 	    </div>
 
-	    <div class="stats-container">
-	    	
+	    <div class="stats-container card">
+			<div class="row">
+			  <div class="col col-75"><strong> {{ 'matches' | translate }} </strong></div>
+			  <p><strong>:</strong></p>
+			  <div class="col col-25"><strong>{{statsScreen.matches}}</strong></div>
+			</div>
+			<div class="row">
+			  <div class="col col-75"><strong> {{ 'matchpercentage' | translate }} </strong></div>
+			  <p><strong>:</strong></p>
+			  <div class="col col-25"><strong>{{statsScreen.matchPercentage}}</strong></div>
+			</div>
+			<div class="row">
+			  <div class="col col-75"><strong> {{ 'clicks' | translate }} </strong></div>
+			  <p><strong>:</strong></p>
+			  <div class="col col-25"><strong>{{statsScreen.clicks}}</strong></div>
+			</div>
+			<div class="row">
+			  <div class="col col-75"><strong> {{ 'contactsEstablished' | translate }} </strong></div>
+			  <p><strong>:</strong></p>
+			  <div class="col col-25"><strong>{{statsScreen.contatsEstablished}}</strong></div>
+			</div>
 	    </div>
 
+	    <div class="stats-popKeywords-container">
+		    <div class="card">
+			  <div class="item item-divider">
+			    <p><strong> {{ 'popKeywords' | translate }} </strong></p>
+			  </div>
+			  <div ng-repeat="keyword in statsScreen.keywords" class="item item-text-wrap">
+			  	<div class="row">
+					<div class="col col-75"><p><strong>{{keyword.name}}</strong></p></div>
+					<p><strong>:</strong></p>
+					<div class="col col-25"><p><strong>{{keyword.nmatches}}</strong></p></div>
+				</div>
+			  </div>
+			</div>	    	
+	    </div>
     
     </ion-content>
 </ion-view>
