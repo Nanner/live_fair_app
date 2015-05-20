@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $state) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -30,6 +30,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $localStorage.set('userEmail', data.email);
                     $localStorage.set('userType', data.type);
 
+                    $rootScope.$broadcast('event:auth-loginConfirmed');
                     //
                     //// Need to inform the http-auth-interceptor that
                     //// the user has logged in successfully.  To do this, we pass in a function that
@@ -51,10 +52,14 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $rootScope.$broadcast('event:auth-login-failed', status);
                 });
         },
-        logout: function(user) {
+        logout: function() {
             $http.post('https://logout', {}, { ignoreAuthModule: true })
                 .finally(function(data) {
-                    $localStorage.remove('authorizationToken');
+                    $localStorage.remove('token');
+                    $localStorage.remove('userID');
+                    $localStorage.remove('userEmail');
+                    $localStorage.remove('userType');
+
                     delete $http.defaults.headers.common.Authorization;
                     $rootScope.$broadcast('event:auth-logout-complete');
                 });

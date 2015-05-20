@@ -210,8 +210,8 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
-    $scope.listfairs = "";
-    $scope.existingFairs = liveFairApi.getLiveFairs();
+    $scope.listfairs = liveFairApi.getLiveFairs();
+//    $scope.existingFairs = liveFairApi.getLiveFairs();
     $scope.sortOption = 0;
 
     var actualDate = new Date();
