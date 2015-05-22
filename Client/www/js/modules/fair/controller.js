@@ -219,16 +219,32 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
 
+    $scope.getFairs = function() {
+
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairs().$promise
+            .then(function(liveFairs) {
+                $scope.listfairs = liveFairs;
+                $scope.existingFairs = liveFairs;
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = false;
+            }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = true;
+            }
+        );
+
+        $scope.listfairs = $scope.existingFairs;
+        $scope.sortOption = 0;
+
+    }
+
     $scope.startDate = "";
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
-    
-    $scope.listfairs = liveFairApi.getLiveFairs();
-//    $scope.existingFairs = liveFairApi.getLiveFairs();
-    $scope.sortOption = 0;
 
-    $scope.existingFairs = [];
+    $scope.getFairs();
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
@@ -305,56 +321,11 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                 utils.setEndDate($scope.endDate);
             }
         }
-    }
+    };
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
-    }
-
-    $scope.getFairs = function() {
-
-        utils.showLoadingPopup();
-        liveFairApi.getLiveFairs().$promise
-            .then(function(liveFairs) {
-                $scope.listfairs = liveFairs;
-                $scope.existingFairs = liveFairs;
-                utils.hideLoadingPopup();
-                $scope.failedToResolve = false;
-            }, function(error) {
-                utils.hideLoadingPopup();
-                $scope.failedToResolve = true;
-            }
-        );
-
-        $scope.listfairs = $scope.existingFairs;
-
-/*
-        $scope.listfairs = [
-             {
-                name: "afeira1",
-                date: "15.07.2015 00:00:00",
-                 local: "porto"
-            },
-            {
-                name: "cfeira2",
-                date: "12.06.2015",
-                local: "lisboa"
-            },
-            {
-                name: "zfeira3",
-                date: "12.06.2014",
-                local: "braga"
-            },
-            {
-                name: "bfeira3",
-                date: "16.05.2015",
-                local: "coimbra"
-            }
-        ]*/
-
-        $scope.sortOption = 0;
-
-    }
+    };
 
     $scope.sortFairsByName = function(){
 
@@ -374,10 +345,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
             $scope.sortOption = 2;
             $scope.listfairs = _.sortBy( $scope.listfairs, function(fair) {
                 return fair.date;
-                //var dateOnly = fair.date.split(" ");
-                //var parts = dateOnly[0].split(".");
-                //return (new Date(+parts[2], parts[1]-1, +parts[0])).getTime();
             });
         }
-    }
+    };
 });

@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="card" ng-show="!existingFairs.length && !failedToResolve">
+        <div class="card" ng-show="(results.length == 0 || !listfairs.length) && !failedToResolve">
             <div class="item item-positive item-placeholder item-text-wrap text-center">
                 {{ 'noLiveFairs' | translate }}
             </div>
@@ -56,7 +56,7 @@
 
         <div class="list list-fair-container">
 
-            <div class="item item-text-wrap" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
+            <div class="item item-text-wrap" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation} as results" ng-click="loadFair(fair.liveFairID)">
                 <!--para adicionar avatar: item-avatar-->
                 <!--<img src="http://upload.wikimedia.org/wikipedia/en/thumb/9/97/San_Diego_Comic-Con_International_logo.svg/829px-San_Diego_Comic-Con_International_logo.svg.png">-->
                 <div>
@@ -64,10 +64,7 @@
 
                     <!--<p class=""><b>{{fair.date | date:'dd-MM-yyyy'}} - {{fair.date | date:'dd-MM-yyyy'}}<br></b>-->
                     <p class="text-right calm"><strong class="calm">{{fair.location}}</strong></p>
-
-
                 </div>
-
             </div>
         </div>
 
