@@ -1,0 +1,35 @@
+<ion-view title="'Menu'">
+	<ion-content scroll='false'>
+        
+        <!-- MENU content -->
+        <ion-side-menus>
+	      <ion-side-menu-content> 
+	        <div class="bar bar-header bar-positive">
+	          <button class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></button>
+	          <div class="title">Live Fair App</div>
+	        </div>
+
+	       <ion-nav-view name="menuContent"></ion-nav-view>
+	        
+	      </ion-side-menu-content>
+
+	      <ion-side-menu side="left">
+	  	 	<a class="link">
+	  			<div class="item item-divider">
+					<ion-item nav-clear menu-close class="item-avatar" ng-click="selectItem(0)">
+						<img src="img/User-icon.png">
+						<h2><strong>{{username}}</strong></h2>
+	  				</ion-item>
+		 		</div>
+  			</a>
+	        <ion-list ng-repeat="x in items">
+	          <ion-item nav-clear menu-close ng-click="selectItem($index)">
+	            {{ x.name }}
+	          </ion-item>
+	        </ion-list>
+	      </ion-side-menu>
+            
+	    </ion-side-menus>
+
+	</ion-content>
+</ion-view>

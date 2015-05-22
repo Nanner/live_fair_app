@@ -1,0 +1,46 @@
+<ion-view title="'Profile'">
+	<ion-content scroll='true'>
+
+        <div class="profile-owner-icons">
+            <span ng-show="profileOwner" class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
+            <span ng-show="profileOwner" class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
+        </div>
+
+        <div class="profile-img-container">
+            <img ng-src="{{standProfileInfo.logo}}">
+        </div>
+        
+        <div class="profile-title-container">
+            <h4 class="profile-name"> {{standProfileInfo.name}} </h4>
+            <a class="stand-website" href="{{standProfileInfo.website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+        </div>
+        
+        <div class="card">
+          <div class="item item-divider">
+            {{ 'info' | translate }}
+          </div>
+          <div class="item item-text-wrap">
+            <p> <b> {{ 'aboutus' | translate }}: </b> {{standProfileInfo.description}} </p>
+            <p> <b> {{ 'phone' | translate }}: </b> {{standProfileInfo.phone}} </p>
+            <p> <b> {{ 'address' | translate }}: </b> {{standProfileInfo.address}} </p>
+          </div>
+        </div>
+        
+        <div class="profile-btn-Container-1">
+            <button nav-clear class="myBtn button button-clear button-outline button-positive">
+                {{ 'btnRecomendedStands' | translate }} 
+            </button>
+        </div>
+        <div class="profile-btn-Container">
+            <button nav-clear class="myBtn button button-balanced">
+                {{ 'btnStandEvents' | translate }} 
+            </button>
+        </div> 
+        <div class="profile-btn-Container-2">
+            <button ng-click="saveContact()" class="myBtn button button-positive">
+                {{ 'saveContact' | translate }} 
+            </button>
+        </div>
+             
+    </ion-content>
+</ion-view>
