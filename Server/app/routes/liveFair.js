@@ -4,6 +4,7 @@ var sequelize = require('../models').sequelize;
 
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
+var CompanyEvents = require('../models').CompanyEvents;
 var Stands = require('../models').Stands;
 var Users = require('../models').User;
 var Company = require('../models').Company;
@@ -12,6 +13,7 @@ var LiveFairInterest = require('../models').LiveFairInterest;
 var VisitorLiveFair = require('../models').VisitorLiveFair;
 var LiveFairCompanyInterest = require('../models').LiveFairCompanyInterest;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
+var LiveFairCompanyEvents = require('../models').LiveFairCompanyEvents;
 
 module.exports = function(server){
     server.route({
@@ -246,8 +248,97 @@ module.exports = function(server){
            }));
        }}
    });
+   
+   server.route({
+       method: 'GET',
+       path: '/livefairs/{liveFairid}/companies/{companyID}/events',
+        config:{
+            auth: {
+               mode:'optional',
+               strategy: 'token'
+           },
+       handler: function (request, reply) {
+           var LiveFairID=request.params.liveFairid;
+           var CompanyID=request.params.companyID;
+		  
+           reply(LiveFairCompanyEvents.findAll({
+               where:{
+                   companyIDref:CompanyID,
+                   liveFairIDref:LiveFairID
+               }
+           }
+           ).map(function(companyEvents)
+           {
+                console.log(CompanyEvents.companyEventsIDref);
+               return CompanyEvents.find({
+                   where:{
+                       companyEventsID:companyEvents.companyEventsIDref
+                   }
+               }).then(function(event){
+                   return JSON.stringify(event);
+               });
+           }));
+       }}
+   });
+   
+      server.route({
+       method: 'GET',
+       path: '/livefairs/{liveFairid}/companies/{companyID}/events/{EventID}',
+        config:{
+            auth: {
+               mode:'optional',
+               strategy: 'token'
+           },
+       handler: function (request, reply) {
+           var CompanyEventID=request.params.EventID;
+           
+           reply(CompanyEvents.findAll({
+               where:{
+                    companyEventsID:CompanyEventID
+               }
+           }
+           ).then(function(event){
+                   return JSON.stringify(event);
+               }));
+       }}
+   });
     
-	server.route({
+   server.route({
+        method: 'POST',
+        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/',
+         config:{
+            auth: {
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                 if(!request.payload.interests){
+                    throw new Error('Missing critical fields');
+                 }
+                
+                var LiveFairID = request.params.LiveFairID;
+                var UserID = request.params.UserID;
+                
+                VisitorLiveFair.create({
+					'liveFairLiveFairID': LiveFairID,
+					'visitorVisitorID': UserID
+				}).then(function(){
+                var interests=JSON.parse(request.payload.interests);
+                for(var i=1;i<=interests.length;i+=2){
+                    LiveFairVisitorInterest.create({
+                        'liveFairIDref':LiveFairID,
+                        'interestIDref':interests[i],
+                        'visitorIDref':UserID
+                    });
+                }
+                reply("Adesão à LiveFair concluída com sucesso!")
+                .catch(function(error) {
+                    reply(Boom.badRequest(error.message));
+                });
+            });
+        }}
+    });
+	
+    server.route({
        method: 'GET',
        path: '/livefairs/search/date/{DateStart}/{DateEnd}',
         config:{
@@ -270,35 +361,7 @@ module.exports = function(server){
        }}
    });
    
-   server.route({
-        method: 'POST',
-        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/',
-         config:{
-            auth: {
-               strategy: 'token'
-           },
-            handler: function (request, reply) {
-                
-                var LiveFairID = request.params.LiveFairID;
-                var UserID = request.params.UserID;
-                
-                VisitorLiveFair.create({
-					'liveFairLiveFairID': LiveFairID,
-					'visitorVisitorID': UserID
-				}).then(function(){
-                var interests=JSON.parse(request.payload.interests);
-                for(var i=1;i<=interests.length;i+=2){
-                    LiveFairVisitorInterest.create({
-                        'liveFairIDref':LiveFairID,
-                        'interestIDref':interests[i],
-                        'visitorIDref':UserID
-                    });
-                }
-                reply("Adesão à LiveFair concluída com sucesso!");
-            });
-        }}
-    });
-	
+    
 	server.route({
 	method: 'GET',
 	path: '/livefairs/search/date/{DateStart}&{DateEnd}',

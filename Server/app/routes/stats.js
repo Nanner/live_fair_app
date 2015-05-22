@@ -9,6 +9,7 @@ var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
 var Stands = require('../models').Stands;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
+var Connection = require('../models').Connection;
 
 module.exports = function(server){
 	 server.route({
@@ -63,5 +64,27 @@ module.exports = function(server){
                             }); 
                 }); 
         }}
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairid}/companies/{companyID}/stats/likes',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.companyID;
+                reply (Connection.count({where:{
+                   companyCompanyID:CompanyID,
+                   liked:true
+                },
+                group:'"Connection"."companyCompanyID"'
+                }).then(function(LikeCount){
+                    return JSON.stringify(LikeCount);
+                })
+                );
+           }}
     });    
 };
