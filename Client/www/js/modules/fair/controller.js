@@ -5,28 +5,11 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
-
-
-    //$scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
-
     $scope.loadProfile = function(id) {
-        utils.setProfileIdToOpen(id);
-        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
+        $state.go('menu.profile', {fairID: liveFairID, companyID: id});
     }
 
 });
-
-/*
-module.controller('presentStrandCtrl', function ($scope, $state, $stateParams, utils) {
-
-    $scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
-
-    $scope.loadProfile = function(id) {
-        utils.setProfileIdToOpen(id);
-        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
-    }
-
-});*/
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
     var getEventsFromSameDateMillis = function(millis, events) {

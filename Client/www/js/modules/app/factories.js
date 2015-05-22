@@ -4,8 +4,10 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
     var filtersStartDate;
     var filtersEndDate;
-    var profileIdToOpen;
     var profileInfo;
+    var oldPassword;
+    var newPassword;
+    var confirmNewPassword;
 
     return {
 
@@ -102,20 +104,36 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
             $ionicLoading.hide();
         },
 
-        setProfileIdToOpen: function(profileID) {
-            profileIdToOpen = profileID;
-        },
-
-        getProfileIdToOpen: function() {
-            return profileIdToOpen;
-        },
-
         setProfileInfo: function(profile) {
             profileInfo = profile;
         },
 
         getProfileInfo: function() {
             return profileInfo;
+        },
+
+        setOldPassword: function(oldpwd) {
+            oldPassword = oldpwd;
+        },
+
+        getOldPassword: function() {
+            return oldPassword;
+        },
+
+        setNewPassword: function(pwd) {
+            newPassword = pwd;
+        },
+
+        getNewPassword: function() {
+            return newPassword;
+        },
+
+        setConfirmPassword: function(confirmPwd) {
+            confirmNewPassword = confirmPwd;
+        },
+
+        getConfirmPassword: function() {
+            return confirmNewPassword;
         }
     };
 });

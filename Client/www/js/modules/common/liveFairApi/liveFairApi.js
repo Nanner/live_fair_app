@@ -99,6 +99,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },
 
+        changePassword: function(userID, oldPassword, newPassword) {
+            return $http.post(server.url + '/Users/' + userID + '/update/password', {oldPassword: oldPassword, password: newPassword}, {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
         register: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
             return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, compayName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
             .then(function(response) {

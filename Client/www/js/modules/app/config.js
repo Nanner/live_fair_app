@@ -81,7 +81,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			}
 		})
 		.state('menu.profile', {
-			url: "/profile",
+			url: "/fairs/:fairID/stands/:companyID",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/profile.html",
@@ -217,7 +217,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Keywords mais populares",
         'upcomingFairs' : 'Próximas feiras',
         'sortByDate' : 'Data',
-        'termsAndConditions' : 'Termos & Condições'
+        'termsAndConditions' : 'Termos & Condições',
+        'lowCharPwd': 'A password deve conter no mínimo 8 caractéres',
+        'noMatchPwd': 'As passwords não correspondem',
+		'repeatedPwd': 'New password must not be the same as the last one'
 	});
 
 	$translateProvider.translations('en', {
@@ -295,7 +298,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Most popular keywords",
         'upcomingFairs' : 'Upcoming Fairs',
         'sortByDate' : 'Date',
-        'termsAndConditions' : 'Terms & Conditions'
+        'termsAndConditions' : 'Terms & Conditions',
+        'lowCharPwd': 'Password must contain at least 8 characters',
+		'noMatchPwd': 'Password do not correspond',
+		'repeatedPwd': 'A nova password não pode ser igual à password antiga'
 	});
 
 	$translateProvider.preferredLanguage('pt');
