@@ -296,15 +296,15 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     }
 
     $scope.getFairs = function() {
-        //{
-        //    $scope.listfairs = $scope.existingFairs;
-        //}
-        //
+        {
+            $scope.listfairs = $scope.existingFairs;
+        }
 
+/*
         $scope.listfairs = [
              {
                 name: "afeira1",
-                date: "15.07.2015",
+                date: "15.07.2015 00:00:00",
                  local: "porto"
             },
             {
@@ -322,7 +322,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                 date: "16.05.2015",
                 local: "coimbra"
             }
-        ]
+        ]*/
 
         $scope.sortOption = 0;
 
@@ -345,9 +345,10 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
         }else{
             $scope.sortOption = 2;
             $scope.listfairs = _.sortBy( $scope.listfairs, function(fair) {
-                var dateOnly = fair.date.split(" ");
-                var parts = dateOnly[0].split(".");
-                return (new Date(+parts[2], parts[1]-1, +parts[0])).getTime();
+                return fair.date;
+                //var dateOnly = fair.date.split(" ");
+                //var parts = dateOnly[0].split(".");
+                //return (new Date(+parts[2], parts[1]-1, +parts[0])).getTime();
             });
         }
     }
