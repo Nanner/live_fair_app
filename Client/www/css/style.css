@@ -321,6 +321,7 @@
 /****** Profile *******/
 
 .profile-img-container {
+    text-align: center;
     max-width: 50%;
     margin-top: 10%;
     margin-left: auto;
