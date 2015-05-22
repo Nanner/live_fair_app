@@ -3,15 +3,15 @@ var crypto = require("crypto");
 var uuid = require('node-uuid');
 var Joi = require('joi');
 var fs = require('fs');
+var Boom = require('boom');
 
 var sequelize = require('../models').sequelize;
-
 var User = require('../models').User;
-
 var Company = require('../models').Company;
 var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
-var Boom = require('boom');
+var Connection = require('../models').Connection;
+
 
 var RegisterSchema = Joi.object().keys({
     email: Joi.string().email().required(),
@@ -204,7 +204,7 @@ module.exports = function(server){
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
         config:{
-            auth: {
+            auth: {mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -227,6 +227,7 @@ module.exports = function(server){
                     throw new Error(validate.error.message);
                 }
                 else{
+                    console.log(request.payload);
                     return User.update({
                         'email':request.payload.email,
                         'description':request.payload.description,
@@ -329,7 +330,6 @@ module.exports = function(server){
                         companyID:UserID
                     }
                 }).then(function(company){
-                    console.log("teste");
                     fs.writeFile("./images/profiles/"+request.payload.imageName,request.payload.image,function(err){
                         if(err)
                         {
@@ -342,6 +342,59 @@ module.exports = function(server){
                     reply(Boom.badRequest(error.message));
                 }));
             }
+        }}
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/favorites',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                reply (Connection.findAll({
+                    where:{
+                        visitorVisitorID:UserID
+                    }
+                }).map(function(companies){
+                    return Company.find({
+                        where:{
+                            companyID:companies.companyCompanyID
+                        }});
+                    }).then(function(company){
+                        return JSON.stringify(company);
+                    })
+                );
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/favorite/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                reply (Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':true
+                    }
+                }).then(function(companies){
+                    return JSON.stringify("Like successful");
+                    })
+                );
         }}
     });
     
