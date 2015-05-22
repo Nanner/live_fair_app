@@ -113,7 +113,7 @@
 /******** Register *********/
 
 .register-container {
-    padding-top: 20%;   
+    padding-top: 20%;
 }
 
 .register-title {
@@ -155,12 +155,14 @@
 /********** Fair ***********/
 
 .fair-container {
-  padding-top: 15%;
+    padding-top: 15%;
+    background-color: #11C1F3;
 }
 
 .fair-title {
-  text-align: center;
-  font-weight: bolder;
+    text-align: center;
+    font-weight: bolder;
+    color: darkblue;
 }
 
 .fair-subtitle {
@@ -168,6 +170,27 @@
     margin-right: auto;
     text-align: center;
     font-weight: bold;
+    color: darkblue;
+}
+
+.buttons-container{
+    text-align: center;
+}
+
+.buttons-container > button{
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+    padding-left: 1px;
+    padding-right: 1px;
+
+    display: inline-block;
+    margin-left: 0px !important;
+    width: 33%;
+}
+
+.buttons-container > button.active{
+    /*//    z-index: 1;       //fazer overlay nos butões*/
 }
 
 .fair-map-container {
@@ -237,7 +260,7 @@
     margin: 30px auto;
     text-align: left;
     width: 80%
-}   
+}
 
 .program-th {
     background: url("../img/noise-diagonal.png"), linear-gradient(#777, #444);
@@ -250,7 +273,7 @@
   font-weight: bold;
     padding: 10px 15px;
     position: relative;
-    text-shadow: 0 1px 0 #000;  
+    text-shadow: 0 1px 0 #000;
 }
 
 .program-th:after {
@@ -266,7 +289,7 @@
 }
 
 .program-th:first-child {
-    border-left: 1px solid #777;    
+    border-left: 1px solid #777;
     box-shadow: inset 1px 1px 0 #999;
 }
 
@@ -285,31 +308,31 @@
 
 .program-td:first-child {
     box-shadow: inset 1px 0 0 #fff;
-}   
+}
 
 .program-td:last-child {
     border-right: 1px solid #e8e8e8;
     box-shadow: inset -1px 0 0 #fff;
-}   
+}
 
 .program-td:last-of-type td {
-    box-shadow: inset 0 -1px 0 #fff; 
+    box-shadow: inset 0 -1px 0 #fff;
 }
 
 .program-td:last-of-type td:first-child {
     box-shadow: inset 1px -1px 0 #fff;
-}   
+}
 
 .program-td:last-of-type td:last-child {
     box-shadow: inset -1px -1px 0 #fff;
-}   
+}
 
 .program-tr {
-    background: url("../img/noise-diagonal.png");  
+    background: url("../img/noise-diagonal.png");
 }
 
 .program-tr:nth-child(odd) td {
-    background: #f1f1f1 url("../img/noise-diagonal.png");  
+    background: #f1f1f1 url("../img/noise-diagonal.png");
 }
 
 /********** Event ***********/
