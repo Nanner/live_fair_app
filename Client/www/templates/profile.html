@@ -6,8 +6,9 @@
             <span ng-show="profileOwner" class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
         </div>
 
-        <div class="profile-img-container" ng-show="standProfileInfo[1].logoImage != null">
-            <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logoImage}}"/>
+        <!--editar o container, botao de opçoes interfere com formataçao-->
+        <div class="profile-img-container">
+            <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
         </div>
         
         <div class="profile-title-container">
@@ -25,19 +26,29 @@
             <p> <b> {{ 'address' | translate }}: </b> {{standProfileInfo[1].address}} </p>
           </div>
         </div>
-        
-        <div class="profile-btn-Container-1">
-            <button nav-clear class="myBtn button button-clear button-outline button-positive">
-                {{ 'btnRecomendedStands' | translate }} 
-            </button>
+
+        <div class="card">
+          <div class="item item-divider">
+            {{ 'interests' | translate }}
+          </div>
+          <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
+            <p><span class="ion-android-radio-button-on"> {{interest.name}} </span> </p>
+          </div>
         </div>
+
+        <!--<div class="profile-btn-Container-1">-->
+            <!--<button nav-clear class="myBtn button button-clear button-outline button-positive">-->
+                <!--{{ 'btnRecomendedStands' | translate }} -->
+            <!--</button>-->
+        <!--</div>-->
+
         <div class="profile-btn-Container">
-            <button nav-clear class="myBtn button button-balanced">
+            <button nav-clear class="save-contact-btn button button-balanced">
                 {{ 'btnStandEvents' | translate }} 
             </button>
         </div> 
         <div class="profile-btn-Container-2">
-            <button ng-click="saveContact()" class="myBtn button button-positive">
+            <button ng-click="saveContact()" class="save-contact-btn button button button-calm">
                 {{ 'saveContact' | translate }} 
             </button>
         </div>

@@ -3,18 +3,19 @@
 
         <!-- Template content -->
         <div class="home-container" ng-controller="homeCtrl">
-            <h1 class="home-title ion-ios-body"></h1>
-            <h1 class="home-title"> Live Fair </h1>
-
-            <div class="home-existing-user">
+            <div class="item-image padding-bottom">
+                <img style="max-width: 45%" src="img/livefairapp.png">
+            </div>
+            <br><br>
+            <div class="home-existing-user padding-top">
                 <span class="center"> {{ 'existingUser' | translate }} </span>
                 <div class="myBtn-Container">
-                    <button class="myBtn button button-outline button-positive" ng-click="loadLogin()"> <strong> {{ 'enter' | translate }} </strong> </button>
+                    <button nav-clear ng-click="loadLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
                 </div>
             </div>
 
             <div class="home-registerBtn-container">
-                <button class="myBtn button button-outline button-assertive" ng-click="loadRegistration()"> <strong> {{ 'register' | translate }} </strong> </button>
+                <button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
             </div>
 
             <div class="bar-footer bar" style="padding-top: 0px;">

@@ -224,7 +224,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"matchpercentage": "Percentagem de matches",
 		"clicks": "Cliques",
 		"contactsEstablished": "Contactos estabelecidos",
-		"popKeywords": "Keywords mais populares"
+		"popKeywords": "Keywords mais populares",
+        'upcomingFairs' : 'Próximas feiras',
+        'sortByDate' : 'Data',
+        'termsAndConditions' : 'Termos & Condições'
 	});
 
 	$translateProvider.translations('en', {
@@ -299,8 +302,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"matchpercentage": "Match percentage",
 		"clicks": "Clicks",
 		"contactsEstablished": "Established contacts",
-		"popKeywords": "Most popular keywords"
-
+		"popKeywords": "Most popular keywords",
+        'upcomingFairs' : 'Upcoming Fairs',
+        'sortByDate' : 'Date',
+        'termsAndConditions' : 'Terms & Conditions'
 	});
 
 	$translateProvider.preferredLanguage('pt');
