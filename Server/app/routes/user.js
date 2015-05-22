@@ -389,7 +389,7 @@ module.exports = function(server){
                     },
                     defaults:{'visitorVisitorID':UserID,
                     'companyCompanyID':CompanyID,
-                    'like':true
+                    'liked':true
                     }
                 }).then(function(companies){
                     return JSON.stringify("Like successful");
