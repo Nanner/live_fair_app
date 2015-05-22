@@ -49,16 +49,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/listfairs.html",
 					controller: "listFairsCtrl"
 				}
-			},
-			resolve: {
-				listfairs: function(liveFairApi, $stateParams) {
-					return liveFairApi.getLiveFairs().$promise
-						.then(function(liveFairs) {
-							return liveFairs;
-						}, function(error) {
-							return "failed to resolve";
-						});
-				}
 			}
 		})
 		.state('menu.presentStands', {
@@ -150,16 +140,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				'menuContent' :{
 					templateUrl: "templates/searchFairs.html",
 					controller: "searchFairCtrl"
-				}
-			},
-			resolve: {
-				listfairs: function(liveFairApi, $stateParams) {
-					return liveFairApi.getLiveFairs().$promise
-						.then(function(liveFairs) {
-							return liveFairs;
-						}, function(error) {
-							return "failed to resolve";
-						});
 				}
 			}
 		});

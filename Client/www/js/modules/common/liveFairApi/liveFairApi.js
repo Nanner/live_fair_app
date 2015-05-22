@@ -63,7 +63,6 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             authService.loginCancelled();
         },
         getLiveFairs: function() {
-            utils.showLoadingPopup();
             return LiveFair.query();
         },
         getLiveFair: function(fairID) {

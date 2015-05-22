@@ -1,5 +1,5 @@
 <ion-view title="'ListFairs'">
-    <ion-content scroll='true'>
+    <ion-content scroll='true' ng-init="loadFairs()">
 
         <!-- Content -->
         <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
@@ -36,7 +36,6 @@
                 </div>
             </div>
         </div>
-        <div ng-init="closeLoading()"></div>
 
     </ion-content>
 </ion-view>

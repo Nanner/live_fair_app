@@ -133,14 +133,9 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils) {
-    $scope.failedToResolve = listfairs == "failed to resolve";
-    if($scope.failedToResolve) {
-        utils.hideLoadingPopup();
-        return;
-    }
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
-    $scope.listfairs = listfairs;
+    $scope.listfairs = "";
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -152,8 +147,17 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         $state.go('menu.fair', {fairID: fairID});
     }
 
-    $scope.closeLoading = function() {
-         utils.hideLoadingPopup();  
+    $scope.loadFairs = function() {
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairs().$promise
+            .then(function(liveFairs) {
+                $scope.listfairs = liveFairs;
+                utils.hideLoadingPopup(); 
+                $scope.failedToResolve = false;
+            }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = true; 
+        });        
     }
 });
 
@@ -209,20 +213,14 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
 });
 
-module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, listfairs) {
+module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
 
     $scope.startDate = "";
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
     $scope.listfairs = "";
-    $scope.failedToResolve = listfairs == "failed to resolve";
-    if($scope.failedToResolve) {
-        utils.hideLoadingPopup();
-        return;
-    }
-
-    $scope.existingFairs = listfairs;
+    $scope.existingFairs = [];
 
     var actualDate = new Date();
     var day = actualDate.getUTCDate();
@@ -306,10 +304,20 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     }
 
     $scope.getFairs = function() {
-        $scope.listfairs = $scope.existingFairs;
-    }
+        
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairs().$promise
+           .then(function(liveFairs) {
+                $scope.listfairs = liveFairs;
+                $scope.existingFairs = liveFairs;
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = false;
+           }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = true;
+            }
+        );
 
-    $scope.closeLoading = function() {
-         utils.hideLoadingPopup();  
+        $scope.listfairs = $scope.existingFairs;
     }
 });
