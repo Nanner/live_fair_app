@@ -9,6 +9,7 @@ var Users = require('../models').User;
 var Company = require('../models').Company;
 var Interest = require('../models').Interest;
 var LiveFairInterest = require('../models').LiveFairInterest;
+var VisitorLiveFair = require('../models').VisitorLiveFair;
 var LiveFairCompanyInterest = require('../models').LiveFairCompanyInterest;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
 
@@ -277,8 +278,14 @@ module.exports = function(server){
                strategy: 'token'
            },
             handler: function (request, reply) {
+                
                 var LiveFairID = request.params.LiveFairID;
                 var UserID = request.params.UserID;
+                
+                VisitorLiveFair.create({
+					'liveFairLiveFairID': LiveFairID,
+					'visitorVisitorID': UserID
+				}).then(function(){
                 var interests=JSON.parse(request.payload.interests);
                 for(var i=1;i<=interests.length;i+=2){
                     LiveFairVisitorInterest.create({
@@ -287,7 +294,8 @@ module.exports = function(server){
                         'visitorIDref':UserID
                     });
                 }
-                reply("Interesses selecionados corretamente");
+                reply("Adesão à LiveFair concluída com sucesso!");
+            });
         }}
     });
 	

@@ -293,6 +293,7 @@ module.exports = function(server){
                 var UserID = request.params.UserID;
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
+                oldPassHash.update(request.payload.oldPasword);
                 passHash.update(request.payload.password);
                 reply(User.update({
                     'password':passHash.digest('hex')
