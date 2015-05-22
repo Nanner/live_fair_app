@@ -8,6 +8,7 @@ var Company = require('../models').Company;
 var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
 var Stands = require('../models').Stands;
+var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
 
 module.exports = function(server){
 	 server.route({
@@ -45,16 +46,22 @@ module.exports = function(server){
             handler: function (request, reply) {
                 var LiveFairID = request.params.livefairid;
                 var CompanyID = request.params.companyid;
-                  Company.find({
-                      where:{companyID:CompanyID}
-                  }).then(function(company){
-                      Stands.find({
-                          where:{companyCompanyID:CompanyID,liveFairLiveFairID:LiveFairID}
-                      }).then(function(stand){
-                          console.log(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
-                          reply(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
-                      });
-             });  
+                  sequelize.query('SELECT interest.interest, count(distinct("liveFairVisitorInterest"."visitorIDref"))FROM interest,"liveFairCompanyInterest","liveFairVisitorInterest"WHERE"liveFairCompanyInterest"."liveFairIDref" IS NOT NULL AND "liveFairCompanyInterest"."companyIDref" IS NOT NULL AND "liveFairCompanyInterest"."interestIDref" IS NOT NULL AND "liveFairVisitorInterest"."liveFairIDref" IS NOT NULL AND "liveFairVisitorInterest"."visitorIDref" IS NOT NULL AND "liveFairVisitorInterest"."interestIDref" IS NOT NULL AND "liveFairCompanyInterest"."liveFairIDref" = ? AND "liveFairVisitorInterest"."liveFairIDref" = ? AND "liveFairCompanyInterest"."companyIDref" = ? AND "liveFairVisitorInterest"."interestIDref" = "liveFairCompanyInterest"."interestIDref" AND interest."interestID" = "liveFairVisitorInterest"."interestIDref" AND interest."interestID" = "liveFairCompanyInterest"."interestIDref" GROUP BY interest."interestID"',
+                        { replacements: [LiveFairID,LiveFairID,CompanyID], type: sequelize.QueryTypes.SELECT }
+                        ).then(function(interestCount) {
+                            LiveFairVisitorInterest.count({
+                                where:{
+                                   liveFairIDref: LiveFairID
+                                }
+                            }).then(function(visitorCount){
+                                var visitorInterestCounter=0;
+                                for(var i=0;i<interestCount.length;i++){
+                                    visitorInterestCounter+=parseInt(interestCount[i].count);
+                                }
+                                var percentil=visitorInterestCounter/visitorCount*100;
+                                reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
+                            }); 
+                }); 
         }}
     });    
 };
