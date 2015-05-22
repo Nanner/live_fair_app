@@ -172,8 +172,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                     text: '<b>' + $translate.instant('submit') + '</b>',
                     type: 'button-positive',
                     onTap: function(e) {
-                        //verificar se password actual corresponde
-                        //fazer pedido ao servidor para mudar password
+                        
                         console.log("tapped submit button");
                     }
                 }

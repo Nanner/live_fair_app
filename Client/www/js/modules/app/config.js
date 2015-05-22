@@ -51,16 +51,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
-		/*
-		.state('menu.presentStands', {
-			url: "/presentStands",
-			views: {
-				'menuContent' :{
-					templateUrl: "templates/presentStands.html",
-					controller: "presentStrandCtrl"
-				}
-			}
-		})*/
 		.state('menu.fairStands', {
 			url: "/fairs/:fairID/stands",
 			views: {
