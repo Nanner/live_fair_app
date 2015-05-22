@@ -1,14 +1,17 @@
 var module = angular.module('starter');
 
-module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state, $stateParams) {
+module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state, $stateParams, $translate) {
     
     $scope.username = "AMT Consulting";
+    var settingsName = $translate.instant('settings');
     $scope.items = [
         {path: "menu.home", name: "Home"},
         {path: "menu.login", name: "Login"},
         {path: "menu.register", name: "Registo"},
         {path: "menu.listfairs", name: "Feiras"},
-        {path: "menu.searchFairs", name: "Pesquisa"}];
+        {path: "menu.searchFairs", name: "Pesquisa"},
+        {path: "menu.settings", name: settingsName}
+    ];
 
     $scope.toggleLeft = function() {
 		$ionicSideMenuDelegate.toggleLeft();

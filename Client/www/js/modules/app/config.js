@@ -143,6 +143,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "searchFairCtrl"
 				}
 			}
+		})
+		.state('menu.settings', {
+			url: "/settings",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/settings.html",
+					controller: "settingsCtrl"
+				}
+			}
 		});
 
 	//Default startup screen
@@ -227,7 +236,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Keywords mais populares",
         'upcomingFairs' : 'Próximas feiras',
         'sortByDate' : 'Data',
-        'termsAndConditions' : 'Termos & Condições'
+        'termsAndConditions' : 'Termos & Condições',
+		'settings' : 'Definições',
+		'language' : 'Idioma'
 	});
 
 	$translateProvider.translations('en', {
@@ -305,7 +316,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Most popular keywords",
         'upcomingFairs' : 'Upcoming Fairs',
         'sortByDate' : 'Date',
-        'termsAndConditions' : 'Terms & Conditions'
+        'termsAndConditions' : 'Terms & Conditions',
+		'settings' : "Settings",
+		'language' : "Language"
 	});
 
 	$translateProvider.preferredLanguage('pt');
