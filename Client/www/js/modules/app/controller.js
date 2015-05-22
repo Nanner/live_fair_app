@@ -17,6 +17,7 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $state,
     
     $scope.selectItem = function($index) {
         //TODO: Do we need $stateParams, { reload: true, inherit: false, notify: true }
-        $state.go($scope.items[$index].path);
+        //$state.go($scope.items[$index].path);
+        $state.transitionTo($scope.items[$index].path, $stateParams, {reload: true,inherit: false,notify: true});
     }
 });

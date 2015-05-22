@@ -3,7 +3,7 @@ var module = angular.module('profileModule');
 module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera, liveFairApi) {
     
     $scope.profileOwner = true;
-    $scope.standProfileInfo = {id: "06be5ca6-9993-7e3a-ce6c-3efd89e6cae4", name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
+    //$scope.standProfileInfo = {id: "06be5ca6-9993-7e3a-ce6c-3efd89e6cae4", name: "Amt Consulting", logo: "img/Amt consulting.png", website: "http://www.amt-consulting.pt/", description: "Campo opcional que deverá conter uma espécie de About us", phone: 210174833, email: "amatteroftrust@amt-consulting.com", address: "Avenida Tomás Ribeiro n43 Bloco 2A Piso 4E"};
     $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
     $scope.saveContact = function() {
@@ -26,6 +26,17 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
     var emptyFields = [1,1,1,1];
+
+    $scope.loadProfile = function() {
+        var profileID = utils.getProfileIdToOpen();
+        liveFairApi.getProfile(profileID).$promise
+            .then(function(profile) {
+                $scope.standProfileInfo = profile;
+                $scope.failedToResolve = false;
+            }, function(error) {
+                $scope.failedToResolve = true; 
+        });
+    }
 
     $scope.editProfile = function() {
     	$state.transitionTo('menu.editProfile', $stateParams, { reload: true, inherit: false, notify: true });

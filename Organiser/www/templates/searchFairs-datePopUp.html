@@ -1,0 +1,18 @@
+<div class="list" ng-controller="searchFairCtrl">
+	<div class="item item-divider filter-date-title">
+		<strong>"{{'filterByDate' | translate }}"</strong>
+	</div>
+
+	<div class="list list-inset">
+		<label class="item item-input">
+			<i class="form-icon ion-ios-calendar placeholder-icon"></i>
+			<input placeholder="{{ 'startDate' | translate }}" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="startDate" ng-change="verifyDate()">
+		</label>
+	</div>
+	<div class="list list-inset">
+		<label class="item item-input">
+			<i class="form-icon ion-ios-calendar placeholder-icon"></i>
+			<input placeholder="{{ 'endDate' | translate }}" class="textbox-n" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="endDate" ng-change="verifyDate()">
+		</label>
+	</div>
+</div>

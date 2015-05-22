@@ -1,9 +1,10 @@
 var module = angular.module('starter');
 
-module.factory('utils', function ($http, $q, $ionicPopup) {
+module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
     var filtersStartDate;
     var filtersEndDate;
+    var profileIdToOpen;
 
     return {
 
@@ -88,7 +89,25 @@ module.factory('utils', function ($http, $q, $ionicPopup) {
 
         getEndDate: function() {
             return filtersEndDate;
-        }
+        },
+
+        showLoadingPopup: function() {
+            $ionicLoading.show({
+                template: 'Aguarde...'
+            });
+        },
+
+        hideLoadingPopup: function() {
+            $ionicLoading.hide();
+        },
+
+        setProfileIdToOpen: function(profileID) {
+            profileIdToOpen = profileID;
+        },
+
+        getProfileIdToOpen: function() {
+            return profileIdToOpen;
+        } 
     };
 });
 

@@ -1,4 +1,6 @@
 var Promise = require("bluebird");
+var Boom = require("boom");
+var sequelize = require('../models').sequelize;
 
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
@@ -8,6 +10,7 @@ var Company = require('../models').Company;
 var Interest = require('../models').Interest;
 var LiveFairInterest = require('../models').LiveFairInterest;
 var LiveFairCompanyInterest = require('../models').LiveFairCompanyInterest;
+var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
 
 module.exports = function(server){
     server.route({
@@ -207,7 +210,6 @@ module.exports = function(server){
         path: '/livefairs/{id}/interests',
          config:{
             auth: {
-               mode: 'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -217,13 +219,33 @@ module.exports = function(server){
                     .map(function(interest) {
                         return Interest.find({where: {interestID: interest.interestInterestID}});
                     })
-                    .then(function(companies) {
-                        return JSON.stringify(companies);
+                    .then(function(interest) {
+                        return JSON.stringify(interest);
                     })
             );
         }}
     });
 	
+    server.route({
+       method: 'GET',
+       path: '/livefairs/{liveFairid}/companies/{UserID}/matches',
+        config:{
+            auth: {
+               strategy: 'token'
+           },
+       handler: function (request, reply) {
+           var LiveFairID=request.params.liveFairid;
+           var UserID=request.params.UserID;
+		   
+           reply( sequelize.query('SELECT company."companyID",company."companyName" FROM company,"liveFairCompanyInterest","liveFairVisitorInterest" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" GROUP BY company."companyID"',
+                        { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
+           ).then(function(companies)
+           {
+               return JSON.stringify(companies);
+           }));
+       }}
+   });
+    
 	server.route({
        method: 'GET',
        path: '/livefairs/search/date/{DateStart}/{DateEnd}',
@@ -249,22 +271,23 @@ module.exports = function(server){
    
    server.route({
         method: 'POST',
-        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/{Interests}',
+        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/',
          config:{
             auth: {
                strategy: 'token'
            },
             handler: function (request, reply) {
-            var liveFairId=request.params.id;
-            reply(
-                LiveFairInterest.findAll({where: {liveFairLiveFairID: liveFairId}})
-                    .map(function(interest) {
-                        return Interest.find({where: {interestID: interest.interestInterestID}});
-                    })
-                    .then(function(companies) {
-                        return JSON.stringify(companies);
-                    })
-            );
+                var LiveFairID = request.params.LiveFairID;
+                var UserID = request.params.UserID;
+                var interests=JSON.parse(request.payload.interests);
+                for(var i=1;i<=interests.length;i+=2){
+                    LiveFairVisitorInterest.create({
+                        'liveFairIDref':LiveFairID,
+                        'interestIDref':interests[i],
+                        'visitorIDref':UserID
+                    });
+                }
+                reply("Interesses selecionados corretamente");
         }}
     });
 	
@@ -290,4 +313,6 @@ module.exports = function(server){
 			}));
 		}}
 	});
+    
+    
 };

@@ -1,5 +1,5 @@
 <ion-view title="'ListFairs'">
-    <ion-content scroll='true'>
+    <ion-content scroll='true' ng-init="loadFairs()">
 
         <!-- Content -->
         <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
@@ -22,7 +22,6 @@
         </div>
 
         <div ng-show="listfairs.length && !failedToResolve" ng-repeat="fair in listfairs">
-
             <div class="card">
                 <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
                     <h2> {{fair.name}} </h2>
@@ -36,7 +35,6 @@
                     <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
                 </div>
             </div>
-
         </div>
 
     </ion-content>

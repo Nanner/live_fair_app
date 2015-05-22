@@ -1,4 +1,4 @@
 angular.module('configModule', []).constant('server', {
-        url: 'http://localhost:3000'
+        url: 'http://172.30.6.165:3000'
     }
 );

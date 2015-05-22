@@ -1,0 +1,26 @@
+<ion-view title="'Stands'">
+    <ion-content scroll='true'>
+    
+        <div class="fair-container">
+            <h3 class="fair-title">{{fair.name}}</h3>
+            <h4 class="fair-subtitle">{{ 'attendingStands' | translate }}</h4>
+        </div>
+
+        <div class="card" ng-hide="fairStands.length">
+            <div class="item item-positive item-placeholder item-text-wrap text-center">
+                {{ 'noStands' | translate }}
+            </div>
+        </div>
+        
+        <div class="list stands-list">
+            <div ng-repeat="stand in fairStands">
+                <a class="item item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
+                  <img no-image ng-src="{{stand.logoImage}}">
+                  <h2>{{stand.companyName}}</h2>
+                  <p>{{stand.website}}</p>
+                </a>
+            </div>
+        </div>
+    
+    </ion-content>
+</ion-view>
