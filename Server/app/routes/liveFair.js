@@ -231,7 +231,6 @@ module.exports = function(server){
        path: '/livefairs/{liveFairid}/companies/{UserID}/matches',
         config:{
             auth: {
-               mode: 'optional',
                strategy: 'token'
            },
        handler: function (request, reply) {
