@@ -4,6 +4,7 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
     var filtersStartDate;
     var filtersEndDate;
+    var profileIdToOpen;
 
     return {
 
@@ -98,7 +99,15 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
         hideLoadingPopup: function() {
             $ionicLoading.hide();
-        }
+        },
+
+        setProfileIdToOpen: function(profileID) {
+            profileIdToOpen = profileID;
+        },
+
+        getProfileIdToOpen: function() {
+            return profileIdToOpen;
+        } 
     };
 });
 

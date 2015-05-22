@@ -11,11 +11,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
-    /* Not being used
-    var Register = $resource(server.url + '/register', {email: '@email', password: '@password', type: '@type', address: '@address', compayName: '@companyName', website: '@website'});
-    */
-
     var IncrementCounter = $resource(server.url + '/Users/:companyID/counter', {companyID: '@companyID'});
+
+    var Profile = $resource(server.url + '/Users/:id', {id : '@id'});
 
     var api = {
 
@@ -78,10 +76,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             return Schedule.query({liveFairID: fairID});
         },
 
-        /* NOT BEING USED
-        postRegister: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
-            return Register.save({email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, companyName: companyNameToSend, website: websiteToSend});
-        },*/
+        getProfile: function(userID) {
+            return Profile.query({id: userID});
+        },
 
         register: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
             return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, compayName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
