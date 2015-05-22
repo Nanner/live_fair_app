@@ -1,5 +1,6 @@
 var Promise = require("bluebird");
 var Boom = require("boom");
+var sequelize = require('../models').sequelize;
 
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
@@ -225,6 +226,27 @@ module.exports = function(server){
         }}
     });
 	
+    server.route({
+       method: 'GET',
+       path: '/livefairs/{liveFairid}/companies/{UserID}/matches',
+        config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+       handler: function (request, reply) {
+           var LiveFairID=request.params.liveFairid;
+           var UserID=request.params.UserID;
+		   
+           reply( sequelize.query('SELECT company."companyID",company."companyName" FROM company,"liveFairCompanyInterest","liveFairVisitorInterest" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" GROUP BY company."companyID"',
+                        { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
+           ).then(function(companies)
+           {
+               return JSON.stringify(companies);
+           }));
+       }}
+   });
+    
 	server.route({
        method: 'GET',
        path: '/livefairs/search/date/{DateStart}/{DateEnd}',
@@ -292,4 +314,6 @@ module.exports = function(server){
 			}));
 		}}
 	});
+    
+    
 };
