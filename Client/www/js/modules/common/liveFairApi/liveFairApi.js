@@ -80,6 +80,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             return Profile.query({id: userID});
         },
 
+        editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {
+            return $http.post(server.url + '/Users/' + userID + '/update', {companyName: name, email: emailToSend, address: addressToSend, contact: contactToSend, website: websiteToSend, description: descritionToSend}, {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
         register: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
             return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, compayName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
             .then(function(response) {

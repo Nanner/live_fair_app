@@ -53,6 +53,14 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         $scope.validatePhoneCallback();
     }
 
+    $scope.validate = function() {
+        $scope.validateNameCallback();
+        $scope.validateEmailCallback();
+        $scope.validateWebsiteCallback();
+        $scope.validateAddressCallback();
+        $scope.validatePhoneCallback();
+    }
+
     $scope.validateNameCallback = function() {
         var pattern = /^[A-Za-z][A-Za-z -]*[A-Za-z]$/;
         if($scope.standProfileInfo[1].companyName.length === 0) {
@@ -205,8 +213,19 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
 
         if(!existsEmptyField && !existsNotValidField) { 
             //all good make request to the server
-            console.log($scope.standProfileInfo);
+            liveFairApi.editProfile($scope.standProfileInfo[0].userID, $scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].description, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[1].address, $scope.standProfileInfo[0].email, $scope.standProfileInfo[1].website).
+                then(function(data) {
+                    utils.showAlert(data, "Sucesso");
+                    $state.go('menu.profile');
+                }, function(error) {
+                    liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
+                        .then(function(profile) {
+                            $scope.standProfileInfo = profile;
+                            $scope.validate();
+                        }, function(error) {
+                    });
+                    utils.showAlert("Error", "Error");
+            });
         }
     }
-
 });
