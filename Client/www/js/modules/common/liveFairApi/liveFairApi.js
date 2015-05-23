@@ -62,29 +62,42 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                 });
         },
         logout: function() {
-            $http.post('http://logout', {}, { ignoreAuthModule: true })
-                .finally(function(data) {
-                    var promises = [];
-                    promises.push($localForage.removeItem('token'));
-                    promises.push($localForage.removeItem('userID'));
-                    promises.push($localForage.removeItem('userEmail'));
-                    promises.push($localForage.removeItem('userType'));
-                    promises.push($localForage.setItem('isAuthenticated', false));
-                    $q.all(promises).then(function() {
-                        $rootScope.isAuthenticated = false;
-                        $rootScope.$broadcast('event:auth-logout-complete');
-                    });
+            var promises = [];
+            promises.push($localForage.removeItem('token'));
+            promises.push($localForage.removeItem('userID'));
+            promises.push($localForage.removeItem('userEmail'));
+            promises.push($localForage.removeItem('userType'));
+            promises.push($localForage.setItem('isAuthenticated', false));
+            $q.all(promises).then(function() {
+                $rootScope.isAuthenticated = false;
+                $rootScope.$broadcast('event:auth-logout-complete');
+            });
 
-                    delete $http.defaults.headers.common.Authorization;
+            delete $http.defaults.headers.common.Authorization;
 
-                    //$localStorage.remove('token');
-                    //$localStorage.remove('userID');
-                    //$localStorage.remove('userEmail');
-                    //$localStorage.remove('userType');
-                    //
-                    //delete $http.defaults.headers.common.Authorization;
-                    //$rootScope.$broadcast('event:auth-logout-complete');
-                });
+            //$http.post('http://logout', {}, { ignoreAuthModule: true })
+            //    .finally(function(data) {
+            //        var promises = [];
+            //        promises.push($localForage.removeItem('token'));
+            //        promises.push($localForage.removeItem('userID'));
+            //        promises.push($localForage.removeItem('userEmail'));
+            //        promises.push($localForage.removeItem('userType'));
+            //        promises.push($localForage.setItem('isAuthenticated', false));
+            //        $q.all(promises).then(function() {
+            //            $rootScope.isAuthenticated = false;
+            //            $rootScope.$broadcast('event:auth-logout-complete');
+            //        });
+            //
+            //        delete $http.defaults.headers.common.Authorization;
+            //
+            //        //$localStorage.remove('token');
+            //        //$localStorage.remove('userID');
+            //        //$localStorage.remove('userEmail');
+            //        //$localStorage.remove('userType');
+            //        //
+            //        //delete $http.defaults.headers.common.Authorization;
+            //        //$rootScope.$broadcast('event:auth-logout-complete');
+            //    });
         },
         loginCancelled: function() {
             authService.loginCancelled();
