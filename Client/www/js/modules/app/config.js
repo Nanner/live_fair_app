@@ -348,16 +348,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'logoutConfirmMessage' : "Are you sure you want to logout of your account?"
 	});
 
-	//$translateProvider.preferredLanguage('en');
+	$translateProvider.useLocalStorage();
+	$translateProvider.preferredLanguage('en');
 
 	//camera stuff
 	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
-	.run(function($localForage, $translate) {
-
-		// Set the language to the one the user defined in the settings, if any.
-		$localForage.getItem('language').then(function(language) {
-			console.log("setting:" + language);
-			$translate.use(language || 'en');
-		});
-	});
+});

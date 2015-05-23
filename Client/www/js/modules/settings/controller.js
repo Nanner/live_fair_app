@@ -7,15 +7,11 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
     });
 
     // Change language
-    console.log($translate.use());
-    console.log($translate.proposedLanguage());
     $scope.currentLanguage =  $translate.use() || $translate.proposedLanguage();
-    console.log($scope.currentLanguage);
     $scope.changeLanguage = function(newLanguage) {
         $translate.use(newLanguage);
         $localForage.setItem('language', newLanguage);
         $scope.currentLanguage = newLanguage;
-        console.log(newLanguage);
     };
 
     //Change password

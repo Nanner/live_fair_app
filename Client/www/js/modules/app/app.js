@@ -22,7 +22,8 @@ angular.module('starter',
         'ngResource',
         'pascalprecht.translate',
         'http-auth-interceptor',
-        'LocalForageModule'
+        'LocalForageModule',
+        'ngCookies'
     ]
 )
     .constant('_', _);

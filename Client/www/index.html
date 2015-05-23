@@ -40,6 +40,15 @@
     <script src="lib/localforage/dist/localforage.min.js"></script>
     <script src="lib/angular-localForage/dist/angular-localForage.js"></script>
 
+    <!-- angular translate -->
+    <script src="lib/angular-translate/angular-translate.min.js"></script>
+    <!-- angular cookies script (for angular translate storage fallback -->
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+    <!-- angular translate cookies (for angular translate storage fallback) -->
+    <script src="lib/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <!-- angular translate local storage (for angular translate storage) -->
+    <script src="lib/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+
     <!-- your app's js -->
     <script src="js/modules/app/app.js"></script>
     <script src="js/modules/app/config.js"></script>
@@ -57,7 +66,6 @@
     <script src="js/modules/profile/controller.js"></script>
     <script src="js/modules/settings/controller.js"></script>
     <script src="lib/sha-256/sha-256.js"></script>
-    <script src="lib/angular-translate/angular-translate.min.js"></script>
   </head>
   <body>
       <ion-nav-view name="applicationContent"></ion-nav-view>
