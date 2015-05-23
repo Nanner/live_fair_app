@@ -1,36 +1,38 @@
-<ion-view title="'Home'">
+﻿<ion-view title="'Home'">
     <ion-content scroll='true'>
 
         <!-- Template content -->
         <div class="home-container" ng-controller="homeCtrl">
 
-            <!--<div class="home-existing-user padding-top">-->
-                <!--<span class="center"> {{ 'existingUser' | translate }} </span>-->
-                <!--<div class="myBtn-Container">-->
-                    <!--<button nav-clear ng-click="loadLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>-->
-                <!--</div>-->
-            <!--</div>-->
+            <h1 class="settings-title"> <span class="ion-android-settings"></span> {{ 'settings' | translate }} </h1>
 
             <div class="list padding">
-
-                <div class="list list-inset">
+                <div class="list list-inset" ng-show="isAuthenticated">
                     <label class="item item-input">
-                        <input type="text" placeholder="First Name">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="oldPassword" placeholder="{{ 'oldPassword' | translate }}" ng-change="oldPasswordCallback()">
                     </label>
                     <label class="item item-input">
-                        <input type="text" placeholder="Last Name">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="newPassword" placeholder="{{ 'newPassword' | translate }}" ng-change="newPasswordCallback()">
+                    </label>
+                    <label class="item item-input">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
+                    </label>
                     </label>
 
-                    <button class="button button-block button-positive">{{'changePassword' | translate}}</button>
+                    <button class="button button-block button-positive" ng-click="changePassword()">{{'changePassword' | translate}}</button>
                 </div>
 
+                <br><br>
                 <label class="item item-input item-select padding">
                     <div class="input-label">
                         {{'language' | translate}}
                     </div>
-                    <select>
-                        <option>Portuguese</option>
-                        <option selected>English</option>
+                    <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
+                        <option value="pt">Português</option>
+                        <option value="en">English</option>
                     </select>
                 </label>
             </div>
@@ -39,9 +41,9 @@
 
     </ion-content>
 
-    <div class="ionic-body">
+    <div class="ionic-body" ng-show="isAuthenticated">
         <div class="bar bar-footer center">
-            <button class="button button-block button-stable"><strong>Logout</strong></button>
+            <button class="button button-block button-stable" ng-click="logoutUser()"><strong>{{ 'logout' | translate }}</strong></button>
         </div>
     </div>
 </ion-view>

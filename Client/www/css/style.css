@@ -152,6 +152,41 @@
 .terms-icon{
 }
 
+/******** Settings *********/
+
+.settings-container {
+    padding-top: 20%;
+}
+
+.settings-title {
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 3%;
+    color: darkblue;
+}
+
+.settings-checkbox {
+    padding-bottom: 5%;
+}
+
+.green-icon {
+    color : green;
+}
+
+.red-icon {
+    color: red;
+}
+
+.neutral-icon {
+}
+
+/*.settings-btn {*/
+    /*width: 95%;*/
+/*}*/
+
+.terms-icon{
+}
+
 /********** Fair ***********/
 
 .fair-container {

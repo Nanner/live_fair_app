@@ -246,7 +246,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'lackInfoCompany': 'Esta empresa não se encontra a partilhar esta informação consigo',
 		'settings' : 'Definições',
 		'language' : 'Idioma',
-		'profile' : 'Perfil'
+		'profile' : 'Perfil',
+		'logout' : "Terminar sessão"
 	});
 
 	$translateProvider.translations('en', {
@@ -335,7 +336,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'lackInfoCompany': 'This company have not shared this information with you',
 		'settings' : "Settings",
 		'language' : "Language",
-		'profile' : "Profile"
+		'profile' : "Profile",
+		'logout' : "Logout"
 	});
 
 	$translateProvider.preferredLanguage('pt');

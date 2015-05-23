@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $state, utils) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $localForage) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -23,13 +23,23 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
                     console.log("Bearer " + data.token);
                     $http.defaults.headers.common.Authorization = "Bearer " + data.token;  // Step 1
-                    $localStorage.set('token', data.token);
-                    $localStorage.set('userID', data.userID);
-                    $localStorage.set('userEmail', data.email);
-                    $localStorage.set('userType', data.type);
-                    $rootScope.showProfile = data.type == "company";
+                    var promises = [];
+                    promises.push($localForage.setItem('token', data.token));
+                    promises.push($localForage.setItem('userID', data.token));
+                    promises.push($localForage.setItem('userEmail', data.token));
+                    promises.push($localForage.setItem('userType', data.token));
+                    promises.push($localForage.setItem('isAuthenticated', true));
+                    $q.all(promises).then(function() {
+                        $rootScope.isAuthenticated = true;
+                        $rootScope.$broadcast('event:auth-loginConfirmed');
+                    });
 
-                    $rootScope.$broadcast('event:auth-loginConfirmed');
+                    //$localStorage.set('token', data.token);
+                    //$localStorage.set('userID', data.userID);
+                    //$localStorage.set('userEmail', data.email);
+                    //$localStorage.set('userType', data.type);
+
+                    //$rootScope.$broadcast('event:auth-loginConfirmed');
                     //
                     //// Need to inform the http-auth-interceptor that
                     //// the user has logged in successfully.  To do this, we pass in a function that
@@ -52,16 +62,28 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                 });
         },
         logout: function() {
-            $http.post('https://logout', {}, { ignoreAuthModule: true })
+            $http.post('http://logout', {}, { ignoreAuthModule: true })
                 .finally(function(data) {
-                    $localStorage.remove('token');
-                    $localStorage.remove('userID');
-                    $localStorage.remove('userEmail');
-                    $localStorage.remove('userType');
-                    $rootScope.showProfile = false;
+                    var promises = [];
+                    promises.push($localForage.removeItem('token'));
+                    promises.push($localForage.removeItem('userID'));
+                    promises.push($localForage.removeItem('userEmail'));
+                    promises.push($localForage.removeItem('userType'));
+                    promises.push($localForage.setItem('isAuthenticated', false));
+                    $q.all(promises).then(function() {
+                        $rootScope.isAuthenticated = false;
+                        $rootScope.$broadcast('event:auth-logout-complete');
+                    });
 
                     delete $http.defaults.headers.common.Authorization;
-                    $rootScope.$broadcast('event:auth-logout-complete');
+
+                    //$localStorage.remove('token');
+                    //$localStorage.remove('userID');
+                    //$localStorage.remove('userEmail');
+                    //$localStorage.remove('userType');
+                    //
+                    //delete $http.defaults.headers.common.Authorization;
+                    //$rootScope.$broadcast('event:auth-logout-complete');
                 });
         },
         loginCancelled: function() {
