@@ -89,6 +89,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.ownProfile', {
+			url: "/companies/:companyID",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/ownProfile.html",
+					controller: "profileCtrl"
+				}
+			}
+		})
 		.state('menu.editProfile', {
 			url: "/editProfile",
 			views: {
@@ -182,6 +191,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'interests': 'Interesses',
 		'btnRecomendedStands': 'Ver stands recomendados',
 		'btnStandEvents': 'Ver eventos deste stand',
+		'btnOwnStandEvents' : 'Ver eventos',
 		'saveContact': 'Guardar contacto',
 		'sync': 'Sync',
 		'cancel': 'Cancelar',
@@ -220,7 +230,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
         'termsAndConditions' : 'Termos & Condições',
         'lowCharPwd': 'A password deve conter no mínimo 8 caractéres',
         'noMatchPwd': 'As passwords não correspondem',
-		'repeatedPwd': 'New password must not be the same as the last one'
+		'repeatedPwd': 'A nova password não pode ser igual à password antiga',
+		'ownNoContact': 'Ainda não forneceu o seu contacto',
+		'ownNoAboutUs': 'Ainda não preencheu a sua descrição',
+		'ownNoAddress': 'Ainda não preencheu a sua morada',
+		'lackInfoCompany': 'Esta empresa não se encontra a partilhar esta informação consigo'
 	});
 
 	$translateProvider.translations('en', {
@@ -263,6 +277,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'interests': 'Interests',
 		'btnRecomendedStands': 'Consult recommended stands',
 		'btnStandEvents': 'Consult stand\'s events',
+		'btnOwnStandEvents' : 'Consult events',
 		'saveContact': 'Save contact',
 		'sync': 'Sync',
 		'cancel': 'Cancel',
@@ -301,7 +316,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
         'termsAndConditions' : 'Terms & Conditions',
         'lowCharPwd': 'Password must contain at least 8 characters',
 		'noMatchPwd': 'Password do not correspond',
-		'repeatedPwd': 'A nova password não pode ser igual à password antiga'
+		'repeatedPwd': 'A nova password não pode ser igual à password antiga',
+		'repeatedPwd': 'New password must not be the same as the last one',
+		'ownNoContact': 'You have not filled your contact',
+		'ownNoAboutUs': 'You have not filled the About you',
+		'ownNoAddress': 'You have not filled your address',
+		'lackInfoCompany': 'This company have not shares this information with you'
 	});
 
 	$translateProvider.preferredLanguage('pt');

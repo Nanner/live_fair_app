@@ -1,6 +1,6 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, utils, contacts, camera, liveFairApi) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, utils, contacts, camera, liveFairApi) {
     
     $scope.profileOwner = true;
     $scope.standProfileInfo = "";
@@ -30,7 +30,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.loadProfile = function() {
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
-            .then(function(profile) {
+            .then(function(profile) {   
                 $scope.standProfileInfo = profile;
                 $scope.failedToResolve = false;
             }, function(error) {

@@ -1,0 +1,37 @@
+<ion-view title="'ownProfile'">
+	<ion-content scroll='true' ng-init="loadProfile()">
+
+        <div class="profile-owner-icons">
+            <span class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
+            <span class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
+        </div>
+
+        <!--editar o container, botao de opçoes interfere com formataçao-->
+        <div class="profile-img-container">
+            <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
+        </div>
+        
+        <div class="profile-title-container">
+            <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
+            <a class="stand-website" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+        </div>
+        
+        <div class="card">
+          <div class="item item-divider">
+            {{ 'info' | translate }}
+          </div>
+          <div class="item item-text-wrap">
+            <p class="placeholder"> <b> {{ 'aboutus' | translate }}: </b> {{standProfileInfo[0].description || 'ownNoAboutUs' | translate}} </p>
+            <p> <b> {{ 'phone' | translate }}: </b> {{standProfileInfo[0].contact || 'ownNoContact' | translate}} </p>
+            <p> <b> {{ 'address' | translate }}: </b> {{standProfileInfo[1].address || 'ownNoAddress' | translate}} </p>
+          </div>
+        </div>
+
+        <div class="profile-btn-Container">
+            <button nav-clear class="save-contact-btn button button-balanced">
+                {{ 'btnOwnStandEvents' | translate }} 
+            </button>
+        </div> 
+
+    </ion-content>
+</ion-view>
