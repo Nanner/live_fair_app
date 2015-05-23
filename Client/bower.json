@@ -12,7 +12,9 @@
     "angular-http-auth": "~1.2.2",
     "angular-localForage": "~1.2.2",
     "angular-translate-storage-cookie": "~2.7.0",
-    "angular-translate-storage-local": "~2.7.0"
+    "angular-translate-storage-local": "~2.7.0",
+    "moment": "~2.10.3",
+    "angular-moment": "~0.10.1"
   },
   "resolutions": {
     "localforage": "~1.2.3",
