@@ -21,7 +21,8 @@ angular.module('starter',
         'ngCordova',
         'ngResource',
         'pascalprecht.translate',
-        'http-auth-interceptor'
+        'http-auth-interceptor',
+        'LocalForageModule'
     ]
 )
     .constant('_', _);
