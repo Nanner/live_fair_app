@@ -272,7 +272,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupMessage' : "Volte sempre!",
 		'logoutConfirmTitle': "Terminar a sessão",
 		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
-		'eventsForCompany' : "Eventos agendados por:"
+		'eventsForCompany' : "Eventos agendados por:",
+		'loggedInAs' : "Autenticado como"
 	});
 
 	$translateProvider.translations('en', {
@@ -368,7 +369,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupMessage' : "Come back anytime!",
 		'logoutConfirmTitle': "Confirm logout",
 		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
-		'eventsForCompany' : "Events scheduled by:"
+		'eventsForCompany' : "Events scheduled by:",
+		'loggedInAs' : "Logged in as"
 	});
 
 	$translateProvider.useLocalStorage();
