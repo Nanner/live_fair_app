@@ -227,7 +227,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Keywords mais populares",
         'upcomingFairs' : 'Próximas feiras',
         'sortByDate' : 'Data',
-        'termsAndConditions' : 'Termos & Condições'
+        'termsAndConditions' : 'Termos & Condições',
+        'fairInformation' : 'Informação',
+        'presentStands' : 'Stands Presentes',
+        'suggestedStands' : 'Stands Sugeridos'
 	});
 
 	$translateProvider.translations('en', {
@@ -305,7 +308,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"popKeywords": "Most popular keywords",
         'upcomingFairs' : 'Upcoming Fairs',
         'sortByDate' : 'Date',
-        'termsAndConditions' : 'Terms & Conditions'
+        'termsAndConditions' : 'Terms & Conditions',
+        'fairInformation' : 'Information',
+        'presentStands' : 'Present Stands',
+        'suggestedStands' : 'Suggested Stands'
 	});
 
 	$translateProvider.preferredLanguage('pt');

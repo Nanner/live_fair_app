@@ -140,6 +140,7 @@
     module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
         $scope.listfairs = "";
+        $scope.sortOption = 0;
 
         $scope.formatMonth = function() {
             for(i = 0; i < $scope.listfairs.length; i++) {
@@ -162,6 +163,28 @@
                     utils.hideLoadingPopup();
                     $scope.failedToResolve = true;
             });
+        }
+
+        $scope.sortFairsByName = function(){
+
+            if($scope.sortOption === 1){
+                $scope.listfairs.reverse();
+            }else{
+                $scope.sortOption = 1;
+                $scope.listfairs =  _.sortBy($scope.listfairs, "name");
+            }
+        };
+
+        $scope.sortFairsByDate = function(){
+
+            if($scope.sortOption === 2) {
+                $scope.listfairs.reverse();
+            }else{
+                $scope.sortOption = 2;
+                $scope.listfairs = _.sortBy( $scope.listfairs, function(fair) {
+                    return fair.date;
+                });
+            }
         }
     });
 
@@ -347,31 +370,6 @@
             );
 
             $scope.listfairs = $scope.existingFairs;
-
-    /*
-            $scope.listfairs = [
-                 {
-                    name: "afeira1",
-                    date: "15.07.2015 00:00:00",
-                     local: "porto"
-                },
-                {
-                    name: "cfeira2",
-                    date: "12.06.2015",
-                    local: "lisboa"
-                },
-                {
-                    name: "zfeira3",
-                    date: "12.06.2014",
-                    local: "braga"
-                },
-                {
-                    name: "bfeira3",
-                    date: "16.05.2015",
-                    local: "coimbra"
-                }
-            ]*/
-
             $scope.sortOption = 0;
 
         }
@@ -394,9 +392,6 @@
                 $scope.sortOption = 2;
                 $scope.listfairs = _.sortBy( $scope.listfairs, function(fair) {
                     return fair.date;
-                    //var dateOnly = fair.date.split(" ");
-                    //var parts = dateOnly[0].split(".");
-                    //return (new Date(+parts[2], parts[1]-1, +parts[0])).getTime();
                 });
             }
         }

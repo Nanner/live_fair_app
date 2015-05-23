@@ -9,7 +9,7 @@
 	            <div class="stats-company-name">
 	            	<strong>{{statsScreen.name}}</strong>
 	            </div>
-	            <div class="stats-company-name">
+	            <div class="stats-label">
 	            	<strong><span class="ion-stats-bars"></span>  {{ 'stats' | translate }} </strong>
 	            </div>
 	        </div>
@@ -17,24 +17,24 @@
 
 	    <div class="stats-container card">
 			<div class="row">
-			  <div class="col col-75"><strong> {{ 'matches' | translate }} </strong></div>
-			  <p><strong>:</strong></p>
-			  <div class="col col-25"><strong>{{statsScreen.matches}}</strong></div>
+			  <div class="col col-75 label"><strong> {{ 'matches' | translate }} </strong></div>
+			  <p class="col"><strong>:</strong></p>
+			  <div class="col col-25 result"><strong>{{statsScreen.matches}}</strong></div>
 			</div>
 			<div class="row">
-			  <div class="col col-75"><strong> {{ 'matchpercentage' | translate }} </strong></div>
-			  <p><strong>:</strong></p>
-			  <div class="col col-25"><strong>{{statsScreen.matchPercentage}}</strong></div>
+			  <div class="col col-75 label"><strong> {{ 'matchpercentage' | translate }} </strong></div>
+			  <p class="col"><strong>:</strong></p>
+			  <div class="col col-25 result"><strong>{{statsScreen.matchPercentage}}</strong></div>
 			</div>
 			<div class="row">
-			  <div class="col col-75"><strong> {{ 'clicks' | translate }} </strong></div>
-			  <p><strong>:</strong></p>
-			  <div class="col col-25"><strong>{{statsScreen.clicks}}</strong></div>
+			  <div class="col col-75 label"><strong> {{ 'clicks' | translate }} </strong></div>
+			  <p class="col"><strong>:</strong></p>
+			  <div class="col col-25 result"><strong>{{statsScreen.clicks}}</strong></div>
 			</div>
 			<div class="row">
-			  <div class="col col-75"><strong> {{ 'contactsEstablished' | translate }} </strong></div>
-			  <p><strong>:</strong></p>
-			  <div class="col col-25"><strong>{{statsScreen.contatsEstablished}}</strong></div>
+			  <div class="col col-75 label"><strong> {{ 'contactsEstablished' | translate }} </strong></div>
+			  <p class="col"><strong>:</strong></p>
+			  <div class="col col-25 result"><strong>{{statsScreen.contatsEstablished}}</strong></div>
 			</div>
 	    </div>
 

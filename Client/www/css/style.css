@@ -35,7 +35,6 @@
 
 .myBtn {
     width: 95%;
-    border-radius: 20px;
 }
 
 .myBtn-Container {
@@ -155,8 +154,9 @@
 /********** Fair ***********/
 
 .fair-container {
-    padding-top: 15%;
-    background-color: #11C1F3;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    background-color: #28A3D4;
 }
 
 .fair-title {
@@ -175,6 +175,9 @@
 
 .buttons-container{
     text-align: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    background-color: red;
 }
 
 .buttons-container > button{
@@ -443,7 +446,7 @@
     padding-bottom: 5%;
 }
 
-.searchFaris-logo-container {
+.searchFairs-logo-container {
     background-color: #28A3D4;
 }
 
@@ -463,15 +466,17 @@
     margin-left: 2%;
 }
 
-.fair-search-button-container{
+.fair-search-button-container, .fair-list-button-container{
     background-color: #28A3D4;
 }
 
-.fair-search-button-container > button{
+
+
+.fair-search-button-container > button, .fair-list-button-container > button{
     border-top-right-radius: 25px;
 }
 
-.search-options-container {
+.search-options-container, .list-options-container {
     float:right;
 }
 
@@ -516,12 +521,26 @@
 
 .stats-company-name {
     text-align: center;
-    color: white;
+    color: darkblue;
 }
 
-.stats-container {
-    padding-top: 5%;
+.stats-label{
     text-align: center;
+    color: #ffffff;
+}
+
+.stats-container > .row p{
+    text-align: center;
+}
+
+.stats-container > .row .label{
+    text-align: left;
+    color: darkblue;
+}
+
+.stats-container > .row .result {
+    text-align: center;
+    color: #28A3D4;
 }
 
 .stats-popKeywords-container {
