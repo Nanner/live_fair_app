@@ -23,13 +23,25 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             $http.post(server.url + '/login', { username: username, password: password }, { ignoreAuthModule: true })
                 .success(function (data, status, headers, config) {
 
-                    console.log("Bearer " + data.token);
-                    $http.defaults.headers.common.Authorization = "Bearer " + data.token;  // Step 1
+                    // Remove stuff that may have been left
                     var promises = [];
+                    promises.push($localForage.removeItem('token'));
+                    promises.push($localForage.removeItem('userID'));
+                    promises.push($localForage.removeItem('userEmail'));
+                    promises.push($localForage.removeItem('userType'));
+                    promises.push($localForage.setItem('isAuthenticated', false));
+                    $q.all(promises).then(function() {
+                        $rootScope.isAuthenticated = false;
+                        delete $http.defaults.headers.common.Authorization;
+                    });
+
+                    // Add the new user info
+                    $http.defaults.headers.common.Authorization = "Bearer " + data.token;
+                    promises = [];
                     promises.push($localForage.setItem('token', data.token));
-                    promises.push($localForage.setItem('userID', data.token));
-                    promises.push($localForage.setItem('userEmail', data.token));
-                    promises.push($localForage.setItem('userType', data.token));
+                    promises.push($localForage.setItem('userID', data.userID));
+                    promises.push($localForage.setItem('userEmail', data.email));
+                    promises.push($localForage.setItem('userType', data.type));
                     promises.push($localForage.setItem('isAuthenticated', true));
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = true;
