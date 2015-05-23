@@ -32,6 +32,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     promises.push($localForage.setItem('isAuthenticated', false));
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = false;
+                        $rootScope.userEmail = "";
                         delete $http.defaults.headers.common.Authorization;
                     });
 
@@ -45,6 +46,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     promises.push($localForage.setItem('isAuthenticated', true));
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = true;
+                        $rootScope.userEmail = data.email;
                         $rootScope.$broadcast('event:auth-loginConfirmed');
                     });
 

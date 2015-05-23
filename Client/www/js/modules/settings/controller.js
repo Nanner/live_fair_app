@@ -6,6 +6,10 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         $rootScope.isAuthenticated = result || false;
     });
 
+    $localForage.getItem('userEmail').then(function(result) {
+        $rootScope.userEmail = result || "";
+    });
+
     // Change language
     $scope.currentLanguage =  $translate.use() || $translate.proposedLanguage();
     $scope.changeLanguage = function(newLanguage) {

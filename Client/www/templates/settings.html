@@ -5,6 +5,22 @@
         <div class="home-container" ng-controller="homeCtrl">
 
             <h1 class="settings-title"> <span class="ion-android-settings"></span> {{ 'settings' | translate }} </h1>
+            <br>
+            <div class="list padding">
+                <h5 ng-show="isAuthenticated" class="item item-text-wrap"><strong>{{'loggedInAs' | translate}}:</strong><span class="pull-right">{{userEmail}}</span></h5>
+            </div>
+
+            <div class="list padding-horizontal">
+                <label class="item item-input item-select padding-vertical">
+                    <div class="input-label">
+                        {{'language' | translate}}
+                    </div>
+                    <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
+                        <option value="pt">Português</option>
+                        <option value="en">English</option>
+                    </select>
+                </label>
+            </div>
 
             <div class="list padding">
                 <div class="list list-inset" ng-show="isAuthenticated">
@@ -20,21 +36,9 @@
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
                         <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
                     </label>
-                    </label>
 
                     <button class="button button-block button-outline button-calm" ng-click="changePassword()">{{'changePassword' | translate}}</button>
                 </div>
-
-                <br><br>
-                <label class="item item-input item-select padding">
-                    <div class="input-label">
-                        {{'language' | translate}}
-                    </div>
-                    <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
-                        <option value="pt">Português</option>
-                        <option value="en">English</option>
-                    </select>
-                </label>
             </div>
 
         </div>
