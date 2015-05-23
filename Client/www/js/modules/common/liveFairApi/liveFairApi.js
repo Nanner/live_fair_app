@@ -27,6 +27,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $localStorage.set('userID', data.userID);
                     $localStorage.set('userEmail', data.email);
                     $localStorage.set('userType', data.type);
+                    $rootScope.showProfile = data.type == "company";
 
                     $rootScope.$broadcast('event:auth-loginConfirmed');
                     //
@@ -57,6 +58,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $localStorage.remove('userID');
                     $localStorage.remove('userEmail');
                     $localStorage.remove('userType');
+                    $rootScope.showProfile = false;
 
                     delete $http.defaults.headers.common.Authorization;
                     $rootScope.$broadcast('event:auth-logout-complete');

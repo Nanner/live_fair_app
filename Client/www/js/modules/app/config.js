@@ -238,7 +238,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
         'sortByDate' : 'Data',
         'termsAndConditions' : 'Termos & Condições',
 		'settings' : 'Definições',
-		'language' : 'Idioma'
+		'language' : 'Idioma',
+		'profile' : 'Perfil'
 	});
 
 	$translateProvider.translations('en', {
@@ -318,7 +319,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
         'sortByDate' : 'Date',
         'termsAndConditions' : 'Terms & Conditions',
 		'settings' : "Settings",
-		'language' : "Language"
+		'language' : "Language",
+		'profile' : "Profile"
 	});
 
 	$translateProvider.preferredLanguage('pt');
