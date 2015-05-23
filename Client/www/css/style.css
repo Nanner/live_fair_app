@@ -512,16 +512,20 @@
     background-color: #28A3D4;
 }
 
-.fair-search-button-container > button{
+.fair-search-button{
     border-top-right-radius: 25px;
 }
 
-.search-options-container {
-    float:right;
+button.button-calm.fair-search-options-button{
+    font-size: smaller;
+    width: 66px;
+    background-color: #28A3D4;
+    border: none;
 }
 
-.search-options-container > button{
-    /*colocar os button alinhados com o fundo da div*/
+button.button-calm.fair-search-options-button.active{
+    background-color: #11C1F3;
+
 }
 
 .list-fair-item-name{

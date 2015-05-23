@@ -331,5 +331,10 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                 return fair.date;
             });
         }
+    };
+
+    $scope.resetSort = function() {
+        $scope.listfairs = $scope.existingFairs;
+        $scope.sortOption = 0;
     }
 });

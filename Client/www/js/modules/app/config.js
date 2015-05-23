@@ -308,7 +308,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'programDay': 'Select day:',
 		'search': 'Search',
 		'filterByDate': 'Filter by date',
-		'clean': 'Clean',
+		'clean': 'Clear',
 		'startDate': 'Start date',
 		'endDate': 'End Date',
 		'searchLocation': 'Location',
