@@ -1,0 +1,47 @@
+<ion-view title="'Home'">
+    <ion-content scroll='true'>
+
+        <!-- Template content -->
+        <div class="home-container" ng-controller="homeCtrl">
+
+            <!--<div class="home-existing-user padding-top">-->
+                <!--<span class="center"> {{ 'existingUser' | translate }} </span>-->
+                <!--<div class="myBtn-Container">-->
+                    <!--<button nav-clear ng-click="loadLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="list padding">
+
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input type="text" placeholder="First Name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Last Name">
+                    </label>
+
+                    <button class="button button-block button-positive">{{'changePassword' | translate}}</button>
+                </div>
+
+                <label class="item item-input item-select padding">
+                    <div class="input-label">
+                        {{'language' | translate}}
+                    </div>
+                    <select>
+                        <option>Portuguese</option>
+                        <option selected>English</option>
+                    </select>
+                </label>
+            </div>
+
+        </div>
+
+    </ion-content>
+
+    <div class="ionic-body">
+        <div class="bar bar-footer center">
+            <button class="button button-block button-stable"><strong>Logout</strong></button>
+        </div>
+    </div>
+</ion-view>

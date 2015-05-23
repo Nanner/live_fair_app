@@ -142,6 +142,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "searchFairCtrl"
 				}
 			}
+		})
+		.state('menu.settings', {
+			url: "/settings",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/settings.html",
+					controller: "settingsCtrl"
+				}
+			}
 		});
 
 	//Default startup screen
@@ -234,7 +243,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'ownNoContact': 'Ainda não forneceu o seu contacto',
 		'ownNoAboutUs': 'Ainda não preencheu a sua descrição',
 		'ownNoAddress': 'Ainda não preencheu a sua morada',
-		'lackInfoCompany': 'Esta empresa não se encontra a partilhar esta informação consigo'
+		'lackInfoCompany': 'Esta empresa não se encontra a partilhar esta informação consigo',
+		'settings' : 'Definições',
+		'language' : 'Idioma',
+		'profile' : 'Perfil'
 	});
 
 	$translateProvider.translations('en', {
@@ -321,7 +333,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'ownNoContact': 'You have not filled your contact',
 		'ownNoAboutUs': 'You have not filled the About you',
 		'ownNoAddress': 'You have not filled your address',
-		'lackInfoCompany': 'This company have not shares this information with you'
+		'lackInfoCompany': 'This company have not shares this information with you',
+		'settings' : "Settings",
+		'language' : "Language",
+		'profile' : "Profile"
 	});
 
 	$translateProvider.preferredLanguage('pt');
