@@ -16,7 +16,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			}
 		})
 		.state('menu.home', {
-			url: "/home",
+			url: "/home/:loggedOut",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/home.html",
@@ -154,7 +154,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		});
 
 	//Default startup screen
-	$urlRouterProvider.otherwise("/menu/home");
+	$urlRouterProvider.otherwise("/menu/home/");
 
 	//Activate variable content escaping (for more security)
 	$translateProvider.useSanitizeValueStrategy('escaped');
@@ -234,11 +234,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"clicks": "Cliques",
 		"contactsEstablished": "Contactos estabelecidos",
 		"popKeywords": "Keywords mais populares",
-        'upcomingFairs' : 'Próximas feiras',
-        'sortByDate' : 'Data',
-        'termsAndConditions' : 'Termos & Condições',
-        'lowCharPwd': 'A password deve conter no mínimo 8 caracteres',
-        'noMatchPwd': 'As passwords não correspondem',
+		'upcomingFairs' : 'Próximas feiras',
+		'sortByDate' : 'Data',
+		'termsAndConditions' : 'Termos & Condições',
+		'lowCharPwd': 'A password deve conter no mínimo 8 caracteres',
+		'noMatchPwd': 'As passwords não correspondem',
 		'repeatedPwd': 'A nova password não pode ser igual à password antiga',
 		'ownNoContact': 'Ainda não forneceu o seu contacto',
 		'ownNoAboutUs': 'Ainda não preencheu a sua descrição',
@@ -247,7 +247,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'settings' : 'Definições',
 		'language' : 'Idioma',
 		'profile' : 'Perfil',
-		'logout' : "Terminar sessão"
+		'logout' : "Terminar sessão",
+		'loggedOutPopupTitle' : "Sessão terminada com sucesso",
+		'loggedOutPopupMessage' : "Volte sempre!",
+		'logoutConfirmTitle': "Terminar a sessão",
+		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?"
 	});
 
 	$translateProvider.translations('en', {
@@ -324,10 +328,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"clicks": "Clicks",
 		"contactsEstablished": "Established contacts",
 		"popKeywords": "Most popular keywords",
-        'upcomingFairs' : 'Upcoming Fairs',
-        'sortByDate' : 'Date',
-        'termsAndConditions' : 'Terms & Conditions',
-        'lowCharPwd': 'Password must contain at least 8 characters',
+		'upcomingFairs' : 'Upcoming Fairs',
+		'sortByDate' : 'Date',
+		'termsAndConditions' : 'Terms & Conditions',
+		'lowCharPwd': 'Password must contain at least 8 characters',
 		'noMatchPwd': 'Password do not correspond',
 		'repeatedPwd': 'New password must not be the same as the last one',
 		'ownNoContact': 'You have not filled your contact',
@@ -337,11 +341,23 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'settings' : "Settings",
 		'language' : "Language",
 		'profile' : "Profile",
-		'logout' : "Logout"
+		'logout' : "Logout",
+		'loggedOutPopupTitle' : "Successfully logged out",
+		'loggedOutPopupMessage' : "Come back anytime!",
+		'logoutConfirmTitle': "Confirm logout",
+		'logoutConfirmMessage' : "Are you sure you want to logout of your account?"
 	});
 
-	$translateProvider.preferredLanguage('pt');
+	//$translateProvider.preferredLanguage('en');
 
 	//camera stuff
 	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-}); 
+})
+	.run(function($localForage, $translate) {
+
+		// Set the language to the one the user defined in the settings, if any.
+		$localForage.getItem('language').then(function(language) {
+			console.log("setting:" + language);
+			$translate.use(language || 'en');
+		});
+	});

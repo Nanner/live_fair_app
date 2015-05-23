@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $localForage) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $localForage, $ionicPopup, $translate) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -71,6 +71,11 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             $q.all(promises).then(function() {
                 $rootScope.isAuthenticated = false;
                 $rootScope.$broadcast('event:auth-logout-complete');
+
+                $ionicPopup.alert({
+                    title: $translate.instant('loggedOutPopupTitle'),
+                    template: '<p class="text-center">' + $translate.instant("loggedOutPopupMessage") + '</p>'
+                });
             });
 
             delete $http.defaults.headers.common.Authorization;

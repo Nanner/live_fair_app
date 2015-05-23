@@ -1,35 +1,24 @@
 var module = angular.module('settingsModule');
 
-module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localStorage, $localForage) {
+module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, $ionicPopup) {
     $rootScope.isAuthenticated = false;
     $localForage.getItem('isAuthenticated').then(function(result) {
         $rootScope.isAuthenticated = result || false;
     });
 
-    //if($localStorage.get('token'))
-    //    $scope.isAuthenticated = true;
-    //else
-    //    $scope.isAuthenticated = false;
-    //
-    //$scope.$on('event:auth-loginConfirmed', function() {
-    //    $scope.isAuthenticated = true;
-    //});
-    //
-    //$scope.$on('event:auth-logout-complete', function() {
-    //    console.log("boo");
-    //    $scope.isAuthenticated = false;
-    //});
-
     // Change language
-    var languages = ['en', 'pt'];
-    $scope.currentLanguage = $translate.proposedLanguage() || $translate.use();
+    console.log($translate.use());
+    console.log($translate.proposedLanguage());
+    $scope.currentLanguage =  $translate.use() || $translate.proposedLanguage();
     console.log($scope.currentLanguage);
     $scope.changeLanguage = function(newLanguage) {
         $translate.use(newLanguage);
+        $localForage.setItem('language', newLanguage);
+        $scope.currentLanguage = newLanguage;
+        console.log(newLanguage);
     };
 
     //Change password
-    var userID = $localStorage.get('userID');
     $scope.oldPassword = "";
     $scope.newPassword = "";
     $scope.confirmNewPassword = "";
@@ -44,7 +33,7 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         }
         else if(oldPasswordEncrypted === newPasswordEncrypted) {
             utils.showAlert($translate.instant('repeatedPwd'), "Error");
-        } else if(newPasswordEnctypted !== confirmPasswordEncrypted) {
+        } else if(newPasswordEncrypted !== confirmPasswordEncrypted) {
             utils.showAlert($translate.instant('noMatchPwd'), "Error");
         } else {
             //ALL GOOD change password
@@ -62,7 +51,6 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
                     utils.showAlert("Error", "Error");
                 });
         }
-
     };
 
     $scope.oldPasswordCallback = function() {
@@ -77,8 +65,17 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         utils.setConfirmPassword($scope.confirmNewPassword);
     };
 
+    // Logout
     $scope.logoutUser = function() {
-        liveFairApi.logout();
-        $state.go('menu.home');
+        var confirmPopup = $ionicPopup.confirm({
+            title: $translate.instant('logoutConfirmTitle'),
+            template: '<p class="text-center">' + $translate.instant('logoutConfirmMessage') + '</p>'
+        });
+        confirmPopup.then(function(res) {
+            if(res) {
+                $state.go('menu.home');
+                liveFairApi.logout();
+            }
+        });
     };
 });
