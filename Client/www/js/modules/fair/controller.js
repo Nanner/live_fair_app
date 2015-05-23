@@ -214,23 +214,22 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
 });
 
-module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
+module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
 
     $scope.startDate = "";
     $scope.endDate = "";
     $scope.searchName = "";
     $scope.searchLocation = "";
 
-    $scope.listfairs = liveFairApi.getLiveFairs();
+    $scope.minDateMoment = moment().add(-1, "years");
+    $scope.minDate = $scope.minDateMoment.format("YYYY-MM-DD");
+    $scope.maxDateMoment = moment().add(2, "years");
+    $scope.maxDate = $scope.maxDateMoment.format("YYYY-MM-DD");
+
+    $scope.existingFairs = liveFairApi.getLiveFairs();
+    $scope.listfairs = $scope.existingFairs;
     //    $scope.existingFairs = liveFairApi.getLiveFairs();
     $scope.sortOption = 0;
-
-    $scope.existingFairs = [];
-
-    var actualDate = new Date();
-    var day = actualDate.getUTCDate();
-    var month = actualDate.getMonth() + 1;
-    var year = actualDate.getFullYear();
 
     $scope.filterByDate = function () {
         var myPopup = $ionicPopup.show({
@@ -238,7 +237,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
             scope: $scope,
             buttons: [
                 {
-                    text: '<b>Limpar</b>',
+                    text: '<b>' + $translate.instant('clean') + '</b>',
                     onTap: function (e) { //lets clean date filters
                         $scope.listfairs = $scope.existingFairs;
                         $scope.startDate = "";
@@ -249,12 +248,20 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                     text: '<b>Ok</b>',
                     type: 'button-positive',
                     onTap: function (e) { //lets filter this stuff
+                        $scope.startDate = utils.getStartDate() || "";
+                        $scope.endDate = utils.getEndDate() || "";
+                        if($scope.startDate === "" || $scope.endDate === "") {
+                            $scope.listfairs = $scope.existingFairs;
+                            $scope.startDate = "";
+                            $scope.endDate = "";
+                            utils.setStartDate("");
+                            utils.setEndDate("");
+                            return;
+                        }
                         var tempArray = [];
                         $scope.listfairs = $scope.existingFairs;
-                        $scope.startDate = utils.getStartDate();
-                        $scope.endDate = utils.getEndDate();
-                        startDateConverted = Number(new Date($scope.startDate));
-                        endDateConverted = Number(new Date($scope.endDate));
+                        var startDateConverted = Number(new Date($scope.startDate));
+                        var endDateConverted = Number(new Date($scope.endDate));
                         for (var i = 0; i < $scope.listfairs.length; i++) {
                             fairDate = $scope.listfairs[i].date.substring(0, 10);
                             fairDateConverted = Number(new Date(fairDate));
@@ -263,6 +270,10 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                             }
                         }
                         $scope.listfairs = tempArray;
+                        $scope.startDate = "";
+                        $scope.endDate = "";
+                        utils.setStartDate("");
+                        utils.setEndDate("");
                     }
                 }
             ]
@@ -270,37 +281,29 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     };
 
     $scope.verifyDate = function () {
-        actualDateConverted = Number(actualDate);
-        if ($scope.startDate !== "") {
-            startDateConverted = Number(new Date($scope.startDate));
-            if (startDateConverted < actualDateConverted) {
-                if (day < 10 && (day.length < 2 || day.length === undefined)) {
-                    day = "0" + day;
-                }
-                if (month < 10 && (month.length < 2 || month.length === undefined)) {
-                    month = "0" + month;
-                }
-                $scope.startDate = year + "-" + month + "-" + day;
-                utils.setStartDate($scope.startDate);
-            } else {
-                utils.setStartDate($scope.startDate);
-            }
+        var startDate = moment($scope.startDate);
+        var endDate = moment($scope.endDate);
+
+        if($scope.startDate !== "") {
+            //if(startDate.isBefore($scope.minDateMoment)) {
+            //    $scope.startDate = $scope.minDate;
+            //}
+            utils.setStartDate($scope.startDate);
+        }
+        else {
+            utils.setStartDate("");
+            $scope.startDate = "";
         }
 
         if ($scope.endDate !== "") {
-            endDateConverted = Number(new Date($scope.endDate));
-            if (endDateConverted < actualDateConverted) {
-                if (day < 10 && (day.length < 2 || day.length === undefined)) {
-                    day = "0" + day;
-                }
-                if (month < 10 && (month.length < 2 || month.length === undefined)) {
-                    month = "0" + month;
-                }
-                $scope.endDate = year + "-" + month + "-" + day;
-                utils.setEndDate($scope.endDate);
-            } else {
-                utils.setEndDate($scope.endDate);
-            }
+            //if (endDate.isAfter($scope.maxDateMoment)) {
+            //    $scope.endDate = $scope.maxDate;
+            //}
+            utils.setEndDate($scope.endDate);
+        }
+        else {
+            utils.setEndDate("");
+            $scope.endDate = "";
         }
     };
 
