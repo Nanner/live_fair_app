@@ -138,7 +138,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
 
         register: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
-            return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, compayName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
+            return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, companyName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;

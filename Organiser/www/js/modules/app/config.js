@@ -5,35 +5,25 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 
 	$stateProvider
-		.state('menu', {
-			url: "/menu",
-			abstract: true,
-			views: {
-				'applicationContent' :{
-					templateUrl: "templates/menu.html",
-					controller: "toogleCtrl"
-				}
-			}
-		})
-		.state('menu.home', {
+		.state('home', {
 			url: "/home",
 			views: {
-				'menuContent' :{
+				'appContent' :{
 					templateUrl: "templates/home.html",
 					controller: "homeCtrl"
 				}
 			}
 		})
-		.state('menu.login', {
+		.state('login', {
 			url: "/login",
 			views: {
-				'menuContent' :{
+				'appContent' :{
 					templateUrl: "templates/login.html",
 					controller: "loginCtrl"
 				}
 			}
 		})
-		.state('menu.register', {
+		/*.state('menu.register', {
 			url: "/register",
 			views: {
 				'menuContent' :{
@@ -152,8 +142,12 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 					controller: "searchFairCtrl"
 				}
 			}
-		});
+		})*/;
 
 	//Default startup screen
-	$urlRouterProvider.otherwise("/menu/home");
-}); 
+	$urlRouterProvider.otherwise("/login");
+}).
+controller('routeController', ['$scope', '$location', function($scope, $location) {
+    $scope.showPageLogin = $location.path() === '/login';
+    console.log($location.path())
+  }]);

@@ -4,6 +4,7 @@ module.controller('homeCtrl', function ($scope, $state, $stateParams, utils){
 
     $scope.loadLogin = function() {
         $state.go('menu.login');
+        
     };
 
     $scope.loadRegistration = function() {

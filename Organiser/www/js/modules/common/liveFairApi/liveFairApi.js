@@ -29,7 +29,6 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $localStorage.set('userID', data.userID);
                     $localStorage.set('userEmail', data.email);
                     $localStorage.set('userType', data.type);
-
                     //
                     //// Need to inform the http-auth-interceptor that
                     //// the user has logged in successfully.  To do this, we pass in a function that
