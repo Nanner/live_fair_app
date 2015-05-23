@@ -9,6 +9,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Stands = $resource(server.url + '/livefairs/:liveFairID/companies', {liveFairID: '@liveFairID'});
 
+    var StandSchedule = $resource(server.url + '/livefairs/:liveFairID/companies/:companyID/events', {liveFairID: '@liveFairID', companyID: '@companyID'});
+
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
     var IncrementCounter = $resource(server.url + '/Users/:companyID/counter', {companyID: '@companyID'});
@@ -119,10 +121,12 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         getLiveFairStands: function(fairID) {
             return Stands.query({liveFairID: fairID});
         },
+        getLiveFairStandSchedule: function(fairID, companyID) {
+            return StandSchedule.query({liveFairID: fairID, companyID: companyID});
+        },
         getLiveFairSchedule: function(fairID) {
             return Schedule.query({liveFairID: fairID});
         },
-
         getProfile: function(userID) {
             return Profile.query({id: userID});
         },

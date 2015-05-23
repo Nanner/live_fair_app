@@ -89,6 +89,25 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.standProgram', {
+			url: "/fairs/:fairID/stands/:companyID/program",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/standProgram.html",
+					controller: "standProgramCtrl"
+				}
+			},
+			resolve: {
+				schedule: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
+						.then(function(schedule) {
+							return schedule;
+						}, function(error) {
+							return "failed to resolve";
+						});
+				}
+			}
+		})
 		.state('menu.ownProfile', {
 			url: "/companies/:companyID",
 			views: {
@@ -252,7 +271,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupTitle' : "Sessão terminada com sucesso",
 		'loggedOutPopupMessage' : "Volte sempre!",
 		'logoutConfirmTitle': "Terminar a sessão",
-		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?"
+		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
+		'eventsForCompany' : "Eventos agendados por:"
 	});
 
 	$translateProvider.translations('en', {
@@ -347,7 +367,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupTitle' : "Successfully logged out",
 		'loggedOutPopupMessage' : "Come back anytime!",
 		'logoutConfirmTitle': "Confirm logout",
-		'logoutConfirmMessage' : "Are you sure you want to logout of your account?"
+		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
+		'eventsForCompany' : "Events scheduled by:"
 	});
 
 	$translateProvider.useLocalStorage();

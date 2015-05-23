@@ -1,10 +1,10 @@
-<ion-view title="'FairProgram'">
+<ion-view title="'StandProgram'">
     <ion-content scroll='true'>
 
         <div class="program-container">
             <div class="program-title-container" ng-hide="failedToResolve">
                 <h3 class="program-subtitle"> {{fair.name}} </h3>
-                <h4 class="program-title"> {{ 'program' | translate }} </h4>
+                <h4 class="program-title">{{ 'eventsForCompany' | translate }}<br>{{companyName}}</h4>
             </div>
 
             <div ng-show="failedToResolve">
@@ -37,39 +37,39 @@
                     </div>
                     <div ng-repeat="event in eventTime.eventTimeEvents">
                         <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
-                            {{event.Subject}}
+                            {{event.companyEventsID}} <!-- TODO: This is temporary, should be the subject -->
                         </div>
                     </div>
                 </div>
             </div>
 
             <script id="eventPopup.html" type="text/ng-template">
-                <div class="list card">
+                <div class="list card item-text-wrap">
 
                     <div class="item item-divider item-text-wrap">
-                        <h2>{{liveFairEvent.Subject}}</h2>
+                        <h2>{{liveFairCompanyEvent.Subject}}</h2>
                     </div>
 
                     <div class="item item-body">
                         <p>
                             <strong>{{ 'date' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.time | date:'dd-MM-yyyy'}}</span>
+                            <span class="event-info">{{liveFairCompanyEvent.time | date:'dd-MM-yyyy'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'starting' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.time | date:'HH:mm'}}</span>
+                            <span class="event-info">{{liveFairCompanyEvent.time | date:'HH:mm'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'ending' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.endTime | date:'HH:mm'}}</span>
+                            <span class="event-info">{{liveFairCompanyEvent.endTime | date:'HH:mm'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'place' | translate }}:</strong>
-                            <p>{{liveFairEvent.eventLocation}}</p>
+                            <p>{{liveFairCompanyEvent.location}}</p>
                         </p>
                         <p>
                             <strong>{{ 'speakers' | translate }}:</strong>
-                            <p>{{liveFairEvent.Speakers}}</p>
+                            <p>{{liveFairCompanyEvent.speakers}}</p>
                         </p>
                     </div>
                 </div>
