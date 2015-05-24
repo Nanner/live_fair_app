@@ -251,7 +251,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupTitle' : "Sessão terminada com sucesso",
 		'loggedOutPopupMessage' : "Volte sempre!",
 		'logoutConfirmTitle': "Terminar a sessão",
-		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?"
+		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
+		'notOpenOwnProfile': "Lamentamos mas não foi possível abrir o seu perfil"
 	});
 
 	$translateProvider.translations('en', {
@@ -345,7 +346,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupTitle' : "Successfully logged out",
 		'loggedOutPopupMessage' : "Come back anytime!",
 		'logoutConfirmTitle': "Confirm logout",
-		'logoutConfirmMessage' : "Are you sure you want to logout of your account?"
+		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
+		'notOpenOwnProfile': "An error occured and it was no possible to load your profile"
 	});
 
 	$translateProvider.useLocalStorage();

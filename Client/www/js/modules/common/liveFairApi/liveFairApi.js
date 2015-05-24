@@ -25,9 +25,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $http.defaults.headers.common.Authorization = "Bearer " + data.token;  // Step 1
                     var promises = [];
                     promises.push($localForage.setItem('token', data.token));
-                    promises.push($localForage.setItem('userID', data.token));
-                    promises.push($localForage.setItem('userEmail', data.token));
-                    promises.push($localForage.setItem('userType', data.token));
+                    promises.push($localForage.setItem('userID', data.userID));
+                    promises.push($localForage.setItem('userEmail', data.email));
+                    promises.push($localForage.setItem('userType', data.type));
                     promises.push($localForage.setItem('isAuthenticated', true));
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = true;

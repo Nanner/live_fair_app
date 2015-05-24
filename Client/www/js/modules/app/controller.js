@@ -1,6 +1,6 @@
 var module = angular.module('starter');
 
-module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootScope, $state, $stateParams, $translate, $localStorage) {
+module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootScope, $state, $stateParams, $translate, $localStorage, $localForage) {
     $scope.username = "AMT Consulting";
 
     $scope.items = [
@@ -23,6 +23,13 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
     }
 
     $scope.loadProfile = function() {
-        $state.go("menu.ownProfile", {companyID: $localStorage.get('userID')});
+        var userID = "";
+        $localForage.getItem('userID').then(function(response) {
+                userID = response;
+                $state.go("menu.ownProfile", {companyID: userID});
+            }, function(response) {
+                console.log("Unable to get userID");
+            }
+        );
     }
 });

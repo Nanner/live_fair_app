@@ -26,7 +26,8 @@
 					<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
 						{{x.name}}
 					</ion-item>
-					<ion-item ng-show="showProfile" nav-clear menu-close ng-click="loadProfile()">
+					<!-- ng-show="showProfile" -->
+					<ion-item nav-clear menu-close ng-click="loadProfile()">
 						{{ 'profile' | translate }}
 					</ion-item>
 				</ion-list>

@@ -30,10 +30,11 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.loadProfile = function() {
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
-            .then(function(profile) {   
+            .then(function(profile) {
                 $scope.standProfileInfo = profile;
                 $scope.failedToResolve = false;
             }, function(error) {
+                console.log("fodi-me");
                 $scope.failedToResolve = true; 
         });
     }
