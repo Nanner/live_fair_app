@@ -274,7 +274,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
 		'notOpenOwnProfile': "Lamentamos mas não foi possível abrir o seu perfil",
 		'eventsForCompany' : "Eventos agendados por:",
-		'loggedInAs' : "Autenticado como"
+		'loggedInAs' : "Autenticado como",
+		'sessionExpired': "A sua sessão expirou",
+		'sorryChangePassword': "Unfortunately password could not be changed"
 	});
 
 	$translateProvider.translations('en', {
@@ -372,7 +374,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
 		'notOpenOwnProfile': "An error occured and it was no possible to load your profile",
 		'eventsForCompany' : "Events scheduled by:",
-		'loggedInAs' : "Logged in as"
+		'loggedInAs' : "Logged in as",
+		'sessionExpired': "Session Expired",
+		'sorryChangePassword': "Unfortunately password could not be changed"
 	});
 
 	$translateProvider.useLocalStorage();
