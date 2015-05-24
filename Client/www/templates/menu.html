@@ -27,12 +27,12 @@
 						<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
 							{{x.name}}
 						</ion-item>
-						<ion-item ng-show="showProfile" nav-clear menu-close ng-click="loadProfile()">
+						<ion-item ng-show="userType == 'company'" nav-clear menu-close ng-click="loadProfile()">
 							{{ 'profile' | translate }}
 						</ion-item>
-						<br><br><br>
+
 						<ion-item nav-clear menu-close ng-click="loadSettings()">
-							{{ 'profile' | translate }}
+							{{ 'settings' | translate }}
 						</ion-item>
 					</ion-list>
 				</ion-content>

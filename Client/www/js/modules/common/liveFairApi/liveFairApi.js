@@ -33,6 +33,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = false;
                         $rootScope.userEmail = "";
+                        $rootScope.userType = "";
                         delete $http.defaults.headers.common.Authorization;
                     });
 
@@ -47,6 +48,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $q.all(promises).then(function() {
                         $rootScope.isAuthenticated = true;
                         $rootScope.userEmail = data.email;
+                        $rootScope.userType = data.type;
                         $rootScope.$broadcast('event:auth-loginConfirmed');
                     });
 
