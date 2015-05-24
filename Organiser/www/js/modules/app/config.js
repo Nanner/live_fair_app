@@ -6,23 +6,24 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
 	$stateProvider
 		.state('home', {
-			url: "/home",
-			views: {
-				'appContent' :{
+					url: "/home",
 					templateUrl: "templates/home.html",
-					controller: "homeCtrl"
+					controller: "listFairsCtrl"
+				,resolve: {
+				listfairs: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairs().$promise
+						.then(function(liveFairs) {
+							return liveFairs;
+						}, function(error) {
+							return "failed to resolve";
+						});
 				}
-			}
-		})
+			}})
 		.state('login', {
-			url: "/login",
-			views: {
-				'appContent' :{
+					url: "/login",
 					templateUrl: "templates/login.html",
 					controller: "loginCtrl"
-				}
-			}
-		})
+				})
 		/*.state('menu.register', {
 			url: "/register",
 			views: {
