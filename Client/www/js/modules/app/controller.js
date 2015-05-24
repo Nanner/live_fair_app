@@ -15,8 +15,8 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
         $rootScope.userType = result || "";
     });
 
-    $scope.toggleLeft = function() {
-        $ionicSideMenuDelegate.toggleLeft();
+    $scope.toggleRight = function() {
+        $ionicSideMenuDelegate.toggleRight();
     };
 
     $scope.selectItem = function($index) {

@@ -1,6 +1,6 @@
 var module = angular.module('settingsModule');
 
-module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, $ionicPopup) {
+module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, $ionicPopup, $ionicHistory) {
     $rootScope.isAuthenticated = false;
     $localForage.getItem('isAuthenticated').then(function(result) {
         $rootScope.isAuthenticated = result || false;
@@ -67,6 +67,9 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         });
         confirmPopup.then(function(res) {
             if(res) {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $state.go('menu.home');
                 liveFairApi.logout();
             }

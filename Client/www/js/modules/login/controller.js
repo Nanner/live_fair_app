@@ -1,6 +1,6 @@
 var module = angular.module('loginModule');
 
-module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairApi, $localStorage, utils) {
+module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairApi, $localStorage, utils, $ionicHistory) {
     $scope.username = "";
     $scope.password = "";
 
@@ -18,6 +18,9 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairA
         liveFairApi.login($scope.username, passwordEncrypted);
 
         $scope.$on('event:auth-loginConfirmed', function() {
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
             $state.go('menu.listfairs');
         });
 
