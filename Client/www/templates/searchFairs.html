@@ -10,19 +10,21 @@
         </div>
 
         <div class="fair-search-button-container">
-            <button class="button button-light">
+            <button class="fair-search-button button button-light">
                 {{ 'upcomingFairs' | translate}}
             </button>
 
-            <div class="search-options-container">
-                <button class="button button-small button-calm button-AZ" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
-                    A-Z
-                </button>
+            <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                <strong>{{ 'sortByDate' | translate }}</strong>
+            </button>
 
-                <button class="button button-small button-calm button-Recente" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
-                    {{ 'sortByDate' | translate }}
-                </button>
-            </div>
+            <button class="button button-calm button-AZ pull-right fair-search-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                <strong>A-Z</strong>
+            </button>
+
+            <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="resetSort()">
+                <strong>{{ 'clean' | translate }}</strong>
+            </button>
         </div>
 
         <div class="bar bar-header item-input-inset">

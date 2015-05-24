@@ -89,6 +89,25 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.standProgram', {
+			url: "/fairs/:fairID/stands/:companyID/program",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/standProgram.html",
+					controller: "standProgramCtrl"
+				}
+			},
+			resolve: {
+				schedule: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
+						.then(function(schedule) {
+							return schedule;
+						}, function(error) {
+							return "failed to resolve";
+						});
+				}
+			}
+		})
 		.state('menu.ownProfile', {
 			url: "/companies/:companyID",
 			views: {
@@ -212,7 +231,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'local': 'Local',
 		'programDay': 'Dia do evento:',
 		'search': 'Pesquisa',
-		'filterByDate': 'Filter by date',
+		'filterByDate': 'Filtrar por data',
+		'clean': 'Limpar',
 		'startDate': 'Data início',
 		'endDate': 'Data Fim',
 		'searchLocation': 'Localização',
@@ -252,7 +272,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupMessage' : "Volte sempre!",
 		'logoutConfirmTitle': "Terminar a sessão",
 		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
-		'notOpenOwnProfile': "Lamentamos mas não foi possível abrir o seu perfil"
+		'notOpenOwnProfile': "Lamentamos mas não foi possível abrir o seu perfil",
+		'eventsForCompany' : "Eventos agendados por:",
+		'loggedInAs' : "Autenticado como"
 	});
 
 	$translateProvider.translations('en', {
@@ -308,6 +330,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'programDay': 'Select day:',
 		'search': 'Search',
 		'filterByDate': 'Filter by date',
+		'clean': 'Clear',
 		'startDate': 'Start date',
 		'endDate': 'End Date',
 		'searchLocation': 'Location',
@@ -347,7 +370,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedOutPopupMessage' : "Come back anytime!",
 		'logoutConfirmTitle': "Confirm logout",
 		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
-		'notOpenOwnProfile': "An error occured and it was no possible to load your profile"
+		'notOpenOwnProfile': "An error occured and it was no possible to load your profile",
+		'eventsForCompany' : "Events scheduled by:",
+		'loggedInAs' : "Logged in as"
 	});
 
 	$translateProvider.useLocalStorage();

@@ -4,7 +4,22 @@
         <!-- Content -->
         <div class="fair-container" ng-init="loadFairProfile()">
             <h2 class="fair-title"> {{fair.name}} </h2>
+            <!--isto vai sair, ficar numa tab que abre a localizacao-->
             <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.location}} </h4>
+        </div>
+
+        <div class="fair-tabs-container">
+            <div class="buttons-container">
+                <button class="button button-calm item-input-wrapper" ng-click="showInfoPage()" ng-class="{active : tabOption === 1}">
+                    {{ 'fairInformation' | translate }}
+                </button>
+                <button class="button button-calm item-input-wrapper" ng-click="showPresentStands()" ng-class="{active : tabOption === 2}">
+                    {{ 'presentStands' | translate }}
+                </button>
+                <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
+                    {{ 'suggestedStands' | translate }}
+                </button>
+            </div>
         </div>
 
         <div class="card">
@@ -42,23 +57,6 @@
                 {{ 'btnAderir' | translate }}
             </button>
         </div>
-
-        <script id="interestsPopup.html" type="text/ng-template">
-            <!--<div class="list">-->
-                <!--<div class="item item-divider">{{ 'chooseInterests' | translate }}</div>-->
-                <!--&lt;!&ndash;<ion-toggle class="item-text-wrap" ng-repeat="item in interestsList" ng-model="item.checked" toggle-class="toggle-calm">{{item.interest}}</ion-toggle>&ndash;&gt;-->
-            <!--</div>-->
-            <ul class="list">
-                <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
-                <li class="item item-stable item-placeholder item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
-                <li class="item item-checkbox" ng-repeat="item in interestsList">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                    {{item.interest}}
-                </li>
-            </ul>
-        </script>
 
     </ion-content>
 </ion-view>
