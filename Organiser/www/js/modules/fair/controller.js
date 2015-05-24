@@ -133,7 +133,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils) {
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi) {
     $scope.failedToResolve = listfairs == "failed to resolve";
     if($scope.failedToResolve)
         return;
@@ -148,7 +148,38 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
-    }
+    };
+
+    $scope.loadPastFairs = function(){
+        $scope.listfairs = listfairs;
+        var pastFairs=[];
+        var curdate = new Date();
+         for(i = 0; i < $scope.listfairs.length; i++) {
+            var fairDate = new Date($scope.listfairs[i].date);
+            if( fairDate < curdate)
+                {
+                     pastFairs.push($scope.listfairs[i]);
+                }
+        }
+        $scope.listfairs=pastFairs;
+        console.log($scope.listfairs.length);
+        
+    };
+
+    $scope.loadNextFairs = function(){
+        $scope.listfairs = listfairs;
+        var nextFairs=[];
+        var curdate = new Date();
+         for(i = 0; i < $scope.listfairs.length; i++) {
+            var fairDate = new Date($scope.listfairs[i].date);
+            if( fairDate > curdate)
+             {
+                nextFairs.push($scope.listfairs[i]);
+            }  
+        }
+        $scope.listfairs=nextFairs;
+        console.log($scope.listfairs.length);
+    };
 });
 
 
