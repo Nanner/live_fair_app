@@ -32,15 +32,29 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         liveFairApi.getProfile(profileID).$promise
             .then(function(profile) {
                 $scope.standProfileInfo = profile;
+                console.log(profile);
                 $scope.failedToResolve = false;
                 $scope.checkIfWebsiteIsAvailable();
                 if(type == "own") {
                     $scope.initEmptyField();
                     $scope.checkIfOwner(profileID);
+                } else if(type == "nown") {
+                    $scope.fetchCompanyInterests(profileID);
                 }
             }, function(error) {
                 $scope.failedToResolve = true; 
         });
+    }
+
+    $scope.fetchCompanyInterests = function(companyID) {
+        var fairID = $stateParams.fairID;
+        liveFairApi.getCompanyInterests(fairID, companyID).$promise
+            .then(function(interests) {
+                console.log(interests);
+            }, function(error) {
+                console.log("Merda a receber interesses");
+            }
+        );
     }
 
     $scope.checkIfOwner = function(profileID) {

@@ -17,6 +17,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Profile = $resource(server.url + '/Users/:id', {id : '@id'});
 
+    var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
+
     var api = {
 
         login: function(username, password) {
@@ -146,6 +148,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
         getProfile: function(userID) {
             return Profile.query({id: userID});
+        },
+
+        getCompanyInterests: function(fairID, companyID) {
+            return ProfileInterests.query({fairID, companyID});
         },
 
         editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {
