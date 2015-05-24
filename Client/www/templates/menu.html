@@ -14,22 +14,28 @@
 			</ion-side-menu-content>
 
 			<ion-side-menu side="left">
-				<a class="link">
-					<div class="item item-divider">
-						<ion-item nav-clear menu-close class="item-avatar" ng-click="selectItem(0)">
-							<img src="img/User-icon.png">
-							<h2><strong>{{username}}</strong></h2>
+				<ion-content scroll="true">
+					<a class="link">
+						<div class="item item-divider">
+							<ion-item nav-clear menu-close class="item-avatar" ng-click="selectItem(0)">
+								<img src="img/User-icon.png">
+								<h2><strong>{{username}}</strong></h2>
+							</ion-item>
+						</div>
+					</a>
+					<ion-list>
+						<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
+							{{x.name}}
 						</ion-item>
-					</div>
-				</a>
-				<ion-list>
-					<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
-						{{x.name}}
-					</ion-item>
-					<ion-item ng-show="showProfile" nav-clear menu-close ng-click="loadProfile()">
-						{{ 'profile' | translate }}
-					</ion-item>
-				</ion-list>
+						<ion-item ng-show="showProfile" nav-clear menu-close ng-click="loadProfile()">
+							{{ 'profile' | translate }}
+						</ion-item>
+						<br><br><br>
+						<ion-item nav-clear menu-close ng-click="loadSettings()">
+							{{ 'profile' | translate }}
+						</ion-item>
+					</ion-list>
+				</ion-content>
 			</ion-side-menu>
 
 		</ion-side-menus>
