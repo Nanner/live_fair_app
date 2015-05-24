@@ -209,67 +209,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    $scope.changePassword = function() {
-        var myPopup = $ionicPopup.show({
-            templateUrl: "templates/changePassword.html",
-            title: $translate.instant('changePassword'),
-            scope: $scope,
-            buttons: [
-                { text: $translate.instant('cancel') },
-                {
-                    text: '<b>' + $translate.instant('submit') + '</b>',
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        $scope.oldPassword = utils.getOldPassword();
-                        $scope.newPassword = utils.getNewPassword();
-                        $scope.confirmNewPassword = utils.getConfirmPassword();
-
-                        var oldPasswordEncrypted = CryptoJS.SHA256($scope.oldPassword).toString();
-                        var newPasswordEnctypted = CryptoJS.SHA256($scope.newPassword).toString();
-                        var confirmPasswordEnctypted = CryptoJS.SHA256($scope.newPassword).toString();
-
-                        if($scope.newPassword.length < 8 || $scope.confirmNewPassword.length < 8) {
-                            utils.showAlert($translate.instant('lowCharPwd'), "Error");
-                        }
-                        else if(oldPasswordEncrypted === newPasswordEnctypted) {
-                            utils.showAlert($translate.instant('repeatedPwd'), "Error");
-                        } else if(newPasswordEnctypted !== confirmPasswordEnctypted) {
-                            utils.showAlert($translate.instant('noMatchPwd'), "Error");
-                        } else {
-                            //ALL GOOD change password
-                            liveFairApi.changePassword($scope.standProfileInfo[0].userID, "097c5870-b8fd-db03-f026-7deb9edf9939", newPasswordEnctypted).
-                                then(function(data) {
-                                    utils.showAlert(data, "Sucesso");
-                                    $state.go('menu.profile');
-                                }, function(error) {
-                                    liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
-                                        .then(function(profile) {
-                                            $scope.standProfileInfo = profile;
-                                            $scope.validate();
-                                        }, function(error) {
-                                    });
-                                    utils.showAlert("Error", "Error");
-                            });
-                        }
-
-                    }
-                }
-            ]
-        });
-    }
-
-    $scope.oldPasswordCallback = function() {
-        utils.setOldPassword($scope.oldPassword);
-    }
-
-    $scope.newPasswordCallback = function() {
-        utils.setNewPassword($scope.newPassword);
-    }
-
-    $scope.confirmPasswordCallback = function() {
-        utils.setConfirmPassword($scope.confirmNewPassword);
-    }
-
     $scope.incrementCounter = function(id) {
         liveFairApi.incrementCounter(id);
     }
