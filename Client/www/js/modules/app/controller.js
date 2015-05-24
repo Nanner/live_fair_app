@@ -28,7 +28,7 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
                 userID = response;
                 $state.go("menu.ownProfile", {companyID: userID});
             }, function(response) {
-                console.log("Unable to get userID");
+                utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
             }
         );
     }

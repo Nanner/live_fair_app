@@ -1,8 +1,8 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, utils, contacts, camera, liveFairApi) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, utils, contacts, camera, liveFairApi) {
     
-    $scope.profileOwner = true;
+    $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
     $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
@@ -27,16 +27,64 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     var messageToDisplay = [0,0,0,0,0];
     var emptyFields = [1,1,1,1];
 
-    $scope.loadProfile = function() {
+    $scope.loadProfile = function(type) {
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
             .then(function(profile) {
                 $scope.standProfileInfo = profile;
                 $scope.failedToResolve = false;
+                $scope.checkIfWebsiteIsAvailable();
+                if(type == "own") {
+                    $scope.initEmptyField();
+                    $scope.checkIfOwner(profileID);
+                }
             }, function(error) {
-                console.log("fodi-me");
                 $scope.failedToResolve = true; 
         });
+    }
+
+    $scope.checkIfOwner = function(profileID) {
+        var accountID = "";
+        $localForage.getItem('userID').then(function(response) {
+                accountID = response;
+                if(profileID != accountID) {
+                    utils.showAlert($translate.instant('notOpenOwnProfile'), "Permission Denied");
+                    $state.go('menu.listfairs');
+                }
+            }, function(response) {
+                utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
+                $state.go('menu.listfairs');
+            }
+        );
+    }
+
+    $scope.initEmptyField = function() {
+        if(! $scope.standProfileInfo[1].companyName || $scope.standProfileInfo[1].companyName === null) {
+            $scope.standProfileInfo[1].companyName = "";
+        } if(! $scope.standProfileInfo[0].email || $scope.standProfileInfo[0].email === null) {
+            $scope.standProfileInfo[0].email = "";
+        } if(! $scope.standProfileInfo[1].website || $scope.standProfileInfo[1].website === null) {
+            $scope.standProfileInfo[1].website = "";
+        } if(! $scope.standProfileInfo[1].address || $scope.standProfileInfo[1].address === null) {
+            $scope.standProfileInfo[1].address = "";
+        } if(! $scope.standProfileInfo[0].contact || $scope.standProfileInfo[0].contact === null) {
+            $scope.standProfileInfo[0].contact = "";
+        } if(! $scope.standProfileInfo[1].logoImage || $scope.standProfileInfo[1].logoImage === null) {
+            $scope.standProfileInfo[1].logoImage = "";
+        }
+    }
+
+    $scope.checkIfWebsiteIsAvailable = function() {
+        if(! $scope.standProfileInfo[1].website || $scope.standProfileInfo[1].website === null) {
+            $scope.existsWebsite = false;
+        } else {
+            var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
+            if($scope.standProfileInfo[1].website.match(pattern)) {
+                $scope.existsWebsite = true;
+            } else {
+                $scope.existsWebsite = false;
+            }
+        }
     }
 
     $scope.editProfile = function() {
@@ -256,7 +304,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             liveFairApi.editProfile($scope.standProfileInfo[0].userID, $scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].description, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[1].address, $scope.standProfileInfo[0].email, $scope.standProfileInfo[1].website).
                 then(function(data) {
                     utils.showAlert(data, "Sucesso");
-                    $state.go('menu.profile');
+                    $state.go("menu.ownProfile", {companyID: $scope.standProfileInfo[0].userID});
                 }, function(error) {
                     liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
                         .then(function(profile) {
