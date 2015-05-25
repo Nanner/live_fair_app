@@ -1,6 +1,9 @@
 var module = angular.module('profileModule');
 
 module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, utils, contacts, camera, liveFairApi) {
+    if($stateParams.fairID) {
+        $scope.fairID = $stateParams.fairID;
+    }
     
     $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
@@ -268,5 +271,9 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                     utils.showAlert("Error", "Error");
             });
         }
-    }
+    };
+
+    $scope.loadEvents = function(fairID, companyID) {
+        $state.go("menu.standProgram", {fairID: fairID, companyID: companyID});
+    };
 });
