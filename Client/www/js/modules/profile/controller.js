@@ -22,6 +22,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.oldPassword = "";
     $scope.newPassword = "";
     $scope.confirmNewPassword = "";
+    $scope.interestsList = "";
 
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
@@ -51,8 +52,9 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         liveFairApi.getCompanyInterests(fairID, companyID).$promise
             .then(function(interests) {
                 console.log(interests);
+                $scope.interestsList = interests;
             }, function(error) {
-                console.log("Error a receber interesses");
+                console.log("Erro a receber interesses");
             }
         );
     }
