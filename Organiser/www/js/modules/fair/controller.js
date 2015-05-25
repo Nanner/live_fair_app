@@ -180,6 +180,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         $scope.listfairs=nextFairs;
         console.log($scope.listfairs.length);
     };
+
+    $scope.newFair = function()
+    {
+        liveFairApi.newLiveFair("dabe1b19-f238-e36a-8456-7f0e7ac386a9", "FEUP Carreer Fair",
+         "Feira de Emprego", "2015-10-10T06:19:00.000Z", "2015-10-10T06:19:00.000Z", "FEUP - Porto", "aa");
+    };
 });
 
 
