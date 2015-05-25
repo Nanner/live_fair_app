@@ -73,6 +73,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				schedule: function(liveFairApi, $stateParams) {
 					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
 						.then(function(schedule) {
+							console.log(schedule);
 							return schedule;
 						}, function(error) {
 							return "failed to resolve";
