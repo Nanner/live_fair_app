@@ -391,4 +391,41 @@ module.exports = function(server){
     });
 
 
+    server.route({
+    method: 'POST',
+    path: '/livefairs/new/',
+    config:{
+        auth: {
+         mode: 'optional',
+         strategy: 'token'
+     },
+     handler: function (request, reply) {
+        var fairOrgID = request.payload.organiserID;
+        var fairName = request.payload.name;
+        var fairDesc = request.payload.description;
+        var fairDS = request.payload.startDate;
+        var fairDE = request.payload.endDate;
+        var fairLoc = request.payload.local;
+        var fairAdd = request.payload.address;
+        var fairCit = request.payload.city;
+        var fairMap = request.payload.map;
+        LiveFair.create({
+           'organizerOrganizerID':fairOrgID,
+           'name':fairName,
+           'description':fairDesc,
+           'startDate':fairDS,
+           'endDate':fairDS,
+           'local':fairLoc,
+           'address':fairAdd,
+           'city':fairCit,
+           'map':fairMap
+       })
+        reply("Live Fair criada com sucesso!")
+        .catch(function(error) {
+            reply(Boom.badRequest(error.message));
+            console.log(error.message)
+        });
+    }}});
+
+
 };
