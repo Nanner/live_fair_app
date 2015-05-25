@@ -155,7 +155,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         var pastFairs=[];
         var curdate = new Date();
          for(i = 0; i < $scope.listfairs.length; i++) {
-            var fairDate = new Date($scope.listfairs[i].date);
+            var fairDate = new Date($scope.listfairs[i].endDate);
             if( fairDate < curdate)
                 {
                      pastFairs.push($scope.listfairs[i]);
@@ -171,7 +171,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         var nextFairs=[];
         var curdate = new Date();
          for(i = 0; i < $scope.listfairs.length; i++) {
-            var fairDate = new Date($scope.listfairs[i].date);
+            var fairDate = new Date($scope.listfairs[i].startDate);
             if( fairDate > curdate)
              {
                 nextFairs.push($scope.listfairs[i]);
@@ -181,10 +181,27 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         console.log($scope.listfairs.length);
     };
 
+    $scope.loadCurrentFairs = function(){
+        $scope.listfairs = listfairs;
+        var nextFairs=[];
+        var curdate = new Date();
+         for(i = 0; i < $scope.listfairs.length; i++) {
+            var sDate = new Date($scope.listfairs[i].startDate);
+            var eDate = new Date($scope.listfairs[i].endDate);
+            if( sDate >= curdate && curdate <= edate)
+             {
+                nextFairs.push($scope.listfairs[i]);
+            }  
+        }
+        $scope.listfairs=nextFairs;
+        console.log($scope.listfairs.length);
+    };
+
+
     $scope.newFair = function()
     {
         liveFairApi.newLiveFair("dabe1b19-f238-e36a-8456-7f0e7ac386a9", "FEUP Carreer Fair",
-         "Feira de Emprego", "2015-10-10T06:19:00.000Z", "2015-10-10T06:19:00.000Z", "FEUP - Porto", "aa");
+         "Feira de Emprego", "2015-10-10T06:19:00.000Z", "2015-10-10T06:19:00.000Z", "FEUP","Rua Roberto Frias", "Porto", "aa");
     };
 });
 
