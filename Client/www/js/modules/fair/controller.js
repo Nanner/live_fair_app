@@ -138,6 +138,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
         utils.showLoadingPopup();
         liveFairApi.getLiveFairs().$promise
             .then(function(liveFairs) {
+                console.log(liveFairs);
                 $scope.listfairs = liveFairs;
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = false;
