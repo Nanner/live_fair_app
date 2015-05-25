@@ -134,6 +134,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi) {
+    
     $scope.failedToResolve = listfairs == "failed to resolve";
     if($scope.failedToResolve)
         return;
@@ -200,7 +201,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
     $scope.newFair = function()
     {
-        liveFairApi.newLiveFair("dabe1b19-f238-e36a-8456-7f0e7ac386a9", "FEUP Carreer Fair",
+        liveFairApi.newLiveFair("3fde43a0-ca0a-4abe-ad37-841b58b4ca73", "FEUP Carreer Fair",
          "Feira de Emprego", "2015-10-10T06:19:00.000Z", "2015-10-10T06:19:00.000Z", "FEUP","Rua Roberto Frias", "Porto", "aa");
     };
 });

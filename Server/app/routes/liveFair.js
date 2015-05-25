@@ -1,6 +1,7 @@
 var Promise = require("bluebird");
 var Boom = require("boom");
 var sequelize = require('../models').sequelize;
+var uuid = require('node-uuid');
 
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
@@ -403,13 +404,17 @@ module.exports = function(server){
         var fairOrgID = request.payload.organiserID;
         var fairName = request.payload.name;
         var fairDesc = request.payload.description;
-        var fairDS = request.payload.startDate;
-        var fairDE = request.payload.endDate;
+        var fairDSstr = request.payload.startDate;
+        var fairDS = new Date(fairDSstr);
+        var fairDE = new Date(fairDEstr);
+        var fairDEstr = request.payload.endDate;
         var fairLoc = request.payload.local;
         var fairAdd = request.payload.address;
         var fairCit = request.payload.city;
         var fairMap = request.payload.map;
+        var ID=uuid.v4();
         LiveFair.create({
+           'liveFairID':ID,
            'organizerOrganizerID':fairOrgID,
            'name':fairName,
            'description':fairDesc,
@@ -420,7 +425,9 @@ module.exports = function(server){
            'city':fairCit,
            'map':fairMap
        })
-        reply("Live Fair criada com sucesso!")
+        .then(function(result) {
+                    reply(JSON.stringify('Live Fair criada com sucesso'));
+            })
         .catch(function(error) {
             reply(Boom.badRequest(error.message));
             console.log(error.message)
