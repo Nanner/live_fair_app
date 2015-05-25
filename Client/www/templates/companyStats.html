@@ -9,13 +9,17 @@
 	            <div class="stats-company-name">
 	            	<strong>{{statsScreen.name}}</strong>
 	            </div>
-	            <div class="stats-label">
-	            	<strong><span class="ion-stats-bars"></span>  {{ 'stats' | translate }} </strong>
-	            </div>
 	        </div>
 	    </div>
 
 	    <div class="stats-container card">
+
+            <div class="item item-divider item-positive">
+                <div class="stats-label">
+                    <strong><span class="ion-stats-bars"></span>  {{ 'stats' | translate }} </strong>
+                </div>
+            </div>
+
 			<div class="row">
 			  <div class="col col-75 label"><strong> {{ 'matches' | translate }} </strong></div>
 			  <p class="col"><strong>:</strong></p>
@@ -38,20 +42,24 @@
 			</div>
 	    </div>
 
-	    <div class="stats-popKeywords-container">
-		    <div class="card">
-			  <div class="item item-divider">
-			    <p><strong> {{ 'popKeywords' | translate }} </strong></p>
-			  </div>
-			  <div ng-repeat="keyword in statsScreen.keywords" class="item item-text-wrap">
-			  	<div class="row">
-					<div class="col col-75"><p><strong>{{keyword.name}}</strong></p></div>
-					<p><strong>:</strong></p>
-					<div class="col col-25"><p><strong>{{keyword.nmatches}}</strong></p></div>
-				</div>
-			  </div>
-			</div>	    	
-	    </div>
+
+        <div class="stats-popKeywords-container card">
+
+          <div class="item item-divider item-positive">
+            <strong> {{ 'popKeywords' | translate }} </strong>
+          </div>
+
+          <!--<div  class="">-->
+
+            <div class="row item-text-wrap" ng-repeat="keyword in statsScreen.keywords" >
+                <div class="col col-75 label"><p><strong> {{keyword.name}} </strong></p></div>
+                <p class="col"><strong>:</strong></p>
+                <div class="col col-25 result"><p><strong> {{keyword.nmatches}} </strong></p></div>
+            </div>
+
+          <!--</div>-->
+
+        </div>
     
     </ion-content>
 </ion-view>

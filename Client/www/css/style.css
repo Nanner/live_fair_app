@@ -57,9 +57,12 @@
 }
 
 .home-registerBtn-container {
+
+    background-color: #B5DEF7;
     position: relative;
     text-align: center;
-    padding-bottom: 20%;
+    padding-top: 5%;
+    padding-bottom: 18%;
 }
 
 .home-existing-user {
@@ -354,6 +357,11 @@
 
 /****** Profile *******/
 
+.top-profile-container{
+    background-color: #28A3D4;
+    padding-bottom: 5%;
+}
+
 .profile-img-container {
     text-align: center;
     max-width: 50%;
@@ -371,38 +379,33 @@
 }
 
 .stand-website {
-    color: #11C1F3;
+    color: darkblue;
     font-weight: bold;
     text-decoration: none;
 }
 
-.profile-btn-Container-1 {
-    margin-top: 2%;
-    position: relative;
-    text-align: center;
-}
 
 .profile-btn-Container {
+
     margin-top: 1%;
+    padding-top: 5%;
+    padding-bottom: 2%;
     position: relative;
     text-align: center;
+    background-color: #B5DEF7;
 }
 
-.profile-btn-Container-2 {
-    margin-top: 1%;
-    position: relative;
-    text-align: center;
-    padding-bottom: 1%;
-}
 
 .edit-profile {
     float: left;
     padding-left: 4%;
+    color: darkblue;
 }
 
 .profile-stats {
     float: right;
     padding-right: 4%;
+    color: darkblue;
 }
 
 .profile-owner-icons {
@@ -411,21 +414,44 @@
 
 .save-contact-btn{
     width: 95%;
+    margin-bottom: 2%;
 }
+
+.info-container > .item{
+    color: #ffffff;
+}
+
+.info-container > .item p .item-info-desc{
+    color: darkblue;
+}
+
+.info-container > .item p .item-info-content{
+    color: #28A3D4;
+}
+
+.info-container > .item p .interest-name{
+    color: darkblue;
+}
+
 
 /****** Edit-Profile *******/
 
 .editProfile-btnsContainer {
     margin-top: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     text-align: center;
+    background-color: #B5DEF7;
 }
 
 .editProfile-photo-btn {
     padding-right: 5%;
+    color: darkblue;
 }
 
 .editProfile-password-btn {
     padding-left: 5%;
+    color: darkblue;
 }
 
 .editProfile-img-container {
@@ -525,7 +551,7 @@
 }
 
 .stats-label{
-    text-align: center;
+    text-align: left;
     color: #ffffff;
 }
 
@@ -543,6 +569,17 @@
     color: #28A3D4;
 }
 
-.stats-popKeywords-container {
+.stats-popKeywords-container > .item{
+    color: #ffffff;
+}
+
+
+.stats-popKeywords-container > .row .label{
+    text-align: left;
+    color: darkblue;
+}
+
+.stats-popKeywords-container > .row .result {
     text-align: center;
+    color: #28A3D4;
 }

@@ -1,57 +1,53 @@
 <ion-view title="'Profile'">
 	<ion-content scroll='true' ng-init="loadProfile()">
 
-        <div class="profile-owner-icons">
-            <span ng-show="profileOwner" class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
-            <span ng-show="profileOwner" class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
+        <div class="top-profile-container">
+            <div class="profile-owner-icons">
+                <span ng-show="profileOwner" class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
+                <span ng-show="profileOwner" class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
+            </div>
+
+            <!--editar o container, botao de opçoes interfere com formataçao-->
+            <div class="profile-img-container">
+                <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
+            </div>
+
+            <div class="profile-title-container">
+                <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
+                <a class="stand-website" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+            </div>
         </div>
 
-        <!--editar o container, botao de opçoes interfere com formataçao-->
-        <div class="profile-img-container">
-            <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
-        </div>
+
         
-        <div class="profile-title-container">
-            <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
-            <a class="stand-website" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
-        </div>
-        
-        <div class="card">
-          <div class="item item-divider">
-            {{ 'info' | translate }}
+        <div class="card info-container">
+          <div class="item item-divider item-positive">
+            <strong>{{ 'info' | translate }}</strong>
           </div>
           <div class="item item-text-wrap">
-            <p> <b> {{ 'aboutus' | translate }}: </b> {{standProfileInfo[0].description}} </p>
-            <p> <b> {{ 'phone' | translate }}: </b> {{standProfileInfo[0].contact}} </p>
-            <p> <b> {{ 'address' | translate }}: </b> {{standProfileInfo[1].address}} </p>
+            <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[0].description}} </span> </p>
+            <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:    </span></strong> <span class="item-info-content">{{standProfileInfo[0].contact}}     </span> </p>
+            <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[1].address}}     </span> </p>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="item item-divider">
-            {{ 'interests' | translate }}
-          </div>
-          <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
-            <p><span class="ion-android-radio-button-on"> {{interest.name}} </span> </p>
-          </div>
-        </div>
+            <div class="item item-divider item-positive">
+                <strong>{{ 'interests' | translate }}</strong>
+            </div>
 
-        <!--<div class="profile-btn-Container-1">-->
-            <!--<button nav-clear class="myBtn button button-clear button-outline button-positive">-->
-                <!--{{ 'btnRecomendedStands' | translate }} -->
-            <!--</button>-->
-        <!--</div>-->
+            <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
+                <p><span class="ion-android-radio-button-on interest-name"> {{interest.name}} </span> </p>
+            </div>
+        </div>
 
         <div class="profile-btn-Container">
-            <button nav-clear class="save-contact-btn button button-balanced">
+            <button nav-clear class="save-contact-btn button button-calm">
                 {{ 'btnStandEvents' | translate }} 
             </button>
-        </div> 
-        <div class="profile-btn-Container-2">
-            <button ng-click="saveContact()" class="save-contact-btn button button button-calm">
-                {{ 'saveContact' | translate }} 
+
+            <button ng-click="saveContact()" class="save-contact-btn button button-calm">
+                {{ 'saveContact' | translate }}
             </button>
-        </div>
-             
+        </div> 
+
     </ion-content>
 </ion-view>

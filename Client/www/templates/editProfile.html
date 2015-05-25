@@ -50,12 +50,14 @@
 
         <div class="editProfile-btnsContainer">
 	        <span class="editProfile-photo-btn" ng-click="uploadPhoto()"><i class="fa fa-camera fa-2x"></i></span>
-	        <span class="editProfile-password-btn" ng-click="changePassword()"><i class="fa fa-lock fa-2x"></i></span>        	
+	        <span class="editProfile-password-btn" ng-click="changePassword()"><i class="fa fa-lock fa-2x"></i></span>
+
+            <div class="fair-btn-Container-1">
+                <button nav-clear ng-click="saveChanges()" class="myBtn button button-calm"> <strong> {{ 'submit' | translate }} </strong> </button>
+            </div>
         </div>
 
-        <div class="fair-btn-Container-1">
-            <button nav-clear ng-click="saveChanges()" class="myBtn button button-calm"> <strong> {{ 'submit' | translate }} </strong> </button>
-        </div>
+
 
     </ion-content>
 </ion-view>
