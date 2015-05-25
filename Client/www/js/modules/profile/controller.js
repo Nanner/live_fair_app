@@ -255,7 +255,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             }
         }
 
-        if(!existsEmptyField && !existsNotValidField) { 
+        if(!existsEmptyField && !existsNotValidField) {
             liveFairApi.editProfile($scope.standProfileInfo[0].userID, $scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].description, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[1].address, $scope.standProfileInfo[0].email, $scope.standProfileInfo[1].website).
                 then(function(data) {
                     utils.showAlert(data, "Sucesso");
