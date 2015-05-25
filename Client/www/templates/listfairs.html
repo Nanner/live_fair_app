@@ -27,12 +27,9 @@
                     <h2> {{fair.name}} </h2>
                 </div>
                 <div class="item item-text-wrap">
-                    <!--<p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{fair.month}} </p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>-->
-                    <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
+                    <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
+                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
+                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
                 </div>
             </div>
         </div>

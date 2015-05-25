@@ -1,6 +1,6 @@
 var module = angular.module('settingsModule');
 
-module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, $ionicPopup) {
+module.controller('settingsCtrl', function($rootScope, $scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, $ionicPopup, $ionicHistory) {
     $rootScope.isAuthenticated = false;
     $localForage.getItem('isAuthenticated').then(function(result) {
         $rootScope.isAuthenticated = result || false;
@@ -24,6 +24,11 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
     $scope.confirmNewPassword = "";
 
     $scope.changePassword = function() {
+
+        console.log($scope.oldPassword);
+        console.log($scope.newPassword);
+        console.log($scope.confirmNewPassword);
+
         var oldPasswordEncrypted = CryptoJS.SHA256($scope.oldPassword).toString();
         var newPasswordEncrypted = CryptoJS.SHA256($scope.newPassword).toString();
         var confirmPasswordEncrypted = CryptoJS.SHA256($scope.newPassword).toString();
@@ -36,33 +41,22 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         } else if(newPasswordEncrypted !== confirmPasswordEncrypted) {
             utils.showAlert($translate.instant('noMatchPwd'), "Error");
         } else {
-            //ALL GOOD change password
-            liveFairApi.changePassword($scope.standProfileInfo[0].userID, "097c5870-b8fd-db03-f026-7deb9edf9939", newPasswordEnctypted).
-                then(function(data) {
-                    utils.showAlert(data, "Sucesso");
-                    $state.go('menu.profile');
-                }, function(error) {
-                    liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
-                        .then(function(profile) {
-                            $scope.standProfileInfo = profile;
-                            $scope.validate();
+            var userID = "";
+            $localForage.getItem('userID').then(function(response) {
+                    userID = response;
+                    liveFairApi.changePassword(userID, oldPasswordEncrypted, newPasswordEncrypted).
+                        then(function(data) {
+                            utils.showAlert(data, "Sucesso");
                         }, function(error) {
-                        });
-                    utils.showAlert("Error", "Error");
-                });
+                            utils.showAlert($translate.instant('sorryChangePassword'), "Error");
+                        }
+                    );
+                }, function(response) {
+                    utils.showAlert($translate.instant('sessionExpired'), "Error");
+                    $scope.logoutUser();
+                }
+            );
         }
-    };
-
-    $scope.oldPasswordCallback = function() {
-        utils.setOldPassword($scope.oldPassword);
-    };
-
-    $scope.newPasswordCallback = function() {
-        utils.setNewPassword($scope.newPassword);
-    };
-
-    $scope.confirmPasswordCallback = function() {
-        utils.setConfirmPassword($scope.confirmNewPassword);
     };
 
     // Logout
@@ -73,6 +67,9 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
         });
         confirmPopup.then(function(res) {
             if(res) {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $state.go('menu.home');
                 liveFairApi.logout();
             }

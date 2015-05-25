@@ -1,14 +1,14 @@
 <ion-view title="'Profile'">
-	<ion-content scroll='true' ng-init="loadProfile()">
+	<ion-content scroll='true' ng-init="loadProfile('nown')">
 
         <!--editar o container, botao de opçoes interfere com formataçao-->
         <div class="other-profile-img-container">
-            <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
+            <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
         </div>
         
         <div class="profile-title-container">
             <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
-            <a class="stand-website" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+            <a class="stand-website" ng-show="{{existsWebsite}}" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
         </div>
         
         <div class="card">
@@ -26,8 +26,8 @@
           <div class="item item-divider">
             {{ 'interests' | translate }}
           </div>
-          <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
-            <p><span class="ion-android-radio-button-on"> {{interest.name}} </span> </p>
+          <div ng-repeat="interest in interestsList" class="item">
+            <p><span class="ion-android-radio-button-on"> {{interest.interest}} </span> </p>
           </div>
         </div>
 

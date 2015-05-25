@@ -112,28 +112,31 @@ module.exports = function(server){
     });
 
     server.route({
-        method: 'GET',
-        path: '/livefairs/{LiveFairID}/companies/{CompanyID}',
-        config:{
-            auth: {
-                mode: 'optional',
-                strategy: 'token'
-            },
-            handler: function (request, reply) {
-                var liveFairId=request.params.LiveFairID;
-                var CompanyID = request.params.CompanyID;
-                reply(
-                    LiveFairCompanyInterest.findAll({
-                        where:{liveFairIDref:liveFairId,companyIDref:CompanyID}}).map(function(interest){
-                        return Interest.find({
-                            where:{
-                                interestID:interest.interestIDref
-                            }
-                        }).then(function(interests){
-                            return JSON.stringify(interests);
-                        });
-                    }));
-            }}
+       method: 'GET',
+       path: '/livefairs/{LiveFairID}/companies/{CompanyID}',
+       config:{
+           auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+           handler: function (request, reply) {
+               var liveFairId=request.params.LiveFairID;
+               var CompanyID = request.params.CompanyID;
+               LiveFairCompanyInterest.findAll({
+                   where:{liveFairIDref:liveFairId,companyIDref:CompanyID}
+               }).map(function(liveFairInterest){
+                   return Interest.find({
+                       where:{
+                           interestID:liveFairInterest.interestIDref
+                       }
+                   }).then(function(interest){
+                       return interest;
+                   });
+               }).then(function(interests) {
+                   reply(JSON.stringify(interests));
+               })
+           }
+       }
     });
 
     server.route({

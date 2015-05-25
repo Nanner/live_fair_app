@@ -1,8 +1,8 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, utils, contacts, camera, liveFairApi) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, utils, contacts, camera, liveFairApi) {
     
-    $scope.profileOwner = true;
+    $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
     $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
@@ -22,20 +22,85 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.oldPassword = "";
     $scope.newPassword = "";
     $scope.confirmNewPassword = "";
+    $scope.interestsList = "";
 
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
     var emptyFields = [1,1,1,1];
 
-    $scope.loadProfile = function() {
+    $scope.loadProfile = function(type) {
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
-            .then(function(profile) {   
+            .then(function(profile) {
                 $scope.standProfileInfo = profile;
+                console.log(profile);
                 $scope.failedToResolve = false;
+                $scope.checkIfWebsiteIsAvailable();
+                if(type == "own") {
+                    $scope.initEmptyField();
+                    $scope.checkIfOwner(profileID);
+                } else if(type == "nown") {
+                    $scope.fetchCompanyInterests(profileID);
+                }
             }, function(error) {
                 $scope.failedToResolve = true; 
         });
+    }
+
+    $scope.fetchCompanyInterests = function(companyID) {
+        var fairID = $stateParams.fairID;
+        liveFairApi.getCompanyInterests(fairID, companyID).$promise
+            .then(function(interests) {
+                console.log(interests);
+                $scope.interestsList = interests;
+            }, function(error) {
+                console.log("Erro a receber interesses");
+            }
+        );
+    }
+
+    $scope.checkIfOwner = function(profileID) {
+        var accountID = "";
+        $localForage.getItem('userID').then(function(response) {
+                accountID = response;
+                if(profileID != accountID) {
+                    utils.showAlert($translate.instant('notOpenOwnProfile'), "Permission Denied");
+                    $state.go('menu.listfairs');
+                }
+            }, function(response) {
+                utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
+                $state.go('menu.listfairs');
+            }
+        );
+    }
+
+    $scope.initEmptyField = function() {
+        if(! $scope.standProfileInfo[1].companyName || $scope.standProfileInfo[1].companyName === null) {
+            $scope.standProfileInfo[1].companyName = "";
+        } if(! $scope.standProfileInfo[0].email || $scope.standProfileInfo[0].email === null) {
+            $scope.standProfileInfo[0].email = "";
+        } if(! $scope.standProfileInfo[1].website || $scope.standProfileInfo[1].website === null) {
+            $scope.standProfileInfo[1].website = "";
+        } if(! $scope.standProfileInfo[1].address || $scope.standProfileInfo[1].address === null) {
+            $scope.standProfileInfo[1].address = "";
+        } if(! $scope.standProfileInfo[0].contact || $scope.standProfileInfo[0].contact === null) {
+            $scope.standProfileInfo[0].contact = "";
+        } if(! $scope.standProfileInfo[1].logoImage || $scope.standProfileInfo[1].logoImage === null) {
+            $scope.standProfileInfo[1].logoImage = "";
+        }
+    }
+
+    $scope.checkIfWebsiteIsAvailable = function() {
+        if(! $scope.standProfileInfo[1].website || $scope.standProfileInfo[1].website === null) {
+            $scope.existsWebsite = false;
+        } else {
+            var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
+            if($scope.standProfileInfo[1].website.match(pattern)) {
+                $scope.existsWebsite = true;
+            } else {
+                $scope.existsWebsite = false;
+            }
+        }
     }
 
     $scope.editProfile = function() {
@@ -160,67 +225,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    $scope.changePassword = function() {
-        var myPopup = $ionicPopup.show({
-            templateUrl: "templates/changePassword.html",
-            title: $translate.instant('changePassword'),
-            scope: $scope,
-            buttons: [
-                { text: $translate.instant('cancel') },
-                {
-                    text: '<b>' + $translate.instant('submit') + '</b>',
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        $scope.oldPassword = utils.getOldPassword();
-                        $scope.newPassword = utils.getNewPassword();
-                        $scope.confirmNewPassword = utils.getConfirmPassword();
-
-                        var oldPasswordEncrypted = CryptoJS.SHA256($scope.oldPassword).toString();
-                        var newPasswordEnctypted = CryptoJS.SHA256($scope.newPassword).toString();
-                        var confirmPasswordEnctypted = CryptoJS.SHA256($scope.newPassword).toString();
-
-                        if($scope.newPassword.length < 8 || $scope.confirmNewPassword.length < 8) {
-                            utils.showAlert($translate.instant('lowCharPwd'), "Error");
-                        }
-                        else if(oldPasswordEncrypted === newPasswordEnctypted) {
-                            utils.showAlert($translate.instant('repeatedPwd'), "Error");
-                        } else if(newPasswordEnctypted !== confirmPasswordEnctypted) {
-                            utils.showAlert($translate.instant('noMatchPwd'), "Error");
-                        } else {
-                            //ALL GOOD change password
-                            liveFairApi.changePassword($scope.standProfileInfo[0].userID, "097c5870-b8fd-db03-f026-7deb9edf9939", newPasswordEnctypted).
-                                then(function(data) {
-                                    utils.showAlert(data, "Sucesso");
-                                    $state.go('menu.profile');
-                                }, function(error) {
-                                    liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
-                                        .then(function(profile) {
-                                            $scope.standProfileInfo = profile;
-                                            $scope.validate();
-                                        }, function(error) {
-                                    });
-                                    utils.showAlert("Error", "Error");
-                            });
-                        }
-
-                    }
-                }
-            ]
-        });
-    }
-
-    $scope.oldPasswordCallback = function() {
-        utils.setOldPassword($scope.oldPassword);
-    }
-
-    $scope.newPasswordCallback = function() {
-        utils.setNewPassword($scope.newPassword);
-    }
-
-    $scope.confirmPasswordCallback = function() {
-        utils.setConfirmPassword($scope.confirmNewPassword);
-    }
-
     $scope.incrementCounter = function(id) {
         liveFairApi.incrementCounter(id);
     }
@@ -251,11 +255,11 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             }
         }
 
-        if(!existsEmptyField && !existsNotValidField) { 
+        if(!existsEmptyField && !existsNotValidField) {
             liveFairApi.editProfile($scope.standProfileInfo[0].userID, $scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].description, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[1].address, $scope.standProfileInfo[0].email, $scope.standProfileInfo[1].website).
                 then(function(data) {
                     utils.showAlert(data, "Sucesso");
-                    $state.go('menu.profile');
+                    $state.go("menu.ownProfile", {companyID: $scope.standProfileInfo[0].userID});
                 }, function(error) {
                     liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
                         .then(function(profile) {

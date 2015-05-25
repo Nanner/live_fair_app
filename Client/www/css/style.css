@@ -84,7 +84,6 @@
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10%;
-    margin-top: 10%;
 }
 
 .login-recover-password {
@@ -458,10 +457,6 @@
 .editProfile-btnsContainer {
     margin-top: 3%;
     text-align: center;
-}
-
-.editProfile-photo-btn {
-    padding-right: 5%;
 }
 
 .editProfile-password-btn {

@@ -12,12 +12,11 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
     ];
 
     $localForage.getItem('userType').then(function(result) {
-        console.log($rootScope.userType);
         $rootScope.userType = result || "";
     });
 
-    $scope.toggleLeft = function() {
-        $ionicSideMenuDelegate.toggleLeft();
+    $scope.toggleRight = function() {
+        $ionicSideMenuDelegate.toggleRight();
     };
 
     $scope.selectItem = function($index) {
@@ -31,6 +30,13 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
     };
 
     $scope.loadProfile = function() {
-        $state.go("menu.ownProfile", {companyID: $localStorage.get('userID')});
+        var userID = "";
+        $localForage.getItem('userID').then(function(response) {
+                userID = response;
+                $state.go("menu.ownProfile", {companyID: userID});
+            }, function(response) {
+                utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
+            }
+        );
     }
 });

@@ -12,6 +12,7 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
 });
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
+    
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -35,18 +36,18 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
     $scope.schedule = _.chain(schedule)
         .sortBy(function(event) {
-            return event.time;
+            return event.startTime;
         })
         .groupBy(function(event) {
-            return event.time;
+            return event.startTime;
         }).value();
 
     $scope.scheduleDays = _.chain(schedule)
         .sortBy(function(event) {
-            return event.time;
+            return event.startTime;
         })
         .map(function(event) {
-            var time = new Date(event.time);
+            var time = new Date(event.startTime);
             return (Date.parse(utils.getDayMonthYearDate(time)));
         })
         .unique()
@@ -60,39 +61,8 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
     $scope.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function(fairName, event) {
-
-        //var ihour;
-        //var fhour;
-        //var iminute;
-        //var fminute;
-        //
-        //if(starHour < 10) {
-        //    ihour = "0" + starHour;
-        //} else {
-        //    ihour = "" + starHour;
-        //}
-        //
-        //if(startMinute < 10) {
-        //    iminute = "0" + startMinute;
-        //} else {
-        //    iminute = "" + startMinute;
-        //}
-        //
-        //if(endHour < 10) {
-        //    fhour = "0" + endHour;
-        //} else {
-        //    fhour = "" + endHour;
-        //}
-        //
-        //if(endMinute < 10) {
-        //    fminute = "0" + endMinute;
-        //} else {
-        //    fminute = "" + endMinute;
-        //}
-
-        //$scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
+        
         $scope.liveFairEvent = event;
-
         var myPopup = $ionicPopup.show({
             templateUrl: "eventPopup.html",
             title: fairName,
@@ -103,8 +73,8 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
                     type: 'button-balanced',
                     onTap: function(e) {
                         //Create event in phone's calendar
-                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.Speakers;
-                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.Subject, $scope.liveFairEvent.Speakers, $scope.liveFairEvent.time, $scope.liveFairEvent.endTime);
+                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.speakers;
+                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.subject, $scope.liveFairEvent.speakers, $scope.liveFairEvent.startTime, $scope.liveFairEvent.endTime);
                     }
                 },
                 {
@@ -138,6 +108,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
         utils.showLoadingPopup();
         liveFairApi.getLiveFairs().$promise
             .then(function(liveFairs) {
+                console.log(liveFairs);
                 $scope.listfairs = liveFairs;
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = false;
