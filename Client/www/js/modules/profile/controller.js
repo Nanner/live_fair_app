@@ -52,7 +52,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             .then(function(interests) {
                 console.log(interests);
             }, function(error) {
-                console.log("Merda a receber interesses");
+                console.log("Error a receber interesses");
             }
         );
     }

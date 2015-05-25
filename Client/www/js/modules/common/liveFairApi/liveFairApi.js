@@ -150,8 +150,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             return Profile.query({id: userID});
         },
 
-        getCompanyInterests: function(fairID, companyID) {
-            return ProfileInterests.query({fairID, companyID});
+        getCompanyInterests: function(fairId, companyId) {
+            return ProfileInterests.query({fairID: fairId, companyID: companyId});
         },
 
         editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {
