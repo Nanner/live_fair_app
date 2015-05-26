@@ -61,7 +61,11 @@ module.exports = function(server){
                                 for(var i=0;i<interestCount.length;i++){
                                     visitorInterestCounter+=parseInt(interestCount[i].count);
                                 }
-                                var percentil=visitorInterestCounter/visitorCount*100;
+                                var percentil;
+                                if(visitorCount===0)
+                                    percentil=0
+                                else
+                                    percentil=visitorInterestCounter/visitorCount*100;
                                 reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
                             }); 
                 }).error(function(err){
