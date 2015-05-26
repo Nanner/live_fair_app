@@ -464,4 +464,31 @@ module.exports = function(server){
                 );
            }}
     });
+	
+	server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/recommendations',
+        config:{
+            auth: {
+                mode:'optional',
+				strategy: 'token'
+			},
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                reply (sequelize.query(
+					"SELECT 'companyCompanyID'
+					 FROM connection 
+					 WHERE 'visitorVisitorID' IN (SELECT 'visitorIDref'
+												  FROM 'liveFairVisitorInterest' 
+												  WHERE 'interestIDref' IN (SELECT 'interestIDref'
+																		FROM 'liveFairVisitorInterest'
+																		WHERE 'visitorIDref' = :userID) AND 'visitorIDref' != :userID ) AND 'like' = TRUE",
+						{ replacements: { userID: UserID}, type: sequelize.QueryTypes.SELECT }
+					).then(function(recoms) {
+					  reply(JSON.stringify(recoms));
+					})
+                );
+			}
+        }
+    });
 };
