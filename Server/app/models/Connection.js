@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Connection = sequelize.define('connection', {
-        like:{
+        liked:{
             type: DataTypes.BOOLEAN, allowNull: false
         },
 		sharedContact:{

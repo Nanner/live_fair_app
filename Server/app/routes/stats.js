@@ -31,6 +31,8 @@ module.exports = function(server){
                       }).then(function(stand){
                           console.log(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
                           reply(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
+                      }).error(function(err){
+                          return Boom.notFound('Stats not found');
                       });
              });  
         }}
@@ -62,6 +64,8 @@ module.exports = function(server){
                                 var percentil=visitorInterestCounter/visitorCount*100;
                                 reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
                             }); 
+                }).error(function(err){
+                   return Boom.notFound('Stats not found');
                 }); 
         }}
     });
@@ -76,15 +80,43 @@ module.exports = function(server){
            },
             handler: function (request, reply) {
                 var CompanyID = request.params.companyID;
-                reply (Connection.count({where:{
+                reply (Connection.count(
+                    {where:{
                    companyCompanyID:CompanyID,
-                   liked:true
+                   liked:'true'
                 },
-                group:'"Connection"."companyCompanyID"'
+                group:'"connection"."companyCompanyID"'
                 }).then(function(LikeCount){
-                    return JSON.stringify(LikeCount);
+                    return LikeCount;
+                }).error(function(err){
+                    return Boom.notFound(' Stats not found');
                 })
                 );
            }}
-    });    
+    });
+    
+        server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairid}/companies/{companyID}/stats/contactShares',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.companyID;
+                reply (Connection.count(
+                    {where:{
+                   companyCompanyID:CompanyID,
+                   sharedContact:'true'
+                },
+                group:'"connection"."companyCompanyID"'
+                }).then(function(LikeCount){
+                    return LikeCount;
+                }).error(function(err){
+                    return Boom.notFound(' Stats not found');
+                })
+                );
+           }}
+    });        
 };

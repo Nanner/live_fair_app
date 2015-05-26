@@ -38,6 +38,8 @@ module.exports = function(server){
                 reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
                 {
                     return JSON.stringify(liveFairs);
+                }).error(function(err){
+                    return Boom.notFound('Live Fairs not found');
                 }));
             }}
     });
@@ -55,6 +57,8 @@ module.exports = function(server){
                 reply(LiveFair.find(liveFairId).then(function(liveFair)
                 {
                     return JSON.stringify(liveFair);
+                }).error(function(err){
+                    return Boom.notFound('Live Fair not found');
                 }));
             }}
     });
@@ -75,6 +79,8 @@ module.exports = function(server){
                 }}).then(function(livefair)
                 {
                     reply.file('./images/maps/'+livefair.map);
+                }).error(function(err){
+                    return Boom.notFound('Live Fair map not found');
                 });
             }}
     });
@@ -95,6 +101,8 @@ module.exports = function(server){
                 }}).then(function(liveFairEvents)
                 {
                     return JSON.stringify(liveFairEvents);
+                }).error(function(err){
+                    return Boom.notFound('Live Fair schedule not found');
                 }));
             }}
     });
@@ -113,9 +121,10 @@ module.exports = function(server){
                     Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
                         .map(function(company) {
                             return Company.find({where: {companyID: company.companyCompanyID}});
-                        })
-                        .then(function(companies) {
+                        }).then(function(companies) {
                             return JSON.stringify(companies);
+                        }).error(function(err){
+                            return Boom.notFound('Live Fair Stands not found');
                         })
                 );
             }}
@@ -144,6 +153,8 @@ module.exports = function(server){
                    });
                }).then(function(interests) {
                    reply(JSON.stringify(interests));
+               }).error(function(err){
+                   return Boom.notFound('Company interests not found');
                });
            }
        }
@@ -173,6 +184,8 @@ module.exports = function(server){
                             Stands.update({
                                 'visitorCounter':stand.visitorCounter+1
                             },{where:{companyCompanyID:CompanyID}});
+                        }).error(function(err){
+                            return Boom.notFound('Counter not found');
                         });
                     });
                 }));
@@ -196,6 +209,8 @@ module.exports = function(server){
                     }).then(function(liveFair)
                     {
                         return JSON.stringify(liveFair);
+                    }).error(function(err){
+                       return Boom.notFound('Live Fairs on that date not found');
                     }));
             }}
     });
@@ -217,6 +232,8 @@ module.exports = function(server){
                     }).then(function(liveFair)
                     {
                         return JSON.stringify(liveFair);
+                    }).error(function(err){
+                        return Boom.notFound('Live Fairs not found on that location');
                     }));
             }}
     });
@@ -237,6 +254,8 @@ module.exports = function(server){
                         })
                         .then(function(interest) {
                             return JSON.stringify(interest);
+                        }).error(function(err){
+                           return  Boom.notFound('Live Fair interests not found');
                         })
                 );
             }}
@@ -256,9 +275,11 @@ module.exports = function(server){
                 reply( sequelize.query('SELECT company."companyID",company."companyName" FROM company,"liveFairCompanyInterest","liveFairVisitorInterest" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" GROUP BY company."companyID"',
                     { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
-                    {
-                        return JSON.stringify(companies);
-                    }));
+                {
+                   return JSON.stringify(companies);
+                }).error(function(err){
+                   return Boom.notFound('Live Fair User Matches not found');
+                }));
             }}
     });
 
@@ -292,7 +313,9 @@ module.exports = function(server){
                     }).then(function(events) {
                         reply(JSON.stringify(events));
                     }
-                );
+                ).error(function(err){
+                    return Boom.notFound('Live Fair Stand Events not found');
+                });
             }}
     });
 
@@ -313,8 +336,10 @@ module.exports = function(server){
                         }
                     }
                 ).then(function(event){
-                        return JSON.stringify(event);
-                    }));
+                    return JSON.stringify(event);
+                }).error(function(err){
+                    return Boom.notFound('Live Fair Stand Event not found');
+                }));
             }}
     });
 
@@ -338,7 +363,7 @@ module.exports = function(server){
                     'visitorVisitorID': UserID
                 }).then(function(){
                     var interests=JSON.parse(request.payload.interests);
-                    for(var i=1;i<=interests.length;i+=2){
+                    for(var i=1;i<=interests.length;i++){
                         LiveFairVisitorInterest.create({
                             'liveFairIDref':LiveFairID,
                             'interestIDref':interests[i],
@@ -347,7 +372,7 @@ module.exports = function(server){
                     }
                     reply("Adesão à LiveFair concluída com sucesso!")
                         .catch(function(error) {
-                            reply(Boom.badRequest(error.message));
+                            return reply(Boom.badRequest(error.message));
                         });
                 });
             }}
@@ -372,6 +397,8 @@ module.exports = function(server){
                     }).then(function(liveFair)
                     {
                         return JSON.stringify(liveFair);
+                    }).error(function(err){
+                        return Boom.notFound('Live Fair between dates not found');
                     }));
             }}
     });
@@ -396,6 +423,8 @@ module.exports = function(server){
                     }).then(function(liveFair)
                     {
                         return JSON.stringify(liveFair);
+                    }).error(function(err){
+                       return Boom.notFound('Live Fair between dates not found');
                     }));
             }}
     });
@@ -512,6 +541,80 @@ module.exports = function(server){
             }}
     });
 
+    server.route({
+        method: 'POST',
+        path: '/livefairs/{livefairID}/companies/{companyID}/events/{eventID}/edit',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function(request, reply) {
+                    
+                var eventID=request.params.eventID;
+                    
+                var Schematest={
+                        location: request.payload.location,
+                        startTime: request.payload.startTime,
+                        endTime: request.payload.endTime,
+                        speakers: request.payload.speakers,
+                        subject: request.payload.subject
+                };
+
+                var validate = Joi.validate(Schematest,CompanyEventSchema);
+                if(validate.error!==null){
+                    throw new Error(validate.error.message);
+                }
+                else{
+                    CompanyEvents.update({
+                        'location':Schematest.location,
+                        'startTime':Schematest.startTime,
+                        'endTime':Schematest.endTime,
+                        'speakers':Schematest.speakers,
+                        'subject':Schematest.subject
+                    },{
+                        where:{
+                            'companyEventsID':eventID
+                        }
+                    })
+                     .then(function(user) {
+                         reply(JSON.stringify('Edição evento bem sucedida'));
+                     }).catch(function(error) {
+                    reply(Boom.badRequest(error));
+                });
+            }}}
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/livefairs/{livefairID}/companies/{companyID}/events/{eventID}/delete',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function(request, reply) {
+                    
+                return sequelize.transaction(function(t) {
+                    
+                var eventID=request.params.eventID;
+                    
+                var ID = uuid.v4();
+                    console.log(ID+"\n");
+                    return CompanyEvents.destroy({where:{
+                        'companyEventsID':eventID
+                    }}, {transaction: t})
+                        .then(function(event) {
+                          return LiveFairCompanyEvents.destroy({where:{
+                                'companyEventsIDref':eventID
+                         }}, {transaction: t}).then(function(events){
+                             reply(JSON.stringify('Evento apagado com sucesso'));
+                         });
+                        });
+                
+                });
+            }}
+    });
 
     server.route({
     method: 'POST',
