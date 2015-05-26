@@ -8,9 +8,7 @@ module.exports = function(server){
 		method: 'POST',
 		path: '/visitor/joinLiveFair',
 		config:{
-            auth: {
-               strategy: 'token'
-           },
+            auth:'token',
 		handler: function (request, reply) {			
 			if(!request.payload.userid || !request.payload.livefairid)
 			{

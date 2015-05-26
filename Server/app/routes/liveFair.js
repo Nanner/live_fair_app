@@ -2,6 +2,7 @@ var Promise = require("bluebird");
 var Boom = require("boom");
 var sequelize = require('../models').sequelize;
 var uuid = require('node-uuid');
+var Joi = require('joi');
 
 var LiveFair = require('../models').LiveFair;
 var LiveFairEvents = require('../models').LiveFairEvents;
@@ -15,6 +16,14 @@ var VisitorLiveFair = require('../models').VisitorLiveFair;
 var LiveFairCompanyInterest = require('../models').LiveFairCompanyInterest;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
 var LiveFairCompanyEvents = require('../models').LiveFairCompanyEvents;
+
+var CompanyEventSchema = Joi.object().keys({
+    location: Joi.string().required(),
+    startTime: Joi.date().required(),
+    endTime: Joi.date().required(),
+    speakers: Joi.string().required(),
+    subject: Joi.string().required()
+});
 
 module.exports = function(server){
     server.route({
@@ -135,7 +144,7 @@ module.exports = function(server){
                    });
                }).then(function(interests) {
                    reply(JSON.stringify(interests));
-               })
+               });
            }
        }
     });
@@ -388,6 +397,62 @@ module.exports = function(server){
                     {
                         return JSON.stringify(liveFair);
                     }));
+            }}
+    });
+    
+        server.route({
+        method: 'POST',
+        path: '/livefairs/{livefairID}/companies/{companyID}/addStandEvent',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function(request, reply) {
+                return sequelize.transaction(function(t) {
+                    
+                var liveFairID=request.params.livefairID;
+                var companyID=request.params.companyID;
+                    
+                var Schematest={
+                        location: request.payload.location,
+                        startTime: request.payload.startTime,
+                        endTime: request.payload.endTime,
+                        speakers: request.payload.speakers,
+                        subject: request.payload.subject
+                };
+
+                var validate = Joi.validate(Schematest,CompanyEventSchema);
+
+                if(validate.error!==null){
+                    throw new Error(validate.error.message);
+                }
+                else{
+                    
+                    var ID = uuid.v4();
+                    console.log(ID+"\n");
+                    return CompanyEvents.create({
+                        'companyEventsID':ID,
+                        'location':Schematest.location,
+                        'startTime':Schematest.startTime,
+                        'endTime':Schematest.endTime,
+                        'speakers':Schematest.speakers,
+                        'subject':Schematest.subject
+                    }, {transaction: t})
+                        .then(function(user) {
+                              return LiveFairCompanyEvents.create({
+                                   'liveFairIDref':liveFairID,
+                                   'companyIDref':companyID,
+                                   'companyEventsIDref':ID
+                              }, {transaction: t});
+                        });
+                }})
+                .then(function(result) {
+                    reply(JSON.stringify('Evento creado com sucesso'));
+                })
+                .catch(function(error) {
+                    reply(Boom.badRequest(error));
+                });
             }}
     });
 
