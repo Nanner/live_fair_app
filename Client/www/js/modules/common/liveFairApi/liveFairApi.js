@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $localForage, $ionicPopup, $translate) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, $localStorage, $localForage, $ionicPopup, $translate) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -48,6 +48,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     promises.push($localForage.setItem('userType', data.type));
                     promises.push($localForage.setItem('isAuthenticated', true));
                     $q.all(promises).then(function() {
+                        $localStorage.set('token', data.token);
                         $rootScope.isAuthenticated = true;
                         $rootScope.userEmail = data.email;
                         $rootScope.userType = data.type;
@@ -125,9 +126,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             //        //$rootScope.$broadcast('event:auth-logout-complete');
             //    });
         },
-        loginCancelled: function() {
-            authService.loginCancelled();
-        },
+        //loginCancelled: function() {
+        //    authService.loginCancelled();
+        //},
         getLiveFairs: function() {
             return LiveFair.query();
         },
@@ -150,8 +151,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             return Profile.query({id: userID});
         },
 
-        getCompanyInterests: function(fairID, companyID) {
-            return ProfileInterests.query({fairID, companyID});
+        getCompanyInterests: function(fairId, companyId) {
+            return ProfileInterests.query({fairID: fairId, companyID: companyId});
         },
 
         editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {

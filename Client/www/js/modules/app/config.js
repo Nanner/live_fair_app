@@ -1,8 +1,12 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider, jwtInterceptorProvider) {
 
-	$httpProvider.interceptors.push('authInterceptor');
+	jwtInterceptorProvider.tokenGetter = function($localForage, $localStorage) {
+		return $localStorage.get('token');
+	};
+
+	$httpProvider.interceptors.push('jwtInterceptor');
 
 	$stateProvider
 		.state('menu', {
@@ -170,6 +174,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "settingsCtrl"
 				}
 			}
+		})
+		.state('menu.createStandEvent', {
+			url: "/fairs/:fairID/stands/:companyID/createEvent",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/createStandEvent.html",
+					controller: 'createStandEventCtrl'
+				}
+			}
 		});
 
 	//Default startup screen
@@ -233,8 +246,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'search': 'Pesquisa',
 		'filterByDate': 'Filtrar por data',
 		'clean': 'Limpar',
-		'startDate': 'Data início',
-		'endDate': 'Data Fim',
+		'startDate': 'Data de início',
+		'endDate': 'Data de fim',
 		'searchLocation': 'Localização',
 		'speakers': 'Oradores',
 		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
@@ -276,7 +289,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'eventsForCompany' : "Eventos agendados por:",
 		'loggedInAs' : "Autenticado como",
 		'sessionExpired': "A sua sessão expirou",
-		'sorryChangePassword': "Unfortunately password could not be changed"
+		'sorryChangePassword': "Unfortunately password could not be changed",
+		'createEvent': "Criar evento",
+		'createStandEvent': 'Criar evento de stand',
+		'newEvent': "Novo evento",
+		'btnAddStandEvent': "Novo evento",
+		'btnCreate': "Criar",
+		'btnConfirmChanges': "Confirmar alterações",
+		'startTime': "Hora de início",
+		'endTime' : "Hora de fim"
 	});
 
 	$translateProvider.translations('en', {
@@ -376,7 +397,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'eventsForCompany' : "Events scheduled by:",
 		'loggedInAs' : "Logged in as",
 		'sessionExpired': "Session Expired",
-		'sorryChangePassword': "Unfortunately password could not be changed"
+		'sorryChangePassword': "Unfortunately password could not be changed",
+		'createEvent': "Create event",
+		'createStandEvent': 'Create stand event',
+		'btnAddStandEvent': "New event",
+		'newEvent': "New event",
+		'btnCreate': "Create",
+		'btnConfirmChanges': "Confirm changes",
+		'startTime': "Start time",
+		'endTime' : "End time"
 	});
 
 	$translateProvider.useLocalStorage();

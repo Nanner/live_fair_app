@@ -21,10 +21,11 @@ angular.module('starter',
         'ngCordova',
         'ngResource',
         'pascalprecht.translate',
-        'http-auth-interceptor',
+        //'http-auth-interceptor',
         'LocalForageModule',
         'ngCookies',
-        'angularMoment'
+        'angularMoment',
+        'angular-jwt'
     ]
 )
     .constant('_', _);
