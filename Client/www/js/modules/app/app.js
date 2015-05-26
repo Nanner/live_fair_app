@@ -24,7 +24,8 @@ angular.module('starter',
         'http-auth-interceptor',
         'LocalForageModule',
         'ngCookies',
-        'angularMoment'
+        'angularMoment',
+        'angular-jwt'
     ]
 )
     .constant('_', _);

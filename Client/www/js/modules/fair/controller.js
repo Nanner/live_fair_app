@@ -135,7 +135,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadFairProfile = function() {
         $scope.month = utils.getMonthName($scope.fair.month);
-        console.log("Cenas: " + $scope.interestsList);
     };
 
     $scope.chooseInterests = function() {
@@ -149,11 +148,24 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                     text: '<b>' + $translate.instant('btnAderir') + '</b>',
                     type: 'button-positive',
                     onTap: function(e) {
+                        $scope.interestsList = utils.getInterestsList();
+                        for(i = 0; i < $scope.interestsList.length; i++) {
+                            console.log($scope.interestsList[i].checked);
+                        }
                         console.log("tapped submit button");
                     }
                 }
             ]
         });
+    };
+
+    $scope.changedCheckbox = function() {
+        console.log("Interest List");
+        for(i = 0; i < $scope.interestsList.length; i++) {
+            if(! $scope.interestsList[i].checked)
+                $scope.interestsList[i].checked = false;
+        }
+        utils.setInterestsList($scope.interestsList);
     };
 
     $scope.loadStands = function(fairID) {

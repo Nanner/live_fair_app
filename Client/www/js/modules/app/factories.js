@@ -8,6 +8,7 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
     var oldPassword;
     var newPassword;
     var confirmNewPassword;
+    var interestsLists;
 
     return {
 
@@ -134,6 +135,14 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
         getConfirmPassword: function() {
             return confirmNewPassword;
+        },
+
+        setInterestsList: function(interestList) {
+            interestsLists = interestList;
+        },
+
+        getInterestsList: function() {
+            return interestsLists;
         }
     };
 });

@@ -19,6 +19,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
+    var VisitorParticipating = $resource(server.url + '/livefairs/:fairID/:userID/participating', {fairID: '@fairID', userID: '@userID'});
+
+    var CompanyParticipating = $resource(server.url + '/livefairs/:fairID/:companyID/standParticipating', {fairID: '@fairID', companyID: '@companyID'});
+
     var api = {
 
         login: function(username, password) {
@@ -33,6 +37,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     promises.push($localForage.removeItem('userType'));
                     promises.push($localForage.setItem('isAuthenticated', false));
                     $q.all(promises).then(function() {
+                        $localStorage.remove('token');
                         $rootScope.isAuthenticated = false;
                         $rootScope.userEmail = "";
                         $rootScope.userType = "";
@@ -48,6 +53,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     promises.push($localForage.setItem('userType', data.type));
                     promises.push($localForage.setItem('isAuthenticated', true));
                     $q.all(promises).then(function() {
+                        $localStorage.set('token', data.token);
                         $rootScope.isAuthenticated = true;
                         $rootScope.userEmail = data.email;
                         $rootScope.userType = data.type;
@@ -90,7 +96,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             promises.push($localForage.removeItem('userType'));
             promises.push($localForage.setItem('isAuthenticated', false));
             $q.all(promises).then(function() {
+                $localStorage.remove('token');
                 $rootScope.isAuthenticated = false;
+                $rootScope.userEmail = "";
+                $rootScope.userType = "";
                 $rootScope.$broadcast('event:auth-logout-complete');
 
                 $ionicPopup.alert({
@@ -166,6 +175,14 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     return $q.reject(response.data);
                 }
             );
+        },
+
+        checkIfVisitorParticipatingFair: function(userId, fairId) {
+            return VisitorParticipating.query({fairID: fairId, userID: userId});
+        },
+
+        checkIfCompanyParticipatingFair:  function(companyId, fairId) {
+            return CompanyParticipating.query({fairID: fairId, companyID: companyId});
         },
 
         adhereLiveFair: function(fairID, userID, interestsList) {
