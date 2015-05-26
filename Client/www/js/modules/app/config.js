@@ -2,11 +2,11 @@ var module = angular.module('starter');
 
 module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider, jwtInterceptorProvider) {
 
-	jwtInterceptorProvider.tokenGetter = function($localForage, $localStorage) {
-		return $localStorage.get('token');
-	};
+	jwtInterceptorProvider.tokenGetter = function($localStorage) {
+        return $localStorage.get('token');
+    };
 
-	$httpProvider.interceptors.push('jwtInterceptor');
+    $httpProvider.interceptors.push('jwtInterceptor');
 
 	$stateProvider
 		.state('menu', {
@@ -77,6 +77,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				schedule: function(liveFairApi, $stateParams) {
 					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
 						.then(function(schedule) {
+							console.log(schedule);
 							return schedule;
 						}, function(error) {
 							return "failed to resolve";

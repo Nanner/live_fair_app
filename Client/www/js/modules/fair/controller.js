@@ -12,6 +12,7 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
 });
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
+
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -35,18 +36,18 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
     $scope.schedule = _.chain(schedule)
         .sortBy(function(event) {
-            return event.time;
+            return event.startTime;
         })
         .groupBy(function(event) {
-            return event.time;
+            return event.startTime;
         }).value();
 
     $scope.scheduleDays = _.chain(schedule)
         .sortBy(function(event) {
-            return event.time;
+            return event.startTime;
         })
         .map(function(event) {
-            var time = new Date(event.time);
+            var time = new Date(event.startTime);
             return (Date.parse(utils.getDayMonthYearDate(time)));
         })
         .unique()
@@ -61,7 +62,6 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
     $scope.loadEvent = function(fairName, event) {
         $scope.liveFairEvent = event;
-
         var myPopup = $ionicPopup.show({
             templateUrl: "eventPopup.html",
             title: fairName,
@@ -72,8 +72,8 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
                     type: 'button-balanced',
                     onTap: function(e) {
                         //Create event in phone's calendar
-                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.Speakers;
-                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.Subject, $scope.liveFairEvent.Speakers, $scope.liveFairEvent.time, $scope.liveFairEvent.endTime);
+                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.speakers;
+                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.subject, $scope.liveFairEvent.speakers, $scope.liveFairEvent.startTime, $scope.liveFairEvent.endTime);
                     }
                 },
                 {
@@ -107,6 +107,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
         utils.showLoadingPopup();
         liveFairApi.getLiveFairs().$promise
             .then(function(liveFairs) {
+                console.log(liveFairs);
                 $scope.listfairs = liveFairs;
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = false;
@@ -133,12 +134,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadFairProfile = function() {
         $scope.month = utils.getMonthName($scope.fair.month);
-
-        /*if($scope.fair.description == null)
-         $scope.showDescription = false;
-
-         if($scope.fair.map == null)
-         $scope.showMap = false;*/
     };
 
     $scope.chooseInterests = function() {
@@ -152,11 +147,24 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                     text: '<b>' + $translate.instant('btnAderir') + '</b>',
                     type: 'button-positive',
                     onTap: function(e) {
+                        $scope.interestsList = utils.getInterestsList();
+                        for(i = 0; i < $scope.interestsList.length; i++) {
+                            console.log($scope.interestsList[i].checked);
+                        }
                         console.log("tapped submit button");
                     }
                 }
             ]
         });
+    };
+
+    $scope.changedCheckbox = function() {
+        console.log("Interest List");
+        for(i = 0; i < $scope.interestsList.length; i++) {
+            if(! $scope.interestsList[i].checked)
+                $scope.interestsList[i].checked = false;
+        }
+        utils.setInterestsList($scope.interestsList);
     };
 
     $scope.loadStands = function(fairID) {

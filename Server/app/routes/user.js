@@ -24,7 +24,7 @@ var RegisterSchema = Joi.object().keys({
 
 var EditSchema = Joi.object().keys({
     email: Joi.string().email().required(),
-    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/).required(),
+    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/),
     address: Joi.string().required(),
     website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
     companyName: Joi.string().required(),
@@ -32,7 +32,8 @@ var EditSchema = Joi.object().keys({
 });
 
 var ChangePasswordSchema = Joi.object().keys({
-    password: Joi.string().alphanum().min(8).max(20).required()
+    password: Joi.string().alphanum().required(),
+    oldPassword: Joi.string().alphanum().required()
 });
 
 module.exports = function(server){
@@ -204,7 +205,8 @@ module.exports = function(server){
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
         config:{
-            auth: {mode:'optional',
+            auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -282,19 +284,20 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
-            var validateSchema={password:request.payload.password};
-            var result=validateSchema.validate();
+            var validateSchema={password:request.payload.password,oldPassword:request.payload.oldPassword};
+            var result=Joi.validate(validateSchema,ChangePasswordSchema);
             if(result.error!==null){
-                    throw new Error(result.error.message);
+                throw new Error(result.error.message);
             }
             else{
                 var UserID = request.params.UserID;
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
-                oldPassHash.update(request.payload.oldPasword);
+                oldPassHash.update(request.payload.oldPassword);
                 passHash.update(request.payload.password);
                 reply(User.update({
                     'password':passHash.digest('hex')
@@ -303,9 +306,9 @@ module.exports = function(server){
                         userID:UserID,
                         password:oldPassHash.digest('hex')
                     }
-                })).catch(function(error) {
+                }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
-                });
+                }));
             }
         }}
     });
@@ -382,19 +385,60 @@ module.exports = function(server){
             handler: function (request, reply) {
                 var UserID = request.params.UserID;
                 var CompanyID = request.params.CompanyID;
-                reply (Connection.findOrCreate({
+                Connection.findOrCreate({
                     where:{
                         visitorVisitorID:UserID,
                         companyCompanyID:CompanyID
                     },
                     defaults:{'visitorVisitorID':UserID,
                     'companyCompanyID':CompanyID,
-                    'liked':true
+                    'liked':true,
+                    'sharedContact':false
                     }
-                }).then(function(companies){
-                    return JSON.stringify("Like successful");
-                    })
-                );
+                }).then(function(connection){
+                    Connection.update({
+                        'liked':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Like bem sucedido'));
+                    });
+                    });
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/shareContact/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':false,
+                    'sharedContact':true
+                    }
+                }).then(function(connection){
+                    Connection.update({
+                        'sharedContact':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Share bem sucedido'));
+                    });
+               });
         }}
     });
     
@@ -419,5 +463,32 @@ module.exports = function(server){
                 })
                 );
            }}
+    });
+	
+	server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/recommendations',
+        config:{
+            auth: {
+                mode:'optional',
+				strategy: 'token'
+			},
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                reply (sequelize.query(
+					"SELECT 'companyCompanyID'
+					 FROM connection 
+					 WHERE 'visitorVisitorID' IN (SELECT 'visitorIDref'
+												  FROM 'liveFairVisitorInterest' 
+												  WHERE 'interestIDref' IN (SELECT 'interestIDref'
+																		FROM 'liveFairVisitorInterest'
+																		WHERE 'visitorIDref' = :userID) AND 'visitorIDref' != :userID ) AND 'like' = TRUE",
+						{ replacements: { userID: UserID}, type: sequelize.QueryTypes.SELECT }
+					).then(function(recoms) {
+					  reply(JSON.stringify(recoms));
+					})
+                );
+			}
+        }
     });
 };

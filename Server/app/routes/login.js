@@ -13,7 +13,6 @@ var User = require('../models').User,
     Organizer = require('../models').Organizer;
 
 var privateKey = 'ORochaApagouADriveDoMatias';
-// var tokenTTL = 7200;
 
 module.exports = function(server) {
 

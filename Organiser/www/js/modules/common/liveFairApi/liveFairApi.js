@@ -95,6 +95,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                 }
             );
         },
+        newLiveFair: function(OrganiserID, Name, Description, DateStart, DateEnd, LocationSend,Address, City, Map) {
+            return $http.post(server.url + '/livefairs/new/', {organiserID: OrganiserID, name: Name, description: Description,
+                startDate: DateStart, endDate: DateEnd, local: LocationSend, address: Address, city:City, map:Map})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
 
         incrementCounter: function(companyId) {
             return IncrementCounter.save({companyID: companyId});

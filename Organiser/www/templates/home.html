@@ -9,7 +9,7 @@
 					<input type="radio" ng-click="loadPastFairs()" /> Past Fairs
 				</label> 
 				<label  class="btn btn-primary">
-					<input type="radio" /> Current Fairs
+					<input type="radio" ng-click="loadCurrentFairs()"/> Current Fairs
 				</label> 
 				<label  class="btn btn-primary">
 					<input type="radio" ng-click="loadNextFairs()" /> Next Fairs
@@ -28,8 +28,8 @@
 				<div class="panel-heading" data-toggle="collapse" data-target="#collapseExample{{fair.liveFairID}}" aria-expanded="false" aria-controls="collapseExample{{fair.liveFairID}}">{{fair.name}}</div>	    				
 				<div class="panel-body collapse" id="collapseExample{{fair.liveFairID}}">
 					<div>
-						<p><b>Data:</b>{{fair.date | date:'dd-MM-yyyy'}} - 22/05/2015</p>
-						<p><b>Local:</b>{{fair.location}}</p>
+						<p><b>Data:</b>{{fair.startDate | date:'dd-MM-yyyy'}} - {{fair.endDate | date:'dd-MM-yyyy'}}</p>
+						<p><b>Local:</b>{{fair.local}} - {{fair.address}}</p>
 						<p><b>Descrição:</b> {{fair.description}}</p>
 						<div class="text-center">
 							<div class="btn-group" >
@@ -82,7 +82,7 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary">Criar</button>
+							<button type="button" class="btn btn-primary" ng-click="newFair()">Criar</button>
 						</div>
 					</form>
 				</div>

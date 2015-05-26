@@ -4,6 +4,7 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairA
 
     $scope.loadHome = function() {
         $state.go('home');
+        
     };
     
     $scope.username = "";
