@@ -168,6 +168,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },
 
+        adhereLiveFair: function(fairID, userID, interestsList) {
+            return $http.post(server.url + '/livefairs/' + fairID + '/interests/' + userID + '/submit', {interests: interestsList}, {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },       
+
         changePassword: function(userID, oldPassword, newPassword) {
             return $http.post(server.url + '/Users/' + userID + '/update/password', {oldPassword: oldPassword, password: newPassword}, {timeout: timeout})
             .then(function(response) {
