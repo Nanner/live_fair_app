@@ -135,7 +135,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadFairProfile = function() {
         $scope.month = utils.getMonthName($scope.fair.month);
-
+        console.log($scope.interestsList);
         /*if($scope.fair.description == null)
          $scope.showDescription = false;
 
