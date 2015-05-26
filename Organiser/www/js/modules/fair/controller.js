@@ -133,12 +133,14 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi) {
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi, $localStorage) {
     
     $scope.failedToResolve = listfairs == "failed to resolve";
     if($scope.failedToResolve)
         return;
 
+    $scope.username = $localStorage.get('userEmail');
+    $scope.userID = $localStorage.get('userID');
     $scope.listfairs = listfairs;
 
     $scope.formatMonth = function() {
@@ -149,6 +151,11 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID});
+    };
+
+    $scope.loadFairVisitors=function(fairID)
+    {
+        $state.go('visitors', {fairID: fairID});
     };
 
     $scope.loadPastFairs = function(){
@@ -189,7 +196,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
          for(i = 0; i < $scope.listfairs.length; i++) {
             var sDate = new Date($scope.listfairs[i].startDate);
             var eDate = new Date($scope.listfairs[i].endDate);
-            if( sDate >= curdate && curdate <= edate)
+            if( sDate <= curdate && curdate <= eDate)
              {
                 nextFairs.push($scope.listfairs[i]);
             }  
@@ -199,10 +206,13 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
     };
 
 
-    $scope.newFair = function()
+    $scope.newFair = function(userID)
     {
-        liveFairApi.newLiveFair("3fde43a0-ca0a-4abe-ad37-841b58b4ca73", "FEUP Carreer Fair",
-         "Feira de Emprego", "2015-10-10T06:19:00.000Z", "2015-10-10T06:19:00.000Z", "FEUP","Rua Roberto Frias", "Porto", "aa");
+        var organizerID = userID;
+        var sDate = new Date($scope.sdate);
+        var eDate = new Date($scope.edate);
+        liveFairApi.newLiveFair(organizerID, $scope.name, $scope.description, sDate, 
+            eDate, $scope.local,$scope.address, $scope.city, $scope.map);
     };
 });
 

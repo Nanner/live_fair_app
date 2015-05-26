@@ -24,6 +24,11 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 					templateUrl: "templates/login.html",
 					controller: "loginCtrl"
 				})
+		.state('visitors', {
+					url: "livefairs/:fairID/visitors",
+					templateUrl: "templates/visitors.html",
+					controller: "loginCtrl"
+				})
 		/*.state('menu.register', {
 			url: "/register",
 			views: {
