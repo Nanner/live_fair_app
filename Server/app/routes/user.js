@@ -383,19 +383,60 @@ module.exports = function(server){
             handler: function (request, reply) {
                 var UserID = request.params.UserID;
                 var CompanyID = request.params.CompanyID;
-                reply (Connection.findOrCreate({
+                Connection.findOrCreate({
                     where:{
                         visitorVisitorID:UserID,
                         companyCompanyID:CompanyID
                     },
                     defaults:{'visitorVisitorID':UserID,
                     'companyCompanyID':CompanyID,
-                    'liked':true
+                    'liked':true,
+                    'sharedContact':false
                     }
-                }).then(function(companies){
-                    return JSON.stringify("Like successful");
-                    })
-                );
+                }).then(function(connection){
+                    Connection.update({
+                        'liked':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Like bem sucedido'));
+                    });
+                    });
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/shareContact/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':false,
+                    'sharedContact':true
+                    }
+                }).then(function(connection){
+                    Connection.update({
+                        'sharedContact':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Share bem sucedido'));
+                    });
+                    });
         }}
     });
     
