@@ -429,6 +429,34 @@ module.exports = function(server){
     });
     
     server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairID}/{userID}/participating',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function (request, reply) {
+                var liveFairID=request.params.livefairID;
+                var userID=request.params.userID;
+
+                reply(VisitorLiveFair.findAll(
+                    {
+                        where: {
+                             liveFairLiveFairID: liveFairID,
+                             visitorVisitor:userID
+                        }
+                    }).then(function(liveFair)
+                    {
+                        return JSON.stringify("true");
+                    }).error(function(error) {
+                        return JSON.stringify("false");
+                    })
+                    );
+            }}
+    });
+    
+    server.route({
         method: 'POST',
         path: '/livefairs/{livefairID}/companies/{companyID}/addStandEvent',
         config:{
