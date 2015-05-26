@@ -24,7 +24,7 @@ var RegisterSchema = Joi.object().keys({
 
 var EditSchema = Joi.object().keys({
     email: Joi.string().email().required(),
-    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/).required(),
+    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/),
     address: Joi.string().required(),
     website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
     companyName: Joi.string().required(),
@@ -204,7 +204,8 @@ module.exports = function(server){
         method: ['GET','POST'],
         path: '/Users/{UserID}/update',
         config:{
-            auth: {mode:'optional',
+            auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -382,19 +383,60 @@ module.exports = function(server){
             handler: function (request, reply) {
                 var UserID = request.params.UserID;
                 var CompanyID = request.params.CompanyID;
-                reply (Connection.findOrCreate({
+                Connection.findOrCreate({
                     where:{
                         visitorVisitorID:UserID,
                         companyCompanyID:CompanyID
                     },
                     defaults:{'visitorVisitorID':UserID,
                     'companyCompanyID':CompanyID,
-                    'liked':true
+                    'liked':true,
+                    'sharedContact':false
                     }
-                }).then(function(companies){
-                    return JSON.stringify("Like successful");
-                    })
-                );
+                }).then(function(connection){
+                    Connection.update({
+                        'liked':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Like bem sucedido'));
+                    });
+                    });
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/shareContact/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':false,
+                    'sharedContact':true
+                    }
+                }).then(function(connection){
+                    Connection.update({
+                        'sharedContact':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Share bem sucedido'));
+                    });
+                    });
         }}
     });
     
