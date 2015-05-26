@@ -400,7 +400,35 @@ module.exports = function(server){
             }}
     });
     
-        server.route({
+    server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairID}/{userID}/standParticipating',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function (request, reply) {
+                var liveFairID=request.params.livefairID;
+                var userID=request.params.userID;
+
+                reply(Stands.findAll(
+                    {
+                        where: {
+                             liveFairLiveFairID: liveFairID,
+                             companyCompanyID:userID
+                        }
+                    }).then(function(liveFair)
+                    {
+                        return JSON.stringify("true");
+                    }).error(function(error) {
+                        return JSON.stringify("false");
+                    })
+                    );
+            }}
+    });
+    
+    server.route({
         method: 'POST',
         path: '/livefairs/{livefairID}/companies/{companyID}/addStandEvent',
         config:{
