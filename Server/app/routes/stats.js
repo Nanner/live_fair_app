@@ -63,7 +63,7 @@ module.exports = function(server){
                                 }
                                 var percentil;
                                 if(visitorCount===0)
-                                    percentil=0
+                                    percentil=0;
                                 else
                                     percentil=visitorInterestCounter/visitorCount*100;
                                 reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
