@@ -159,6 +159,37 @@ module.exports = function(server){
            }
        }
     });
+    
+    server.route({
+       method: 'GET',
+       path: '/livefairs/{LiveFairID}/companies/{CompanyID}/edit',
+       config:{
+           auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+           handler: function (request, reply) {
+               var liveFairId=request.params.LiveFairID;
+               var CompanyID = request.params.CompanyID;
+               LiveFairCompanyInterest.destroy({
+                   where:{liveFairIDref:liveFairId,companyIDref:CompanyID},
+                   individualHooks:true
+               }).then(function(liveFairInterest){
+                   return Interest.find({
+                       where:{
+                           interestID:liveFairInterest.interestIDref
+                       }
+                   }).then(function(interest){
+                       return interest;
+                   });
+               }).then(function(interests) {
+                   reply(JSON.stringify(interests));
+               }).error(function(err){
+                   return Boom.notFound('Company interests not found');
+               });
+           }
+       }
+    });
 
     server.route({
         method: 'GET',
