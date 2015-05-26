@@ -37,9 +37,9 @@ INSERT INTO "public"."organizer" ("organizerID","organizerName","createdAt","upd
 VALUES ('3fde43a0-ca0a-4abe-ad37-841b58b4ca73','FEUP','13.05.2015 23:07:00','13.05.2015 23:07:00');
  
 INSERT INTO "public"."liveFair" ("liveFairID","name","description","startDate","endDate","local","address","city","map","createdAt","updatedAt","organizerOrganizerID") 
-VALUES ('67118f9f-561a-8025-850a-ac0ea5b29880','FEUP Carreer Fair','Oportunidade dos alunos contactarem empresas','15.05.2015 00:00:00','15.05.2015 00:00:00','FEUP','Porto','Rua Roberto Faria','feupcarreerfair.png','13.05.2015 23:07:00','13.05.2015 23:07:00','3fde43a0-ca0a-4abe-ad37-841b58b4ca73');
+VALUES ('67118f9f-561a-8025-850a-ac0ea5b29880','FEUP Carreer Fair','Oportunidade dos alunos contactarem empresas','15.05.2015 00:00:00','15.05.2015 00:00:00','FEUP','Rua Roberto Frias','Porto','feupcarreerfair.png','13.05.2015 23:07:00','13.05.2015 23:07:00','3fde43a0-ca0a-4abe-ad37-841b58b4ca73');
 
-INSERT INTO "public"."connection" ("like","sharedContact","createdAt","updatedAt","visitorVisitorID","companyCompanyID") 
+INSERT INTO "public"."connection" ("liked","sharedContact","createdAt","updatedAt","visitorVisitorID","companyCompanyID") 
 VALUES (True,True,'13.05.2015 23:07:00','13.05.2015 23:07:00','0cad5dd2-3dac-41e4-ad48-ba8548318350','1cb7eee5-30bf-4a9a-91ef-cba731368403');
  
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
