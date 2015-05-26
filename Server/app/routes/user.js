@@ -32,7 +32,8 @@ var EditSchema = Joi.object().keys({
 });
 
 var ChangePasswordSchema = Joi.object().keys({
-    password: Joi.string().alphanum().min(8).max(20).required()
+    password: Joi.string().alphanum().required(),
+    oldPassword: Joi.string().alphanum().required()
 });
 
 module.exports = function(server){
@@ -283,19 +284,20 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
-            var validateSchema={password:request.payload.password};
-            var result=validateSchema.validate();
+            var validateSchema={password:request.payload.password,oldPassword:request.payload.oldPassword};
+            var result=Joi.validate(validateSchema,ChangePasswordSchema);
             if(result.error!==null){
-                    throw new Error(result.error.message);
+                throw new Error(result.error.message);
             }
             else{
                 var UserID = request.params.UserID;
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
-                oldPassHash.update(request.payload.oldPasword);
+                oldPassHash.update(request.payload.oldPassword);
                 passHash.update(request.payload.password);
                 reply(User.update({
                     'password':passHash.digest('hex')
@@ -304,9 +306,9 @@ module.exports = function(server){
                         userID:UserID,
                         password:oldPassHash.digest('hex')
                     }
-                })).catch(function(error) {
+                }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
-                });
+                }));
             }
         }}
     });
@@ -436,7 +438,7 @@ module.exports = function(server){
                     }}).then(function(con){
                         reply(JSON.stringify('Share bem sucedido'));
                     });
-                    });
+               });
         }}
     });
     
