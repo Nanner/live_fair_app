@@ -60,37 +60,6 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
     $scope.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function(fairName, event) {
-
-        //var ihour;
-        //var fhour;
-        //var iminute;
-        //var fminute;
-        //
-        //if(starHour < 10) {
-        //    ihour = "0" + starHour;
-        //} else {
-        //    ihour = "" + starHour;
-        //}
-        //
-        //if(startMinute < 10) {
-        //    iminute = "0" + startMinute;
-        //} else {
-        //    iminute = "" + startMinute;
-        //}
-        //
-        //if(endHour < 10) {
-        //    fhour = "0" + endHour;
-        //} else {
-        //    fhour = "" + endHour;
-        //}
-        //
-        //if(endMinute < 10) {
-        //    fminute = "0" + endMinute;
-        //} else {
-        //    fminute = "" + endMinute;
-        //}
-
-        //$scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
         $scope.liveFairEvent = event;
 
         var myPopup = $ionicPopup.show({
@@ -149,7 +118,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 });
 
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi,$translate) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate, $localForage) {
 
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
@@ -196,8 +165,18 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
-    }
+    };
 
+    $scope.createStandEvent = function(fairID) {
+        $localForage.getItem('userID').then(function(userID){
+            $state.go('menu.createStandEvent', {fairID: fairID, companyID: userID});
+        }, function(error) {
+            $ionicPopup.alert({
+                title: $translate.instant('cantCreateStandEventTitle'),
+                template: '<p class="text-center">' + $translate.instant("cantCreateStandEventMessage") + '</p>'
+            });
+        });
+    };
 });
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
@@ -326,7 +305,6 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 });
 
 module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
-    console.log(schedule);
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -349,7 +327,6 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     var companyID = $stateParams.companyID;
     liveFairApi.getProfile(companyID).$promise.then(function(profile) {
         $scope.companyName = profile[1].companyName;
-        console.log($scope.companyName);
     });
 
     var liveFairID = $stateParams.fairID;
@@ -362,8 +339,6 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         .groupBy(function (event) {
             return event.time;
         }).value();
-
-    console.log($scope.schedule);
 
     $scope.scheduleDays = _.chain(schedule)
         .sortBy(function (event) {
@@ -409,5 +384,18 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                 },
             ]
         });
+    }
+});
+
+module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, utils, $localForage) {
+    $scope.subject = "";
+    $scope.speakers = "";
+    $scope.location = "";
+    $scope.startDate = "";
+    $scope.startTime = "";
+    $scope.endDate = "";
+    $scope.endTime = "";
+
+    $scope.createEvent = function() {
     }
 });

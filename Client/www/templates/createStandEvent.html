@@ -1,0 +1,33 @@
+<ion-view title="{{'createStandEvent' | translate}}">
+    <ion-content scroll="true">
+        <h1 class="register-title padding"> <span class="ion-clock"></span> {{ 'newEvent' | translate }} </h1>
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Subject" ng-model="subject">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Speakers" ng-model="speakers">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Location" ng-model="location">
+            </label>
+            <label class="item item-input">
+                <input placeholder="{{ 'startDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="startDate">
+            </label>
+            <label class="item item-input">
+                <input placeholder="{{ 'startTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="startTime">
+            </label>
+            <label class="item item-input">
+                <input placeholder="{{ 'endDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="endDate">
+            </label>
+            <label class="item item-input">
+                <input placeholder="{{ 'endTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="endTime">
+            </label>
+        </div>
+        <div class="padding">
+            <button ng-click="createEvent()" class="item button button-block button-positive">
+                {{ 'btnCreate' | translate }}
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
