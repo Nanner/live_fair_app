@@ -11,20 +11,20 @@
         <div class="fair-tabs-container">
             <div class="buttons-container">
                 <button class="button button-calm item-input-wrapper" ng-click="showInfoPage()" ng-class="{active : tabOption === 1}">
-                    {{ 'fairInformation' | translate }}
+                    <strong>{{ 'fairInformation' | translate }}</strong>
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showPresentStands()" ng-class="{active : tabOption === 2}">
-                    {{ 'presentStands' | translate }}
+                    <strong>{{ 'presentStands' | translate }}</strong>
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
-                {{ 'suggestedStands' | translate }}
+                    <strong>{{ 'suggestedStands' | translate }}</strong>
             </button>
             </div>
         </div>
 
-        <div class="fair-container">
+        <div class="fair-tabs-container">
 
-            <div class="card information-tab tab-content" ng-show="tabOption === 1">
+            <div class="card information-tab" ng-show="tabOption === 1">
 
                 <div class="info-container item item-divider item-positive">
                     <strong>Informações</strong>
@@ -52,43 +52,23 @@
 
                 <div class="list">
                     <div ng-repeat="stand in fairStands">
-                        <div class="row">
-                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                        <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
                             <img no-image ng-src="{{stand.logoImage}}">
                             <h2>{{stand.companyName}}</h2>
                             <p>{{stand.website}}</p>
                         </a>
-                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
-                            <img no-image ng-src="{{stand.logoImage}}">
-                            <h2>{{stand.companyName}}</h2>
-                            <p>{{stand.website}}</p>
-                        </a>
-                            </div>
-                        <div class="row">
-                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
-                            <img no-image ng-src="{{stand.logoImage}}">
-                            <h2>{{stand.companyName}}</h2>
-                            <p>{{stand.website}}</p>
-                        </a>
-
-                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
-                            <img no-image ng-src="{{stand.logoImage}}">
-                            <h2>{{stand.companyName}}</h2>
-                            <p>{{stand.website}}</p>
-                        </a>
-                            </div>
                     </div>
                 </div>
 
             </div>
 
             <div class="suggested-stands-tab tab-content" ng-show="tabOption === 3">
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+                <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
+                    <img no-image ng-src="{{stand.logoImage}}">
+                    <h2>{{stand.companyName}}</h2>
+                    <p>{{stand.website}}</p>
+                </a>
+                <!--TODO: mudar para stands sugeridos-->
             </div>
 
         </div>
@@ -99,9 +79,9 @@
             </button>
         </div>
         <div class="fair-btn-Container">
-            <button nav-clear ng-click="loadStands(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">
-                {{ 'btnStands' | translate }}
-            </button>
+            <!--<button nav-clear ng-click="loadStands(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">-->
+                <!--{{ 'btnStands' | translate }}-->
+            <!--</button>-->
         </div>
         <div class="fair-btn-Container-3">
             <button ng-click="chooseInterests()" class="myBtn button button-positive">

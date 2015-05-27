@@ -188,8 +188,8 @@
 /********** Fair ***********/
 
 .fair-container {
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
+    padding-top: 8%;
+    padding-bottom: 8%;
     background-color: #28A3D4;
 }
 
@@ -225,7 +225,7 @@
     text-align: center;
     padding-bottom: 1%;
     padding-top: 1%;
-    background-color: #28A3D4;
+    background-color: #ffffff;
 }
 
 .buttons-container > button.button-calm{
@@ -240,12 +240,14 @@
     width: 32%;
 
     font-size: small;
-    background-color: #28A3D4;
+    background-color: #F2F2F2;
+    color: darkblue;
     border: none;
 }
 
 .buttons-container > button.button-calm.active{
-    background-color: #11C1F3;
+    background-color: #ffffff;
+    box-shadow: none;
 }
 
 
@@ -292,12 +294,14 @@
 /****** Fair program *******/
 
 .program-title-container {
-    padding-top: 10%;
+    padding-top: 8%;
+    padding-bottom: 8%;
 }
 
 .program-title {
     text-align: center;
     font-weight: bolder;
+    color: darkblue;
 }
 
 .program-subtitle {
@@ -305,10 +309,7 @@
     margin-right: auto;
     text-align: center;
     font-weight: bold;
-}
-
-.program-container {
-    margin-top: 10%;
+    color: darkblue;
 }
 
 .program-table {
@@ -600,7 +601,7 @@ button.button-calm.fair-search-options-button.active, button.button-calm.fair-li
 /****** Statistics *******/
 
 .stats-container1 {
-    padding-top: 15%;
+    padding-top: 8%;
     padding-bottom: 5%;
 }
 

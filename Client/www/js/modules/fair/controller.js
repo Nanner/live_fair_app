@@ -93,6 +93,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
     $scope.listfairs = "";
+    $scope.sortOption = 0;
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -117,6 +118,28 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
                 $scope.failedToResolve = true;
             });
     }
+
+    $scope.sortFairsByName = function () {
+
+        if ($scope.sortOption === 1) {
+            $scope.listfairs.reverse();
+        } else {
+            $scope.sortOption = 1;
+            $scope.listfairs = _.sortBy($scope.listfairs, "name");
+        }
+    };
+
+    $scope.sortFairsByDate = function () {
+
+        if ($scope.sortOption === 2) {
+            $scope.listfairs.reverse();
+        } else {
+            $scope.sortOption = 2;
+            $scope.listfairs = _.sortBy($scope.listfairs, function (fair) {
+                return fair.date;
+            });
+        }
+    };
 });
 
 
