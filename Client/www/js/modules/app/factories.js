@@ -4,7 +4,11 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
     var filtersStartDate;
     var filtersEndDate;
-    var profileIdToOpen;
+    var profileInfo;
+    var oldPassword;
+    var newPassword;
+    var confirmNewPassword;
+    var interestsLists;
 
     return {
 
@@ -101,13 +105,45 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
             $ionicLoading.hide();
         },
 
-        setProfileIdToOpen: function(profileID) {
-            profileIdToOpen = profileID;
+        setProfileInfo: function(profile) {
+            profileInfo = profile;
         },
 
-        getProfileIdToOpen: function() {
-            return profileIdToOpen;
-        } 
+        getProfileInfo: function() {
+            return profileInfo;
+        },
+
+        setOldPassword: function(oldpwd) {
+            oldPassword = oldpwd;
+        },
+
+        getOldPassword: function() {
+            return oldPassword;
+        },
+
+        setNewPassword: function(pwd) {
+            newPassword = pwd;
+        },
+
+        getNewPassword: function() {
+            return newPassword;
+        },
+
+        setConfirmPassword: function(confirmPwd) {
+            confirmNewPassword = confirmPwd;
+        },
+
+        getConfirmPassword: function() {
+            return confirmNewPassword;
+        },
+
+        setInterestsList: function(interestList) {
+            interestsLists = interestList;
+        },
+
+        getInterestsList: function() {
+            return interestsLists;
+        }
     };
 });
 
@@ -142,37 +178,6 @@ module.factory('calendar', function ($http, $q, $ionicPopup, $cordovaCalendar) {
                 console.error("There was an error: " + err);
             });
         }        
-    
-    };
-});
-
-module.factory('contacts', function ($http, $q, $ionicPopup, $cordovaContacts) {
-    
-    return {
-
-        getContactList: function() {
-            $cordovaContacts.find({filter: ''}).then(function(result) {
-                $scope.contacts = result;
-            }, function(error) {
-                console.log("ERROR: " + error);
-            });
-        },
-        
-        removeContact: function(name) {
-            $cordovaContacts.remove({"displayName": name}).then(function(result) {
-                console.log(JSON.stringify(result));
-            }, function(error) {
-                console.log(error);
-            });
-        },
-        
-        addContact: function(name, phone, email, website, address) {
-            $cordovaContacts.save({"displayName": name, "name": {"givenName": name,"formatted": name,"middleName":null,"familyName":null,"honorificPrefix":null,"honorificSuffix":null},"phoneNumbers":[{"type":"other","value":phone ,"id":0,"pref":false}],"emails":[{"type":"home","value": email,"id":0,"pref":false}],"addresses":[{"postalCode":"","type":"work","id":0,"locality":" ","pref":"false","streetAddress": address,"region":" ","country":" "}],"urls":[{"type":"other","value": website,"id":0,"pref":false}]}).then(function(result) {
-                console.log(JSON.stringify(result));
-            }, function(error) {
-                console.log(error);
-            });
-        }
     
     };
 });

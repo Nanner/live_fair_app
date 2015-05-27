@@ -1,4 +1,4 @@
-<ion-view title="'ListFairs'">
+<ion-view title="'FairProgram'">
     <ion-content scroll='true'>
 
         <div class="program-container">
@@ -37,7 +37,7 @@
                     </div>
                     <div ng-repeat="event in eventTime.eventTimeEvents">
                         <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
-                            {{event.Subject}}
+                            {{event.subject}}
                         </div>
                     </div>
                 </div>
@@ -47,17 +47,17 @@
                 <div class="list card">
 
                     <div class="item item-divider item-text-wrap">
-                        <h2>{{liveFairEvent.Subject}}</h2>
+                        <h2>{{liveFairEvent.subject}}</h2>
                     </div>
 
                     <div class="item item-body">
                         <p>
                             <strong>{{ 'date' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.time | date:'dd-MM-yyyy'}}</span>
+                            <span class="event-info">{{liveFairEvent.startTime | date:'dd-MM-yyyy'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'starting' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.time | date:'HH:mm'}}</span>
+                            <span class="event-info">{{liveFairEvent.startTime | date:'HH:mm'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'ending' | translate }}:</strong>
@@ -65,11 +65,11 @@
                         </p>
                         <p>
                             <strong>{{ 'place' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.eventLocation}}</span>
+                            <p>{{liveFairEvent.eventLocation}}</p>
                         </p>
                         <p>
                             <strong>{{ 'speakers' | translate }}:</strong>
-                            <span class="event-info">{{liveFairEvent.Speakers}}</span>
+                            <p>{{liveFairEvent.speakers}}</p>
                         </p>
                     </div>
                 </div>

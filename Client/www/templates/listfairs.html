@@ -10,36 +10,36 @@
                     </div>
                 </div>
             </div>
+        </div>
+
             <div class="fair-list-button-container">
-                <button class="button button-light">
+                <button class="button button-light fair-list-button">
                     {{ 'listfairs' | translate}}
                 </button>
 
-                <div class="list-options-container">
-                    <button class="button button-small button-calm button-AZ" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
-                        A-Z
-                    </button>
+                <button class="button button-calm button-Recente pull-right fair-list-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                    <strong>{{ 'sortByDate' | translate }}</strong>
+                </button>
 
-                    <button class="button button-small button-calm button-Recente" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
-                        {{ 'sortByDate' | translate }}
-                    </button>
-                </div>
+                <button class="button button-calm button-AZ pull-right fair-list-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                    <strong>A-Z</strong>
+                </button>
+
             </div>
 
             <div class="list list-fair-container" ng-show="listfairs.length && !failedToResolve">
 
                 <div class="item item-text-wrap" ng-repeat="fair in listfairs" ng-click="loadFair(fair.liveFairID)">
                     <div>
-                        <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.date | date:'dd/MM'}} - {{fair.date | date:'dd/MM/yy'}}</strong></p>
+                        <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
 
-                        <p class="text-right calm"><strong class="calm">{{fair.location}}</strong></p>
-
+                        <p class="text-right calm"><strong class="calm">address:{{fair.address}}  city:{{fair.city}}</strong></p>
 
                     </div>
 
                 </div>
             </div>
-        </div>
+
 
 
 

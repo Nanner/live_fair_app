@@ -5,35 +5,26 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 
 	$stateProvider
-		.state('menu', {
-			url: "/menu",
-			abstract: true,
-			views: {
-				'applicationContent' :{
-					templateUrl: "templates/menu.html",
-					controller: "toogleCtrl"
-				}
-			}
-		})
-		.state('menu.home', {
-			url: "/home",
-			views: {
-				'menuContent' :{
+		.state('home', {
+					url: "/home",
 					templateUrl: "templates/home.html",
-					controller: "homeCtrl"
+					controller: "listFairsCtrl"
+				,resolve: {
+				listfairs: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairs().$promise
+						.then(function(liveFairs) {
+							return liveFairs;
+						}, function(error) {
+							return "failed to resolve";
+						});
 				}
-			}
-		})
-		.state('menu.login', {
-			url: "/login",
-			views: {
-				'menuContent' :{
+			}})
+		.state('login', {
+					url: "/login",
 					templateUrl: "templates/login.html",
 					controller: "loginCtrl"
-				}
-			}
-		})
-		.state('menu.register', {
+				})
+		/*.state('menu.register', {
 			url: "/register",
 			views: {
 				'menuContent' :{
@@ -152,8 +143,12 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 					controller: "searchFairCtrl"
 				}
 			}
-		});
+		})*/;
 
 	//Default startup screen
-	$urlRouterProvider.otherwise("/menu/home");
-}); 
+	$urlRouterProvider.otherwise("/login");
+}).
+controller('routeController', ['$scope', '$location', function($scope, $location) {
+    $scope.showPageLogin = $location.path() === '/login';
+    console.log($location.path())
+  }]);

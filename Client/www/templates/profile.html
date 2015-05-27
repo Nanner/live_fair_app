@@ -16,6 +16,7 @@
                 <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
                 <a class="stand-website" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
             </div>
+
         </div>
 
 
@@ -24,15 +25,17 @@
           <div class="item item-divider item-positive">
             <strong>{{ 'info' | translate }}</strong>
           </div>
-          <div class="item item-text-wrap">
-            <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[0].description}} </span> </p>
-            <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:    </span></strong> <span class="item-info-content">{{standProfileInfo[0].contact}}     </span> </p>
-            <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[1].address}}     </span> </p>
-          </div>
+              <div class="item item-text-wrap">
+
+                <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[0].description || 'lackInfoCompany' | translate}} </span> </p>
+                <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:    </span></strong> <span class="item-info-content">{{standProfileInfo[0].contact     || 'lackInfoCompany' | translate}}     </span> </p>
+                <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[1].address     || 'lackInfoCompany' | translate}}     </span> </p>
+              </div>
 
             <div class="item item-divider item-positive">
                 <strong>{{ 'interests' | translate }}</strong>
             </div>
+
 
             <div ng-repeat="interest in standProfileInfo.interestsList" class="item">
                 <p><span class="ion-android-radio-button-on interest-name"> {{interest.name}} </span> </p>

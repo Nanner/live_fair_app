@@ -2,20 +2,19 @@
 
 module.exports = function(sequelize, DataTypes) {
     var LiveFairEvents = sequelize.define('liveFairEvents', {
-        liveFairEventID:{
-            type: DataTypes.UUID,
-            primaryKey: true
-        },
         eventLocation: {
             type: DataTypes.STRING, allowNull: false
         },
-        time: {
+		startTime: {
             type: DataTypes.DATE, allowNull: false
         },
-        Speakers: {
+		endTime:{
+            type: DataTypes.DATE, allowNull: false
+        },
+        speakers: {
             type: DataTypes.TEXT, allowNull: false
         },
-        Subject: {
+        subject: {
             type: DataTypes.TEXT, allowNull: false
         }
     }, {

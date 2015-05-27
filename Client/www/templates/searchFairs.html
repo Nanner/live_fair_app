@@ -10,19 +10,21 @@
         </div>
 
         <div class="fair-search-button-container">
-            <button class="button button-light">
+            <button class="fair-search-button button button-light">
                 {{ 'upcomingFairs' | translate}}
             </button>
 
-            <div class="search-options-container">
-                <button class="button button-small button-calm button-AZ" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
-                    A-Z
-                </button>
+            <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                <strong>{{ 'sortByDate' | translate }}</strong>
+            </button>
 
-                <button class="button button-small button-calm button-Recente" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
-                    {{ 'sortByDate' | translate }}
-                </button>
-            </div>
+            <button class="button button-calm button-AZ pull-right fair-search-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                <strong>A-Z</strong>
+            </button>
+
+            <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="resetSort()">
+                <strong>{{ 'clean' | translate }}</strong>
+            </button>
         </div>
 
         <div class="bar bar-header item-input-inset">
@@ -48,7 +50,7 @@
             </div>
         </div>
 
-        <div class="card" ng-show="!existingFairs.length && !failedToResolve">
+        <div class="card" ng-show="(results.length == 0 || !listfairs.length) && !failedToResolve">
             <div class="item item-positive item-placeholder item-text-wrap text-center">
                 {{ 'noLiveFairs' | translate }}
             </div>
@@ -56,15 +58,14 @@
 
         <div class="list list-fair-container">
 
-            <div class="item item-text-wrap" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation}" ng-click="loadFair(fair.liveFairID)">
+            <div class="item item-text-wrap" ng-repeat="fair in listfairs | filter: {name: searchName, location: searchLocation} as results" ng-click="loadFair(fair.liveFairID)">
+                <!--para adicionar avatar: item-avatar-->
+                <!--<img src="http://upload.wikimedia.org/wikipedia/en/thumb/9/97/San_Diego_Comic-Con_International_logo.svg/829px-San_Diego_Comic-Con_International_logo.svg.png">-->
                 <div>
-                    <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.date | date:'dd/MM'}} - {{fair.date | date:'dd/MM/yy'}}</strong></p>
-
-                    <p class="text-right calm"><strong class="calm">{{fair.location}}</strong></p>
-
+                    <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
+                    <p class="text-right calm"><strong class="calm">{{fair.local}}</strong></p>
 
                 </div>
-
             </div>
         </div>
 

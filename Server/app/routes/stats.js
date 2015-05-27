@@ -9,6 +9,7 @@ var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
 var Stands = require('../models').Stands;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
+var Connection = require('../models').Connection;
 
 module.exports = function(server){
 	 server.route({
@@ -30,6 +31,8 @@ module.exports = function(server){
                       }).then(function(stand){
                           console.log(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
                           reply(JSON.stringify([company.visitorCounter,stand.visitorCounter]));
+                      }).error(function(err){
+                          return Boom.notFound('Stats not found');
                       });
              });  
         }}
@@ -58,10 +61,66 @@ module.exports = function(server){
                                 for(var i=0;i<interestCount.length;i++){
                                     visitorInterestCounter+=parseInt(interestCount[i].count);
                                 }
-                                var percentil=visitorInterestCounter/visitorCount*100;
+                                var percentil;
+                                if(visitorCount===0)
+                                    percentil=0;
+                                else
+                                    percentil=visitorInterestCounter/visitorCount*100;
                                 reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
                             }); 
+                }).error(function(err){
+                   return Boom.notFound('Stats not found');
                 }); 
         }}
-    });    
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairid}/companies/{companyID}/stats/likes',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.companyID;
+                reply (Connection.count(
+                    {where:{
+                   companyCompanyID:CompanyID,
+                   liked:'true'
+                },
+                group:'"connection"."companyCompanyID"'
+                }).then(function(LikeCount){
+                    return LikeCount;
+                }).error(function(err){
+                    return Boom.notFound(' Stats not found');
+                })
+                );
+           }}
+    });
+    
+        server.route({
+        method: 'GET',
+        path: '/livefairs/{livefairid}/companies/{companyID}/stats/contactShares',
+         config:{
+            auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var CompanyID = request.params.companyID;
+                reply (Connection.count(
+                    {where:{
+                   companyCompanyID:CompanyID,
+                   sharedContact:'true'
+                },
+                group:'"connection"."companyCompanyID"'
+                }).then(function(LikeCount){
+                    return LikeCount;
+                }).error(function(err){
+                    return Boom.notFound(' Stats not found');
+                })
+                );
+           }}
+    });        
 };

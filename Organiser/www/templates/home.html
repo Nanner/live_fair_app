@@ -1,152 +1,127 @@
+
 <!-- Page Content -->
-	    	<div class="container">
-	    		<!-- Page Heading -->
-	    		<div class="row page-header">
-	    			<div class="col-lg-12 text-center">
-	    				<div class="btn-group top-5" >
-	    					<button class="btn btn-primary"  btn-radio="'Left'">Past Fairs</button>
-	    					<button class="btn btn-primary"  btn-radio="'Middle'">Current Fairs</button>
-	    					<button class="btn btn-primary"  btn-radio="'Right'">Next Fairs</button>
-	    					<button class="btn btn-success" data-toggle="modal" data-target="#newFairModal">New Fair</button>
-	    				</div>
-	    			</div>
-	    		</div>
-	    		<!-- /.row -->
+<div class="container">
+	<!-- Page Heading -->
+	<div class="row page-header">
+		<div class="col-lg-12 text-center">
+			<div class="btn-group top-5" data-toggle="buttons">
+				<label  class="btn btn-primary">
+					<input type="radio" ng-click="loadPastFairs()" /> Past Fairs
+				</label> 
+				<label  class="btn btn-primary">
+					<input type="radio" ng-click="loadCurrentFairs()"/> Current Fairs
+				</label> 
+				<label  class="btn btn-primary">
+					<input type="radio" ng-click="loadNextFairs()" /> Next Fairs
+					</label> 
+				<button class="btn btn-success" data-toggle="modal" data-target="#newFairModal">New Fair</button>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
 
-	    		<!-- Projects Row -->
-	    		<div class="row">
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">FEUP Carreer Fair</div>	    				
-	    					<div class="panel-body collapse" id="collapseExample">
-	    						<div>
-	    							<p><b>Data:</b> 20/05/2015 - 22/05/2015 </p>
-	    							<p><b>Local:</b> FEUP - Rua Roberto Frias</p>
-	    							<p><b>Descrição:</b> De 18 a 20 de novembro de 2014 realizar-se-á mais uma edição da FEUP CAREER FAIR, este ano com o apoio do BEST PORTO. As empresas podem participar nas diferentes atividades da feira nos dias 18 e 19 de novembro, sendo o dia 20 de novembro dedicado a sessões sobre emprego e carreira, destinadas apenas a estudantes e alumni FEUP.</p>
-	    							<div class="text-center">
-	    								<div class="btn-group" >
-	    									<button class="btn btn-primary btn-xs"  btn-radio="'Left'">Visiantes</button>
-	    									<button class="btn btn-primary btn-xs"  btn-radio="'Middle'">Programa</button>
-	    									<button class="btn btn-primary btn-xs"  btn-radio="'Right'">Empresas</button>
-	    								</div>
-	    							</div>
-	    						</div>
-	    					</div>				
-	    				</div>
-	    			</div>
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Porto Tech Hub</div>
-	    					<div class="panel-body collapse" id="collapseExample">
-	    						<div>
-	    							Live Fair Info
-	    						</div>
-	    					</div>		
-	    				</div>
-	    			</div>
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Wine Porto Fair</div>
-	    					<div class="panel-body collapse" id="collapseExample">
-	    						<div>
-	    							Live Fair Info
-	    						</div>
-	    					</div>		
-	    				</div>
-	    			</div>
-	    			<div class="col-md-3 portfolio-item">
-	    				<div class="panel panel-primary">
-	    					<!-- Default panel contents -->
-	    					<div class="panel-heading">Live Fair Name</div>
-	    					<div class="panel-body collapse" id="collapseExample">
-	    						<div>
-	    							Live Fair Info
-	    						</div>
-	    					</div>		
-	    				</div>
-	    			</div>
-	    		</div>
-	    		<!-- /.row -->
+	<!-- Projects Row -->
+	<div class="row">
+		<div class="col-md-3 portfolio-item" ng-repeat="fair in listfairs">
+			<div class="panel panel-primary">
+				<!-- Default panel contents -->
+				<div class="panel-heading" data-toggle="collapse" data-target="#collapseExample{{fair.liveFairID}}" aria-expanded="false" aria-controls="collapseExample{{fair.liveFairID}}">{{fair.name}}</div>	    				
+				<div class="panel-body collapse" id="collapseExample{{fair.liveFairID}}">
+					<div>
+						<p><b>Data:</b>{{fair.startDate | date:'dd-MM-yyyy'}} - {{fair.endDate | date:'dd-MM-yyyy'}}</p>
+						<p><b>Local:</b>{{fair.local}} - {{fair.address}}</p>
+						<p><b>Descrição:</b> {{fair.description}}</p>
+						<div class="text-center">
+							<div class="btn-group" >
+								<button class="btn btn-primary btn-xs"  btn-radio="'Left'">Visiantes</button>
+								<button class="btn btn-primary btn-xs"  btn-radio="'Middle'">Programa</button>
+								<button class="btn btn-primary btn-xs"  btn-radio="'Right'">Empresas</button>
+							</div>
+						</div>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
 
 
-	    		<div class="modal fade" id="newFairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    			<div class="modal-dialog">
-	    				<div class="modal-content">
-	    					<div class="modal-header">
-	    						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	    						<h4 class="modal-title" id="myModalLabel">Nova Live Fair</h4>
-	    					</div>
-	    					<div class="modal-body">
-	    						<form>
-	    							<div class="form-group">
-	    								<label>Nome</label>
-	    								<input type="text" class="form-control" placeholder="Live Fair Name">
-	    							</div>
-	    							<div class="form-group">
-	    								<label>Local</label>
-	    								<input type="text" class="form-control" placeholder="Live Fair Addres">
-	    							</div>
-	    							<div class="form-group">
-	    								<label>Data Início</label>
-	    								<input type="date" class="form-control">
-	    							</div>
-	    							<div class="form-group">
-	    								<label>Data Fim</label>
-	    								<input type="date" class="form-control">
-	    							</div>
-	    							<div class="form-group">
-	    								<label>Website</label>
-	    								<input type="url" class="form-control" placeholder="Live Fair Website">
-	    							</div>
-	    							<div class="form-group">
-	    								<label for="exampleInputFile">Map</label>
-	    								<input type="file" id="mapFile">
-	    							</div>
+	<div class="modal fade" id="newFairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Nova Live Fair</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label>Nome</label>
+							<input type="text" class="form-control" placeholder="Live Fair Name">
+						</div>
+						<div class="form-group">
+							<label>Local</label>
+							<input type="text" class="form-control" placeholder="Live Fair Addres">
+						</div>
+						<div class="form-group">
+							<label>Data Início</label>
+							<input type="date" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Data Fim</label>
+							<input type="date" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Website</label>
+							<input type="url" class="form-control" placeholder="Live Fair Website">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputFile">Map</label>
+							<input type="file" id="mapFile">
+						</div>
 
-	    							<div class="modal-footer">
-	    								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	    								<button type="button" class="btn btn-primary">Criar</button>
-	    							</div>
-	    						</form>
-	    					</div>
-	    				</div>
-	    			</div>
-	    		</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary" ng-click="newFair()">Criar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-	    		<hr>
+	<hr>
 
-	    		<!-- Pagination -->
-	    		<div class="row text-center">
-	    			<div class="col-lg-12">
-	    				<ul class="pagination">
-	    					<li>
-	    						<a href="#">&laquo;</a>
-	    					</li>
-	    					<li class="active">
-	    						<a href="#">1</a>
-	    					</li>
-	    					<li>
-	    						<a href="#">2</a>
-	    					</li>
-	    					<li>
-	    						<a href="#">3</a>
-	    					</li>
-	    					<li>
-	    						<a href="#">4</a>
-	    					</li>
-	    					<li>
-	    						<a href="#">5</a>
-	    					</li>
-	    					<li>
-	    						<a href="#">&raquo;</a>
-	    					</li>
-	    				</ul>
-	    			</div>
-	    		</div>
-	    		<!-- /.row -->
+	<!-- Pagination -->
+	<div class="row text-center">
+		<div class="col-lg-12">
+			<ul class="pagination">
+				<li>
+					<a href="#">&laquo;</a>
+				</li>
+				<li class="active">
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">5</a>
+				</li>
+				<li>
+					<a href="#">&raquo;</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /.row -->
 
-	    		<hr>
+	<hr>
+</div>

@@ -86,7 +86,6 @@
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10%;
-    margin-top: 10%;
 }
 
 .login-recover-password {
@@ -154,12 +153,58 @@
 .terms-icon{
 }
 
+/******** Settings *********/
+
+.settings-container {
+    padding-top: 20%;
+}
+
+.settings-title {
+    text-align: center;
+    font-weight: bolder;
+    margin-bottom: 3%;
+    color: darkblue;
+}
+
+.settings-checkbox {
+    padding-bottom: 5%;
+}
+
+.green-icon {
+    color : green;
+}
+
+.red-icon {
+    color: red;
+}
+
+.loggedInAs{
+
+}
+
+.loggedInAs-label, .language-label{
+    color: darkblue;
+}
 /********** Fair ***********/
 
 .fair-container {
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     background-color: #28A3D4;
+}
+
+.tab-content{
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.info-container{
+    text-align: left;
+}
+
+.info-container >  p .item-info-desc{
+    color: darkblue;
 }
 
 .fair-title {
@@ -180,10 +225,10 @@
     text-align: center;
     padding-bottom: 1%;
     padding-top: 1%;
-    background-color: red;
+    background-color: #28A3D4;
 }
 
-.buttons-container > button{
+.buttons-container > button.button-calm{
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 
@@ -192,8 +237,17 @@
 
     display: inline-block;
     margin-left: 0px !important;
-    width: 33%;
+    width: 32%;
+
+    font-size: small;
+    background-color: #28A3D4;
+    border: none;
 }
+
+.buttons-container > button.button-calm.active{
+    background-color: #11C1F3;
+}
+
 
 .buttons-container > button.active{
     /*//    z-index: 1;       //fazer overlay nos butões*/
@@ -238,7 +292,7 @@
 /****** Fair program *******/
 
 .program-title-container {
-    padding-top: 15%;
+    padding-top: 10%;
 }
 
 .program-title {
@@ -370,6 +424,14 @@
     margin-right: auto;
 }
 
+.other-profile-img-container {
+    text-align: center;
+    max-width: 50%;
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;   
+}
+
 .profile-title-container {
     text-align: center;
 }
@@ -444,6 +506,7 @@
     background-color: #B5DEF7;
 }
 
+
 .editProfile-photo-btn {
     padding-right: 5%;
     color: darkblue;
@@ -455,6 +518,8 @@
 }
 
 .editProfile-img-container {
+    padding-top: 5%;
+    text-align: center;
     max-width: 50%;
     margin-top: 10%;
     margin-left: auto;
@@ -497,17 +562,23 @@
 }
 
 
-
-.fair-search-button-container > button, .fair-list-button-container > button{
+.fair-search-button{
     border-top-right-radius: 25px;
 }
 
-.search-options-container, .list-options-container {
-    float:right;
+.fair-list-button{
+    border-top-right-radius: 25px;
 }
 
-.search-options-container > button{
-    /*colocar os button alinhados com o fundo da div*/
+button.button-calm.fair-search-options-button, button.button-calm.fair-list-options-button{
+    font-size: smaller;
+    width: 66px;
+    background-color: #28A3D4;
+    border: none;
+}
+
+button.button-calm.fair-search-options-button.active, button.button-calm.fair-list-options-button.active{
+    background-color: #11C1F3;
 }
 
 .list-fair-item-name{

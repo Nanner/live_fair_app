@@ -9,10 +9,16 @@ module.exports = function(sequelize, DataTypes) {
         location:{
             type: DataTypes.TEXT, allowNull: false
         },
-        time:{
+        startTime:{
+            type: DataTypes.DATE, allowNull: false
+        },
+		endTime:{
             type: DataTypes.DATE, allowNull: false
         },
         speakers:{
+            type: DataTypes.TEXT, allowNull: false
+        },
+        subject:{
             type: DataTypes.TEXT, allowNull: false
         }
     }, {

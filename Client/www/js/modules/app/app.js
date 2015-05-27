@@ -5,6 +5,7 @@ angular.module('loginModule', []);
 angular.module('registerModule', []);
 angular.module('profileModule', []);
 angular.module('fairModule', []);
+angular.module('settingsModule', []);
 
 // Lastly, create your "main" module and inject all other modules as dependencies
 angular.module('starter',
@@ -15,11 +16,16 @@ angular.module('starter',
         'registerModule',
         'profileModule',
         'fairModule',
+        'settingsModule',
         'ionic',
         'ngCordova',
         'ngResource',
         'pascalprecht.translate',
-        'http-auth-interceptor'
+        'http-auth-interceptor',
+        'LocalForageModule',
+        'ngCookies',
+        'angularMoment',
+        'angular-jwt'
     ]
 )
     .constant('_', _);

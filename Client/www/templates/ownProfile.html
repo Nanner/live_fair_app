@@ -1,0 +1,39 @@
+<ion-view title="'ownProfile'">
+	<ion-content scroll='true' ng-init="loadProfile('own')">
+
+        <div class="top-profile-container">
+            <div class="profile-owner-icons">
+                <span class="edit-profile" ng-click="editProfile()"><i class="fa fa-cog fa-2x"></i></span>
+                <span class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
+            </div>
+
+            <!--editar o container, botao de opçoes interfere com formataçao-->
+            <div class="profile-img-container">
+                <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
+            </div>
+
+            <div class="profile-title-container">
+                <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
+                <a class="stand-website" ng-show="{{existsWebsite}}" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+            </div>
+        </div>
+        
+        <div class="card info-container">
+          <div class="item item-divider item-positive">
+            <strong>{{ 'info' | translate }}</strong>
+          </div>
+          <div class="item item-text-wrap">
+            <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}: </span></strong> {{standProfileInfo[0].description || 'ownNoAboutUs' | translate}} </p>
+            <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:   </span></strong> {{standProfileInfo[0].contact || 'ownNoContact' | translate}} </p>
+            <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}: </span></strong> {{standProfileInfo[1].address || 'ownNoAddress' | translate}} </p>
+          </div>
+        </div>
+
+        <div class="profile-btn-Container">
+            <button nav-clear class="save-contact-btn button button-balanced">
+                {{ 'btnOwnStandEvents' | translate }} 
+            </button>
+        </div> 
+
+    </ion-content>
+</ion-view>

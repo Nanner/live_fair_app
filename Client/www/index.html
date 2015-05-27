@@ -25,8 +25,8 @@
     <script src="lib/angular-resource/angular-resource.min.js"></script>
 
     <!-- ng-cordova script -->
-    <script src="js/ng-cordova.min.js"></script> 
-
+    <script src="js/ng-cordova.min.js"></script>
+  
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -35,6 +35,26 @@
 
     <!-- angular http auth script -->
     <script src="lib/angular-http-auth/src/http-auth-interceptor.js"></script>
+
+    <!-- angular local forage scripts -->
+    <script src="lib/localforage/dist/localforage.min.js"></script>
+    <script src="lib/angular-localForage/dist/angular-localForage.js"></script>
+
+    <!-- angular translate -->
+    <script src="lib/angular-translate/angular-translate.min.js"></script>
+    <!-- angular cookies script (for angular translate storage fallback -->
+    <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+    <!-- angular translate cookies (for angular translate storage fallback) -->
+    <script src="lib/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <!-- angular translate local storage (for angular translate storage) -->
+    <script src="lib/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>
+
+    <!-- moment js script -->
+    <script src="lib/moment/min/moment-with-locales.min.js"></script>
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
+
+    <!-- angular-jwt script -->
+    <script src="lib/angular-jwt/dist/angular-jwt.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/modules/app/app.js"></script>
@@ -51,8 +71,8 @@
     <script src="js/modules/register/controller.js"></script>
     <script src="js/modules/fair/controller.js"></script>
     <script src="js/modules/profile/controller.js"></script>
+    <script src="js/modules/settings/controller.js"></script>
     <script src="lib/sha-256/sha-256.js"></script>
-    <script src="lib/angular-translate/angular-translate.min.js"></script>
   </head>
   <body>
       <ion-nav-view name="applicationContent"></ion-nav-view>

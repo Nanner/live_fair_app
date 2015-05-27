@@ -1,0 +1,80 @@
+<ion-view title="'StandProgram'">
+    <ion-content scroll='true'>
+
+        <div class="program-container">
+            <div class="program-title-container" ng-hide="failedToResolve">
+                <h3 class="program-subtitle"> {{fair.name}} </h3>
+                <h4 class="program-title">{{ 'eventsForCompany' | translate }}<br>{{companyName}}</h4>
+            </div>
+
+            <div ng-show="failedToResolve">
+                <br>
+                <div class="card">
+                    <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                        {{ 'failedToResolve' | translate }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" ng-hide="scheduleDays.length || failedToResolve">
+                <div class="item item-positive item-placeholder item-text-wrap text-center">
+                    {{ 'noEvents' | translate }}
+                </div>
+            </div>
+
+            <div class="list" ng-hide="!scheduleDays.length || failedToResolve">
+                <label class="item item-input item-select item-positive">
+                    <div class="input-label">
+                        {{ 'programDay' | translate }}
+                    </div>
+                    <select ng-model="selectedDay">
+                        <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
+                    </select>
+                </label>
+                <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                    <div class="item item-divider item-calm item-borderless">
+                        {{eventTime.eventTime | date:'HH:mm'}}
+                    </div>
+                    <div ng-repeat="event in eventTime.eventTimeEvents">
+                        <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
+                            {{event.companyEventsID}} <!-- TODO: This is temporary, should be the subject -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script id="eventPopup.html" type="text/ng-template">
+                <div class="list card item-text-wrap">
+
+                    <div class="item item-divider item-text-wrap">
+                        <h2>{{liveFairCompanyEvent.Subject}}</h2>
+                    </div>
+
+                    <div class="item item-body">
+                        <p>
+                            <strong>{{ 'date' | translate }}:</strong>
+                            <span class="event-info">{{liveFairCompanyEvent.time | date:'dd-MM-yyyy'}}</span>
+                        </p>
+                        <p>
+                            <strong>{{ 'starting' | translate }}:</strong>
+                            <span class="event-info">{{liveFairCompanyEvent.time | date:'HH:mm'}}</span>
+                        </p>
+                        <p>
+                            <strong>{{ 'ending' | translate }}:</strong>
+                            <span class="event-info">{{liveFairCompanyEvent.endTime | date:'HH:mm'}}</span>
+                        </p>
+                        <p>
+                            <strong>{{ 'place' | translate }}:</strong>
+                            <p>{{liveFairCompanyEvent.location}}</p>
+                        </p>
+                        <p>
+                            <strong>{{ 'speakers' | translate }}:</strong>
+                            <p>{{liveFairCompanyEvent.speakers}}</p>
+                        </p>
+                    </div>
+                </div>
+            </script>
+        </div>
+
+    </ion-content>
+</ion-view>

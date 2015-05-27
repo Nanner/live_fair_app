@@ -1,0 +1,55 @@
+?<ion-view title="'Home'">
+    <ion-content scroll='true'>
+
+        <!-- Template content -->
+        <div class="home-container" ng-controller="settingsCtrl">
+
+            <h1 class="settings-title"> <span class="ion-android-settings"></span> {{ 'settings' | translate }} </h1>
+            <br>
+            <div class="list padding loggedInAs">
+                <h5 ng-show="isAuthenticated" class="item item-text-wrap item-calm"><strong><span class="loggedInAs-label">{{'loggedInAs' | translate}}:</span></strong>
+                    <span class="pull-right">{{userEmail}}</span>
+                    <br>
+                    <br></h5>
+            </div>
+
+            <div class="list padding-horizontal">
+                <label class="item item-input item-select padding-vertical item-calm">
+                    <div class="input-label">
+                        <span class="language-label"><strong>{{'language' | translate}}</strong></span>
+                    </div>
+                    <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
+                        <option value="pt">Português</option>
+                        <option value="en">English</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="list padding">
+                <div class="list list-inset" ng-show="isAuthenticated">
+                    <label class="item item-input">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="oldPassword" placeholder="{{ 'oldPassword' | translate }}" ng-change="oldPasswordCallback()">
+                    </label>
+                    <label class="item item-input">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="newPassword" placeholder="{{ 'newPassword' | translate }}" ng-change="newPasswordCallback()">
+                    </label>
+                    <label class="item item-input">
+                        <i class="form-icon ion-help-circled placeholder-icon"></i>
+                        <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
+                    </label>
+
+                    <button class="button button-block button-outline button-calm" ng-click="changePassword()">{{'changePassword' | translate}}</button>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+
+    <div class="ionic-body" ng-show="isAuthenticated">
+        <div class="bar bar-footer center">
+            <button class="button button-block button-stable" ng-click="logoutUser()"><strong>{{ 'logout' | translate }}</strong></button>
+        </div>
+    </div>
+</ion-view>

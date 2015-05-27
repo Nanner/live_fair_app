@@ -1,8 +1,12 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider, jwtInterceptorProvider) {
 
-	$httpProvider.interceptors.push('authInterceptor');
+	jwtInterceptorProvider.tokenGetter = function($localStorage) {
+        return $localStorage.get('token');
+    };
+
+    $httpProvider.interceptors.push('jwtInterceptor');
 
 	$stateProvider
 		.state('menu', {
@@ -16,7 +20,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			}
 		})
 		.state('menu.home', {
-			url: "/home",
+			url: "/home/:loggedOut",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/home.html",
@@ -51,16 +55,6 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
-		/*
-		.state('menu.presentStands', {
-			url: "/presentStands",
-			views: {
-				'menuContent' :{
-					templateUrl: "templates/presentStands.html",
-					controller: "presentStrandCtrl"
-				}
-			}
-		})*/
 		.state('menu.fairStands', {
 			url: "/fairs/:fairID/stands",
 			views: {
@@ -83,6 +77,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				schedule: function(liveFairApi, $stateParams) {
 					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
 						.then(function(schedule) {
+							console.log(schedule);
 							return schedule;
 						}, function(error) {
 							return "failed to resolve";
@@ -91,10 +86,38 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			}
 		})
 		.state('menu.profile', {
-			url: "/profile",
+			url: "/fairs/:fairID/stands/:companyID",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/profile.html",
+					controller: "profileCtrl"
+				}
+			}
+		})
+		.state('menu.standProgram', {
+			url: "/fairs/:fairID/stands/:companyID/program",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/standProgram.html",
+					controller: "standProgramCtrl"
+				}
+			},
+			resolve: {
+				schedule: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
+						.then(function(schedule) {
+							return schedule;
+						}, function(error) {
+							return "failed to resolve";
+						});
+				}
+			}
+		})
+		.state('menu.ownProfile', {
+			url: "/companies/:companyID",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/ownProfile.html",
 					controller: "profileCtrl"
 				}
 			}
@@ -143,10 +166,19 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "searchFairCtrl"
 				}
 			}
+		})
+		.state('menu.settings', {
+			url: "/settings",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/settings.html",
+					controller: "settingsCtrl"
+				}
+			}
 		});
 
 	//Default startup screen
-	$urlRouterProvider.otherwise("/menu/home");
+	$urlRouterProvider.otherwise("/menu/home/");
 
 	//Activate variable content escaping (for more security)
 	$translateProvider.useSanitizeValueStrategy('escaped');
@@ -192,6 +224,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'interests': 'Áreas de Interesse',
 		'btnRecomendedStands': 'Ver stands recomendados',
 		'btnStandEvents': 'Ver eventos deste stand',
+		'btnOwnStandEvents' : 'Ver eventos',
 		'saveContact': 'Guardar contacto',
 		'sync': 'Sync',
 		'cancel': 'Cancelar',
@@ -203,7 +236,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'local': 'Local',
 		'programDay': 'Dia do evento:',
 		'search': 'Pesquisa',
-		'filterByDate': 'Filter by date',
+		'filterByDate': 'Filtrar por data',
+		'clean': 'Limpar',
 		'startDate': 'Data início',
 		'endDate': 'Data Fim',
 		'searchLocation': 'Localização',
@@ -225,12 +259,32 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"clicks": "Cliques",
 		"contactsEstablished": "Contactos estabelecidos",
 		"popKeywords": "Keywords mais populares",
-        'upcomingFairs' : 'Próximas feiras',
-        'sortByDate' : 'Data',
-        'termsAndConditions' : 'Termos & Condições',
         'fairInformation' : 'Informação',
         'presentStands' : 'Stands Presentes',
-        'suggestedStands' : 'Stands Sugeridos'
+        'suggestedStands' : 'Stands Sugeridos',
+		'upcomingFairs' : 'Próximas feiras',
+		'sortByDate' : 'Data',
+		'termsAndConditions' : 'Termos & Condições',
+		'lowCharPwd': 'A password deve conter no mínimo 8 caracteres',
+		'noMatchPwd': 'As passwords não correspondem',
+		'repeatedPwd': 'A nova password não pode ser igual à password antiga',
+		'ownNoContact': 'Ainda não forneceu o seu contacto',
+		'ownNoAboutUs': 'Ainda não preencheu a sua descrição',
+		'ownNoAddress': 'Ainda não preencheu a sua morada',
+		'lackInfoCompany': 'Esta empresa não se encontra a partilhar esta informação consigo',
+		'settings' : 'Definições',
+		'language' : 'Idioma',
+		'profile' : 'Perfil',
+		'logout' : "Terminar sessão",
+		'loggedOutPopupTitle' : "Sessão terminada com sucesso",
+		'loggedOutPopupMessage' : "Volte sempre!",
+		'logoutConfirmTitle': "Terminar a sessão",
+		'logoutConfirmMessage' : "Deseja realmente terminar a sessão?",
+		'notOpenOwnProfile': "Lamentamos mas não foi possível abrir o seu perfil",
+		'eventsForCompany' : "Eventos agendados por:",
+		'loggedInAs' : "Autenticado como",
+		'sessionExpired': "A sua sessão expirou",
+		'sorryChangePassword': "Unfortunately password could not be changed"
 	});
 
 	$translateProvider.translations('en', {
@@ -273,6 +327,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'interests': 'Interest Areas',
 		'btnRecomendedStands': 'Consult recommended stands',
 		'btnStandEvents': 'Consult stand\'s events',
+		'btnOwnStandEvents' : 'Consult events',
 		'saveContact': 'Save contact',
 		'sync': 'Sync',
 		'cancel': 'Cancel',
@@ -284,7 +339,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'local': 'Location',
 		'programDay': 'Select day:',
 		'search': 'Search',
-		'filterByDate': 'Filtrar por data',
+		'filterByDate': 'Filter by date',
+		'clean': 'Clear',
 		'startDate': 'Start date',
 		'endDate': 'End Date',
 		'searchLocation': 'Location',
@@ -299,23 +355,44 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"editInterests": "Edit interest areas",
 		"changePassword": "Change password",
 		"newPassword": "New password",
-		"oldPassword": "Password antiga",
+		"oldPassword": "Previous password",
 		"stats": "Statistics",
 		"matches": "Matches",
 		"matchpercentage": "Match percentage",
 		"clicks": "Clicks",
 		"contactsEstablished": "Established contacts",
 		"popKeywords": "Most popular keywords",
-        'upcomingFairs' : 'Upcoming Fairs',
-        'sortByDate' : 'Date',
-        'termsAndConditions' : 'Terms & Conditions',
         'fairInformation' : 'Information',
         'presentStands' : 'Present Stands',
-        'suggestedStands' : 'Suggested Stands'
+        'suggestedStands' : 'Suggested Stands',
+		'upcomingFairs' : 'Upcoming Fairs',
+		'sortByDate' : 'Date',
+		'termsAndConditions' : 'Terms & Conditions',
+		'lowCharPwd': 'Password must contain at least 8 characters',
+		'noMatchPwd': 'Password do not correspond',
+		'repeatedPwd': 'New password must not be the same as the last one',
+		'ownNoContact': 'You have not filled your contact',
+		'ownNoAboutUs': 'You have not filled the About you',
+		'ownNoAddress': 'You have not filled your address',
+		'lackInfoCompany': 'This company have not shared this information with you',
+		'settings' : "Settings",
+		'language' : "Language",
+		'profile' : "Profile",
+		'logout' : "Logout",
+		'loggedOutPopupTitle' : "Successfully logged out",
+		'loggedOutPopupMessage' : "Come back anytime!",
+		'logoutConfirmTitle': "Confirm logout",
+		'logoutConfirmMessage' : "Are you sure you want to logout of your account?",
+		'notOpenOwnProfile': "An error occured and it was no possible to load your profile",
+		'eventsForCompany' : "Events scheduled by:",
+		'loggedInAs' : "Logged in as",
+		'sessionExpired': "Session Expired",
+		'sorryChangePassword': "Unfortunately password could not be changed"
 	});
 
-	$translateProvider.preferredLanguage('pt');
+	$translateProvider.useLocalStorage();
+	$translateProvider.preferredLanguage('en');
 
 	//camera stuff
 	$compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-}); 
+});

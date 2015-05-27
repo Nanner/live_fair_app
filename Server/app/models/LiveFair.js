@@ -12,15 +12,24 @@ module.exports = function(sequelize, DataTypes) {
         description: {
             type: DataTypes.STRING, allowNull: false
         },
-        date: {
+        startDate: {
             type: DataTypes.DATE, allowNull: false
         },
-        location: {
+		endDate: {
+            type: DataTypes.DATE, allowNull: false
+        },
+        local: {
+            type: DataTypes.STRING, allowNull: false
+        },
+        address: {
             type: DataTypes.STRING, allowNull: false
         },
         map: {
             type: DataTypes.STRING, allowNull: false
-        }
+        },
+        city: {
+            type: DataTypes.STRING, allowNull: false
+        },
     }, {
         freezeTableName: true // Model tableName will be the same as the model name
     });

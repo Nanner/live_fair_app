@@ -29,7 +29,6 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     $localStorage.set('userID', data.userID);
                     $localStorage.set('userEmail', data.email);
                     $localStorage.set('userType', data.type);
-
                     //
                     //// Need to inform the http-auth-interceptor that
                     //// the user has logged in successfully.  To do this, we pass in a function that
@@ -85,6 +84,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
         register: function(emailToSend, passwordToSend, typeToSend, addressToSend, companyNameToSend, websiteToSend) {
             return $http.post(server.url + '/register', {email: emailToSend, password: passwordToSend, type: typeToSend, address: addressToSend, compayName: companyNameToSend, website: websiteToSend}, {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+        newLiveFair: function(OrganiserID, Name, Description, DateStart, DateEnd, LocationSend,Address, City, Map) {
+            return $http.post(server.url + '/livefairs/new/', {organiserID: OrganiserID, name: Name, description: Description,
+                startDate: DateStart, endDate: DateEnd, local: LocationSend, address: Address, city:City, map:Map})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;

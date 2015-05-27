@@ -1,56 +1,57 @@
 <ion-view title="'editProfile'">
 	<ion-content scroll='true'>
 
-	    <div class="editProfile-img-container" ng-init="validateFields()">
-            <img ng-src="{{standProfileInfo.logo}}">
+        <div class="profile-img-container" ng-init="validateFields()">
+            <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
         </div>
 
         <div>
             <div class="list list-inset">
                 <label class="item item-input">
                     <i class="form-icon ion-android-contact placeholder-icon {{valName}}"></i>
-                    <input type="text" placeholder="{{ 'name' | translate }}" ng-model="standProfileInfo.name" ng-change="validateNameCallback()">
+                    <input type="text" placeholder="{{ 'name' | translate }}" ng-model="standProfileInfo[1].companyName" ng-change="validateNameCallback()">
                 </label>
             </div>
 
 			<div class="list list-inset">
 			    <label class="item item-input">
 			        <i class="form-icon ion-email placeholder-icon {{valEmail}}"></i>
-			        <input type="email" placeholder="Email" ng-model="standProfileInfo.email" ng-change="validateEmailCallback()">
+			        <input type="email" placeholder="Email" ng-model="standProfileInfo[0].email" ng-change="validateEmailCallback()">
 			    </label>
 			</div>
 
 			<div class="list list-inset">
 			    <label class="item item-input">
 			        <i class="form-icon ion-at placeholder-icon {{valWebsite}}"></i>
-			        <input type="text" placeholder="Website" ng-model="standProfileInfo.website" ng-change="validateWebsiteCallback()">
+			        <input type="text" placeholder="Website" ng-model="standProfileInfo[1].website" ng-change="validateWebsiteCallback()">
 			    </label> 
 			</div>
 
 			<div class="list list-inset">
 			    <label class="item item-input">
 			        <i class="form-icon ion-map placeholder-icon {{valAddress}}"></i>
-			        <input type="text" placeholder="{{ 'address' | translate }}" ng-model="standProfileInfo.address" ng-change="validateAddressCallback()">
+			        <input type="text" placeholder="{{ 'address' | translate }}" ng-model="standProfileInfo[1].address" ng-change="validateAddressCallback()">
 			    </label>
 			</div>
 
 			<div class="list list-inset">
 			    <label class="item item-input">
 			        <i class="form-icon ion-ios-telephone placeholder-icon {{valPhone}}"></i>
-			        <input type="tel" placeholder="{{ 'phone' | translate }}" ng-model="standProfileInfo.phone" ng-change="validatePhoneCallback()">
+			        <input type="tel" placeholder="{{ 'phone' | translate }}" ng-model="standProfileInfo[0].contact" ng-change="validatePhoneCallback()">
 			    </label>
 			</div>
 
 			<div class="list list-inset">
 			    <label class="item item-input">
-			        <textarea rows="5" cols="50" placeholder="{{ 'aboutus' | translate }}" ng-model="standProfileInfo.description"></textarea>
+			        <textarea rows="5" cols="50" placeholder="{{ 'aboutus' | translate }}" ng-model="standProfileInfo[0].description"></textarea>
 			    </label>
 			</div>
         </div>	
 
         <div class="editProfile-btnsContainer">
 	        <span class="editProfile-photo-btn" ng-click="uploadPhoto()"><i class="fa fa-camera fa-2x"></i></span>
-	        <span class="editProfile-password-btn" ng-click="changePassword()"><i class="fa fa-lock fa-2x"></i></span>
+	        <!--<span class="editProfile-password-btn" ng-click="changePassword()"><i class="fa fa-lock fa-2x"></i></span>-->
+        </div>
 
             <div class="fair-btn-Container-1">
                 <button nav-clear ng-click="saveChanges()" class="myBtn button button-calm"> <strong> {{ 'submit' | translate }} </strong> </button>

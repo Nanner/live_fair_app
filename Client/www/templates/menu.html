@@ -1,35 +1,39 @@
 <ion-view title="'Menu'">
 	<ion-content scroll='false'>
-        
-        <!-- MENU content -->
-        <ion-side-menus>
-	      <ion-side-menu-content> 
-	        <div class="bar bar-header bar-positive">
-	          <button class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></button>
-	          <div class="title">Live Fair App</div>
-	        </div>
 
-	       <ion-nav-view name="menuContent"></ion-nav-view>
-	        
-	      </ion-side-menu-content>
+		<!-- MENU content -->
+		<ion-side-menus>
+			<ion-side-menu-content>
+				<ion-nav-bar class="bar-positive">
+					<ion-nav-back-button>
+					</ion-nav-back-button>
+					<ion-nav-buttons side="right">
+						<button class="button button-icon icon ion-navicon" ng-click="toggleRight()"></button>
+					</ion-nav-buttons>
+				</ion-nav-bar>
 
-	      <ion-side-menu side="left">
-	  	 	<a class="link">
-	  			<div class="item item-divider">
-					<ion-item nav-clear menu-close class="item-avatar" ng-click="selectItem(0)">
-						<img src="img/User-icon.png">
-						<h2><strong>{{username}}</strong></h2>
-	  				</ion-item>
-		 		</div>
-  			</a>
-	        <ion-list ng-repeat="x in items">
-	          <ion-item nav-clear menu-close ng-click="selectItem($index)">
-	            {{ x.name }}
-	          </ion-item>
-	        </ion-list>
-	      </ion-side-menu>
-            
-	    </ion-side-menus>
+				<ion-nav-view name="menuContent"></ion-nav-view>
+
+			</ion-side-menu-content>
+
+			<ion-side-menu side="right">
+				<ion-content scroll="true">
+					<ion-list>
+						<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
+							{{x.name}}
+						</ion-item>
+						<ion-item ng-show="userType == 'company'" nav-clear menu-close ng-click="loadProfile()">
+							{{ 'profile' | translate }}
+						</ion-item>
+
+						<ion-item nav-clear menu-close ng-click="loadSettings()">
+							{{ 'settings' | translate }}
+						</ion-item>
+					</ion-list>
+				</ion-content>
+			</ion-side-menu>
+
+		</ion-side-menus>
 
 	</ion-content>
 </ion-view>

@@ -3,15 +3,15 @@ var crypto = require("crypto");
 var uuid = require('node-uuid');
 var Joi = require('joi');
 var fs = require('fs');
+var Boom = require('boom');
 
 var sequelize = require('../models').sequelize;
-
 var User = require('../models').User;
-
 var Company = require('../models').Company;
 var Visitor = require('../models').Visitor;
 var Organizer = require('../models').Organizer;
-var Boom = require('boom');
+var Connection = require('../models').Connection;
+
 
 var RegisterSchema = Joi.object().keys({
     email: Joi.string().email().required(),
@@ -24,7 +24,7 @@ var RegisterSchema = Joi.object().keys({
 
 var EditSchema = Joi.object().keys({
     email: Joi.string().email().required(),
-    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/).required(),
+    contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/),
     address: Joi.string().required(),
     website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
     companyName: Joi.string().required(),
@@ -32,7 +32,8 @@ var EditSchema = Joi.object().keys({
 });
 
 var ChangePasswordSchema = Joi.object().keys({
-    password: Joi.string().alphanum().min(8).max(20).required()
+    password: Joi.string().alphanum().required(),
+    oldPassword: Joi.string().alphanum().required()
 });
 
 module.exports = function(server){
@@ -205,6 +206,7 @@ module.exports = function(server){
         path: '/Users/{UserID}/update',
         config:{
             auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -227,6 +229,7 @@ module.exports = function(server){
                     throw new Error(validate.error.message);
                 }
                 else{
+                    console.log(request.payload);
                     return User.update({
                         'email':request.payload.email,
                         'description':request.payload.description,
@@ -281,19 +284,20 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
+                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
-            var validateSchema={password:request.payload.password};
-            var result=validateSchema.validate();
+            var validateSchema={password:request.payload.password,oldPassword:request.payload.oldPassword};
+            var result=Joi.validate(validateSchema,ChangePasswordSchema);
             if(result.error!==null){
-                    throw new Error(result.error.message);
+                throw new Error(result.error.message);
             }
             else{
                 var UserID = request.params.UserID;
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
-                oldPassHash.update(request.payload.oldPasword);
+                oldPassHash.update(request.payload.oldPassword);
                 passHash.update(request.payload.password);
                 reply(User.update({
                     'password':passHash.digest('hex')
@@ -302,9 +306,9 @@ module.exports = function(server){
                         userID:UserID,
                         password:oldPassHash.digest('hex')
                     }
-                })).catch(function(error) {
+                }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
-                });
+                }));
             }
         }}
     });
@@ -329,7 +333,6 @@ module.exports = function(server){
                         companyID:UserID
                     }
                 }).then(function(company){
-                    console.log("teste");
                     fs.writeFile("./images/profiles/"+request.payload.imageName,request.payload.image,function(err){
                         if(err)
                         {
@@ -342,6 +345,100 @@ module.exports = function(server){
                     reply(Boom.badRequest(error.message));
                 }));
             }
+        }}
+    });
+    
+    server.route({
+        method: 'GET',
+        path: '/Users/{UserID}/favorites',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                reply (Connection.findAll({
+                    where:{
+                        visitorVisitorID:UserID
+                    }
+                }).map(function(companies){
+                    return Company.find({
+                        where:{
+                            companyID:companies.companyCompanyID
+                        }});
+                    }).then(function(company){
+                        return JSON.stringify(company);
+                    })
+                );
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/favorite/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':true,
+                    'sharedContact':false
+                    }
+                }).then(function(connection){
+                    Connection.update({
+                        'liked':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Like bem sucedido'));
+                    });
+                    });
+        }}
+    });
+    
+    server.route({
+        method: 'POST',
+        path: '/Users/{UserID}/shareContact/{CompanyID}',
+         config:{
+            auth: {
+                mode:'optional',
+               strategy: 'token'
+           },
+            handler: function (request, reply) {
+                var UserID = request.params.UserID;
+                var CompanyID = request.params.CompanyID;
+                Connection.findOrCreate({
+                    where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    },
+                    defaults:{'visitorVisitorID':UserID,
+                    'companyCompanyID':CompanyID,
+                    'liked':false,
+                    'sharedContact':true
+                    }
+                }).then(function(connection){
+                    Connection.update({
+                        'sharedContact':true
+                    },{where:{
+                        visitorVisitorID:UserID,
+                        companyCompanyID:CompanyID
+                    }}).then(function(con){
+                        reply(JSON.stringify('Share bem sucedido'));
+                    });
+               });
         }}
     });
     

@@ -5,7 +5,7 @@
         <div class="fair-container" ng-init="loadFairProfile()">
             <h2 class="fair-title"> {{fair.name}} </h2>
             <!--isto vai sair, ficar numa tab que abre a localizacao-->
-            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.location}} </h4>
+            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.local}} </h4>
         </div>
 
         <div class="fair-tabs-container">
@@ -17,48 +17,80 @@
                     {{ 'presentStands' | translate }}
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
-                    {{ 'suggestedStands' | translate }}
-                </button>
+                {{ 'suggestedStands' | translate }}
+            </button>
             </div>
         </div>
 
         <div class="fair-container">
 
-            <div class="card information-tab" ng-show="tabOption === 1">
-                <div class="item item-divider">
-                    Informações
+            <div class="card information-tab tab-content" ng-show="tabOption === 1">
+
+                <div class="info-container item item-divider item-positive">
+                    <strong>Informações</strong>
                 </div>
-                <div class="item item-text-wrap">
-                    <!--<p> <b> {{ 'date' | translate }}: </b> {{ 'de' | translate }} {{fair.startDay}} {{ 'a' | translate }} {{fair.endDay}}, {{month}} </p>-->
-                    <!--<p> <b> {{ 'opening' | translate }}: </b> {{fair.startHour}}:{{fair.startMinute}}h </p>-->
-                    <!--<p> <b> {{ 'ending' | translate }}: </b> {{fair.closingHour}}:{{fair.closingMinute}}h </p>-->
-                    <!--<p> <b> {{ 'address' | translate }}: </b> {{fair.address}} </p>-->
-                    <p> <b> {{ 'date' | translate }}: </b> {{fair.date | date:'dd-MM-yyyy'}}</p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.date | date: 'HH:mm Z'}}</p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.location}} </p>
-                    <p ng-show="fair.description != null"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
+                <div class="info-container item item-text-wrap">
+                    <p> <strong> <span class="item-info-desc"> {{ 'date' | translate }}: </span></strong> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
+                    <p> <strong> <span class="item-info-desc"> {{ 'opening' | translate }}: </span></strong> {{fair.startDate | date: 'HH:mm Z'}}</p>
+                    <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}: </span></strong> {{fair.address}} {{fair.city}} </p>
+                    <p ng-show="fair.description != null"> <strong> <span class="item-info-desc"> {{ 'description' | translate }}: </span></strong> {{fair.description}} </p>
                 </div>
+
+
+                <div class="fair-map-container item" ng-show="fair.map != null">
+                    <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+                </div>
+
             </div>
 
-            <div class="present-stands-tab" ng-show="tabOption === 2">
+            <div class="present-stands-tab tab-content" ng-show="tabOption === 2">
+                <div class="card" ng-hide="fairStands.length">
+                    <div class="item item-positive item-placeholder item-text-wrap text-center">
+                        {{ 'noStands' | translate }}
+                    </div>
+                </div>
+
+                <div class="list">
+                    <div ng-repeat="stand in fairStands">
+                        <div class="row">
+                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                            <img no-image ng-src="{{stand.logoImage}}">
+                            <h2>{{stand.companyName}}</h2>
+                            <p>{{stand.website}}</p>
+                        </a>
+                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                            <img no-image ng-src="{{stand.logoImage}}">
+                            <h2>{{stand.companyName}}</h2>
+                            <p>{{stand.website}}</p>
+                        </a>
+                            </div>
+                        <div class="row">
+                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                            <img no-image ng-src="{{stand.logoImage}}">
+                            <h2>{{stand.companyName}}</h2>
+                            <p>{{stand.website}}</p>
+                        </a>
+
+                        <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                            <img no-image ng-src="{{stand.logoImage}}">
+                            <h2>{{stand.companyName}}</h2>
+                            <p>{{stand.website}}</p>
+                        </a>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="suggested-stands-tab tab-content" ng-show="tabOption === 3">
+                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
                 <img no-image class="fair-map" ng-src="{{fair.map}}"/>
                 <img no-image class="fair-map" ng-src="{{fair.map}}"/>
                 <img no-image class="fair-map" ng-src="{{fair.map}}"/>
             </div>
 
-            <div class="suggested-stands-tab" ng-show="tabOption === 3">
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-                <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-            </div>
-
-        </div>
-
-        <div class="fair-map-container" ng-show="fair.map != null">
-            <img no-image class="fair-map" ng-src="{{fair.map}}"/>
         </div>
 
         <div class="fair-btn-Container-1">
@@ -76,6 +108,19 @@
                 {{ 'btnAderir' | translate }}
             </button>
         </div>
+
+        <script id="interestsPopup.html" type="text/ng-template">
+            <ul class="list">
+                <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
+                <li class="item item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
+                <li class="item item-checkbox" ng-repeat="item in interestsList">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="item.checked" ng-change="changedCheckbox()">
+                    </label>
+                    {{item.interest}}
+                </li>
+            </ul>
+        </script>
 
     </ion-content>
 </ion-view>
