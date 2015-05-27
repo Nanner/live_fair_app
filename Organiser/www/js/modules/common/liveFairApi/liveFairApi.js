@@ -9,6 +9,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Stands = $resource(server.url + '/livefairs/:liveFairID/companies', {liveFairID: '@liveFairID'});
 
+    var Visitors = $resource(server.url + '/livefairs/:liveFairID/visitors', {liveFairID: '@liveFairID'});
+
+
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
     /* Not being used
@@ -72,6 +75,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
         getLiveFairStands: function(fairID) {
             return Stands.query({liveFairID: fairID});
+        },
+        getLiveFairVisitors: function(fairID) {
+            return Visitors.query({liveFairID: fairID});
         },
         getLiveFairSchedule: function(fairID) {
             return Schedule.query({liveFairID: fairID});
