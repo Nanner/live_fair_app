@@ -524,11 +524,10 @@ module.exports = function(server){
            handler: function (request, reply) {
                var liveFairID=request.params.livefairID;
                var userID=request.params.userID;
-
                VisitorLiveFair.findAll({
                    where: {
                        liveFairLiveFairID: liveFairID,
-                       visitorVisitor:userID
+                       visitorVisitorID:userID
                    }
                }).then(function(liveFairs){
                    if(liveFairs.length > 0)

@@ -156,7 +156,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/fair.html",
 					controller: "fairCtrl"
 				}
-			}
+			},
+			cache: false
 		})
 		.state('menu.searchFairs', {
 			url: "/searchFairs",
