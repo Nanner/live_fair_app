@@ -462,17 +462,18 @@
 .edit-profile {
     float: left;
     padding-left: 4%;
-    color: darkblue;
+    color: #ffffff;
 }
 
 .profile-stats {
     float: right;
     padding-right: 4%;
-    color: darkblue;
+    color: #ffffff;
 }
 
 .profile-owner-icons {
-    padding-top: 15%;
+    padding-top:8%;
+    background-color: #28A3D4;
 }
 
 .save-contact-btn{
@@ -509,7 +510,6 @@
 
 
 .editProfile-photo-btn {
-    padding-right: 5%;
     color: darkblue;
 }
 
