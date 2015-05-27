@@ -428,7 +428,8 @@ module.exports = function(server){
                     reply("Adesão à LiveFair concluída com sucesso!")
                         
                 }).catch(function(error) {
-                            return reply(Boom.badRequest(error.message));
+                    console.log(JSON.stringify(error));
+                    return reply(Boom.badRequest(error.message));
                 });
             }}
     });

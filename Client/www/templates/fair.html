@@ -38,18 +38,33 @@
             <img no-image class="fair-map" ng-src="{{fair.map}}"/>
         </div>
 
-        <div class="list padding">
+        <div class="list padding" ng-hide="participating">
             <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnProgram' | translate }}
             </button>
             <button nav-clear ng-click="loadStands(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnStands' | translate }}
             </button>
-            <button class="item button button button-block button-outline button-positive" ng-click="createStandEvent(fair.liveFairID)"> <!-- ng-show="companyPresentInFair" -->
+            <button ng-click="chooseInterests()" class="item button button-block button-positive">
+                {{ 'btnAderir' | translate }}
+            </button>
+        </div>
+
+        <div ng-show="participating">
+            <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
+                {{ 'btnProgram' | translate }}
+            </button>
+            <button nav-clear ng-click="loadStands(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
+                {{ 'matches' | translate }}
+            </button>
+            <button nav-clear ng-click="loadStands(fair.liveFairID)" ng-show="userType == 'company'" class="item button button-block button-clear button-outline button-positive">
+                {{ 'stats' | translate }}
+            </button>
+            <button class="item button button button-block button-outline button-positive" ng-show="userType == 'company'" ng-click="createStandEvent(fair.liveFairID)">
                 {{ 'btnAddStandEvent' | translate }}
             </button>
             <button ng-click="chooseInterests()" class="item button button-block button-positive">
-                {{ 'btnAderir' | translate }}
+                {{ 'btnNoAderir' | translate }}
             </button>
         </div>
 
