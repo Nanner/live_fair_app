@@ -120,7 +120,6 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 
 
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi) {
-
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.hideMap = false;
@@ -139,24 +138,24 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 $scope.userType = response;
                 $localForage.getItem('userID').then(function(responseID) {
                         var userID = responseID;
-                        if(userType === 'company') {
+                        if($scope.userType === 'company') {
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
                                     $scope.participating = data;
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                     //
-                                    $scope.participating = true;
+                                    //$scope.participating = true;
                                 }, function(error) {
                                     console.log(error);
                                     $scope.participating = false;
                             });
-                        } else if(userType === 'visitor') { ///CHANGE
+                        } else if($scope.userType === 'visitor') { ///CHANGE
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
                                     $scope.participating = data;
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                     //
-                                    $scope.participating = true;                                    
+                                    //$scope.participating = true;                                    
                                 }, function(error) {
                                     console.log(error);
                                     $scope.participating = false;
@@ -196,6 +195,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                         }
 
                         $localForage.getItem('userID').then(function(response) {
+                                console.log("Isto devia dar uma vez");
                                 liveFairApi.adhereLiveFair(liveFairID, response, interestsIDS).
                                     then(function(data) {
                                         utils.showAlert(data, "Sucesso");

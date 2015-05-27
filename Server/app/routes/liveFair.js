@@ -412,13 +412,13 @@ module.exports = function(server){
 
                 var LiveFairID = request.params.LiveFairID;
                 var UserID = request.params.UserID;
-
+                console.log("Eu devia de dar uma vez");
                 VisitorLiveFair.create({
                     'liveFairLiveFairID': LiveFairID,
                     'visitorVisitorID': UserID
                 }).then(function(){
-                    var interests=JSON.parse(request.payload.interests);
-                    for(var i=1;i<=interests.length;i++){
+                    var interests=request.payload.interests;
+                    for(var i = 0; i<interests.length; i++){
                         LiveFairVisitorInterest.create({
                             'liveFairIDref':LiveFairID,
                             'interestIDref':interests[i],
