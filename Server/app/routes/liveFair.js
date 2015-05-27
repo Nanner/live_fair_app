@@ -10,6 +10,7 @@ var CompanyEvents = require('../models').CompanyEvents;
 var Stands = require('../models').Stands;
 var Users = require('../models').User;
 var Company = require('../models').Company;
+var Visitor= require('../models').Visitor;
 var Interest = require('../models').Interest;
 var LiveFairInterest = require('../models').LiveFairInterest;
 var VisitorLiveFair = require('../models').VisitorLiveFair;
@@ -125,6 +126,29 @@ module.exports = function(server){
                             return JSON.stringify(companies);
                         }).error(function(err){
                             return Boom.notFound('Live Fair Stands not found');
+                        })
+                );
+            }}
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/livefairs/{id}/visitors',
+        config:{
+            auth: {
+                mode: 'optional',
+                strategy: 'token'
+            },
+            handler: function (request, reply) {
+                var liveFairId=request.params.id;
+                reply(
+                    VisitorLiveFair.findAll({where: {liveFairLiveFairID: liveFairId}})
+                        .map(function(visitor) {
+                            return Visitor.find({where: {visitorID: visitor.visitorVisitorID}});
+                        }).then(function(visitors) {
+                            return JSON.stringify(visitors);
+                        }).error(function(err){
+                            return Boom.notFound('Live Fair Visitors not found');
                         })
                 );
             }}

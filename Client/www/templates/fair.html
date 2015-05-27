@@ -38,18 +38,17 @@
             <img no-image class="fair-map" ng-src="{{fair.map}}"/>
         </div>
 
-        <div class="fair-btn-Container-1">
-            <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">
+        <div class="list padding">
+            <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnProgram' | translate }}
             </button>
-        </div>
-        <div class="fair-btn-Container">
-            <button nav-clear ng-click="loadStands(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">
+            <button nav-clear ng-click="loadStands(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnStands' | translate }}
             </button>
-        </div>
-        <div class="fair-btn-Container-3">
-            <button ng-click="chooseInterests()" class="myBtn button button-positive">
+            <button class="item button button button-block button-outline button-positive" ng-click="createStandEvent(fair.liveFairID)"> <!-- ng-show="companyPresentInFair" -->
+                {{ 'btnAddStandEvent' | translate }}
+            </button>
+            <button ng-click="chooseInterests()" class="item button button-block button-positive">
                 {{ 'btnAderir' | translate }}
             </button>
         </div>

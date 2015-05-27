@@ -222,7 +222,9 @@ $scope.newFair = function(userID)
 });
 
 module.controller('fairVisitorsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
-
+     $scope.username = $localStorage.get('userEmail');
+     var fairID = $stateParams.fairID;
+     $scope.fairVisitorsIDs = liveFairApi.getLiveFairVisitors(fairID);
 });
 
 module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {

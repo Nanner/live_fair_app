@@ -9,13 +9,13 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Live Fair App</a>
+			<a class="navbar-brand" href="#/livefairs">Live Fair App</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li>
-					<a>My Live Fairs</a>
+					<a href="#/livefairs">My Live Fairs</a>
 				</li>
 				<li>
 					<a>{{username}}</a>
@@ -51,21 +51,12 @@
 						<th>Contacto<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Estado<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 					</tr>
-					<tr>
-						<td>nuno27@gmail.com</td>
+					<tr ng-repeat = "visitor in fairVisitorsIDs">
+						<td>{{visitor.visitorID}}</td>
 						<td>912312312</td>
 						<td>
 							<button type="button" class="btn btn-success" aria-label="Left Align">
 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-							</button>
-						</td>
-					</tr>
-					<tr>
-						<td>user@gmail.com</td>
-						<td>982375942</td>
-						<td>
-							<button type="button" class="btn btn-danger" aria-label="Left Align">
-								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 							</button>
 						</td>
 					</tr>

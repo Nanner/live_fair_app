@@ -12,7 +12,7 @@ module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, live
 });
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
-    
+
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -61,7 +61,6 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
     $scope.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function(fairName, event) {
-        
         $scope.liveFairEvent = event;
         var myPopup = $ionicPopup.show({
             templateUrl: "eventPopup.html",
@@ -230,8 +229,18 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
-    }
+    };
 
+    $scope.createStandEvent = function(fairID) {
+        $localForage.getItem('userID').then(function(userID){
+            $state.go('menu.createStandEvent', {fairID: fairID, companyID: userID});
+        }, function(error) {
+            $ionicPopup.alert({
+                title: $translate.instant('cantCreateStandEventTitle'),
+                template: '<p class="text-center">' + $translate.instant("cantCreateStandEventMessage") + '</p>'
+            });
+        });
+    };
 });
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
@@ -359,7 +368,6 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 });
 
 module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
-    console.log(schedule);
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -382,7 +390,6 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     var companyID = $stateParams.companyID;
     liveFairApi.getProfile(companyID).$promise.then(function(profile) {
         $scope.companyName = profile[1].companyName;
-        console.log($scope.companyName);
     });
 
     var liveFairID = $stateParams.fairID;
@@ -395,8 +402,6 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         .groupBy(function (event) {
             return event.time;
         }).value();
-
-    console.log($scope.schedule);
 
     $scope.scheduleDays = _.chain(schedule)
         .sortBy(function (event) {
@@ -442,5 +447,18 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                 },
             ]
         });
+    }
+});
+
+module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, utils, $localForage) {
+    $scope.subject = "";
+    $scope.speakers = "";
+    $scope.location = "";
+    $scope.startDate = "";
+    $scope.startTime = "";
+    $scope.endDate = "";
+    $scope.endTime = "";
+
+    $scope.createEvent = function() {
     }
 });

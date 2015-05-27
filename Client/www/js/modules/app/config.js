@@ -175,6 +175,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					controller: "settingsCtrl"
 				}
 			}
+		})
+		.state('menu.createStandEvent', {
+			url: "/fairs/:fairID/stands/:companyID/createEvent",
+			views: {
+				'menuContent' :{
+					templateUrl: "templates/createStandEvent.html",
+					controller: 'createStandEventCtrl'
+				}
+			}
 		});
 
 	//Default startup screen
@@ -238,8 +247,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'search': 'Pesquisa',
 		'filterByDate': 'Filtrar por data',
 		'clean': 'Limpar',
-		'startDate': 'Data início',
-		'endDate': 'Data Fim',
+		'startDate': 'Data de início',
+		'endDate': 'Data de fim',
 		'searchLocation': 'Localização',
 		'speakers': 'Oradores',
 		'noInterests': 'O organizador ainda não definiu a lista de interesses para este evento',
@@ -283,6 +292,14 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'sessionExpired': "A sua sessão expirou",
 		'sorryChangePassword': "Unfortunately password could not be changed",
 		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia á feira"
+		'createEvent': "Criar evento",
+		'createStandEvent': 'Criar evento de stand',
+		'newEvent': "Novo evento",
+		'btnAddStandEvent': "Novo evento",
+		'btnCreate': "Criar",
+		'btnConfirmChanges': "Confirmar alterações",
+		'startTime': "Hora de início",
+		'endTime' : "Hora de fim"
 	});
 
 	$translateProvider.translations('en', {
@@ -384,6 +401,14 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'sessionExpired': "Session Expired",
 		'sorryChangePassword': "Unfortunately password could not be changed",
 		"erroSubscribeLiveFair": "An error have occured while subscribing the fair"
+		'createEvent': "Create event",
+		'createStandEvent': 'Create stand event',
+		'btnAddStandEvent': "New event",
+		'newEvent': "New event",
+		'btnCreate': "Create",
+		'btnConfirmChanges': "Confirm changes",
+		'startTime': "Start time",
+		'endTime' : "End time"
 	});
 
 	$translateProvider.useLocalStorage();

@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, authService, $localStorage, $localForage, $ionicPopup, $translate) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, $localStorage, $localForage, $ionicPopup, $translate) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -130,9 +130,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             //        //$rootScope.$broadcast('event:auth-logout-complete');
             //    });
         },
-        loginCancelled: function() {
-            authService.loginCancelled();
-        },
+        //loginCancelled: function() {
+        //    authService.loginCancelled();
+        //},
         getLiveFairs: function() {
             return LiveFair.query();
         },

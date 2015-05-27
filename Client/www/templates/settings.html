@@ -1,8 +1,8 @@
-?<ion-view title="'Home'">
+?<ion-view title="{{'settings' | translate}}">
     <ion-content scroll='true'>
 
         <!-- Template content -->
-        <div class="home-container" ng-controller="settingsCtrl">
+        <div class="home-container">
 
             <h1 class="settings-title"> <span class="ion-android-settings"></span> {{ 'settings' | translate }} </h1>
             <br>
@@ -16,7 +16,7 @@
                         {{'language' | translate}}
                     </div>
                     <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
-                        <option value="pt">Português</option>
+                        <option value="pt">PortuguÃªs</option>
                         <option value="en">English</option>
                     </select>
                 </label>
