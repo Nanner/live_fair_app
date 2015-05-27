@@ -500,7 +500,7 @@ module.exports = function(server){
                 var liveFairID=request.params.livefairID;
                 var userID=request.params.userID;
 
-                reply(VisitorLiveFair.findAll(
+                VisitorLiveFair.findAll(
                     {
                         where: {
                              liveFairLiveFairID: liveFairID,
@@ -508,11 +508,10 @@ module.exports = function(server){
                         }
                     }).then(function(liveFair)
                     {
-                        return JSON.stringify("true");
+                        reply(JSON.stringify("true"));
                     }).error(function(error) {
-                        return JSON.stringify("false");
-                    })
-                    );
+                        reply(JSON.stringify("false"));
+                    });
             }}
     });
     
