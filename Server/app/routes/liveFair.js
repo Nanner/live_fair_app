@@ -508,9 +508,9 @@ module.exports = function(server){
                         }
                     }).then(function(liveFair)
                     {
-                        reply("true");
+                        reply(JSON.stringify(true));
                     }).error(function(error) {
-                        reply("false");
+                        reply(JSON.stringify(false));
                     });
             }}
     });
