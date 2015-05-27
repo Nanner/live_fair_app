@@ -461,58 +461,59 @@ module.exports = function(server){
     });
     
     server.route({
-        method: 'GET',
-        path: '/livefairs/{livefairID}/{userID}/standParticipating',
-        config:{
-            auth: {
-                mode: 'optional',
-                strategy: 'token'
-            },
-            handler: function (request, reply) {
-                var liveFairID=request.params.livefairID;
-                var userID=request.params.userID;
+       method: 'GET',
+       path: '/livefairs/{livefairID}/{userID}/standParticipating',
+       config:{
+           auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+           handler: function (request, reply) {
+               var liveFairID=request.params.livefairID;
+               var userID=request.params.userID;
 
-                reply(Stands.findAll(
-                    {
-                        where: {
-                             liveFairLiveFairID: liveFairID,
-                             companyCompanyID:userID
-                        }
-                    }).then(function(liveFair)
-                    {
-                        return JSON.stringify("true");
-                    }).error(function(error) {
-                        return JSON.stringify("false");
-                    })
-                    );
-            }}
+               Stands.findAll({
+                   where: {
+                       liveFairLiveFairID: liveFairID,
+                       companyCompanyID:userID
+                   }
+               }).then(function(liveFairs) {
+                   if(liveFairs.length > 0)
+                       reply(JSON.stringify(true));
+                   else
+                       reply(JSON.stringify(false));
+               }).error(function(error) {
+                   reply(JSON.stringify(false));
+               });
+           }}
     });
-    
+ 
     server.route({
-        method: 'GET',
-        path: '/livefairs/{livefairID}/{userID}/participating',
-        config:{
-            auth: {
-                mode: 'optional',
-                strategy: 'token'
-            },
-            handler: function (request, reply) {
-                var liveFairID=request.params.livefairID;
-                var userID=request.params.userID;
+       method: 'GET',
+       path: '/livefairs/{livefairID}/{userID}/participating',
+       config:{
+           auth: {
+               mode: 'optional',
+               strategy: 'token'
+           },
+           handler: function (request, reply) {
+               var liveFairID=request.params.livefairID;
+               var userID=request.params.userID;
 
-                VisitorLiveFair.findAll(
-                    {
-                        where: {
-                             liveFairLiveFairID: liveFairID,
-                             visitorVisitor:userID
-                        }
-                    }).then(function(liveFair)
-                    {
-                        reply(JSON.stringify(true));
-                    }).error(function(error) {
-                        reply(JSON.stringify(false));
-                    });
-            }}
+               VisitorLiveFair.findAll({
+                   where: {
+                       liveFairLiveFairID: liveFairID,
+                       visitorVisitor:userID
+                   }
+               }).then(function(liveFairs){
+                   if(liveFairs.length > 0)
+                       reply(JSON.stringify(true));
+                   else
+                       reply(JSON.stringify(false));
+               }).error(function(error) {
+                   reply(JSON.stringify(false));
+               });
+           }}
     });
     
     server.route({
