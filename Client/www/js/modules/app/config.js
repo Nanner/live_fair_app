@@ -291,7 +291,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedInAs' : "Autenticado como",
 		'sessionExpired': "A sua sessão expirou",
 		'sorryChangePassword': "Unfortunately password could not be changed",
-		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia á feira"
+		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia á feira",
 		'createEvent': "Criar evento",
 		'createStandEvent': 'Criar evento de stand',
 		'newEvent': "Novo evento",
@@ -400,7 +400,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedInAs' : "Logged in as",
 		'sessionExpired': "Session Expired",
 		'sorryChangePassword': "Unfortunately password could not be changed",
-		"erroSubscribeLiveFair": "An error have occured while subscribing the fair"
+		"erroSubscribeLiveFair": "An error have occured while subscribing the fair",
 		'createEvent': "Create event",
 		'createStandEvent': 'Create stand event',
 		'btnAddStandEvent': "New event",
