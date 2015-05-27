@@ -141,7 +141,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                         var userID = responseID;
                         if(userType === 'company') {
 
-                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).$promise.then(function(data) {
+                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                 }, function(error) {
@@ -151,7 +151,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
                         } else if(userType === 'visitor') { ///CHANGE
 
-                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).$promise.then(function(data) {
+                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                 }, function(error) {

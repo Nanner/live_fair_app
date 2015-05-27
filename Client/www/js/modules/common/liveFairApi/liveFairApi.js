@@ -19,10 +19,6 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
-    var VisitorParticipating = $resource(server.url + '/livefairs/:fairID/:userID/participating', {fairID: '@fairID', userID: '@userID'});
-
-    var CompanyParticipating = $resource(server.url + '/livefairs/:fairID/:companyID/standParticipating', {fairID: '@fairID', companyID: '@companyID'});
-
     var api = {
 
         login: function(username, password) {
@@ -178,11 +174,31 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
 
         checkIfVisitorParticipatingFair: function(userId, fairId) {
-            return VisitorParticipating.get({fairID: fairId, userID: userId});
+            return $http.get(server.url + '/livefairs/' + fairId + "/" + companyId + '/participating', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );        
         },
 
         checkIfCompanyParticipatingFair:  function(companyId, fairId) {
-            return CompanyParticipating.get({fairID: fairId, companyID: companyId});
+            return $http.get(server.url + '/livefairs/' + fairId + "/" + companyId + '/standParticipating', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
         },
 
         adhereLiveFair: function(fairID, userID, interestsList) {
