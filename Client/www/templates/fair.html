@@ -1,70 +1,29 @@
-<ion-view title="'Fair'">
-    <ion-content scroll='true'>
-
-        <!-- Content -->
-        <div class="fair-container" ng-init="loadFairProfile()">
-            <h2 class="fair-title"> {{fair.name}} </h2>
-            <!--isto vai sair, ficar numa tab que abre a localizacao-->
-            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.local}} </h4>
+<div class="list">
+    <div ng-repeat="stand in fairStands">
+        <div class="row">
+            <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                <img no-image ng-src="{{stand.logoImage}}">
+                <h2>{{stand.companyName}}</h2>
+                <p>{{stand.website}}</p>
+            </a>
+            <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                <img no-image ng-src="{{stand.logoImage}}">
+                <h2>{{stand.companyName}}</h2>
+                <p>{{stand.website}}</p>
+            </a>
         </div>
+        <div class="row">
+            <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                <img no-image ng-src="{{stand.logoImage}}">
+                <h2>{{stand.companyName}}</h2>
+                <p>{{stand.website}}</p>
+            </a>
 
-        <div class="fair-tabs-container">
-            <div class="buttons-container">
-                <button class="button button-calm item-input-wrapper" ng-click="showInfoPage()" ng-class="{active : tabOption === 1}">
-                    {{ 'fairInformation' | translate }}
-                </button>
-                <button class="button button-calm item-input-wrapper" ng-click="showPresentStands()" ng-class="{active : tabOption === 2}">
-                    {{ 'presentStands' | translate }}
-                </button>
-                <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
-                    {{ 'suggestedStands' | translate }}
-                </button>
-            </div>
+            <a class="item list-inset col col-45" ng-click="loadProfile(stand.companyID)">
+                <img no-image ng-src="{{stand.logoImage}}">
+                <h2>{{stand.companyName}}</h2>
+                <p>{{stand.website}}</p>
+            </a>
         </div>
-
-        <div class="card">
-            <div class="item item-divider">
-                Informações
-            </div>
-            <div class="item item-text-wrap">
-                <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
-                <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
-                <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
-                <p ng-show="fair.description != null"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
-            </div>
-        </div>
-
-        <div class="fair-map-container" ng-show="fair.map != null">
-            <img no-image class="fair-map" ng-src="{{fair.map}}"/>
-        </div>
-
-        <div class="list padding">
-            <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
-                {{ 'btnProgram' | translate }}
-            </button>
-            <button nav-clear ng-click="loadStands(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
-                {{ 'btnStands' | translate }}
-            </button>
-            <button class="item button button button-block button-outline button-positive" ng-click="createStandEvent(fair.liveFairID)"> <!-- ng-show="companyPresentInFair" -->
-                {{ 'btnAddStandEvent' | translate }}
-            </button>
-            <button ng-click="chooseInterests()" class="item button button-block button-positive">
-                {{ 'btnAderir' | translate }}
-            </button>
-        </div>
-
-        <script id="interestsPopup.html" type="text/ng-template">
-            <ul class="list">
-                <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
-                <li class="item item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
-                <li class="item item-checkbox" ng-repeat="item in interestsList">
-                    <label class="checkbox">
-                        <input type="checkbox" ng-model="item.checked" ng-change="changedCheckbox()">
-                    </label>
-                    {{item.interest}}
-                </li>
-            </ul>
-        </script>
-
-    </ion-content>
-</ion-view>
+    </div>
+</div>
