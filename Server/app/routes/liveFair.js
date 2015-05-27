@@ -400,7 +400,7 @@ module.exports = function(server){
 
     server.route({
         method: 'POST',
-        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/',
+        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit',
         config:{
             auth: {
                 strategy: 'token'
