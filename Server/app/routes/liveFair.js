@@ -402,9 +402,9 @@ module.exports = function(server){
                         });
                     }
                     reply("Adesão à LiveFair concluída com sucesso!")
-                        .catch(function(error) {
+                        
+                }).catch(function(error) {
                             return reply(Boom.badRequest(error.message));
-                        });
                 });
             }}
     });
