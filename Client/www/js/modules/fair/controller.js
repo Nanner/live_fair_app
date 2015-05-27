@@ -149,7 +149,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                     utils.showAlert("ASNEIRA", "Erro");
                             });
 
-                        } else if(userType === 'visitor') {
+                        } else if(userType === 'visitor') { ///CHANGE
 
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).$promise.then(function(data) {
                                     console.log(data);
