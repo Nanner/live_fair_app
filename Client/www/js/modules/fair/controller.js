@@ -143,20 +143,22 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
+                                    $scope.participating = data;
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                 }, function(error) {
                                     console.log(error);
-                                    utils.showAlert("ASNEIRA", "Erro");
+                                    $scope.participating = false;
                             });
 
                         } else if(userType === 'visitor') { ///CHANGE
 
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
                                     console.log(data);
+                                    $scope.participating = data;
                                     $scope.month = utils.getMonthName($scope.fair.month);
                                 }, function(error) {
                                     console.log(error);
-                                    utils.showAlert("ASNEIRA", "Erro");
+                                    $scope.participating = false;
                             });
 
                         }
