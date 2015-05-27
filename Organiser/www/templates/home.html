@@ -1,4 +1,31 @@
-
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top  blue-navbar" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/livefairs">Live Fair App</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#/livefairs">My Live Fairs</a>
+				</li>
+				<li>
+					<a>{{username}}</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container -->
+</nav>
 <!-- Page Content -->
 <div class="container">
 	<!-- Page Heading -->
@@ -13,7 +40,7 @@
 				</label> 
 				<label  class="btn btn-primary">
 					<input type="radio" ng-click="loadNextFairs()" /> Next Fairs
-					</label> 
+				</label> 
 				<button class="btn btn-success" data-toggle="modal" data-target="#newFairModal">New Fair</button>
 			</div>
 		</div>
@@ -33,9 +60,9 @@
 						<p><b>Descrição:</b> {{fair.description}}</p>
 						<div class="text-center">
 							<div class="btn-group" >
-								<button class="btn btn-primary btn-xs"  btn-radio="'Left'">Visiantes</button>
+								<button class="btn btn-primary btn-xs"  btn-radio="'Left'" ng-click="loadFairVisitors(fair.liveFairID)">Visitantes</button>
 								<button class="btn btn-primary btn-xs"  btn-radio="'Middle'">Programa</button>
-								<button class="btn btn-primary btn-xs"  btn-radio="'Right'">Empresas</button>
+								<button class="btn btn-primary btn-xs"  btn-radio="'Right'" ng-click="loadFairCompanies(fair.liveFairID)">Empresas</button>
 							</div>
 						</div>
 					</div>
@@ -57,32 +84,40 @@
 					<form>
 						<div class="form-group">
 							<label>Nome</label>
-							<input type="text" class="form-control" placeholder="Live Fair Name">
+							<input type="text" class="form-control" placeholder="Nome da Live Fair" ng-model="name">
 						</div>
 						<div class="form-group">
 							<label>Local</label>
-							<input type="text" class="form-control" placeholder="Live Fair Addres">
+							<input type="text" class="form-control" placeholder="Local da Live Fair" ng-model="local">
+						</div>
+						<div class="form-group">
+							<label>Morada</label>
+							<input type="text" class="form-control" placeholder="Morada da Live Fair" ng-model="address">
+						</div>
+						<div class="form-group">
+							<label>Cidade</label>
+							<input type="text" class="form-control" placeholder="Cidade da Live Fair" ng-model="city">
 						</div>
 						<div class="form-group">
 							<label>Data Início</label>
-							<input type="date" class="form-control">
+							<input type="date" class="form-control" ng-model="sdate">
 						</div>
 						<div class="form-group">
 							<label>Data Fim</label>
-							<input type="date" class="form-control">
+							<input type="date" class="form-control" ng-model="edate">
 						</div>
 						<div class="form-group">
-							<label>Website</label>
-							<input type="url" class="form-control" placeholder="Live Fair Website">
+							<label>Descrição</label>
+							<textarea  type="textarea" class="form-control" placeholder="Descrição da Live Fair" ng-model="description"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="exampleInputFile">Map</label>
-							<input type="file" id="mapFile">
+							<label for="exampleInputFile">Mapa de Stands</label>
+							<input type="file" id="mapFile" ng-model="map">
 						</div>
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary" ng-click="newFair()">Criar</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newFair()">Criar</button>
 						</div>
 					</form>
 				</div>
@@ -125,3 +160,14 @@
 
 	<hr>
 </div>
+
+<!-- Footer -->
+<footer>
+	<div class="row text-center">
+		<div class="col-lg-12">
+			<img class="img-footer" src="images\LiveFair.jpg" alt="" width="80" height="60">
+			<img class="img-footer left-5" src="images\Lettuce.jpg" alt="" width="60" height="60">
+		</div>
+	</div>
+	<!-- /.row -->
+</footer>
