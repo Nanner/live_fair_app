@@ -3,7 +3,7 @@ var module = angular.module('loginModule');
 module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairApi, $localStorage, $ionicModal) {
 
     $scope.loadHome = function() {
-        $state.go('home');
+        $state.go('livefairs');
     };
     
     $scope.username = "";

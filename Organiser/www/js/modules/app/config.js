@@ -5,8 +5,9 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 	$httpProvider.interceptors.push('authInterceptor');
 
 	$stateProvider
-		.state('home', {
-					url: "/home",
+		.state('livefairs', {
+					abstract: false,
+					url: "/livefairs",
 					templateUrl: "templates/home.html",
 					controller: "listFairsCtrl"
 				,resolve: {
@@ -25,9 +26,14 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 					controller: "loginCtrl"
 				})
 		.state('visitors', {
-					url: "livefairs/:fairID/visitors",
+					url: "/:fairID/visitors",
 					templateUrl: "templates/visitors.html",
-					controller: "loginCtrl"
+					controller: "fairVisitorsCtrl"
+				})
+		.state('companies', {
+					url: "/:fairID/companies",
+					templateUrl: "templates/companies.html",
+					controller: "fairCompaniesCtrl"
 				})
 		/*.state('menu.register', {
 			url: "/register",
@@ -150,8 +156,8 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 			}
 		})*/;
 
-	//Default startup screen
 	$urlRouterProvider.otherwise("/login");
+
 }).
 controller('routeController', ['$scope', '$location', function($scope, $location) {
     $scope.showPageLogin = $location.path() === '/login';

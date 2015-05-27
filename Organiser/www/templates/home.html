@@ -9,13 +9,13 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Live Fair App</a>
+			<a class="navbar-brand" href="#/livefairs">Live Fair App</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li>
-					<a>My Live Fairs</a>
+					<a href="#/livefairs">My Live Fairs</a>
 				</li>
 				<li>
 					<a>{{username}}</a>
@@ -62,7 +62,7 @@
 							<div class="btn-group" >
 								<button class="btn btn-primary btn-xs"  btn-radio="'Left'" ng-click="loadFairVisitors(fair.liveFairID)">Visitantes</button>
 								<button class="btn btn-primary btn-xs"  btn-radio="'Middle'">Programa</button>
-								<button class="btn btn-primary btn-xs"  btn-radio="'Right'">Empresas</button>
+								<button class="btn btn-primary btn-xs"  btn-radio="'Right'" ng-click="loadFairCompanies(fair.liveFairID)">Empresas</button>
 							</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary" ng-click="newFair()">Criar</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newFair()">Criar</button>
 						</div>
 					</form>
 				</div>
