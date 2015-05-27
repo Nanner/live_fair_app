@@ -178,11 +178,11 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
 
         checkIfVisitorParticipatingFair: function(userId, fairId) {
-            return VisitorParticipating.query({fairID: fairId, userID: userId});
+            return VisitorParticipating.get({fairID: fairId, userID: userId});
         },
 
         checkIfCompanyParticipatingFair:  function(companyId, fairId) {
-            return CompanyParticipating.query({fairID: fairId, companyID: companyId});
+            return CompanyParticipating.get({fairID: fairId, companyID: companyId});
         },
 
         adhereLiveFair: function(fairID, userID, interestsList) {

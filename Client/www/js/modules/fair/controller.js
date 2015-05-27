@@ -140,13 +140,26 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 $localForage.getItem('userID').then(function(responseID) {
                         var userID = responseID;
                         if(userType === 'company') {
-                            var participationgcenas = liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID);
-                            console.log(participationgcenas);
+
+                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).$promise.then(function(data) {
+                                    console.log(data);
+                                    $scope.month = utils.getMonthName($scope.fair.month);
+                                }, function(error) {
+                                    console.log(error);
+                                    utils.showAlert("ASNEIRA", "Erro");
+                            });
+
                         } else if(userType === 'visitor') {
-                            //console.log(liveFairApi.checkIfVisitorParticipatingFair(userID, liveFairID));
-                            console.log("Conas");
+
+                            liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).$promise.then(function(data) {
+                                    console.log(data);
+                                    $scope.month = utils.getMonthName($scope.fair.month);
+                                }, function(error) {
+                                    console.log(error);
+                                    utils.showAlert("ASNEIRA", "Erro");
+                            });
+
                         }
-                        $scope.month = utils.getMonthName($scope.fair.month);
                     }, function(response) {
                         utils.showAlert($translate.instant('sessionExpired'), "Error");
                         $state.go('menu.home');
