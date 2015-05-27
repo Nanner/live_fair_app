@@ -281,7 +281,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'eventsForCompany' : "Eventos agendados por:",
 		'loggedInAs' : "Autenticado como",
 		'sessionExpired': "A sua sessão expirou",
-		'sorryChangePassword': "Unfortunately password could not be changed"
+		'sorryChangePassword': "Unfortunately password could not be changed",
+		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia á feira"
 	});
 
 	$translateProvider.translations('en', {
@@ -381,7 +382,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'eventsForCompany' : "Events scheduled by:",
 		'loggedInAs' : "Logged in as",
 		'sessionExpired': "Session Expired",
-		'sorryChangePassword': "Unfortunately password could not be changed"
+		'sorryChangePassword': "Unfortunately password could not be changed",
+		"erroSubscribeLiveFair": "An error have occured while subscribing the fair"
 	});
 
 	$translateProvider.useLocalStorage();

@@ -120,7 +120,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 });
 
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi,$translate) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi) {
 
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
@@ -128,13 +128,37 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.month = "";
     $scope.description = true;
     $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+    $scope.participating = false;
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
     };
 
     $scope.loadFairProfile = function() {
-        $scope.month = utils.getMonthName($scope.fair.month);
+        $localForage.getItem('userType').then(function(response) {
+                var userType = response;
+                $localForage.getItem('userID').then(function(responseID) {
+                        var userID = responseID;
+                        if(userType === 'company') {
+                            var participationgcenas = liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID);
+                            console.log(participationgcenas);
+                        } else if(userType === 'visitor') {
+                            //console.log(liveFairApi.checkIfVisitorParticipatingFair(userID, liveFairID));
+                            console.log("Conas");
+                        }
+                        $scope.month = utils.getMonthName($scope.fair.month);
+                    }, function(response) {
+                        utils.showAlert($translate.instant('sessionExpired'), "Error");
+                        $state.go('menu.home');
+                        liveFairApi.logout();
+                    }
+                );
+            }, function(response) {
+                utils.showAlert($translate.instant('sessionExpired'), "Error");
+                $state.go('menu.home');
+                liveFairApi.logout();
+            }
+        );
     };
 
     $scope.chooseInterests = function() {
@@ -148,11 +172,28 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                     text: '<b>' + $translate.instant('btnAderir') + '</b>',
                     type: 'button-positive',
                     onTap: function(e) {
+                        var liveFairID = $stateParams.fairID;
                         $scope.interestsList = utils.getInterestsList();
+                        var interestsIDS = [];
                         for(i = 0; i < $scope.interestsList.length; i++) {
-                            console.log($scope.interestsList[i].checked);
+                            if($scope.interestsList[i].checked)
+                                interestsIDS.push($scope.interestsList[i].interestID);
                         }
-                        console.log("tapped submit button");
+
+                        $localForage.getItem('userID').then(function(response) {
+                                liveFairApi.adhereLiveFair(liveFairID, response, interestsIDS).
+                                    then(function(data) {
+                                        utils.showAlert(data, "Sucesso");
+                                        //fazer reload ao screen para quem esta a participar
+                                    }, function(error) {
+                                        utils.showAlert($translate.instant('erroSubscribeLiveFair'), "Erro");
+                                });
+                            }, function(response) {
+                                utils.showAlert($translate.instant('sessionExpired'), "Error");
+                                $state.go('menu.home');
+                                liveFairApi.logout();
+                            }
+                        );
                     }
                 }
             ]
@@ -160,7 +201,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     };
 
     $scope.changedCheckbox = function() {
-        console.log("Interest List");
+        console.log($scope.interestsList);
         for(i = 0; i < $scope.interestsList.length; i++) {
             if(! $scope.interestsList[i].checked)
                 $scope.interestsList[i].checked = false;
@@ -192,7 +233,6 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
     $scope.existingFairs = liveFairApi.getLiveFairs();
     $scope.listfairs = $scope.existingFairs;
-    //    $scope.existingFairs = liveFairApi.getLiveFairs();
     $scope.sortOption = 0;
 
     $scope.filterByDate = function () {

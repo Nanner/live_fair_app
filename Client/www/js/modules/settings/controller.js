@@ -53,7 +53,8 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
                     );
                 }, function(response) {
                     utils.showAlert($translate.instant('sessionExpired'), "Error");
-                    $scope.logoutUser();
+                    $state.go('menu.home');
+                    liveFairApi.logout();
                 }
             );
         }

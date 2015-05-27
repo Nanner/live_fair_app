@@ -199,8 +199,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },       
 
-        changePassword: function(userID, oldPassword, newPassword) {
-            return $http.post(server.url + '/Users/' + userID + '/update/password', {oldPassword: oldPassword, password: newPassword}, {timeout: timeout})
+        changePassword: function(userID, oldPasswordToSend, newPassword) {
+            return $http.post(server.url + '/Users/' + userID + '/update/password', {password: newPassword, oldPassword: oldPasswordToSend}, {timeout: timeout})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;
