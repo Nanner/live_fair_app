@@ -261,8 +261,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 userID = response;
                 liveFairApi.cancelSubscription(liveFairID, userID).$promise
                     .then(function(liveFairs) {
-                        console.log(liveFairs);
-                        utils.showAlert($translate.instant('impCancelarParticipacao'), "Sucesso");
+                        $scope.participating = false;
+                        utils.showAlert($translate.instant('pCancelarParticipacao'), "Sucesso");
                     }, function(error) {
                         utils.showAlert($translate.instant('impCancelarParticipacao'), "Erro");
                     }
@@ -273,7 +273,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 liveFairApi.logout();
             }
         );
-
     };
 
     $scope.getMatches = function(fairID) {
