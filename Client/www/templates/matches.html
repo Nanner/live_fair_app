@@ -1,38 +1,20 @@
-<ion-view title="'ListFairs'">
-    <ion-content scroll='true' ng-init="loadMatches()">
-
-        <!-- Content -->
-        <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
-            <h1 class="fair-title">{{ 'listfairs' | translate }}</h1>
+<ion-view title="'Matches'">
+    <ion-content scroll='true'>
+    
+        <div class="fair-container">
+            <h1 class="fair-title">{{ 'attendingStands' | translate }}</h1>
+            <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fairStands.name}} </h4>
         </div>
-
-        <div ng-show="failedToResolve">
-            <br><br>
-            <div class="card">
-                <div class="item item-assertive item-placeholder item-text-wrap text-center">
-                    {{ 'failedToResolve' | translate }}
-                </div>
+        
+        <div class="list stands-list">
+            <div ng-repeat="stand in fairStands.stands">
+                <a class="item item-thumbnail-left" ng-click="loadProfile({{stand.id}})">
+                  <img ng-src="{{stand.logo}}">
+                  <h2>{{stand.stand}}</h2>
+                  <p>Stand nº {{stand.standNumber}}</p>
+                </a>
             </div>
         </div>
-
-        <div class="card" ng-show="!listfairs.length && !failedToResolve">
-            <div class="item item-positive item-placeholder item-text-wrap text-center">
-                {{ 'noLiveFairs' | translate }}
-            </div>
-        </div>
-
-        <div ng-show="listfairs.length && !failedToResolve" ng-repeat="fair in listfairs">
-            <div class="card">
-                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
-                    <h2> {{fair.name}} </h2>
-                </div>
-                <div class="item item-text-wrap">
-                    <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
-                </div>
-            </div>
-        </div>
-
+    
     </ion-content>
 </ion-view>

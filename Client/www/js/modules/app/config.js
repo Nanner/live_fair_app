@@ -56,11 +56,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			}
 		})
 		.state('menu.matches',{
-			url: "/matches",
+			url: "/fairs/:fairID/matches",
 			views:{
 				'menuContent' :{
 					templateUrl: "templates/matches.html",
-					controller: "listFairsCtrl"
+					controller: "fairMatchesCtrl"
 				}
 			}
 		})
@@ -311,7 +311,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startTime': "Hora de início",
 		'endTime' : "Hora de fim",
 		'btnNoAderir': "Cancelar adesão",
-		'pwwdChangedSuccess': "Password alterada com sucesso"
+		'pwwdChangedSuccess': "Password alterada com sucesso",
+		'notPossibleMatches' : "Não foi possível mostrar os seus matches"
 	});
 
 	$translateProvider.translations('en', {
@@ -422,7 +423,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startTime': "Start time",
 		'endTime' : "End time",
 		'btnNoAderir': "Cancel subscription",
-		'pwwdChangedSuccess': "Password changed successfully"
+		'pwwdChangedSuccess': "Password changed successfully",
+		'notPossibleMatches' : "It was not possible to show you mathces"
 	});
 
 	$translateProvider.useLocalStorage();
