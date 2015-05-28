@@ -127,6 +127,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
     $scope.userType = "";
     $scope.participating = false;
+    $scope.matches = "";
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
@@ -226,6 +227,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     };
 
+    $scope.getMatches = function(fairID) {
+        $state.go('menu.matches', {fairID: fairID});
+    };
+
     $scope.changedCheckbox = function() {
         console.log($scope.interestsList);
         for(i = 0; i < $scope.interestsList.length; i++) {
@@ -254,6 +259,27 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         });
     };
 });
+
+module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
+    var liveFairID = $stateParams.fairID;
+
+    $localForage.getItem('userID').then(function(response) {
+            liveFairApi.getMatches(liveFairID, response).$promise.
+                then(function(data) {
+                    console.log(data);
+                    //atribuir dados as variaveis
+                }, function(error) {
+                    utils.showAlert($translate.instant('notPossibleMatches'), "Erro");
+            });
+        }, function(response) {
+            utils.showAlert($translate.instant('sessionExpired'), "Error");
+            $state.go('menu.home');
+            liveFairApi.logout();
+        }
+    );
+
+});
+
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
 

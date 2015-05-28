@@ -57,6 +57,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.matches',{
+			url: "/fairs/:fairID/matches",
+			views:{
+				'menuContent' :{
+					templateUrl: "templates/matches.html",
+					controller: "fairMatchesCtrl"
+				}
+			}
+		})
 		.state('menu.fairStands', {
 			url: "/fairs/:fairID/stands",
 			views: {
@@ -322,7 +331,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'successfulEventCreationMessage': "Evento criado com sucesso!",
 		'unsuccessfulEventCreationTitle': "Lamentamos",
 		'unsuccessfulEventCreationMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
-		'processingPopup': "A processar..."
+		'processingPopup': "A processar...",
+		'notPossibleMatches' : "Não foi possível mostrar os seus matches"
 	});
 
 	$translateProvider.translations('en', {
@@ -438,7 +448,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'successfulEventCreationMessage': "Event successfully created",
 		'unsuccessfulEventCreationTitle': "We're sorry",
 		'unsuccessfulEventCreationMessage': "Event creation failed. Please try again later",
-		'processingPopup': "Processing..."
+		'processingPopup': "Processing...",
+		'notPossibleMatches' : "It was not possible to show you mathces"
 	});
 
 	$translateProvider.useLocalStorage();

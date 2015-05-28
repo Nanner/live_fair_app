@@ -19,6 +19,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
+    var Matches = $resource(server.url + 'livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
+
     var api = {
 
         login: function(username, password) {
@@ -157,6 +159,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
         getCompanyInterests: function(fairId, companyId) {
             return ProfileInterests.query({fairID: fairId, companyID: companyId});
+        },
+
+        getMatches: function(fairId, userId) {
+            return Matches.query({fairID: fairId, userID: userId});
         },
 
         editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {
