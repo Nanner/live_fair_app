@@ -345,7 +345,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'homeScreen': "Início",
 		'login': "Iniciar sessão",
 		'registration': "Registo",
-		'standProgram': "Programação de stand"
+		'standProgram': "Programação de stand",
+		'impCancelarParticipacao': "Foi impossível cancelar a sua participação"
 	});
 
 	$translateProvider.translations('en', {
@@ -475,7 +476,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'homeScreen': "Home",
 		'login': "Login",
 		'registration': "Registration",
-		'standProgram': "Stand program"
+		'standProgram': "Stand program",
+		'impCancelarParticipacao': "It was no possible to delete your subscription"
 	});
 
 	$translateProvider.useLocalStorage();
