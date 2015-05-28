@@ -186,11 +186,19 @@
 .loggedInAs-label, .language-label{
     color: darkblue;
 }
+
+/******** Matches **********/
+.match-container{
+    padding-top: 7%;
+    padding-bottom: 7%;
+    background-color: #28A3D4;
+}
+
 /********** Fair ***********/
 
 .fair-container {
-    padding-top: 8%;
-    padding-bottom: 8%;
+    padding-top: 9%;
+    padding-bottom: 9%;
     background-color: #28A3D4;
 }
 
@@ -463,6 +471,7 @@
 .edit-profile {
     float: left;
     padding-left: 4%;
+    padding-top: 7%;
     color: #ffffff;
 }
 
@@ -473,7 +482,7 @@
 }
 
 .profile-owner-icons {
-    padding-top:8%;
+    padding-top:1%;
     background-color: #28A3D4;
 }
 
@@ -535,20 +544,20 @@
 }
 
 .searchFairs-container1 {
-    padding-top: 15%;
-    padding-bottom: 5%;
+    padding-top: 9%;
+    padding-bottom: 9%;
 }
 
 .searchFairs-logo-container {
     background-color: #28A3D4;
+
 }
 
 .searchFairs-logo {
     width: 15%;
+    height: 15%;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 2%;
-    margin-top: 2%;
 }
 
 .filter-date-title {
@@ -602,12 +611,13 @@ button.button-calm.fair-search-options-button.active, button.button-calm.fair-li
 /****** Statistics *******/
 
 .stats-container1 {
-    padding-top: 8%;
-    padding-bottom: 5%;
+
 }
 
 .stats-logo-container {
     background-color: #28A3D4;
+    padding-top: 9%;
+    padding-bottom: 9%;
 }
 
 .stats-logo {
