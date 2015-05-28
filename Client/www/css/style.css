@@ -115,13 +115,13 @@
 /******** Register *********/
 
 .register-container {
-    padding-top: 20%;
+    padding-top: 10%;
 }
 
 .register-title {
     text-align: center;
     font-weight: bolder;
-    margin-bottom: 3%;
+    padding-bottom: 7%;
     color: darkblue;
 }
 
