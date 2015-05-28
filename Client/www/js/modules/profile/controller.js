@@ -17,7 +17,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         $localForage.getItem('userID').then(function(response) {
                 userID = response;
                 liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID);
- //Descometar   //contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
+                contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
                 alert("Contacto adicionado");
             }, function(response) {
                 utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
@@ -299,16 +299,12 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
     $localForage.getItem('userID').then(function(response) {
             companyID = response;
             liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
-                console.log(webVisitors);
                 $scope.websiteVisitors = webVisitors[1];
                 liveFairApi.getCompanyMatchesStats(liveFairID, companyID).then(function(match) {
-                        console.log(match);
                         $scope.matches = match;
                         liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
-                                console.log(likes);
                                 $scope.likes = likes[0].count;
                                 liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
-                                        console.log(contacts);
                                         $scope.contactsEstablished = contacts[0].count;
                                     }, function(error) {
                                         console.log(error);
