@@ -1,10 +1,47 @@
 <ion-view title="'ListFairs'">
     <ion-content scroll='true' ng-init="loadFairs()">
 
-        <!-- Content -->
+
         <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
-            <h1 class="fair-title">{{ 'listfairs' | translate }}</h1>
+            <div class="searchFairs-logo-container">
+                <div class="searchFairs-container1">
+                    <div class="searchFairs-logo item-image">
+                        <img src="img/livefair.png">
+                    </div>
+                </div>
+            </div>
         </div>
+
+            <div class="fair-list-button-container">
+                <button class="button button-light fair-list-button">
+                    {{ 'listfairs' | translate}}
+                </button>
+
+                <button class="button button-calm button-Recente pull-right fair-list-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                    <strong>{{ 'sortByDate' | translate }}</strong>
+                </button>
+
+                <button class="button button-calm button-AZ pull-right fair-list-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                    <strong>A-Z</strong>
+                </button>
+
+            </div>
+
+            <div class="list list-fair-container" ng-show="listfairs.length && !failedToResolve">
+
+                <div class="item item-text-wrap" ng-repeat="fair in listfairs" ng-click="loadFair(fair.liveFairID)">
+                    <div>
+                        <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
+
+                        <p class="text-right calm"><strong class="calm">{{fair.address}}, {{fair.city}}</strong></p>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
 
         <div ng-show="failedToResolve">
             <br><br>
@@ -21,18 +58,6 @@
             </div>
         </div>
 
-        <div ng-show="listfairs.length && !failedToResolve" ng-repeat="fair in listfairs">
-            <div class="card">
-                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
-                    <h2> {{fair.name}} </h2>
-                </div>
-                <div class="item item-text-wrap">
-                    <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
-                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
-                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
-                </div>
-            </div>
-        </div>
 
     </ion-content>
 </ion-view>

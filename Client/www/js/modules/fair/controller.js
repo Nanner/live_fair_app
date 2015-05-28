@@ -92,6 +92,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
     $scope.listfairs = "";
+    $scope.sortOption = 0;
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -116,6 +117,28 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
                 $scope.failedToResolve = true;
             });
     }
+
+    $scope.sortFairsByName = function () {
+
+        if ($scope.sortOption === 1) {
+            $scope.listfairs.reverse();
+        } else {
+            $scope.sortOption = 1;
+            $scope.listfairs = _.sortBy($scope.listfairs, "name");
+        }
+    };
+
+    $scope.sortFairsByDate = function () {
+
+        if ($scope.sortOption === 2) {
+            $scope.listfairs.reverse();
+        } else {
+            $scope.sortOption = 2;
+            $scope.listfairs = _.sortBy($scope.listfairs, function (fair) {
+                return fair.date;
+            });
+        }
+    };
 });
 
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi) {
@@ -128,6 +151,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.userType = "";
     $scope.participating = false;
     $scope.matches = "";
+
+    $scope.tabOption = 1;
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
@@ -244,6 +269,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $state.go('menu.fairStands', {fairID: fairID});
     };
 
+        $scope.listfairs = "";
+        $scope.sortOption = 0;
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
     };
@@ -258,6 +285,26 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
             });
         });
     };
+
+    $scope.showInfoPage = function(){
+        $scope.tabOption = 1;
+    };
+
+    $scope.showPresentStands = function(){
+        $scope.tabOption = 2;
+    };
+
+    $scope.showSuggestedStands = function(){
+        $scope.tabOption = 3;
+    };
+
+    var liveFairID = $stateParams.fairID;
+    $scope.fair = liveFairApi.getLiveFair(liveFairID);
+    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
+
+    $scope.loadProfile = function(id) {
+        $state.go('menu.profile', {fairID: liveFairID, companyID: id});
+    }
 });
 
 module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
@@ -282,6 +329,20 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
 
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
+
+
+        $scope.loadFairs = function() {
+            utils.showLoadingPopup();
+            liveFairApi.getLiveFairs().$promise
+                .then(function(liveFairs) {
+                    $scope.listfairs = liveFairs;
+                    utils.hideLoadingPopup();
+                    $scope.failedToResolve = false;
+                }, function(error) {
+                    utils.hideLoadingPopup();
+                    $scope.failedToResolve = true;
+            });
+        }
 
     $scope.startDate = "";
     $scope.endDate = "";
@@ -482,6 +543,8 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     };
 
     $scope.loadProgram(schedule);
+
+    $scope.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function (fairName, event) {
         $scope.liveFairCompanyEvent = event;

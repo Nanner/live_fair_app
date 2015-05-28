@@ -11,41 +11,80 @@
         <div class="fair-tabs-container">
             <div class="buttons-container">
                 <button class="button button-calm item-input-wrapper" ng-click="showInfoPage()" ng-class="{active : tabOption === 1}">
-                    {{ 'fairInformation' | translate }}
+                    <strong>{{ 'fairInformation' | translate }}</strong>
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showPresentStands()" ng-class="{active : tabOption === 2}">
-                    {{ 'presentStands' | translate }}
+                    <strong>{{ 'presentStands' | translate }}</strong>
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
-                    {{ 'suggestedStands' | translate }}
+                    <strong>{{ 'suggestedStands' | translate }}</strong>
                 </button>
             </div>
         </div>
 
-        <div class="card">
-            <div class="item item-divider">
-                Informações
-            </div>
-            <div class="item item-text-wrap">
-                <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
-                <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
-                <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
-                <p ng-show="fair.description != null"> <b> {{ 'description' | translate }}: </b> {{fair.description}} </p>
-            </div>
-        </div>
+        <div class="fair-tabs-container">
 
-        <div class="fair-map-container" ng-show="fair.map != null">
-            <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+            <div class="card information-tab" ng-show="tabOption === 1">
+
+                <div class="info-container item item-divider item-positive">
+                    <strong>Informações</strong>
+                </div>
+                <div class="info-container item item-text-wrap">
+                    <p> <strong> <span class="item-info-desc"> {{ 'date' | translate }}: </span></strong> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
+                    <p> <strong> <span class="item-info-desc"> {{ 'opening' | translate }}: </span></strong> {{fair.startDate | date: 'HH:mm Z'}}</p>
+                    <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}: </span></strong> {{fair.address}} {{fair.city}} </p>
+                    <p ng-show="fair.description != null"> <strong> <span class="item-info-desc"> {{ 'description' | translate }}: </span></strong> {{fair.description}} </p>
+                </div>
+
+
+                <div class="fair-map-container item" ng-show="fair.map != null">
+                    <img no-image class="fair-map" ng-src="{{fair.map}}"/>
+                </div>
+
+            </div>
+
+            <div class="present-stands-tab tab-content" ng-show="tabOption === 2">
+                <div class="card" ng-hide="fairStands.length">
+                    <div class="item item-positive item-placeholder item-text-wrap text-center">
+                        {{ 'noStands' | translate }}
+                    </div>
+                </div>
+
+                <div class="list">
+                    <div ng-repeat="stand in fairStands">
+                        <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
+                            <img no-image ng-src="{{stand.logoImage}}">
+                            <h2>{{stand.companyName}}</h2>
+                            <p>{{stand.website}}</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="suggested-stands-tab tab-content" ng-show="tabOption === 3">
+                <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
+                    <img no-image ng-src="{{stand.logoImage}}">
+                    <h2>{{stand.companyName}}</h2>
+                    <p>{{stand.website}}</p>
+                </a>
+                <!--TODO: mudar para stands sugeridos-->
+            </div>
+
         </div>
 
         <div class="list padding" ng-hide="participating">
             <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnProgram' | translate }}
             </button>
-            <button nav-clear ng-click="loadStands(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
-                {{ 'btnStands' | translate }}
-            </button>
-            <button ng-click="chooseInterests()" class="item button button-block button-positive">
+        </div>
+        <div class="fair-btn-Container">
+            <!--<button nav-clear ng-click="loadStands(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">-->
+            <!--{{ 'btnStands' | translate }}-->
+            <!--</button>-->
+        </div>
+        <div class="fair-btn-Container-3">
+            <button ng-click="chooseInterests()" class="myBtn button button-positive">
                 {{ 'btnAderir' | translate }}
             </button>
         </div>

@@ -35,7 +35,6 @@
 
 .myBtn {
     width: 95%;
-    border-radius: 20px;
 }
 
 .myBtn-Container {
@@ -48,7 +47,7 @@
 /********** Home **********/
 
 .home-container {
-    padding-top: 20%;
+    padding-top: 10%;
 }
 
 .home-title {
@@ -58,9 +57,12 @@
 }
 
 .home-registerBtn-container {
+
+    background-color: #B5DEF7;
     position: relative;
     text-align: center;
-    padding-bottom: 20%;
+    padding-top: 5%;
+    padding-bottom: 18%;
 }
 
 .home-existing-user {
@@ -154,7 +156,7 @@
 /******** Settings *********/
 
 .settings-container {
-    padding-top: 20%;
+    /*padding-top: 20%;*/
 }
 
 .settings-title {
@@ -176,21 +178,33 @@
     color: red;
 }
 
-.neutral-icon {
+.loggedInAs{
+
 }
 
-/*.settings-btn {*/
-    /*width: 95%;*/
-/*}*/
-
-.terms-icon{
+.loggedInAs-label, .language-label{
+    color: darkblue;
 }
-
 /********** Fair ***********/
 
 .fair-container {
-    padding-top: 15%;
-    background-color: #11C1F3;
+    padding-top: 8%;
+    padding-bottom: 8%;
+    background-color: #28A3D4;
+}
+
+.tab-content{
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.info-container{
+    text-align: left;
+}
+
+.info-container >  p .item-info-desc{
+    color: darkblue;
 }
 
 .fair-title {
@@ -209,9 +223,12 @@
 
 .buttons-container{
     text-align: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    background-color: #ffffff;
 }
 
-.buttons-container > button{
+.buttons-container > button.button-calm{
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 
@@ -220,8 +237,19 @@
 
     display: inline-block;
     margin-left: 0px !important;
-    width: 33%;
+    width: 32%;
+
+    font-size: small;
+    background-color: #F2F2F2;
+    color: darkblue;
+    border: none;
 }
+
+.buttons-container > button.button-calm.active{
+    background-color: #ffffff;
+    box-shadow: none;
+}
+
 
 .buttons-container > button.active{
     /*//    z-index: 1;       //fazer overlay nos butões*/
@@ -266,12 +294,14 @@
 /****** Fair program *******/
 
 .program-title-container {
-    padding-top: 10%;
+    padding-top: 8%;
+    padding-bottom: 8%;
 }
 
 .program-title {
     text-align: center;
     font-weight: bolder;
+    color: darkblue;
 }
 
 .program-subtitle {
@@ -279,10 +309,7 @@
     margin-right: auto;
     text-align: center;
     font-weight: bold;
-}
-
-.program-container {
-    margin-top: 10%;
+    color: darkblue;
 }
 
 .program-table {
@@ -385,6 +412,11 @@
 
 /****** Profile *******/
 
+.top-profile-container{
+    background-color: #28A3D4;
+    padding-bottom: 5%;
+}
+
 .profile-img-container {
     text-align: center;
     max-width: 50%;
@@ -410,57 +442,80 @@
 }
 
 .stand-website {
-    color: #11C1F3;
+    color: darkblue;
     font-weight: bold;
     text-decoration: none;
 }
 
-.profile-btn-Container-1 {
-    margin-top: 2%;
-    position: relative;
-    text-align: center;
-}
 
 .profile-btn-Container {
+
     margin-top: 1%;
+    padding-top: 5%;
+    padding-bottom: 2%;
     position: relative;
     text-align: center;
+    background-color: #B5DEF7;
 }
 
-.profile-btn-Container-2 {
-    margin-top: 1%;
-    position: relative;
-    text-align: center;
-    padding-bottom: 1%;
-}
 
 .edit-profile {
     float: left;
     padding-left: 4%;
+    color: #ffffff;
 }
 
 .profile-stats {
     float: right;
     padding-right: 4%;
+    color: #ffffff;
 }
 
 .profile-owner-icons {
-    padding-top: 15%;
+    padding-top:8%;
+    background-color: #28A3D4;
 }
 
 .save-contact-btn{
     width: 95%;
+    margin-bottom: 2%;
 }
+
+.info-container > .item{
+    color: #ffffff;
+}
+
+.info-container > .item p .item-info-desc{
+    color: darkblue;
+}
+
+.info-container > .item p .item-info-content{
+    color: #28A3D4;
+}
+
+.info-container > .item p .interest-name{
+    color: darkblue;
+}
+
 
 /****** Edit-Profile *******/
 
 .editProfile-btnsContainer {
     margin-top: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     text-align: center;
+    background-color: #B5DEF7;
+}
+
+
+.editProfile-photo-btn {
+    color: darkblue;
 }
 
 .editProfile-password-btn {
     padding-left: 5%;
+    color: darkblue;
 }
 
 .editProfile-img-container {
@@ -483,7 +538,7 @@
     padding-bottom: 5%;
 }
 
-.searchFaris-logo-container {
+.searchFairs-logo-container {
     background-color: #28A3D4;
 }
 
@@ -503,24 +558,28 @@
     margin-left: 2%;
 }
 
-.fair-search-button-container{
+.fair-search-button-container, .fair-list-button-container{
     background-color: #28A3D4;
 }
+
 
 .fair-search-button{
     border-top-right-radius: 25px;
 }
 
-button.button-calm.fair-search-options-button{
+.fair-list-button{
+    border-top-right-radius: 25px;
+}
+
+button.button-calm.fair-search-options-button, button.button-calm.fair-list-options-button{
     font-size: smaller;
     width: 66px;
     background-color: #28A3D4;
     border: none;
 }
 
-button.button-calm.fair-search-options-button.active{
+button.button-calm.fair-search-options-button.active, button.button-calm.fair-list-options-button.active{
     background-color: #11C1F3;
-
 }
 
 .list-fair-item-name{
@@ -542,7 +601,7 @@ button.button-calm.fair-search-options-button.active{
 /****** Statistics *******/
 
 .stats-container1 {
-    padding-top: 15%;
+    padding-top: 8%;
     padding-bottom: 5%;
 }
 
@@ -560,14 +619,39 @@ button.button-calm.fair-search-options-button.active{
 
 .stats-company-name {
     text-align: center;
-    color: white;
+    color: darkblue;
 }
 
-.stats-container {
-    padding-top: 5%;
+.stats-label{
+    text-align: left;
+    color: #ffffff;
+}
+
+.stats-container > .row p{
     text-align: center;
 }
 
-.stats-popKeywords-container {
+.stats-container > .row .label{
+    text-align: left;
+    color: darkblue;
+}
+
+.stats-container > .row .result {
     text-align: center;
+    color: #28A3D4;
+}
+
+.stats-popKeywords-container > .item{
+    color: #ffffff;
+}
+
+
+.stats-popKeywords-container > .row .label{
+    text-align: left;
+    color: darkblue;
+}
+
+.stats-popKeywords-container > .row .result {
+    text-align: center;
+    color: #28A3D4;
 }

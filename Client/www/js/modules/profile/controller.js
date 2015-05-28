@@ -12,7 +12,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.saveContact = function() {
         contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
         alert("Contacto adicionado");
-    }
+    };
 
     //EditProfile validation variables
     $scope.valName = "neutral-icon";

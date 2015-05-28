@@ -6,14 +6,17 @@
 
             <h1 class="settings-title"> <span class="ion-android-settings"></span> {{ 'settings' | translate }} </h1>
             <br>
-            <div class="list padding">
-                <h5 ng-show="isAuthenticated" class="item item-text-wrap"><strong>{{'loggedInAs' | translate}}:</strong><span class="pull-right">{{userEmail}}</span></h5>
+            <div class="list padding loggedInAs">
+                <h5 ng-show="isAuthenticated" class="item item-text-wrap item-light"><strong><span class="loggedInAs-label">{{'loggedInAs' | translate}}:</span></strong>
+                    <span class="pull-right">{{userEmail}}</span>
+                    <br>
+                    <br></h5>
             </div>
 
             <div class="list padding-horizontal">
-                <label class="item item-input item-select padding-vertical">
+                <label class="item item-input item-select padding-vertical item-light">
                     <div class="input-label">
-                        {{'language' | translate}}
+                        <span class="language-label"><strong>{{'language' | translate}}</strong></span>
                     </div>
                     <select ng-model="currentLanguage" ng-change="changeLanguage(currentLanguage)">
                         <option value="pt">Português</option>
