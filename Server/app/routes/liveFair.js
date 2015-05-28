@@ -522,11 +522,11 @@ server.route({
                     });
                 }
                 else if(userType == 'company') {
-                    return Stands.destroy({where:{
+                    Stands.destroy({where:{
                        'liveFairLiveFairID': LiveFairID,
                         'companyCompanyID': UserID 
                     }}).then(function(){
-                            return LiveFairCompanyInterest.destroy({where:{
+                            LiveFairCompanyInterest.destroy({where:{
                                 'liveFairIDref':LiveFairID,
                                 'companyIDref':UserID
                             },individualHooks:true});
