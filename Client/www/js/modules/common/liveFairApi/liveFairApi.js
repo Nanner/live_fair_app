@@ -284,7 +284,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
         cancelSubscription: function(fairId, userId) {
             return NoSubscription.save({fairID: fairId, userID: userId});
-        }       
+        },       
 
         changePassword: function(userID, oldPasswordToSend, newPassword) {
             return $http.post(server.url + '/Users/' + userID + '/update/password', {password: newPassword, oldPassword: oldPasswordToSend}, {timeout: timeout})
