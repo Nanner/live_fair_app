@@ -245,6 +245,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
         incrementCounter: function(companyId) {
             return IncrementCounter.save({companyID: companyId});
+        },
+
+        createStandEvent: function(liveFairID, companyID, subject, speakers, location, startTime, endTime) {
+            return $http.post(server.url + '/livefairs/' + liveFairID + "/companies/" + companyID + "/addStandEvent", {location: location, startTime: startTime, endTime: endTime, speakers: speakers, subject: subject}, {timeout: timeout})
+                .then(function(response) {
+                    if(response.status === 200) {
+                        return response.data;
+                    } else {
+                        return $q.reject(response.data);
+                    }
+                }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
         }
     };
 
