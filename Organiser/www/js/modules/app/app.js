@@ -5,6 +5,7 @@ angular.module('loginModule', []);
 angular.module('registerModule', []);
 angular.module('profileModule', []);
 angular.module('fairModule', []);
+angular.module('bootstrap-tagsinput', []);
 
 // Lastly, create your "main" module and inject all other modules as dependencies
 angular.module('starter',
@@ -16,6 +17,7 @@ angular.module('starter',
         'profileModule',
         'fairModule',
         'ionic',
+        'bootstrap-tagsinput',
         'ngCordova',
         'ngResource',
         'http-auth-interceptor'

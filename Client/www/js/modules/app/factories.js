@@ -113,30 +113,6 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
             return profileInfo;
         },
 
-        setOldPassword: function(oldpwd) {
-            oldPassword = oldpwd;
-        },
-
-        getOldPassword: function() {
-            return oldPassword;
-        },
-
-        setNewPassword: function(pwd) {
-            newPassword = pwd;
-        },
-
-        getNewPassword: function() {
-            return newPassword;
-        },
-
-        setConfirmPassword: function(confirmPwd) {
-            confirmNewPassword = confirmPwd;
-        },
-
-        getConfirmPassword: function() {
-            return confirmNewPassword;
-        },
-
         setInterestsList: function(interestList) {
             interestsLists = interestList;
         },

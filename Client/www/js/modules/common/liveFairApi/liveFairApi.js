@@ -174,7 +174,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
 
         checkIfVisitorParticipatingFair: function(userId, fairId) {
-            return $http.get(server.url + '/livefairs/' + fairId + "/" + companyId + '/participating', {timeout: timeout})
+            return $http.get(server.url + '/livefairs/' + fairId + "/" + userId + '/participating', {timeout: timeout})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;

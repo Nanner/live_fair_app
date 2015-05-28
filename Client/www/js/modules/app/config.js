@@ -156,7 +156,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/fair.html",
 					controller: "fairCtrl"
 				}
-			}
+			},
+			cache: false
 		})
 		.state('menu.searchFairs', {
 			url: "/searchFairs",
@@ -300,7 +301,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'btnConfirmChanges': "Confirmar alterações",
 		'startTime': "Hora de início",
 		'endTime' : "Hora de fim",
-		'btnNoAderir': "Cancelar adesão"
+		'btnNoAderir': "Cancelar adesão",
+		'pwwdChangedSuccess': "Password alterada com sucesso"
 	});
 
 	$translateProvider.translations('en', {
@@ -410,7 +412,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'btnConfirmChanges': "Confirm changes",
 		'startTime': "Start time",
 		'endTime' : "End time",
-		'btnNoAderir': "Cancel subscription"
+		'btnNoAderir': "Cancel subscription",
+		'pwwdChangedSuccess': "Password changed successfully"
 	});
 
 	$translateProvider.useLocalStorage();

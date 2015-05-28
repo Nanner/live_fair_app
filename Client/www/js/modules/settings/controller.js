@@ -19,21 +19,18 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
     };
 
     //Change password
-    $scope.oldPassword = "";
-    $scope.newPassword = "";
-    $scope.confirmNewPassword = "";
+    $scope.password = [];
+    $scope.password.oldPassword = "";
+    $scope.password.newPassword = "";
+    $scope.password.confirmNewPassword = "";
 
     $scope.changePassword = function() {
 
-        console.log($scope.oldPassword);
-        console.log($scope.newPassword);
-        console.log($scope.confirmNewPassword);
+        var oldPasswordEncrypted = CryptoJS.SHA256($scope.password.oldPassword).toString();
+        var newPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
+        var confirmPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
 
-        var oldPasswordEncrypted = CryptoJS.SHA256($scope.oldPassword).toString();
-        var newPasswordEncrypted = CryptoJS.SHA256($scope.newPassword).toString();
-        var confirmPasswordEncrypted = CryptoJS.SHA256($scope.newPassword).toString();
-
-        if($scope.newPassword.length < 8 || $scope.confirmNewPassword.length < 8) {
+        if($scope.password.newPassword.length < 8 || $scope.password.confirmNewPassword.length < 8) {
             utils.showAlert($translate.instant('lowCharPwd'), "Error");
         }
         else if(oldPasswordEncrypted === newPasswordEncrypted) {
@@ -46,7 +43,7 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
                     userID = response;
                     liveFairApi.changePassword(userID, oldPasswordEncrypted, newPasswordEncrypted).
                         then(function(data) {
-                            utils.showAlert(data, "Sucesso");
+                            utils.showAlert($translate.instant('pwwdChangedSuccess'), "Sucesso");
                         }, function(error) {
                             utils.showAlert($translate.instant('sorryChangePassword'), "Error");
                         }

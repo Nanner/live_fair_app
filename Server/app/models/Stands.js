@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Stands = sequelize.define('stands', {
         standLocation:{
-            type: DataTypes.TEXT, allowNull: false
+            type: DataTypes.TEXT, allowNull: true
         },
         approved:{
             type: DataTypes.BOOLEAN, allowNull: false
