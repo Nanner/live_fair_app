@@ -294,8 +294,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"contactsEstablished": "Contactos estabelecidos",
 		"popKeywords": "Keywords mais populares",
         'fairInformation' : 'Informação',
-        'presentStands' : 'Stands Presentes',
-        'suggestedStands' : 'Stands Sugeridos',
+        'presentStands' : 'Stands',
+        'suggestedStands' : 'Matches',
 		'upcomingFairs' : 'Próximas feiras',
 		'sortByDate' : 'Data',
 		'termsAndConditions' : 'Termos & Condições',
@@ -337,7 +337,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'processingPopup': "A processar...",
 		'notPossibleMatches' : "Não foi possível mostrar os seus matches",
 		'fairList': "Listagem de feiras",
-		'searchFairs': "Pesquisa de feiras"
+		'searchFairs': "Pesquisa de feiras",
+		'ownProfile': "Meu perfil",
+		'details': "Informações"
 	});
 
 	$translateProvider.translations('en', {
@@ -416,8 +418,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		"contactsEstablished": "Established contacts",
 		"popKeywords": "Most popular keywords",
         'fairInformation' : 'Information',
-        'presentStands' : 'Present Stands',
-        'suggestedStands' : 'Suggested Stands',
+        'presentStands' : 'Stands',
+        'suggestedStands' : 'Matches',
 		'upcomingFairs' : 'Upcoming Fairs',
 		'sortByDate' : 'Date',
 		'termsAndConditions' : 'Terms & Conditions',
@@ -459,7 +461,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'processingPopup': "Processing...",
 		'notPossibleMatches' : "It was not possible to show you mathces",
 		'fairList' : "Fair listing",
-		'searchFairs': "Fair search"
+		'searchFairs': "Fair search",
+		'ownProfile': "My profile",
+		'details': "Details"
 	});
 
 	$translateProvider.useLocalStorage();

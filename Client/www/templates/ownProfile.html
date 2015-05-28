@@ -1,4 +1,4 @@
-<ion-view title="'ownProfile'">
+<ion-view title="{{'ownProfile' | translate}}">
     <ion-content scroll='true' ng-init="loadProfile('own')">
 
         <div class="top-profile-container">
@@ -6,15 +6,16 @@
                 <span class="edit-profile" ng-click="editProfile()"><i class="fa ion-ios-gear-outline fa-2x"></i></span>
                 <span class="profile-stats" ng-click="openStats()"><i class="fa fa-bar-chart fa-2x"></i></span>
             </div>
-        </div>
-        <!--editar o container, botao de opçoes interfere com formataçao-->
-        <div class="profile-img-container">
-            <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
-        </div>
 
-        <div class="profile-title-container">
-            <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
-            <a class="stand-website" ng-show="existsWebsite" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+            <!--editar o container, botao de opçoes interfere com formataçao-->
+            <div class="profile-img-container">
+                <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
+            </div>
+
+            <div class="profile-title-container">
+                <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
+                <a class="stand-website" ng-show="existsWebsite" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
+            </div>
         </div>
 
         <div class="card info-container">
