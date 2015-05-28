@@ -141,14 +141,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
 
                                     if(data === "false") {
-                                        console.log("Foi false Company");
                                         $scope.participating = false;
                                     }
                                     else if(data === "true") {
-                                        console.log("Foi true Company");
                                         $scope.participating = true;
-                                    } else {
-                                        console.log("Puta que pariu Company");                                        
                                     }
 
                                     $scope.month = utils.getMonthName($scope.fair.month);
@@ -160,14 +156,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                             liveFairApi.checkIfVisitorParticipatingFair(userID, liveFairID).then(function(data) {
 
                                     if(data === "false") {
-                                        console.log("Foi false Visitor");
                                         $scope.participating = false;
                                     }
                                     else if(data === "true") {
-                                        console.log("Foi true Visitor");
                                         $scope.participating = true;
-                                    } else {
-                                        console.log("Puta que pariu Visitor");
                                     }
 
                                     $scope.month = utils.getMonthName($scope.fair.month);                                 

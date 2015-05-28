@@ -1,4 +1,4 @@
-?<ion-view title="{{'settings' | translate}}">
+<ion-view title="{{'settings' | translate}}">
     <ion-content scroll='true'>
 
         <!-- Template content -->
@@ -26,17 +26,16 @@
                 <div class="list list-inset" ng-show="isAuthenticated">
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-model="oldPassword" placeholder="{{ 'oldPassword' | translate }}" ng-change="oldPasswordCallback()">
+                        <input type="password" ng-model="oldPassword" placeholder="{{ 'oldPassword' | translate }}">
                     </label>
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-model="newPassword" placeholder="{{ 'newPassword' | translate }}" ng-change="newPasswordCallback()">
+                        <input type="password" ng-bind="newPassword" placeholder="{{ 'newPassword' | translate }}">
                     </label>
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="confirmPasswordCallback()">
+                        <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="testPicas()">
                     </label>
-
                     <button class="button button-block button-outline button-calm" ng-click="changePassword()">{{'changePassword' | translate}}</button>
                 </div>
             </div>
