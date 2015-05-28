@@ -10,7 +10,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     
     $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
-    $scope.statsScreen = {name: "Amt consulting", matches: 120, matchPercentage: 67, clicks: 50, contatsEstablished: 35, keywords:[{name: 'Informática', nmatches: 80},{name: 'Empreendedorismo', nmatches: 50}]};
 
     $scope.saveContact = function() {
         contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
@@ -235,10 +234,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         liveFairApi.incrementCounter(id);
     }
 
-    $scope.openStats = function() {
-        $state.go('menu.companyStats');
-    }
-
     $scope.saveChanges = function() {
         var existsEmptyField = false;
         var existsNotValidField = false;
@@ -281,4 +276,49 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.loadEvents = function(fairID, companyID) {
         $state.go("menu.standProgram", {fairID: fairID, companyID: companyID});
     };
+});
+
+module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $localForage, liveFairApi, utils) {
+    var liveFairID = $stateParams.fairID;
+    var companyID = "";
+    $scope.websiteVisitors = "";
+    $scope.matches = "";
+    $scope.likes = "";
+    $scope.contactsEstablished = "";
+
+    $localForage.getItem('userID').then(function(response) {
+            companyID = response;
+            liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
+                $scope.websiteVisitors = webVisitors;
+                liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(match) {
+                        $scope.matches = match;
+                        liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
+                                $scope.likes = likes;
+                                liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
+                                        $scope.contactsEstablished = contacts;
+                                        console.log("website: " + $scope.webVisitors);
+                                        console.log("matches: " + $scope.matches);
+                                        console.log("likes: " + $scope.likes);
+                                        console.log("contactsEstablished: " + $scope.contactsEstablished);
+                                    }, function(error) {
+                                        console.log(error);
+                                    }
+                                );
+                            }, function(error) {
+                                console.log(error);
+                            }
+                        );
+                    }, function(error) {
+                        console.log(error);
+                    }
+                );
+            }, function(error) {
+                console.log(error);
+            });
+        }, function(response) {
+            utils.showAlert($translate.instant('sessionExpired'), "Error");
+            $state.go('menu.home');
+            liveFairApi.logout();
+        }
+    );
 });

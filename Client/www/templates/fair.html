@@ -59,7 +59,6 @@
                         </a>
                     </div>
                 </div>
-
             </div>
 
             <div class="suggested-stands-tab tab-content" ng-show="tabOption === 3">
@@ -141,7 +140,7 @@
                 <button nav-clear ng-click="getMatches(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
                     {{ 'matches' | translate }}
                 </button>
-                <button nav-clear ng-show="userType == 'company'" class="item button button-block button-clear button-outline button-positive">
+                <button nav-clear ng-show="userType == 'company'" class="item button button-block button-clear button-outline button-positive" ng-click="openStats(fair.liveFairID)">
                     {{ 'stats' | translate }}
                 </button>
                 <button class="item button button button-block button-outline button-positive" ng-show="userType == 'company'" ng-click="createStandEvent(fair.liveFairID)">

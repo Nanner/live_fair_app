@@ -19,7 +19,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
-    var Matches = $resource(server.url + 'livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
+    var Matches = $resource(server.url + '/livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
 
     var api = {
 
@@ -193,8 +193,65 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );        
         },
 
-        checkIfCompanyParticipatingFair:  function(companyId, fairId) {
+        checkIfCompanyParticipatingFair: function(companyId, fairId) {
             return $http.get(server.url + '/livefairs/' + fairId + "/" + companyId + '/standParticipating', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+
+        getCompanyWebsiteVisitors: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/visitors', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+        getCompanyMatchesStats: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/hits', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+        getCompanyLikes: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/likes', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+        getContactsEstablished: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/contactShares', {timeout: timeout})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;
