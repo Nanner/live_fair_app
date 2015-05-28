@@ -91,6 +91,9 @@ module.exports = function(server){
                 },
                 group:'"connection"."companyCompanyID"'
                 }).then(function(LikeCount){
+                    if(LikeCount.length===0)
+                    return [{"count":"0"}];
+                    else
                     return LikeCount;
                 }).error(function(err){
                     return Boom.notFound(' Stats not found');
@@ -115,8 +118,11 @@ module.exports = function(server){
                    sharedContact:'true'
                 },
                 group:'"connection"."companyCompanyID"'
-                }).then(function(LikeCount){
-                    return LikeCount;
+                }).then(function(shareCount){
+                    if(shareCount.length===0)
+                    return [{"count":"0"}];
+                    else
+                    return shareCount;
                 }).error(function(err){
                     return Boom.notFound(' Stats not found');
                 })
