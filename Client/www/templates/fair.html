@@ -88,8 +88,8 @@
                             </select>
                         </label>
                         <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
-                            <div class="item item-divider item-calm item-borderless">
-                                {{eventTime.eventTime | date:'HH:mm'}}
+                            <div class="item item-divider event-time item-borderless">
+                                <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
                             </div>
                             <div ng-repeat="event in eventTime.eventTimeEvents">
                                 <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
