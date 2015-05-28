@@ -1,4 +1,4 @@
-<ion-view title="'ListFairs'">
+<ion-view title="{{'listfairs' | translate}}">
     <ion-content scroll='true' ng-init="loadFairs()">
 
 
@@ -25,6 +25,10 @@
                     <strong>A-Z</strong>
                 </button>
 
+                <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="resetSort()">
+                    <strong>{{ 'clean' | translate }}</strong>
+                </button>
+
             </div>
 
             <div class="list list-fair-container" ng-show="listfairs.length && !failedToResolve">
@@ -32,7 +36,7 @@
                 <div class="item item-text-wrap" ng-repeat="fair in listfairs" ng-click="loadFair(fair.liveFairID)">
                     <div>
                         <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
-
+                        <br>
                         <p class="text-right calm"><strong class="calm">{{fair.address}}, {{fair.city}}</strong></p>
 
                     </div>

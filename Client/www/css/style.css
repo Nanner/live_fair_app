@@ -573,7 +573,7 @@
 
 button.button-calm.fair-search-options-button, button.button-calm.fair-list-options-button{
     font-size: smaller;
-    width: 66px;
+    width: auto;
     background-color: #28A3D4;
     border: none;
 }

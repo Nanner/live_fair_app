@@ -1,4 +1,4 @@
-<ion-view title="'searchFairs'">
+<ion-view title="{{'searchFairs' | translate}}">
     <ion-content scroll='true'>
 
         <div class="searchFairs-logo-container">
@@ -11,7 +11,7 @@
 
         <div class="fair-search-button-container">
             <button class="fair-search-button button button-light">
-                {{ 'upcomingFairs' | translate}}
+                {{ 'searchFairs' | translate}}
             </button>
 
             <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">

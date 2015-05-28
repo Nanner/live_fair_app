@@ -335,7 +335,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'unsuccessfulEventCreationTitle': "Lamentamos",
 		'unsuccessfulEventCreationMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
 		'processingPopup': "A processar...",
-		'notPossibleMatches' : "Não foi possível mostrar os seus matches"
+		'notPossibleMatches' : "Não foi possível mostrar os seus matches",
+		'fairList': "Listagem de feiras",
+		'searchFairs': "Pesquisa de feiras"
 	});
 
 	$translateProvider.translations('en', {
@@ -455,7 +457,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'unsuccessfulEventCreationTitle': "We're sorry",
 		'unsuccessfulEventCreationMessage': "Event creation failed. Please try again later",
 		'processingPopup': "Processing...",
-		'notPossibleMatches' : "It was not possible to show you mathces"
+		'notPossibleMatches' : "It was not possible to show you mathces",
+		'fairList' : "Fair listing",
+		'searchFairs': "Fair search"
 	});
 
 	$translateProvider.useLocalStorage();
