@@ -2,7 +2,7 @@ var module = angular.module('starter');
 
 var timeout = 5000;
 
-module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, $localStorage, $localForage, $ionicPopup, $translate) {
+module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server, $localStorage, $localForage, $ionicPopup, $translate, $ionicLoading) {
     var LiveFair = $resource(server.url + '/livefairs/:liveFairID', {liveFairID:'@liveFairID'});
 
     var LiveFairInterests = $resource(server.url + '/livefairs/:liveFairID/interests', {liveFairID:'@liveFairID'});
@@ -248,17 +248,20 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
 
         createStandEvent: function(liveFairID, companyID, subject, speakers, location, startTime, endTime) {
-            return $http.post(server.url + '/livefairs/' + liveFairID + "/companies/" + companyID + "/addStandEvent", {location: location, startTime: startTime, endTime: endTime, speakers: speakers, subject: subject}, {timeout: timeout})
+            var deferred = $q.defer();
+            $http.post(server.url + '/livefairs/' + liveFairID + "/companies/" + companyID + "/addStandEvent", {location: location, startTime: startTime, endTime: endTime, speakers: speakers, subject: subject}, {timeout: timeout})
                 .then(function(response) {
                     if(response.status === 200) {
-                        return response.data;
+                        $ionicLoading.hide();
+                        deferred.resolve(true);
                     } else {
-                        return $q.reject(response.data);
+                        deferred.resolve(false);
                     }
                 }, function(response) {
-                    return $q.reject(response.data);
+                    deferred.resolve(false);
                 }
             );
+            return deferred.promise;
         }
     };
 

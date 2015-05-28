@@ -140,32 +140,32 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                         if($scope.userType === 'company') {
                             liveFairApi.checkIfCompanyParticipatingFair(userID, liveFairID).then(function(data) {
 
-                                    if(data === "false") {
-                                        $scope.participating = false;
-                                    }
-                                    else if(data === "true") {
-                                        $scope.participating = true;
-                                    }
-
-                                    $scope.month = utils.getMonthName($scope.fair.month);
-                                }, function(error) {
-                                    console.log(error);
+                                if(data === "false") {
                                     $scope.participating = false;
+                                }
+                                else if(data === "true") {
+                                    $scope.participating = true;
+                                }
+
+                                $scope.month = utils.getMonthName($scope.fair.month);
+                            }, function(error) {
+                                console.log(error);
+                                $scope.participating = false;
                             });
                         } else if($scope.userType === 'visitor') {
                             liveFairApi.checkIfVisitorParticipatingFair(userID, liveFairID).then(function(data) {
 
-                                    if(data === "false") {
-                                        $scope.participating = false;
-                                    }
-                                    else if(data === "true") {
-                                        $scope.participating = true;
-                                    }
-
-                                    $scope.month = utils.getMonthName($scope.fair.month);                                 
-                                }, function(error) {
-                                    console.log(error);
+                                if(data === "false") {
                                     $scope.participating = false;
+                                }
+                                else if(data === "true") {
+                                    $scope.participating = true;
+                                }
+
+                                $scope.month = utils.getMonthName($scope.fair.month);
+                            }, function(error) {
+                                console.log(error);
+                                $scope.participating = false;
                             });
                         }
                     }, function(response) {
@@ -209,7 +209,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                         $scope.participating = true;
                                     }, function(error) {
                                         utils.showAlert($translate.instant('erroSubscribeLiveFair'), "Erro");
-                                });
+                                    });
                             }, function(response) {
                                 utils.showAlert($translate.instant('sessionExpired'), "Error");
                                 $state.go('menu.home');
@@ -486,7 +486,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     }
 });
 
-module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, utils, $localForage) {
+module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, $translate, $ionicLoading) {
     $scope.eventInfo = {};
     $scope.eventInfo.subject = "";
     $scope.eventInfo.speakers = "";
@@ -500,7 +500,26 @@ module.controller('createStandEventCtrl', function ($scope, $state, $stateParams
         var startTime = moment($scope.eventInfo.startDate + " " + $scope.eventInfo.startTime, "YYYY-MM-DD HH:mm");
         var endTime = moment($scope.eventInfo.endDate + " " + $scope.eventInfo.endTime, "YYYY-MM-DD HH:mm");
 
-        var result = liveFairApi.createStandEvent($stateParams.fairID, $stateParams.companyID, $scope.eventInfo.subject, $scope.eventInfo.speakers, $scope.eventInfo.location, startTime, endTime);
-        console.log(result);
+        $ionicLoading.show({
+            template: $translate.instant('processingPopup')
+        });
+        liveFairApi.createStandEvent($stateParams.fairID, $stateParams.companyID, $scope.eventInfo.subject, $scope.eventInfo.speakers, $scope.eventInfo.location, startTime, endTime)
+            .then(function(result) {
+                if(result) {
+                    $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: $translate.instant('successfulEventCreationTitle'),
+                        template: '<p class="text-center">' + $translate.instant("successfulEventCreationMessage") + '</p>'
+                    });
+                    $state.go('menu.fair', {fairID: $stateParams.fairID});
+                }
+                else {
+                    $ionicLoading.hide();
+                    $ionicPopup.alert({
+                        title: $translate.instant('unsuccessfulEventCreationTitle'),
+                        template: '<p class="text-center">' + $translate.instant("unsuccessfulEventCreationMessage") + '</p>'
+                    });
+                }
+            });
     }
 });

@@ -317,7 +317,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startTime': "Hora de início",
 		'endTime' : "Hora de fim",
 		'btnNoAderir': "Cancelar adesão",
-		'pwwdChangedSuccess': "Password alterada com sucesso"
+		'pwwdChangedSuccess': "Password alterada com sucesso",
+		'successfulEventCreationTitle': "Sucesso",
+		'successfulEventCreationMessage': "Evento criado com sucesso!",
+		'unsuccessfulEventCreationTitle': "Lamentamos",
+		'unsuccessfulEventCreationMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
+		'processingPopup': "A processar..."
 	});
 
 	$translateProvider.translations('en', {
@@ -428,7 +433,12 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'startTime': "Start time",
 		'endTime' : "End time",
 		'btnNoAderir': "Cancel subscription",
-		'pwwdChangedSuccess': "Password changed successfully"
+		'pwwdChangedSuccess': "Password changed successfully",
+		'successfulEventCreationTitle': "Success",
+		'successfulEventCreationMessage': "Event successfully created",
+		'unsuccessfulEventCreationTitle': "We're sorry",
+		'unsuccessfulEventCreationMessage': "Event creation failed. Please try again later",
+		'processingPopup': "Processing..."
 	});
 
 	$translateProvider.useLocalStorage();
