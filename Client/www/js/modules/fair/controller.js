@@ -405,7 +405,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
     }
 });
 
-module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
+module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils, $localForage) {
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -420,44 +420,68 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         return eventsFromSameDate;
     };
 
-    $scope.failedToResolve = (schedule == "failed to resolve");
-    if ($scope.failedToResolve) {
-        return;
-    }
+    $scope.reloadProgram = function() {
+        liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
+            .then(function(program) {
+                $localForage.setItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID, program)
+                    .then(function() {
+                        $scope.loadProgram(program);
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+            }, function(error) {
+                return $localForage.getItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID)
+                    .then(function(program) {
+                        $scope.loadProgram(program);
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }, function(error) {
+                        $scope.loadProgram("failed to resolve");
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+            });
+    };
 
-    var companyID = $stateParams.companyID;
-    liveFairApi.getProfile(companyID).$promise.then(function(profile) {
-        $scope.companyName = profile[1].companyName;
-    });
+    $scope.loadProgram = function(unparsedProgram) {
+        $scope.failedToResolve = (unparsedProgram == "failed to resolve");
+        if ($scope.failedToResolve) {
+            return;
+        }
 
-    var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
+        var companyID = $stateParams.companyID;
+        liveFairApi.getProfile(companyID).$promise.then(function(profile) {
+            $scope.companyName = profile[1].companyName;
+        });
 
-    $scope.schedule = _.chain(schedule)
-        .sortBy(function (event) {
-            return event.time;
-        })
-        .groupBy(function (event) {
-            return event.time;
-        }).value();
+        var liveFairID = $stateParams.fairID;
+        $scope.fair = liveFairApi.getLiveFair(liveFairID);
 
-    $scope.scheduleDays = _.chain(schedule)
-        .sortBy(function (event) {
-            return event.time;
-        })
-        .map(function (event) {
-            var time = new Date(event.time);
-            return (Date.parse(utils.getDayMonthYearDate(time)));
-        })
-        .unique()
-        .value();
+        $scope.schedule = _.chain(unparsedProgram)
+            .sortBy(function (event) {
+                return event.startTime;
+            })
+            .groupBy(function (event) {
+                return event.startTime;
+            }).value();
 
-    $scope.scheduleOrganizedByDay = [];
-    _.forEach($scope.scheduleDays, function (day) {
-        return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
-    });
+        $scope.scheduleDays = _.chain(unparsedProgram)
+            .sortBy(function (event) {
+                return event.startTime;
+            })
+            .map(function (event) {
+                var time = new Date(event.startTime);
+                return (Date.parse(utils.getDayMonthYearDate(time)));
+            })
+            .unique()
+            .value();
 
-    $scope.selectedDay = $scope.scheduleDays[0];
+        $scope.scheduleOrganizedByDay = [];
+        _.forEach($scope.scheduleDays, function (day) {
+            return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
+        });
+
+        $scope.selectedDay = $scope.scheduleDays[0];
+    };
+
+    $scope.loadProgram(schedule);
 
     $scope.loadEvent = function (fairName, event) {
         $scope.liveFairCompanyEvent = event;
@@ -473,7 +497,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                     onTap: function (e) {
                         //Create event in phone's calendar
                         var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairCompanyEvent.speakers;
-                        calendar.createEventInteractively(fairName, $scope.liveFairCompanyEvent.Subject, $scope.liveFairCompanyEvent.speakers, $scope.liveFairCompanyEvent.time, $scope.liveFairCompanyEvent.endTime);
+                        calendar.createEventInteractively(fairName, $scope.liveFairCompanyEvent.subject, $scope.liveFairCompanyEvent.speakers, $scope.liveFairCompanyEvent.startTime, $scope.liveFairCompanyEvent.endTime);
                     }
                 },
                 {
@@ -489,14 +513,20 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
 });
 
 module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, utils, $localForage) {
-    $scope.subject = "";
-    $scope.speakers = "";
-    $scope.location = "";
-    $scope.startDate = "";
-    $scope.startTime = "";
-    $scope.endDate = "";
-    $scope.endTime = "";
+    $scope.eventInfo = {};
+    $scope.eventInfo.subject = "";
+    $scope.eventInfo.speakers = "";
+    $scope.eventInfo.location = "";
+    $scope.eventInfo.startDate = "";
+    $scope.eventInfo.startTime = "";
+    $scope.eventInfo.endDate = "";
+    $scope.eventInfo.endTime = "";
 
     $scope.createEvent = function() {
+        var startTime = moment($scope.eventInfo.startDate + " " + $scope.eventInfo.startTime, "YYYY-MM-DD HH:mm");
+        var endTime = moment($scope.eventInfo.endDate + " " + $scope.eventInfo.endTime, "YYYY-MM-DD HH:mm");
+
+        var result = liveFairApi.createStandEvent($stateParams.fairID, $stateParams.companyID, $scope.eventInfo.subject, $scope.eventInfo.speakers, $scope.eventInfo.location, startTime, endTime);
+        console.log(result);
     }
 });

@@ -3,25 +3,25 @@
         <h1 class="register-title padding"> <span class="ion-clock"></span> {{ 'newEvent' | translate }} </h1>
         <div class="list">
             <label class="item item-input">
-                <input type="text" placeholder="Subject" ng-model="subject">
+                <input type="text" placeholder="Subject" ng-model="eventInfo.subject">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Speakers" ng-model="speakers">
+                <input type="text" placeholder="Speakers" ng-model="eventInfo.speakers">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Location" ng-model="location">
+                <input type="text" placeholder="Location" ng-model="eventInfo.location">
             </label>
             <label class="item item-input">
-                <input placeholder="{{ 'startDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="startDate">
+                <input placeholder="{{ 'startDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="eventInfo.startDate">
             </label>
             <label class="item item-input">
-                <input placeholder="{{ 'startTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="startTime">
+                <input placeholder="{{ 'startTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="eventInfo.startTime">
             </label>
             <label class="item item-input">
-                <input placeholder="{{ 'endDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="endDate">
+                <input placeholder="{{ 'endDate' | translate }}" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" ng-model="eventInfo.endDate">
             </label>
             <label class="item item-input">
-                <input placeholder="{{ 'endTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="endTime">
+                <input placeholder="{{ 'endTime' | translate }}" type="text" onfocus="(this.type='time')" onblur="(this.type='text')" ng-model="eventInfo.endTime">
             </label>
         </div>
         <div class="padding">

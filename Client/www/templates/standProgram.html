@@ -22,6 +22,8 @@
                 </div>
             </div>
 
+            <ion-refresher pulling-text="Pull to refresh" on-refresh="reloadProgram()">
+            </ion-refresher>
             <div class="list" ng-hide="!scheduleDays.length || failedToResolve">
                 <label class="item item-input item-select item-positive">
                     <div class="input-label">
@@ -37,7 +39,7 @@
                     </div>
                     <div ng-repeat="event in eventTime.eventTimeEvents">
                         <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
-                            {{event.companyEventsID}} <!-- TODO: This is temporary, should be the subject -->
+                            {{event.subject}}
                         </div>
                     </div>
                 </div>
@@ -47,17 +49,17 @@
                 <div class="list card item-text-wrap">
 
                     <div class="item item-divider item-text-wrap">
-                        <h2>{{liveFairCompanyEvent.Subject}}</h2>
+                        <h2>{{liveFairCompanyEvent.subject}}</h2>
                     </div>
 
                     <div class="item item-body">
                         <p>
                             <strong>{{ 'date' | translate }}:</strong>
-                            <span class="event-info">{{liveFairCompanyEvent.time | date:'dd-MM-yyyy'}}</span>
+                            <span class="event-info">{{liveFairCompanyEvent.startTime | date:'dd-MM-yyyy'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'starting' | translate }}:</strong>
-                            <span class="event-info">{{liveFairCompanyEvent.time | date:'HH:mm'}}</span>
+                            <span class="event-info">{{liveFairCompanyEvent.startTime | date:'HH:mm'}}</span>
                         </p>
                         <p>
                             <strong>{{ 'ending' | translate }}:</strong>
