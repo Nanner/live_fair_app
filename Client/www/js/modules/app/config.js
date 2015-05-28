@@ -154,11 +154,11 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 			cache: false
 		})
 		.state('menu.companyStats', {
-			url: "/companyStats",
+			url: "/companyStats/:fairID",
 			views: {
 				'menuContent' :{
 					templateUrl: "templates/companyStats.html",
-					controller: "profileCtrl"
+					controller: "statisticsCtrl"
 				}
 			}
 		})

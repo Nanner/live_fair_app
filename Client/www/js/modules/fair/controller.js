@@ -257,6 +257,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $state.go('menu.matches', {fairID: fairID});
     };
 
+    $scope.openStats = function(fairID) {
+        $state.go('menu.companyStats', {fairID: fairID});
+    }
+
     $scope.changedCheckbox = function() {
         console.log($scope.interestsList);
         for(i = 0; i < $scope.interestsList.length; i++) {
