@@ -1,6 +1,6 @@
 var module = angular.module('starter');
 
-module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootScope, $state, $stateParams, $translate, $localStorage, $localForage) {
+module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootScope, $state, $stateParams, $translate, $localStorage, $localForage, $ionicHistory) {
     $scope.username = "AMT Consulting";
 
     $scope.items = [
@@ -20,10 +20,16 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
     };
 
     $scope.selectItem = function($index) {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
         $state.go($scope.items[$index].path, $stateParams);
     };
 
     $scope.loadSettings = function() {
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
         $state.go("menu.settings");
     };
 
@@ -31,6 +37,9 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
         var userID = "";
         $localForage.getItem('userID').then(function(response) {
                 userID = response;
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $state.go("menu.ownProfile", {companyID: userID});
             }, function(response) {
                 utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");

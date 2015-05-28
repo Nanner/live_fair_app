@@ -337,14 +337,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'processingPopup': "A processar...",
 		'notPossibleMatches' : "Não foi possível mostrar os seus matches",
 		'fairList': "Listagem de feiras",
-		'searchFairs': "Pesquisa de feiras",
+		'searchFairs': "Pesquisa",
 		'ownProfile': "Meu perfil",
 		'details': "Informações",
 		'fairProgram': "Programa",
 		'fairProfile': "Perfil da feira",
 		'homeScreen': "Início",
 		'login': "Iniciar sessão",
-		'registration': "Registo"
+		'registration': "Registo",
+		'standProgram': "Programação de stand"
 	});
 
 	$translateProvider.translations('en', {
@@ -466,14 +467,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'processingPopup': "Processing...",
 		'notPossibleMatches' : "It was not possible to show you mathces",
 		'fairList' : "Fair listing",
-		'searchFairs': "Fair search",
+		'searchFairs': "Search",
 		'ownProfile': "My profile",
 		'details': "Details",
 		'fairProgram': "Program",
 		'fairProfile': "Fair profile",
 		'homeScreen': "Home",
 		'login': "Login",
-		'registration': "Registration"
+		'registration': "Registration",
+		'standProgram': "Stand program"
 	});
 
 	$translateProvider.useLocalStorage();
