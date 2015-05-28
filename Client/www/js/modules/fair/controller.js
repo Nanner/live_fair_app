@@ -222,6 +222,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         });
     };
 
+    $scope.cancelFairSubmition = function() {
+
+    };
+
     $scope.changedCheckbox = function() {
         console.log($scope.interestsList);
         for(i = 0; i < $scope.interestsList.length; i++) {
