@@ -15,7 +15,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var IncrementCounter = $resource(server.url + '/livefairs/:fairID/companies/:companyID/counter', {fairID: '@fairID', companyID: '@companyID'});
 
-    var IncrementContact = $resource(server.url + '/livefairs/:userID/shareContact/:companyID', {userID: '@userID', companyID: '@companyID'});
+    var IncrementContact = $resource(server.url + '/Users/:userID/shareContact/:companyID', {userID: '@userID', companyID: '@companyID'});
 
     var Profile = $resource(server.url + '/Users/:id', {id : '@id'});
 
