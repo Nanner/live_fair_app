@@ -26,15 +26,15 @@
                 <div class="list list-inset" ng-show="isAuthenticated">
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-model="oldPassword" placeholder="{{ 'oldPassword' | translate }}">
+                        <input type="password" ng-model="password.oldPassword" placeholder="{{ 'oldPassword' | translate }}">
                     </label>
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-bind="newPassword" placeholder="{{ 'newPassword' | translate }}">
+                        <input type="password" ng-model="password.newPassword" placeholder="{{ 'newPassword' | translate }}">
                     </label>
                     <label class="item item-input">
                         <i class="form-icon ion-help-circled placeholder-icon"></i>
-                        <input type="password" ng-model="confirmNewPassword" placeholder="{{ 'confPassword' | translate }}" ng-change="testPicas()">
+                        <input type="password" ng-model="password.confirmNewPassword" placeholder="{{ 'confPassword' | translate }}">
                     </label>
                     <button class="button button-block button-outline button-calm" ng-click="changePassword()">{{'changePassword' | translate}}</button>
                 </div>

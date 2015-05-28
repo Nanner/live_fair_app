@@ -26,10 +26,6 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
 
     $scope.changePassword = function() {
 
-        console.log($scope.password.oldPassword);
-        console.log($scope.password.newPassword);
-        console.log($scope.password.confirmNewPassword);
-
         var oldPasswordEncrypted = CryptoJS.SHA256($scope.password.oldPassword).toString();
         var newPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
         var confirmPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
@@ -47,7 +43,7 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
                     userID = response;
                     liveFairApi.changePassword(userID, oldPasswordEncrypted, newPasswordEncrypted).
                         then(function(data) {
-                            utils.showAlert(data, "Sucesso");
+                            utils.showAlert($translate.instant('pwwdChangedSuccess'), "Sucesso");
                         }, function(error) {
                             utils.showAlert($translate.instant('sorryChangePassword'), "Error");
                         }
@@ -60,14 +56,6 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
             );
         }
     };
-
-    $scope.testPicas = function() {
-        console.log("Valha-me deus");
-        console.log($scope.password.oldPassword);
-        console.log($scope.password.newPassword);
-        console.log($scope.password.confirmNewPassword);
-        console.log("puta que pariu");
-    }
 
     // Logout
     $scope.logoutUser = function() {
