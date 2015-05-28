@@ -286,12 +286,16 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
     $localForage.getItem('userID').then(function(response) {
             companyID = response;
             liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
+                console.log("1: " + webVisitors);
                 $scope.websiteVisitors = webVisitors;
-                liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(match) {
+                liveFairApi.getCompanyMatchesStats(liveFairID, companyID).then(function(match) {
+                        console.log(match);
                         $scope.matches = match;
                         liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
+                                console.log("3: " + likes);
                                 $scope.likes = likes;
                                 liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
+                                        console.log("4: " + contacts);
                                         $scope.contactsEstablished = contacts;
                                         console.log("website: " + $scope.webVisitors);
                                         console.log("matches: " + $scope.matches);
