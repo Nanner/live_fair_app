@@ -4,11 +4,6 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairA
     $scope.username = "";
     $scope.password = "";
 
-    $localStorage.remove('token');
-    $localStorage.remove('userID');
-    $localStorage.remove('userEmail');
-    $localStorage.remove('userType');
-
     $scope.letMeRegister = function() {
         $state.transitionTo('menu.register', $stateParams, { reload: true, inherit: false, notify: true });
     };

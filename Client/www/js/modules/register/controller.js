@@ -1,7 +1,7 @@
 var module = angular.module('registerModule');
 
-module.controller('registerCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
-    
+module.controller('registerCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $ionicLoading, $translate) {
+
     $scope.isCompany = false;
     $scope.usertype = false; //true -> empresa, false -> visitante
     $scope.name = "";
@@ -12,7 +12,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     $scope.website = "";
     $scope.address = "";
     $scope.termsAcceptance = true;
-    
+
     //validation variables
     $scope.valName = "neutral-icon";
     $scope.valPassword = "neutral-icon";
@@ -20,12 +20,12 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     $scope.valEmail = "neutral-icon";
     $scope.valWebsite = "neutral-icon";
     $scope.valAddress = "neutral-icon";
-    
+
     var messages = ["Nome só pode conter letras", "A password tem que ter no mínimo 8 caracteres", "As passwords não correspondem", "Email com formato inválido", "URL do website é inválido", "Por favor preencha todos os campos", "Para prosseguir deverá aceitar os termos de uso", "Lamentamos mas não foi possível realizar o registo com sucesso"];
-    
+
     var messageToDisplay = [0,0,0,0,0,0,0,0];
     var emptyFields = [1,1,1,1,1,1];
-    
+
     /* Fields validation */
     $scope.validateNameCallback = function() {
         var pattern = /^[A-Za-z][A-Za-z -]*[A-Za-z]$/;
@@ -42,10 +42,10 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
                 $scope.valName = "red-icon";
                 messageToDisplay[0] = 1;
                 emptyFields[0] = 0;
-            }            
+            }
         }
     }
-    
+
     $scope.passwordCallback = function() {
         if($scope.password.length === 0) {
             $scope.valPassword = "neutral-icon";
@@ -61,13 +61,13 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
                 $scope.valPassword = "red-icon";
                 messageToDisplay[1] = 1;
             }
-        
+
             if($scope.confirmPassword.length > 0) {
                 $scope.confirmPasswordCallback();
             }
         }
     }
-    
+
     $scope.confirmPasswordCallback = function() {
         if($scope.confirmPassword.length === 0) {
             $scope.valConfirmPassword = "neutral-icon";
@@ -91,10 +91,10 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
             emptyFields[2] = 0;
         }
     }
-    
+
     $scope.validateEmailCallback = function() {
         var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        
+
         if(!$scope.mail || $scope.mail.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[3] = 0;
@@ -106,12 +106,12 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
         } else {
             $scope.valEmail = "red-icon";
             messageToDisplay[3] = 1;
-            emptyFields[3] = 0;           
+            emptyFields[3] = 0;
         }
     }
-    
+
     $scope.validateWebsiteCallback = function() {
-        var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;     
+        var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
         if($scope.website.length === 0) {
             $scope.valWebsite = "neutral-icon";
             messageToDisplay[4] = 0;
@@ -126,7 +126,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
             emptyFields[4] = 0;
         }
     }
-    
+
     $scope.validateAddressCallback = function() {
         if($scope.address.length === 0) {
             $scope.valAddress = "red-icon";
@@ -143,57 +143,65 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     }
 
     $scope.submitRegister = function() {
-     var existsEmptyField = false;
-     var existsNotValidField = false;
-     
-     if($scope.usertype !== true) { //visitante
-        emptyFields[0] = 0;
-        emptyFields[4] = 0;
-        emptyFields[5] = 0;
-     } 
+        $ionicLoading.show({
+            template: $translate.instant('processingPopup')
+        });
+        var existsEmptyField = false;
+        var existsNotValidField = false;
 
-     for(var i = 0; i < emptyFields.length; i++) {
-         if(emptyFields[i] === 1) {
-             existsEmptyField = true;
-             utils.showAlert(messages[5], 'Informação errada');
-             break;
-         }
-     }
-     
-     if(!existsEmptyField) {
-        for(var i = 0; i < messageToDisplay.length; i++) {
-            if(messageToDisplay[i] === 1) {
-                existsNotValidField = true;
-                utils.showAlert(messages[i], 'Informação errada');
+        if($scope.usertype !== true) { //visitante
+            emptyFields[0] = 0;
+            emptyFields[4] = 0;
+            emptyFields[5] = 0;
+        }
+
+        for(var i = 0; i < emptyFields.length; i++) {
+            if(emptyFields[i] === 1) {
+                existsEmptyField = true;
+                $ionicLoading.hide();
+                utils.showAlert(messages[5], 'Informação errada');
                 break;
             }
         }
-     }
-     
-     if(!existsNotValidField && !existsEmptyField) {
-        if(!$scope.termsAcceptance) {
-            utils.showAlert(messages[6], 'Termos de uso'); 
-        } else {
-            var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
-            console.log(passwordEncrypted);
-            console.log("all good, time to submit");
 
-            var usertype = "";
-            if($scope.usertype)
-                usertype = 'company';
-            else
-                usertype = 'visitor';
-
-            liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
-                then(function(data) {
-                    utils.showAlert(data, "Sucesso");
-                    $state.go('menu.login');
-                }, function(error) {
-                    utils.showAlert(messages[7], "Erro");
-            }); 
+        if(!existsEmptyField) {
+            for(var i = 0; i < messageToDisplay.length; i++) {
+                if(messageToDisplay[i] === 1) {
+                    existsNotValidField = true;
+                    $ionicLoading.hide();
+                    utils.showAlert(messages[i], 'Informação errada');
+                    break;
+                }
+            }
         }
-     }
-    }
+
+        if(!existsNotValidField && !existsEmptyField) {
+            if(!$scope.termsAcceptance) {
+                $ionicLoading.hide();
+                utils.showAlert(messages[6], 'Termos de uso');
+            } else {
+                var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
+                var usertype = "";
+                if($scope.usertype)
+                    usertype = 'company';
+                else
+                    usertype = 'visitor';
+
+                liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
+                    then(function(data) {
+                        $ionicLoading.hide();
+                        utils.showAlert(data, "Sucesso");
+                        $state.go('menu.login');
+                    }, function(error) {
+                        $ionicLoading.hide();
+                        utils.showAlert(messages[7], "Erro");
+                    });
+            }
+        }
+        else {
+            $ionicLoading.hide();
+        }
+    };
 
 
     $scope.readTerms = function(){

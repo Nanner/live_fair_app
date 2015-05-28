@@ -141,7 +141,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
     };
 });
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar) {
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.hideMap = false;
@@ -298,12 +298,106 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $scope.tabOption = 3;
     };
 
-    var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
     $scope.loadProfile = function(id) {
         $state.go('menu.profile', {fairID: liveFairID, companyID: id});
+    };
+
+    var getEventsFromSameDateMillis = function(millis, events) {
+        var date = new Date(millis);
+        var eventsFromSameDate = [];
+        var eventTimes = _.keys(events);
+        for(var i = 0; i < eventTimes.length; i++) {
+            var eventTime = eventTimes[i];
+            var eventDate = new Date(eventTime);
+            if(eventDate.getDate() == date.getDate() && eventDate.getMonth() == date.getMonth() && eventDate.getFullYear() == date.getFullYear()) {
+                eventsFromSameDate.push({eventTime: eventTime, eventTimeEvents: events[eventTime]});
+            }
+        }
+        return eventsFromSameDate;
+    };
+
+    $scope.loadProgram = function(unparsedProgram) {
+        $scope.failedToResolve = (unparsedProgram == "failed to resolve");
+        if ($scope.failedToResolve) {
+            return;
+        }
+
+        $scope.schedule = _.chain(unparsedProgram)
+            .sortBy(function(event) {
+                return event.startTime;
+            })
+            .groupBy(function(event) {
+                return event.startTime;
+            }).value();
+
+        $scope.scheduleDays = _.chain(unparsedProgram)
+            .sortBy(function(event) {
+                return event.startTime;
+            })
+            .map(function(event) {
+                var time = new Date(event.startTime);
+                return (Date.parse(utils.getDayMonthYearDate(time)));
+            })
+            .unique()
+            .value();
+
+        $scope.scheduleOrganizedByDay = [];
+        _.forEach($scope.scheduleDays, function(day) {
+            return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
+        });
+
+        $scope.selectedDay = $scope.scheduleDays[0];
+    };
+
+    $scope.initializeProgram = function() {
+        liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
+            .then(function(program) {
+                $localForage.setItem("schedule_" + $stateParams.fairID, program)
+                    .then(function() {
+                        $scope.loadProgram(program);
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+            }, function(error) {
+                return $localForage.getItem("schedule_" + $stateParams.fairID)
+                    .then(function(program) {
+                        $scope.loadProgram(program);
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }, function(error) {
+                        $scope.loadProgram("failed to resolve");
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
+            });
+    };
+
+    $scope.initializeProgram();
+
+    $scope.loadEvent = function(fairName, event) {
+        $scope.liveFairEvent = event;
+        var myPopup = $ionicPopup.show({
+            templateUrl: "eventPopup.html",
+            title: fairName,
+            scope: $scope,
+            buttons: [
+                {
+                    text: '<b>Sync</b>',
+                    type: 'button-balanced',
+                    onTap: function(e) {
+                        //Create event in phone's calendar
+                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.speakers;
+                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.subject, $scope.liveFairEvent.speakers, $scope.liveFairEvent.startTime, $scope.liveFairEvent.endTime);
+                    }
+                },
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
+                    onTap: function(e) {
+                        console.log("tapped button");
+                    }
+                },
+            ]
+        });
     }
 });
 

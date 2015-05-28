@@ -1,4 +1,4 @@
-<ion-view title="'Fair'">
+<ion-view title="{{'fairProfile' | translate}}">
     <ion-content scroll='true'>
 
         <!-- Content -->
@@ -17,7 +17,7 @@
                     <strong>{{ 'presentStands' | translate }}</strong>
                 </button>
                 <button class="button button-calm item-input-wrapper" ng-click="showSuggestedStands()" ng-class="{active : tabOption === 3}">
-                    <strong>{{ 'suggestedStands' | translate }}</strong>
+                    <strong>{{ 'fairProgram' | translate }}</strong>
                 </button>
             </div>
         </div>
@@ -63,30 +63,80 @@
             </div>
 
             <div class="suggested-stands-tab tab-content" ng-show="tabOption === 3">
-                <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
-                    <img no-image ng-src="{{stand.logoImage}}">
-                    <h2>{{stand.companyName}}</h2>
-                    <p>{{stand.website}}</p>
-                </a>
-                <!--TODO: mudar para stands sugeridos-->
+                <div class="program-container text-left">
+                    <div ng-show="failedToResolve">
+                        <br>
+                        <div class="card">
+                            <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                                {{ 'failedToResolve' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" ng-hide="scheduleDays.length || failedToResolve">
+                        <div class="item item-positive item-placeholder item-text-wrap text-center">
+                            {{ 'noEvents' | translate }}
+                        </div>
+                    </div>
+
+                    <div class="list" ng-hide="!scheduleDays.length || failedToResolve">
+                        <label class="item item-input item-select item-positive">
+                            <div class="input-label">
+                                {{ 'programDay' | translate }}
+                            </div>
+                            <select ng-model="selectedDay">
+                                <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
+                            </select>
+                        </label>
+                        <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                            <div class="item item-divider item-calm item-borderless">
+                                {{eventTime.eventTime | date:'HH:mm'}}
+                            </div>
+                            <div ng-repeat="event in eventTime.eventTimeEvents">
+                                <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
+                                    {{event.subject}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script id="eventPopup.html" type="text/ng-template">
+                        <div class="list card">
+
+                            <div class="item item-divider item-text-wrap">
+                                <h2>{{liveFairEvent.subject}}</h2>
+                            </div>
+
+                            <div class="item item-body">
+                                <p>
+                                    <strong>{{ 'date' | translate }}:</strong>
+                                    <span class="event-info">{{liveFairEvent.startTime | date:'dd-MM-yyyy'}}</span>
+                                </p>
+                                <p>
+                                    <strong>{{ 'starting' | translate }}:</strong>
+                                    <span class="event-info">{{liveFairEvent.startTime | date:'HH:mm'}}</span>
+                                </p>
+                                <p>
+                                    <strong>{{ 'ending' | translate }}:</strong>
+                                    <span class="event-info">{{liveFairEvent.endTime | date:'HH:mm'}}</span>
+                                </p>
+                                <p>
+                                    <strong>{{ 'place' | translate }}:</strong>
+                                <p>{{liveFairEvent.eventLocation}}</p>
+                                </p>
+                                <p>
+                                    <strong>{{ 'speakers' | translate }}:</strong>
+                                <p>{{liveFairEvent.speakers}}</p>
+                                </p>
+                            </div>
+                        </div>
+                    </script>
+                </div>
             </div>
 
         </div>
 
-        <!--<div class="list padding" ng-hide="participating">-->
-            <!--<button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">-->
-                <!--{{ 'btnProgram' | translate }}-->
-            <!--</button>-->
-        <!--</div>-->
-        <!--<div class="fair-btn-Container">-->
-            <!--&lt;!&ndash;<button nav-clear ng-click="loadStands(fair.liveFairID)" class="myBtn button button-clear button-outline button-positive">&ndash;&gt;-->
-            <!--&lt;!&ndash;{{ 'btnStands' | translate }}&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-        <!--</div>-->
         <div class="padding">
-            <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
-                {{ 'btnProgram' | translate }}
-            </button>
             <div ng-show="participating">
                 <button nav-clear ng-click="getMatches(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
                     {{ 'matches' | translate }}
@@ -110,7 +160,7 @@
 
         <script id="interestsPopup.html" type="text/ng-template">
             <ul class="list">
-                <div class="item item-divider" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</div>
+                <li class="item item-divider item-text-wrap item-positive" ng-hide="!interestsList.length">{{ 'chooseInterests' | translate }}</li>
                 <li class="item item-text-wrap text-center" ng-hide="interestsList.length">{{ 'noInterests' | translate }}</li>
                 <li class="item item-checkbox" ng-repeat="item in interestsList">
                     <label class="checkbox">

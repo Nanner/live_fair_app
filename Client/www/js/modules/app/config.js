@@ -243,7 +243,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'starting': 'Início',
 		'place': 'Local',
 		'adherence': 'Adesão',
-		'chooseInterests': 'Escolha as suas áreas de interese',
+		'chooseInterests': 'Escolha as suas áreas de interesse',
 		'select': 'Selecionar',
 		'menuFair': 'Feira',
 		'menuFairs': 'Feiras',
@@ -319,7 +319,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedInAs' : "Autenticado como",
 		'sessionExpired': "A sua sessão expirou",
 		'sorryChangePassword': "Unfortunately password could not be changed",
-		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia á feira",
+		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia à feira",
 		'createEvent': "Criar evento",
 		'createStandEvent': 'Criar evento de stand',
 		'newEvent': "Novo evento",
@@ -339,7 +339,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'fairList': "Listagem de feiras",
 		'searchFairs': "Pesquisa de feiras",
 		'ownProfile': "Meu perfil",
-		'details': "Informações"
+		'details': "Informações",
+		'fairProgram': "Programa",
+		'fairProfile': "Perfil da feira",
+		'homeScreen': "Início"
 	});
 
 	$translateProvider.translations('en', {
@@ -463,7 +466,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'fairList' : "Fair listing",
 		'searchFairs': "Fair search",
 		'ownProfile': "My profile",
-		'details': "Details"
+		'details': "Details",
+		'fairProgram': "Program",
+		'fairProfile': "Fair profile",
+		'homeScreen': "Home"
 	});
 
 	$translateProvider.useLocalStorage();
