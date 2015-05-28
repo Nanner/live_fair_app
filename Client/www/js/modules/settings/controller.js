@@ -28,7 +28,7 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
 
         var oldPasswordEncrypted = CryptoJS.SHA256($scope.password.oldPassword).toString();
         var newPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
-        var confirmPasswordEncrypted = CryptoJS.SHA256($scope.password.newPassword).toString();
+        var confirmPasswordEncrypted = CryptoJS.SHA256($scope.password.confirmNewPassword).toString();
 
         if($scope.password.newPassword.length < 8 || $scope.password.confirmNewPassword.length < 8) {
             utils.showAlert($translate.instant('lowCharPwd'), "Error");
@@ -44,6 +44,9 @@ module.controller('settingsCtrl', function($rootScope, $scope, $state, $statePar
                     liveFairApi.changePassword(userID, oldPasswordEncrypted, newPasswordEncrypted).
                         then(function(data) {
                             utils.showAlert($translate.instant('pwwdChangedSuccess'), "Sucesso");
+                            $scope.password.oldPassword = "";
+                            $scope.password.newPassword = "";
+                            $scope.password.confirmNewPassword = "";
                         }, function(error) {
                             utils.showAlert($translate.instant('sorryChangePassword'), "Error");
                         }
