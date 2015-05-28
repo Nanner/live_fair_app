@@ -216,7 +216,7 @@ server.route({
 });
 
 server.route({
-    method: 'GET',
+    method: 'POST',
     path: '/livefairs/{LiveFairID}/companies/{CompanyID}/counter',
     config:{
         auth: {
