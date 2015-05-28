@@ -405,6 +405,8 @@ server.route({
         auth: {
             strategy: 'token'
         },
+        
+        
         handler: function (request, reply) {
             if(!request.payload.interests){
                 throw new Error('Missing critical fields');
@@ -421,22 +423,23 @@ server.route({
                 if(!user) {
                     throw new Error('User not found');
                 }
-
+            
                 var userType = user.type;
                 if(userType == "visitor") {
-                    VisitorLiveFair.create({
+
+                   return VisitorLiveFair.create({
                         'liveFairLiveFairID': LiveFairID,
                         'visitorVisitorID': UserID
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
-                            LiveFairVisitorInterest.create({
+                            return LiveFairVisitorInterest.create({
                                 'liveFairIDref':LiveFairID,
                                 'interestIDref':interests[i],
                                 'visitorIDref':UserID
                             });
                         }
-                        reply("Successful fair join")
+                        reply("Successful fair join");
 
                     }).catch(function(error) {
                         console.log(JSON.stringify(error));
@@ -444,7 +447,7 @@ server.route({
                     });
                 }
                 else if(userType == 'company') {
-                    Stands.create({
+                    return Stands.create({
                         'liveFairLiveFairID': LiveFairID,
                         'companyCompanyID': UserID,
                         'visitorCounter': 0,
@@ -452,13 +455,13 @@ server.route({
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
-                            LiveFairCompanyInterest.create({
+                            return LiveFairCompanyInterest.create({
                                 'liveFairIDref':LiveFairID,
                                 'interestIDref':interests[i],
                                 'companyIDref':UserID
                             });
                         }
-                        reply("Successful fair join")
+                        reply("Successful fair join");
 
                     }).catch(function(error) {
                         console.log(JSON.stringify(error));
@@ -468,9 +471,76 @@ server.route({
                 else {
                     throw new Error('Wrong user type');
                 }
-            })
-}}
-});
+            });
+        }}
+    });
+
+    server.route({
+    method: 'POST',
+    path: '/livefairs/{LiveFairID}/interests/{UserID}/cancel',
+    config:{
+        auth: {mode: 'optional',
+            strategy: 'token'
+        },
+        
+        handler: function (request, reply) {
+
+            var LiveFairID = request.params.LiveFairID;
+            var UserID = request.params.UserID;
+
+             Users.find({
+                where:{
+                    userID:UserID
+                }
+            }).then(function(user) {
+                if(!user) {
+                    throw new Error('User not found');
+                }
+            
+                var userType = user.type;
+                if(userType == "visitor") {
+
+                   console.log('estou aqui');
+                    VisitorLiveFair.destroy({where:{
+                       'liveFairLiveFairID': LiveFairID,
+                        'visitorVisitorID': UserID
+                   }}).then(function(){
+                        console.log('estou aqui');
+                         LiveFairVisitorInterest.destroy({
+                            where:{
+                                'liveFairIDref':LiveFairID,
+                                'visitorIDref':UserID
+                            },individualHooks:true
+                        });
+                        reply("Successful fair cancelation");
+
+                    }).catch(function(error) {
+                        console.log(JSON.stringify(error));
+                        return reply(Boom.badRequest(error.message));
+                    });
+                }
+                else if(userType == 'company') {
+                    return Stands.destroy({where:{
+                       'liveFairLiveFairID': LiveFairID,
+                        'companyCompanyID': UserID 
+                    }}).then(function(){
+                            return LiveFairCompanyInterest.destroy({where:{
+                                'liveFairIDref':LiveFairID,
+                                'companyIDref':UserID
+                            },individualHooks:true});
+                        reply("Successful fair cancelation");
+
+                    }).catch(function(error) {
+                        console.log(JSON.stringify(error));
+                        return reply(Boom.badRequest(error.message));
+                    });
+                }
+                else {
+                    throw new Error('Wrong user type');
+                }
+            });
+        }}
+    });
 
 server.route({
     method: 'GET',
