@@ -139,6 +139,10 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
     if($scope.failedToResolve)
         return;
 
+    $('.inputTags').tagsinput({
+       maxTags: 5
+   }); 
+
     $scope.username = $localStorage.get('userEmail');
     $scope.userID = $localStorage.get('userID');
     $scope.listfairs = listfairs;
@@ -154,7 +158,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         $state.go('visitors', {fairID: fairID});
     };
 
-     $scope.loadFairCompanies=function(fairID)
+    $scope.loadFairCompanies=function(fairID)
     {
         $state.go('companies', {fairID: fairID});
     };
@@ -167,15 +171,15 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
             var fairDate = new Date($scope.listfairs[i].endDate);
             if( fairDate < curdate)
             {
-               pastFairs.push($scope.listfairs[i]);
-           }
-       }
-       $scope.listfairs=pastFairs;
-       console.log($scope.listfairs.length);
+             pastFairs.push($scope.listfairs[i]);
+         }
+     }
+     $scope.listfairs=pastFairs;
+     console.log($scope.listfairs.length);
 
-   };
+ };
 
-   $scope.loadNextFairs = function(){
+ $scope.loadNextFairs = function(){
     $scope.listfairs = listfairs;
     var nextFairs=[];
     var curdate = new Date();
@@ -212,25 +216,30 @@ $scope.newFair = function(userID)
     var organizerID = userID;
     document.getElementById('mapFile').onchange = function () {
       var mapFileName = this.value.replace(/^.*[\\\/]/, '');
-    };
+  };
+
+  var interestsList = $(".inputTags").tagsinput('items');
+  console.log(interestsList);
 
   var sDate = new Date($scope.sdate);
   var eDate = new Date($scope.edate);
   liveFairApi.newLiveFair(organizerID, $scope.name, $scope.description, sDate, 
-    eDate, $scope.local,$scope.address, $scope.city, "noimage.jpg");
+    eDate, $scope.local,$scope.address, $scope.city, "noimage.jpg",interestsList);
 };
 });
 
 module.controller('fairVisitorsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
-     $scope.username = $localStorage.get('userEmail');
-     var fairID = $stateParams.fairID;
-     $scope.fairVisitorsIDs = liveFairApi.getLiveFairVisitors(fairID);
+   $scope.username = $localStorage.get('userEmail');
+   var fairID = $stateParams.fairID;
+   $scope.fair = liveFairApi.getLiveFair(fairID);
+   $scope.fairVisitorsIDs = liveFairApi.getLiveFairVisitors(fairID);
 });
 
 module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
-     $scope.username = $localStorage.get('userEmail');
-     var fairID = $stateParams.fairID;
-     $scope.fairCompanies = liveFairApi.getLiveFairStands(fairID);
+   $scope.username = $localStorage.get('userEmail');
+   var fairID = $stateParams.fairID;
+   $scope.fair = liveFairApi.getLiveFair(fairID);
+   $scope.fairCompanies = liveFairApi.getLiveFairStands(fairID);
 });
 
 
@@ -254,34 +263,34 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
          $scope.showDescription = false;
 
          if($scope.fair.map == null)
-           $scope.showMap = false;*/
-   };
+             $scope.showMap = false;*/
+     };
 
-   $scope.chooseInterests = function() {
-    var myPopup = $ionicPopup.show({
-        templateUrl: "interestsPopup.html",
-        title: 'Adesão',
-        scope: $scope,
-        buttons: [
-        { text: $translate.instant('cancel') },
-        {
-            text: '<b>' + $translate.instant('btnAderir') + '</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                console.log("tapped submit button");
+     $scope.chooseInterests = function() {
+        var myPopup = $ionicPopup.show({
+            templateUrl: "interestsPopup.html",
+            title: 'Adesão',
+            scope: $scope,
+            buttons: [
+            { text: $translate.instant('cancel') },
+            {
+                text: '<b>' + $translate.instant('btnAderir') + '</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                    console.log("tapped submit button");
+                }
             }
-        }
-        ]
-    });
-};
+            ]
+        });
+    };
 
-$scope.loadStands = function(fairID) {
-    $state.go('menu.fairStands', {fairID: fairID});
-};
+    $scope.loadStands = function(fairID) {
+        $state.go('menu.fairStands', {fairID: fairID});
+    };
 
-$scope.loadEvents = function(fairID) {
-    $state.go('menu.fairProgram', {fairID: fairID});
-}
+    $scope.loadEvents = function(fairID) {
+        $state.go('menu.fairProgram', {fairID: fairID});
+    }
 
 });
 

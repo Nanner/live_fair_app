@@ -9,7 +9,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#/livefairs">Live Fair App</a>
+			<a class="navbar-brand" href="#/livefairs"> <img style="max-width:40px; margin-top: -7px; border:3px solid white;" src="images\LiveFair.jpg" ></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
@@ -82,42 +82,72 @@
 				</div>
 				<div class="modal-body">
 					<form>
-						<div class="form-group">
-							<label>Nome</label>
-							<input type="text" class="form-control" placeholder="Nome da Live Fair" ng-model="name">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-tag"></span></span>
+									<input type="text" class="form-control" placeholder="Nome da Live Fair" ng-model="name">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Local</label>
-							<input type="text" class="form-control" placeholder="Local da Live Fair" ng-model="local">
+						<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-envelope"></span></span>
+									<input type="text" class="form-control" placeholder="Morada da Live Fair" ng-model="address">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Morada</label>
-							<input type="text" class="form-control" placeholder="Morada da Live Fair" ng-model="address">
+						<br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-star"></span></span>
+									<input type="text" class="form-control" placeholder="Local da Live Fair" ng-model="local">
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-home"></span></span>
+									<input type="text" class="form-control" placeholder="Cidade da Live Fair" ng-model="city">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+									<input placeholder="Data Início" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" ng-model="sdate">
+									<input placeholder="Data Fim" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" ng-model="edate">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Cidade</label>
-							<input type="text" class="form-control" placeholder="Cidade da Live Fair" ng-model="city">
+						<br>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<textarea  type="textarea" class="form-control" placeholder="Descrição da Live Fair" ng-model="description"></textarea>
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Data Início</label>
-							<input type="date" class="form-control" ng-model="sdate">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<input type="text" placeholder="Adicionar Interesses (max 5)" class="form-control inputTags">
+								</div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label>Data Fim</label>
-							<input type="date" class="form-control" ng-model="edate">
-						</div>
-						<div class="form-group">
-							<label>Descrição</label>
-							<textarea  type="textarea" class="form-control" placeholder="Descrição da Live Fair" ng-model="description"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputFile">Mapa de Stands</label>
-							<input type="file" id="mapFile" ng-model="map">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+								<label for="exampleInputFile">Mapa de Stands</label>
+								<input type="file" id="mapFile" ng-model="map">
+							</div>
+							</div>
 						</div>
 
+						<br>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newFair()">Criar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="newFair()">Criar</button>
 						</div>
 					</form>
 				</div>

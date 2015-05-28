@@ -101,9 +101,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                 }
             );
         },
-        newLiveFair: function(OrganiserID, Name, Description, DateStart, DateEnd, LocationSend,Address, City, Map) {
+        newLiveFair: function(OrganiserID, Name, Description, DateStart, DateEnd, LocationSend,Address, City, Map, InterestList) {
             return $http.post(server.url + '/livefairs/new/', {organiserID: OrganiserID, name: Name, description: Description,
-                startDate: DateStart, endDate: DateEnd, local: LocationSend, address: Address, city:City, map:Map})
+                startDate: DateStart, endDate: DateEnd, local: LocationSend, address: Address, city:City, map:Map, interestList: InterestList})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;
