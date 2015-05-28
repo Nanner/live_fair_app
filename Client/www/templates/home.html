@@ -14,15 +14,22 @@
                 </div>
             </div>
         </div>
-    </ion-content>
 
-    <!-- align to the bottom of the page -->
-    <div style="position: absolute; bottom: 0px; width: 100%">
         <div class="home-registerBtn-container">
-            <button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
-            <div class="padding-horizontal" style="text-align: center">
+            <div class="padding-horizontal">
+                <button nav-clear ng-click="loadRegistration()" class="button button-block button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
                 <button class="button button-block button-stable button-positive" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>
             </div>
         </div>
-    </div>
+    </ion-content>
+
+    <!--&lt;!&ndash; align to the bottom of the page &ndash;&gt;-->
+    <!--<div style="position: absolute; bottom: 0px; width: 100%">-->
+        <!--<div class="home-registerBtn-container">-->
+            <!--<button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>-->
+            <!--<div class="padding-horizontal" style="text-align: center">-->
+                <!--<button class="button button-block button-stable button-positive" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </ion-view>
