@@ -400,7 +400,7 @@ module.exports = function(server){
 
     server.route({
         method: 'POST',
-        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit/',
+        path: '/livefairs/{LiveFairID}/interests/{UserID}/submit',
         config:{
             auth: {
                 strategy: 'token'
@@ -412,13 +412,13 @@ module.exports = function(server){
 
                 var LiveFairID = request.params.LiveFairID;
                 var UserID = request.params.UserID;
-
+                console.log("Eu devia de dar uma vez");
                 VisitorLiveFair.create({
                     'liveFairLiveFairID': LiveFairID,
                     'visitorVisitorID': UserID
                 }).then(function(){
-                    var interests=JSON.parse(request.payload.interests);
-                    for(var i=1;i<=interests.length;i++){
+                    var interests=request.payload.interests;
+                    for(var i = 0; i<interests.length; i++){
                         LiveFairVisitorInterest.create({
                             'liveFairIDref':LiveFairID,
                             'interestIDref':interests[i],
@@ -428,7 +428,8 @@ module.exports = function(server){
                     reply("Adesão à LiveFair concluída com sucesso!")
                         
                 }).catch(function(error) {
-                            return reply(Boom.badRequest(error.message));
+                    console.log(JSON.stringify(error));
+                    return reply(Boom.badRequest(error.message));
                 });
             }}
     });

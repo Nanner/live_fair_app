@@ -299,7 +299,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'btnCreate': "Criar",
 		'btnConfirmChanges': "Confirmar alterações",
 		'startTime': "Hora de início",
-		'endTime' : "Hora de fim"
+		'endTime' : "Hora de fim",
+		'btnNoAderir': "Cancelar adesão"
 	});
 
 	$translateProvider.translations('en', {
@@ -408,7 +409,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'btnCreate': "Create",
 		'btnConfirmChanges': "Confirm changes",
 		'startTime': "Start time",
-		'endTime' : "End time"
+		'endTime' : "End time",
+		'btnNoAderir': "Cancel subscription"
 	});
 
 	$translateProvider.useLocalStorage();
