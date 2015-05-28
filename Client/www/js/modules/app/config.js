@@ -106,12 +106,20 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			},
 			resolve: {
-				schedule: function(liveFairApi, $stateParams) {
+				schedule: function(liveFairApi, $stateParams, $localForage) {
 					return liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
 						.then(function(schedule) {
-							return schedule;
+							return $localForage.setItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID, schedule)
+								.then(function() {
+									return schedule;
+								});
 						}, function(error) {
-							return "failed to resolve";
+							return $localForage.getItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID)
+								.then(function(schedule) {
+									return schedule;
+								}, function(error) {
+									return "failed to resolve";
+								});
 						});
 				}
 			}
