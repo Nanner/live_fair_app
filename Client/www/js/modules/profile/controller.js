@@ -4,6 +4,9 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     if($stateParams.fairID) {
         $scope.fairID = $stateParams.fairID;
     }
+    if($stateParams.companyID) {
+        $scope.companyID = $stateParams.companyID;
+    }
     
     $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
