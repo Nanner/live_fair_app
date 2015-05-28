@@ -92,6 +92,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
 
     $scope.listfairs = "";
+    $scope.existingFairs = "";
     $scope.sortOption = 0;
 
     $scope.formatMonth = function() {
@@ -102,7 +103,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 
     $scope.loadFair = function(fairID){
         $state.go('menu.fair', {fairID: fairID}, {reload: true,inherit: false,notify: true});
-    }
+    };
 
     $scope.loadFairs = function() {
         utils.showLoadingPopup();
@@ -110,13 +111,14 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
             .then(function(liveFairs) {
                 console.log(liveFairs);
                 $scope.listfairs = liveFairs;
+                $scope.existingFairs = liveFairs;
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = false;
             }, function(error) {
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = true;
             });
-    }
+    };
 
     $scope.sortFairsByName = function () {
 
@@ -139,6 +141,11 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
             });
         }
     };
+
+    $scope.resetSort = function() {
+        $scope.listfairs = $scope.existingFairs;
+        $scope.sortOption = 0;
+    }
 });
 
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar) {
