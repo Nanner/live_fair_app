@@ -133,6 +133,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     }
 
     $scope.validate = function() {
+        $scope.initEmptyField();
         $scope.validateNameCallback();
         $scope.validateEmailCallback();
         $scope.validateWebsiteCallback();
