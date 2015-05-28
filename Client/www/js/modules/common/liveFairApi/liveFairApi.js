@@ -23,6 +23,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Matches = $resource(server.url + '/livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
 
+    var NoSubscription = $resource(server.url + '/livefairs/:fairID/interests/:userID/cancel', {fairID: '@fairID', userID: '@userID'});
+
     var api = {
 
         login: function(username, password) {
@@ -278,7 +280,11 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     return $q.reject(response.data);
                 }
             );
-        },       
+        },
+
+        cancelSubscription: function(fairId, userId) {
+            return NoSubscription.save({fairID: fairId, userID: userId});
+        }       
 
         changePassword: function(userID, oldPasswordToSend, newPassword) {
             return $http.post(server.url + '/Users/' + userID + '/update/password', {password: newPassword, oldPassword: oldPasswordToSend}, {timeout: timeout})
