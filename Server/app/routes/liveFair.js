@@ -429,13 +429,13 @@ server.route({
                 var userType = user.type;
                 if(userType == "visitor") {
 
-                   return VisitorLiveFair.create({
+                   VisitorLiveFair.create({
                         'liveFairLiveFairID': LiveFairID,
                         'visitorVisitorID': UserID
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
-                            return LiveFairVisitorInterest.create({
+                            LiveFairVisitorInterest.create({
                                 'liveFairIDref':LiveFairID,
                                 'interestIDref':interests[i],
                                 'visitorIDref':UserID
@@ -449,7 +449,7 @@ server.route({
                     });
                 }
                 else if(userType == 'company') {
-                    return Stands.create({
+                    Stands.create({
                         'liveFairLiveFairID': LiveFairID,
                         'companyCompanyID': UserID,
                         'visitorCounter': 0,
@@ -457,7 +457,7 @@ server.route({
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
-                            return LiveFairCompanyInterest.create({
+                            LiveFairCompanyInterest.create({
                                 'liveFairIDref':LiveFairID,
                                 'interestIDref':interests[i],
                                 'companyIDref':UserID
