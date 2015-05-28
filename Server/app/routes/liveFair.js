@@ -321,18 +321,20 @@ server.route({
     path: '/livefairs/{liveFairid}/companies/{UserID}/matches',
     config:{
         auth: {
+            mode:'optional',
             strategy: 'token'
         },
         handler: function (request, reply) {
             var LiveFairID=request.params.liveFairid;
             var UserID=request.params.UserID;
 
-            reply( sequelize.query('SELECT company."companyID",company."companyName" FROM company,"liveFairCompanyInterest","liveFairVisitorInterest" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" GROUP BY company."companyID"',
+            reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID"',
                 { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
                 {
                  return JSON.stringify(companies);
              }).error(function(err){
+                 console.log(err);
                  return Boom.notFound('Live Fair User Matches not found');
              }));
         }}
