@@ -9,6 +9,7 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
     var newPassword;
     var confirmNewPassword;
     var interestsLists;
+    var fairName;
 
     return {
 
@@ -119,6 +120,14 @@ module.factory('utils', function ($http, $q, $ionicPopup, $ionicLoading) {
 
         getInterestsList: function() {
             return interestsLists;
+        },
+
+        setFairName: function(livefairName) {
+            fairName = livefairName;
+        },
+
+        getFairName: function() {
+            return fairName;
         }
     };
 });

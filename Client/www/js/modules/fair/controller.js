@@ -253,6 +253,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     };
 
     $scope.getMatches = function(fairID) {
+        utils.setFairName($scope.fair.name);
         $state.go('menu.matches', {fairID: fairID});
     };
 
@@ -403,12 +404,15 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
 module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
     var liveFairID = $stateParams.fairID;
+    $scope.stands = "";
+    $scope.fairName = "";
 
     $localForage.getItem('userID').then(function(response) {
-            liveFairApi.getMatches(liveFairID, response).$promise.
-                then(function(data) {
+            var userID = response;
+            liveFairApi.getMatches(liveFairID, userID).$promise.then(function(data) {
                     console.log(data);
-                    //atribuir dados as variaveis
+                    $scope.stands = data;
+                    $scope.fairName = utils.getFairName();
                 }, function(error) {
                     utils.showAlert($translate.instant('notPossibleMatches'), "Erro");
             });

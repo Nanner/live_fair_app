@@ -19,7 +19,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
-    var Matches = $resource(server.url + 'livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
+    var Matches = $resource(server.url + '/livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
 
     var api = {
 
