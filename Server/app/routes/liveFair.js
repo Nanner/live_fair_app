@@ -412,25 +412,63 @@ module.exports = function(server){
 
                 var LiveFairID = request.params.LiveFairID;
                 var UserID = request.params.UserID;
-                console.log("Eu devia de dar uma vez");
-                VisitorLiveFair.create({
-                    'liveFairLiveFairID': LiveFairID,
-                    'visitorVisitorID': UserID
-                }).then(function(){
-                    var interests=request.payload.interests;
-                    for(var i = 0; i<interests.length; i++){
-                        LiveFairVisitorInterest.create({
-                            'liveFairIDref':LiveFairID,
-                            'interestIDref':interests[i],
-                            'visitorIDref':UserID
+                
+                Users.find({
+                    where:{
+                        userID:UserID
+                    }
+                }).then(function(user) {
+                    if(!user) {
+                        throw new Error('User not found');
+                    }
+
+                    var userType = user.type;
+                    if(userType == "visitor") {
+                        VisitorLiveFair.create({
+                            'liveFairLiveFairID': LiveFairID,
+                            'visitorVisitorID': UserID
+                        }).then(function(){
+                            var interests=request.payload.interests;
+                            for(var i = 0; i<interests.length; i++){
+                                LiveFairVisitorInterest.create({
+                                    'liveFairIDref':LiveFairID,
+                                    'interestIDref':interests[i],
+                                    'visitorIDref':UserID
+                                });
+                            }
+                            reply("Successful fair join")
+
+                        }).catch(function(error) {
+                            console.log(JSON.stringify(error));
+                            return reply(Boom.badRequest(error.message));
                         });
                     }
-                    reply("Adesão à LiveFair concluída com sucesso!")
-                        
-                }).catch(function(error) {
-                    console.log(JSON.stringify(error));
-                    return reply(Boom.badRequest(error.message));
-                });
+                    else if(userType == 'company') {
+                        Stands.create({
+                            'liveFairLiveFairID': LiveFairID,
+                            'companyCompanyID': UserID,
+                            'visitorCounter': 0,
+                            'approved': false
+                        }).then(function(){
+                            var interests=request.payload.interests;
+                            for(var i = 0; i<interests.length; i++){
+                                LiveFairCompanyInterest.create({
+                                    'liveFairIDref':LiveFairID,
+                                    'interestIDref':interests[i],
+                                    'companyIDref':UserID
+                                });
+                            }
+                            reply("Successful fair join")
+
+                        }).catch(function(error) {
+                            console.log(JSON.stringify(error));
+                            return reply(Boom.badRequest(error.message));
+                        });
+                    }
+                    else {
+                        throw new Error('Wrong user type');
+                    }
+                })
             }}
     });
 
