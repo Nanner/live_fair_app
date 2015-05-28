@@ -236,6 +236,33 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },
 
+        getCompanyLikes: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/likes', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+        getContactsEstablished: function(fairId, companyId) {
+            return $http.get(server.url + '/livefairs/' + fairId + "/companies/" + companyId + '/stats/contactShares', {timeout: timeout})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
 
         adhereLiveFair: function(fairID, userID, interestsList) {
             return $http.post(server.url + '/livefairs/' + fairID + '/interests/' + userID + '/submit', {interests: interestsList}, {timeout: timeout})

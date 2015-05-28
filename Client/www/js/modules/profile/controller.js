@@ -278,9 +278,40 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
 module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $localForage, liveFairApi, utils) {
     var liveFairID = $stateParams.fairID;
     var companyID = "";
+    $scope.websiteVisitors = "";
+    $scope.matches = "";
+    $scope.likes = "";
+    $scope.contactsEstablished = "";
 
     $localForage.getItem('userID').then(function(response) {
-        companyID = response;
+            companyID = response;
+            liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
+                $scope.websiteVisitors = webVisitors;
+                liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(match) {
+                        $scope.matches = match;
+                        liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
+                                $scope.likes = likes;
+                                liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
+                                        $scope.contactsEstablished = contacts;
+                                        console.log("website: " + $scope.webVisitors);
+                                        console.log("matches: " + $scope.matches);
+                                        console.log("likes: " + $scope.likes);
+                                        console.log("contactsEstablished: " + $scope.contactsEstablished);
+                                    }, function(error) {
+                                        console.log(error);
+                                    }
+                                );
+                            }, function(error) {
+                                console.log(error);
+                            }
+                        );
+                    }, function(error) {
+                        console.log(error);
+                    }
+                );
+            }, function(error) {
+                console.log(error);
+            });
         }, function(response) {
             utils.showAlert($translate.instant('sessionExpired'), "Error");
             $state.go('menu.home');
