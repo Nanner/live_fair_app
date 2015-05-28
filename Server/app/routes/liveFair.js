@@ -625,14 +625,14 @@ server.route({
                      }, {transaction: t});
                   });
                 }})
-.then(function(result) {
-    reply(JSON.stringify('Evento creado com sucesso'));
-})
-.catch(function(error) {
-    reply(Boom.badRequest(error));
-});
-}}
-});
+                .then(function(result) {
+                    reply(JSON.stringify('Evento criado com sucesso'));
+                })
+                .catch(function(error) {
+                    reply(Boom.badRequest(error));
+                });
+            }}
+        });
 
 server.route({
     method: 'POST',
