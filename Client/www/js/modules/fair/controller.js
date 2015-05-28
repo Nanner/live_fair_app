@@ -453,14 +453,20 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
 });
 
 module.controller('createStandEventCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, utils, $localForage) {
-    $scope.subject = "";
-    $scope.speakers = "";
-    $scope.location = "";
-    $scope.startDate = "";
-    $scope.startTime = "";
-    $scope.endDate = "";
-    $scope.endTime = "";
+    $scope.eventInfo = {};
+    $scope.eventInfo.subject = "";
+    $scope.eventInfo.speakers = "";
+    $scope.eventInfo.location = "";
+    $scope.eventInfo.startDate = "";
+    $scope.eventInfo.startTime = "";
+    $scope.eventInfo.endDate = "";
+    $scope.eventInfo.endTime = "";
 
     $scope.createEvent = function() {
+        var startTime = moment($scope.eventInfo.startDate + " " + $scope.eventInfo.startTime, "YYYY-MM-DD HH:mm");
+        var endTime = moment($scope.eventInfo.endDate + " " + $scope.eventInfo.endTime, "YYYY-MM-DD HH:mm");
+
+        var result = liveFairApi.createStandEvent($stateParams.fairID, $stateParams.companyID, $scope.eventInfo.subject, $scope.eventInfo.speakers, $scope.eventInfo.location, startTime, endTime);
+        console.log(result);
     }
 });
