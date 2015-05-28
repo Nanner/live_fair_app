@@ -1,4 +1,4 @@
-<ion-view title="'Home'">
+<ion-view title="{{'homeScreen' | translate}}">
     <ion-content scroll='true'>
 
         <!-- Template content -->
@@ -8,20 +8,29 @@
             </div>
             <br><br>
             <div class="home-existing-user padding-top">
-                <span class="center"> {{ 'existingUser' | translate }} </span>
+                <p class="center"> {{ 'existingUser' | translate }} </p>
                 <div class="myBtn-Container">
                     <button nav-clear ng-click="loadLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
                 </div>
             </div>
 
-            <div class="home-registerBtn-container">
-                <button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
-            </div>
+            <!--<div class="home-registerBtn-container">-->
+                <!--<button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>-->
+            <!--</div>-->
+        </div>
+    </ion-content>
 
-            <div class="bar-footer bar" style="padding-top: 0px;">
+    <!--<div class="bar-footer bar" style="padding-top: 0px;">-->
+        <!--<button class="button button-block button-stable button-positive" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>-->
+    <!--</div>-->
+
+    <!-- align to the bottom of the page -->
+    <div style="position: absolute; bottom: 0px; width: 100%">
+        <div class="home-registerBtn-container">
+            <button nav-clear ng-click="loadRegistration()" class="login-btn button button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
+            <div class="padding-horizontal" style="text-align: center">
                 <button class="button button-block button-stable button-positive" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>
             </div>
         </div>
-
-    </ion-content>
+    </div>
 </ion-view>

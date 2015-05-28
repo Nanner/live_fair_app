@@ -341,7 +341,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'ownProfile': "Meu perfil",
 		'details': "Informações",
 		'fairProgram': "Programa",
-		'fairProfile': "Perfil da feira"
+		'fairProfile': "Perfil da feira",
+		'homeScreen': "Início"
 	});
 
 	$translateProvider.translations('en', {
@@ -467,7 +468,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'ownProfile': "My profile",
 		'details': "Details",
 		'fairProgram': "Program",
-		'fairProfile': "Fair profile"
+		'fairProfile': "Fair profile",
+		'homeScreen': "Home"
 	});
 
 	$translateProvider.useLocalStorage();
