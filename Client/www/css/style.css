@@ -99,16 +99,16 @@
 }
 
 .login-register-container {
-    margin-top: 10%;
+    margin-top: 24%;
     background-color: #B5DEF7;
-    margin-bottom: 0%;
+    margin-bottom: 0;
 }
 
 .login-resgisterbtn-Container {
     padding-top: 8%;
     position: relative;
     text-align: center;
-    padding-bottom: 5%;
+    padding-bottom: 8%;
 }
 
 /******** Register *********/
