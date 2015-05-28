@@ -303,8 +303,14 @@
 /****** Fair program *******/
 
 .program-title-container {
-    padding-top: 8%;
-    padding-bottom: 8%;
+    padding-top: 7%;
+    padding-bottom: 7%;
+    background-color: #28A3D4;
+}
+
+.event-time{
+    background-color: #B5DEF7;
+    color: #0000ff;
 }
 
 .program-title {
