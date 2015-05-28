@@ -55,6 +55,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 				}
 			}
 		})
+		.state('menu.matches',{
+			url: "/matches",
+			views:{
+				'menuContent' :{
+					templateUrl: "templates/matches.html",
+					controller: "listFairsCtrl"
+				}
+			}
+		})
 		.state('menu.fairStands', {
 			url: "/fairs/:fairID/stands",
 			views: {

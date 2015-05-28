@@ -54,7 +54,7 @@
             <button nav-clear ng-click="loadEvents(fair.liveFairID)" class="item button button-block button-clear button-outline button-positive">
                 {{ 'btnProgram' | translate }}
             </button>
-            <button nav-clear ng-click="loadStands(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
+            <button nav-clear ng-click="getMatches()" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
                 {{ 'matches' | translate }}
             </button>
             <button nav-clear ng-click="loadStands(fair.liveFairID)" ng-show="userType == 'company'" class="item button button-block button-clear button-outline button-positive">

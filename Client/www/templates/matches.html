@@ -1,0 +1,38 @@
+<ion-view title="'ListFairs'">
+    <ion-content scroll='true' ng-init="loadMatches()">
+
+        <!-- Content -->
+        <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
+            <h1 class="fair-title">{{ 'listfairs' | translate }}</h1>
+        </div>
+
+        <div ng-show="failedToResolve">
+            <br><br>
+            <div class="card">
+                <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                    {{ 'failedToResolve' | translate }}
+                </div>
+            </div>
+        </div>
+
+        <div class="card" ng-show="!listfairs.length && !failedToResolve">
+            <div class="item item-positive item-placeholder item-text-wrap text-center">
+                {{ 'noLiveFairs' | translate }}
+            </div>
+        </div>
+
+        <div ng-show="listfairs.length && !failedToResolve" ng-repeat="fair in listfairs">
+            <div class="card">
+                <div class="item item-divider" ng-click="loadFair(fair.liveFairID)">
+                    <h2> {{fair.name}} </h2>
+                </div>
+                <div class="item item-text-wrap">
+                    <p> <b> {{ 'date' | translate }}: </b> {{fair.startDate | date:'dd-MM-yyyy'}} {{ 'a' | translate }} {{fair.endDate | date:'dd-MM-yyyy'}} </p>
+                    <p> <b> {{ 'opening' | translate }}: </b> {{fair.startDate | date: 'HH:mm Z'}}</p>
+                    <p> <b> {{ 'address' | translate }}: </b> {{fair.address}} {{fair.city}} </p>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

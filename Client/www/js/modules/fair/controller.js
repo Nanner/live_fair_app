@@ -127,6 +127,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
     $scope.userType = "";
     $scope.participating = false;
+    $scope.matches = "";
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
@@ -224,6 +225,14 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.cancelFairSubmition = function() {
 
+    };
+
+    $scope.loadMatches = function() {
+
+    };
+
+    $scope.getMatches = function() {
+        $state.go('menu.matches');
     };
 
     $scope.changedCheckbox = function() {
