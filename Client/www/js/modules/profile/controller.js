@@ -286,21 +286,17 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
     $localForage.getItem('userID').then(function(response) {
             companyID = response;
             liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
-                console.log("1: " + webVisitors);
-                $scope.websiteVisitors = webVisitors;
+                console.log(webVisitors);
+                $scope.websiteVisitors = webVisitors[1];
                 liveFairApi.getCompanyMatchesStats(liveFairID, companyID).then(function(match) {
                         console.log(match);
                         $scope.matches = match;
                         liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
-                                console.log("3: " + likes);
-                                $scope.likes = likes;
+                                console.log(likes);
+                                $scope.likes = likes[0].count;
                                 liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
-                                        console.log("4: " + contacts);
-                                        $scope.contactsEstablished = contacts;
-                                        console.log("website: " + $scope.webVisitors);
-                                        console.log("matches: " + $scope.matches);
-                                        console.log("likes: " + $scope.likes);
-                                        console.log("contactsEstablished: " + $scope.contactsEstablished);
+                                        console.log(contacts);
+                                        $scope.contactsEstablished = contacts[0].count;
                                     }, function(error) {
                                         console.log(error);
                                     }

@@ -23,22 +23,22 @@
 			<div class="row">
 			  <div class="col col-75 label"><strong> {{ 'matches' | translate }} </strong></div>
 			  <p class="col"><strong>:</strong></p>
-			  <div class="col col-25 result"><strong>{{statsScreen.matches}}</strong></div>
+			  <div class="col col-25 result"><strong>{{matches[1].totalHits}}</strong></div>
 			</div>
 			<div class="row">
 			  <div class="col col-75 label"><strong> {{ 'matchpercentage' | translate }} </strong></div>
 			  <p class="col"><strong>:</strong></p>
-			  <div class="col col-25 result"><strong>{{statsScreen.matchPercentage}}</strong></div>
+			  <div class="col col-25 result"><strong>{{matches[2].percentage}}</strong></div>
 			</div>
 			<div class="row">
 			  <div class="col col-75 label"><strong> {{ 'clicks' | translate }} </strong></div>
 			  <p class="col"><strong>:</strong></p>
-			  <div class="col col-25 result"><strong>{{statsScreen.clicks}}</strong></div>
+			  <div class="col col-25 result"><strong>{{websiteVisitors}}</strong></div>
 			</div>
 			<div class="row">
 			  <div class="col col-75 label"><strong> {{ 'contactsEstablished' | translate }} </strong></div>
 			  <p class="col"><strong>:</strong></p>
-			  <div class="col col-25 result"><strong>{{statsScreen.contatsEstablished}}</strong></div>
+			  <div class="col col-25 result"><strong>{{contactsEstablished}}</strong></div>
 			</div>
 	    </div>
 
@@ -51,10 +51,10 @@
 
           <!--<div  class="">-->
 
-            <div class="row item-text-wrap" ng-repeat="keyword in statsScreen.keywords" >
-                <div class="col col-75 label"><p><strong> {{keyword.name}} </strong></p></div>
+            <div class="row item-text-wrap" ng-repeat="keyword in matches[0]" >
+                <div class="col col-75 label"><p><strong> {{keyword.interest}} </strong></p></div>
                 <p class="col"><strong>:</strong></p>
-                <div class="col col-25 result"><p><strong> {{keyword.nmatches}} </strong></p></div>
+                <div class="col col-25 result"><p><strong> {{keyword.count}} </strong></p></div>
             </div>
 
           <!--</div>-->
