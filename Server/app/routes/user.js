@@ -360,7 +360,8 @@ module.exports = function(server){
                 var UserID = request.params.UserID;
                 reply (Connection.findAll({
                     where:{
-                        visitorVisitorID:UserID
+                        visitorVisitorID:UserID,
+                        liked:true
                     }
                 }).map(function(companies){
                     return Company.find({
