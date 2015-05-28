@@ -427,6 +427,9 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
         }
     );
 
+    $scope.loadProfile = function(id) {
+        $state.go('menu.profile', {fairID: liveFairID, companyID: id});
+    };
 });
 
 

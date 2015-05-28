@@ -318,6 +318,4 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
             liveFairApi.logout();
         }
     );
-
-
 });

@@ -2,7 +2,8 @@ var module = angular.module('starter');
 
 module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $compileProvider, $httpProvider, jwtInterceptorProvider) {
 
-	jwtInterceptorProvider.tokenGetter = function($localForage) {
+	jwtInterceptorProvider.tokenGetter = function($localStorage) {
+        return $localStorage.get('token');/*
 	    $localForage.getItem('token').then(function(response) {
 	            return response;
 	        }, function(response) {
@@ -10,7 +11,7 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 	            $state.go('menu.home');
 	            liveFairApi.logout();
 	        }
-	    );
+	    );*/
     };
 
     $httpProvider.interceptors.push('jwtInterceptor');
