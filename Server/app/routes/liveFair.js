@@ -50,7 +50,7 @@ module.exports = function(server){
                 strategy: 'token'
             },
             handler: function (request, reply) {
-                reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
+                reply(LiveFair.findAll({order:'"startDate" ASC'}).then(function(liveFairs)
                 {
                     return JSON.stringify(liveFairs);
                 }).error(function(err){
