@@ -347,7 +347,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registration': "Registo",
 		'standProgram': "Programação de stand",
 		'impCancelarParticipacao': "Foi impossível cancelar a sua participação",
-		'pCancelarParticipacao': "A sua participação foi cancelada"
+		'pCancelarParticipacao': "A sua participação foi cancelada",
+		'email': "Email"
 	});
 
 	$translateProvider.translations('en', {
@@ -479,7 +480,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registration': "Registration",
 		'standProgram': "Stand program",
 		'impCancelarParticipacao': "It was no possible to delete your subscription",
-		'pCancelarParticipacao': "Your participation has been suspended"
+		'pCancelarParticipacao': "Your participation has been suspended",
+		'email': "Email"
 	});
 
 	$translateProvider.useLocalStorage();
