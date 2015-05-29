@@ -148,7 +148,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
     }
 });
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar, $ionicScrollDelegate) {
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.hideMap = false;
@@ -316,14 +316,17 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
     $scope.showInfoPage = function(){
         $scope.tabOption = 1;
+        $ionicScrollDelegate.resize();
     };
 
     $scope.showPresentStands = function(){
         $scope.tabOption = 2;
+        $ionicScrollDelegate.resize();
     };
 
     $scope.showSuggestedStands = function(){
         $scope.tabOption = 3;
+        $ionicScrollDelegate.resize();
     };
 
     $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
