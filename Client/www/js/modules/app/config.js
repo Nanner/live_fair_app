@@ -320,7 +320,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedInAs' : "Autenticado como",
 		'sessionExpired': "A sua sessão expirou",
 		'sorryChangePassword': "Unfortunately password could not be changed",
-		"erroSubscribeLiveFair": "Ocorreu um erro enquanto aderia à feira",
+		"errorSubscribeLiveFair": "Ocorreu um erro enquanto aderia à feira",
+		'successfulSubscribeLiveFair': "Adesão bem sucedida",
 		'createEvent': "Criar evento",
 		'createStandEvent': 'Criar evento de stand',
 		'newEvent': "Novo evento",
@@ -348,16 +349,19 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registration': "Registo",
 		'standProgram': "Programação de stand",
 		'error': "Erro",
+		'success': "Sucesso",
 		'ownStandEventsProblem': "Problema a carregar eventos. Tente novamente mais tarde",
 		'btnViewOwnStandEvents': "Eventos próprios",
-		'impCancelarParticipacao': "Foi impossível cancelar a sua participação",
+		'impCancelarParticipacao': "Foi impossível cancelar a sua participação. Tente novamente mais tarde",
 		'pCancelarParticipacao': "A sua participação foi cancelada",
 		'cantCreateStandEventTitle': "Lamentamos",
 		'cantCreateStandEventMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
 		'cantRemoveStandEventTitle': "Lamentamos",
 		'cantRemoveStandEventMessage': "O cancelamento do evento falhou. Por favor tente novamente mais tarde",
 		'email': "Email",
-		'home': "Ecrã inicial"
+		'home': "Ecrã inicial",
+		'confirm': "Confirmar",
+		'confirmFairCancel': "Tem a certeza que deseja cancelar a sua participação?"
 	});
 
 	$translateProvider.translations('en', {
@@ -461,7 +465,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'loggedInAs' : "Logged in as",
 		'sessionExpired': "Session Expired",
 		'sorryChangePassword': "Unfortunately password could not be changed",
-		"erroSubscribeLiveFair": "An error have occured while subscribing the fair",
+		"errorSubscribeLiveFair": "An error has occurred while subscribing the fair",
+		'successfulSubscribeLiveFair': "Successful subscription",
 		'createEvent': "Create event",
 		'createStandEvent': 'Create stand event',
 		'btnAddStandEvent': "New event",
@@ -489,16 +494,19 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registration': "Registration",
 		'standProgram': "Stand program",
 		'error': "Error",
+		'success': "Success",
 		'ownStandEventsProblem': "Problem loading events. Please try again later.",
 		'btnViewOwnStandEvents': "Own events",
-		'impCancelarParticipacao': "It was no possible to delete your subscription",
+		'impCancelarParticipacao': "It was not possible to delete your subscription",
 		'pCancelarParticipacao': "Your participation has been suspended",
 		'cantCreateStandEventTitle': "We're sorry",
 		'cantCreateStandEventMessage': "Event creation failed. Please try again later.",
 		'cantRemoveStandEventTitle': "We're sorry",
 		'cantRemoveStandEventMessage': "Event cancelling failed. Please try again later.",
 		'email': "Email",
-		'home': "Home"
+		'home': "Home",
+		'confirm': "Confirm",
+		'confirmFairCancel': "Are you sure you want to cancel your participation?"
 	});
 
 	$translateProvider.useLocalStorage();

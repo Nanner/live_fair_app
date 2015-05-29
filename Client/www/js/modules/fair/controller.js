@@ -266,14 +266,13 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                         $localForage.getItem('userID').then(function(response) {
                                 liveFairApi.adhereLiveFair(liveFairID, response, interestsIDS).
                                     then(function(data) {
-                                        utils.showAlert(data, "Sucesso");
-                                        //fazer reload ao screen para quem esta a participar
+                                        utils.showAlert($translate.instant('successfulSubscribeLiveFair'), $translate.instant('success'));
                                         $scope.participating = true;
                                     }, function(error) {
-                                        utils.showAlert($translate.instant('erroSubscribeLiveFair'), "Erro");
+                                        utils.showAlert($translate.instant('errorSubscribeLiveFair'), $translate.instant('error'));
                                     });
                             }, function(response) {
-                                utils.showAlert($translate.instant('sessionExpired'), "Error");
+                                utils.showAlert($translate.instant('sessionExpired'), $translate.instant('error'));
                                 $state.go('menu.home');
                                 liveFairApi.logout();
                             }
@@ -284,24 +283,32 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         });
     };
 
-    $scope.cancelFairSubmition = function() {
+    $scope.cancelFairSubmission = function() {
         var userID = "";
-        $localForage.getItem('userID').then(function(response) {
-                userID = response;
-                liveFairApi.cancelSubscription(liveFairID, userID).$promise
-                    .then(function(liveFairs) {
-                        $scope.participating = false;
-                        utils.showAlert($translate.instant('pCancelarParticipacao'), "Sucesso");
-                    }, function(error) {
-                        utils.showAlert($translate.instant('impCancelarParticipacao'), "Erro");
+        var confirmPopup = $ionicPopup.confirm({
+            title: $translate.instant('confirm'),
+            template: $translate.instant('confirmFairCancel')
+        });
+        confirmPopup.then(function(res) {
+            if(res) {
+                $localForage.getItem('userID').then(function(response) {
+                        userID = response;
+                        liveFairApi.cancelSubscription(liveFairID, userID).$promise
+                            .then(function(liveFairs) {
+                                $scope.participating = false;
+                                utils.showAlert($translate.instant('pCancelarParticipacao'), $translate.instant('success'));
+                            }, function(error) {
+                                utils.showAlert($translate.instant('impCancelarParticipacao'), $translate.instant('error'));
+                            }
+                        );
+                    }, function(response) {
+                        utils.showAlert($translate.instant('sessionExpired'), $translate.instant('error'));
+                        $state.go('menu.home');
+                        liveFairApi.logout();
                     }
                 );
-            }, function(response) {
-                utils.showAlert($translate.instant('sessionExpired'), "Error");
-                $state.go('menu.home');
-                liveFairApi.logout();
             }
-        );
+        });
     };
 
     $scope.getMatches = function(fairID) {
