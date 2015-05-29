@@ -162,7 +162,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.hideMap = false;
     $scope.month = "";
     $scope.description = true;
-    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
     $scope.userType = "";
     $scope.participating = false;
     $scope.matches = "";
@@ -184,6 +183,10 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 }
             }, function(response) {}
         );
+
+        if($scope.loggedIn) {
+            $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+        }
 
         $localForage.getItem('userType').then(function(response) {
                 $scope.userType = response;
@@ -483,18 +486,18 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
 
 
-        $scope.loadFairs = function() {
-            utils.showLoadingPopup();
-            liveFairApi.getLiveFairs().$promise
-                .then(function(liveFairs) {
-                    $scope.listfairs = liveFairs;
-                    utils.hideLoadingPopup();
-                    $scope.failedToResolve = false;
-                }, function(error) {
-                    utils.hideLoadingPopup();
-                    $scope.failedToResolve = true;
-            });
-        }
+    $scope.loadFairs = function() {
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairs().$promise
+            .then(function(liveFairs) {
+                $scope.listfairs = liveFairs;
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = false;
+            }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = true;
+        });
+    }
 
     $scope.startDate = "";
     $scope.endDate = "";
