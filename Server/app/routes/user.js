@@ -56,7 +56,7 @@ module.exports = function(server){
         path: '/register',
         config:{
             auth: {
-                mode: 'optional',
+               mode: 'optional',
                strategy: 'token'
            },
         handler: function(request, reply) {
@@ -207,7 +207,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/update',
         config:{
             auth: {
-               mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -292,7 +291,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -383,7 +381,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorites',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -410,7 +407,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorite/{CompanyID}',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -501,7 +497,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/recommendations',
         config:{
             auth: {
-                mode:'optional',
 				strategy: 'token'
 			},
             handler: function (request, reply) {
