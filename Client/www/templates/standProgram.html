@@ -34,7 +34,7 @@
             </label>
             <ion-list show-delete="true" ng-hide="!scheduleDays.length || failedToResolve">
                 <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
-                    <ion-item class="item item-divider item-calm item-borderless">
+                    <ion-item class="item item-divider event-time item-borderless">
                         <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
                     </ion-item>
                     <ion-item class="item item-text-wrap" ng-click="loadEvent(fair.name, event)" ng-repeat="event in eventTime.eventTimeEvents">
