@@ -27,6 +27,8 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
         return eventsFromSameDate;
     };
 
+    $scope.days = {};
+
     $scope.failedToResolve = schedule == "failed to resolve";
     if($scope.failedToResolve)
         return;
@@ -58,7 +60,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
         return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
     });
 
-    $scope.selectedDay = $scope.scheduleDays[0];
+    $scope.days.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function(fairName, event) {
         $scope.liveFairEvent = event;
