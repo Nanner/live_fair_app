@@ -13,13 +13,17 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
-    var IncrementCounter = $resource(server.url + '/Users/:companyID/counter', {companyID: '@companyID'});
+    var IncrementCounter = $resource(server.url + '/livefairs/:fairID/companies/:companyID/counter', {fairID: '@fairID', companyID: '@companyID'});
+
+    var IncrementContact = $resource(server.url + '/Users/:userID/shareContact/:companyID', {userID: '@userID', companyID: '@companyID'});
 
     var Profile = $resource(server.url + '/Users/:id', {id : '@id'});
 
     var ProfileInterests = $resource(server.url + '/livefairs/:fairID/companies/:companyID', {fairID: '@fairID', companyID: '@companyID'});
 
     var Matches = $resource(server.url + '/livefairs/:fairID/companies/:userID/matches', {fairID: '@fairID', userID: '@userID'});
+
+    var NoSubscription = $resource(server.url + '/livefairs/:fairID/interests/:userID/cancel', {fairID: '@fairID', userID: '@userID'});
 
     var api = {
 
@@ -276,6 +280,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     return $q.reject(response.data);
                 }
             );
+        },
+
+        cancelSubscription: function(fairId, userId) {
+            return NoSubscription.save({fairID: fairId, userID: userId});
         },       
 
         changePassword: function(userID, oldPasswordToSend, newPassword) {
@@ -306,8 +314,12 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },
 
-        incrementCounter: function(companyId) {
-            return IncrementCounter.save({companyID: companyId});
+        incrementCounter: function(LiveFairId, companyId) {
+            return IncrementCounter.save({fairID: LiveFairId, companyID: companyId});
+        },
+
+        IncrementContact: function(userId, companyId) {
+            return IncrementContact.save({userID: userId, companyID: companyId});
         },
 
         createStandEvent: function(liveFairID, companyID, subject, speakers, location, startTime, endTime) {

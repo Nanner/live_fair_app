@@ -256,7 +256,23 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     };
 
     $scope.cancelFairSubmition = function() {
-
+        var userID = "";
+        $localForage.getItem('userID').then(function(response) {
+                userID = response;
+                liveFairApi.cancelSubscription(liveFairID, userID).$promise
+                    .then(function(liveFairs) {
+                        $scope.participating = false;
+                        utils.showAlert($translate.instant('pCancelarParticipacao'), "Sucesso");
+                    }, function(error) {
+                        utils.showAlert($translate.instant('impCancelarParticipacao'), "Erro");
+                    }
+                );
+            }, function(response) {
+                utils.showAlert($translate.instant('sessionExpired'), "Error");
+                $state.go('menu.home');
+                liveFairApi.logout();
+            }
+        );
     };
 
     $scope.getMatches = function(fairID) {

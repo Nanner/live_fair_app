@@ -348,7 +348,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'standProgram': "Programação de stand",
 		'error': "Erro",
 		'ownStandEventsProblem': "Problema a carregar eventos. Tente novamente mais tarde",
-		'btnViewOwnStandEvents': "Listar eventos próprios"
+		'btnViewOwnStandEvents': "Listar eventos próprios",
+		'impCancelarParticipacao': "Foi impossível cancelar a sua participação",
+		'pCancelarParticipacao': "A sua participação foi cancelada"
 	});
 
 	$translateProvider.translations('en', {
@@ -481,7 +483,9 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'standProgram': "Stand program",
 		'error': "Error",
 		'ownStandEventsProblem': "Problem loading events. Please try again later.",
-		'btnViewOwnStandEvents': "View own stand events"
+		'btnViewOwnStandEvents': "View own stand events",
+		'impCancelarParticipacao': "It was no possible to delete your subscription",
+		'pCancelarParticipacao': "Your participation has been suspended"
 	});
 
 	$translateProvider.useLocalStorage();

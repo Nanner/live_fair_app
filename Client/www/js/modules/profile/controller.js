@@ -1,6 +1,7 @@
 var module = angular.module('profileModule');
 
 module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, utils, contacts, camera, liveFairApi) {
+    
     if($stateParams.fairID) {
         $scope.fairID = $stateParams.fairID;
     }
@@ -12,8 +13,17 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.standProfileInfo = "";
 
     $scope.saveContact = function() {
-        contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
-        alert("Contacto adicionado");
+        var userID = "";
+        $localForage.getItem('userID').then(function(response) {
+                userID = response;
+                liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID);
+                contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
+                alert("Contacto adicionado");
+            }, function(response) {
+                utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
+                $state.go('menu.listfairs');
+            }
+        );
     };
 
     //EditProfile validation variables
@@ -123,6 +133,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     }
 
     $scope.validate = function() {
+        $scope.initEmptyField();
         $scope.validateNameCallback();
         $scope.validateEmailCallback();
         $scope.validateWebsiteCallback();
@@ -230,8 +241,8 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    $scope.incrementCounter = function(id) {
-        liveFairApi.incrementCounter(id);
+    $scope.incrementCounter = function(id) { 
+        liveFairApi.incrementCounter($scope.fairID, id);
     }
 
     $scope.saveChanges = function() {
@@ -289,17 +300,13 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
     $localForage.getItem('userID').then(function(response) {
             companyID = response;
             liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(webVisitors) {
-                $scope.websiteVisitors = webVisitors;
-                liveFairApi.getCompanyWebsiteVisitors(liveFairID, companyID).then(function(match) {
+                $scope.websiteVisitors = webVisitors[1];
+                liveFairApi.getCompanyMatchesStats(liveFairID, companyID).then(function(match) {
                         $scope.matches = match;
                         liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
-                                $scope.likes = likes;
+                                $scope.likes = likes[0].count;
                                 liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
-                                        $scope.contactsEstablished = contacts;
-                                        console.log("website: " + $scope.webVisitors);
-                                        console.log("matches: " + $scope.matches);
-                                        console.log("likes: " + $scope.likes);
-                                        console.log("contactsEstablished: " + $scope.contactsEstablished);
+                                        $scope.contactsEstablished = contacts[0].count;
                                     }, function(error) {
                                         console.log(error);
                                     }

@@ -11,6 +11,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var Visitors = $resource(server.url + '/livefairs/:liveFairID/visitors', {liveFairID: '@liveFairID'});
 
+    var Profile = $resource(server.url + '/Users/:id', {id : '@id'});
 
     var Schedule = $resource(server.url + '/livefairs/:liveFairID/schedule', {liveFairID: '@liveFairID'});
 
@@ -81,6 +82,9 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         },
         getLiveFairSchedule: function(fairID) {
             return Schedule.query({liveFairID: fairID});
+        },
+        getProfile: function(userID) {
+            return Profile.query({id: userID});
         },
 
         /* NOT BEING USED

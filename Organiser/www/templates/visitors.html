@@ -48,15 +48,22 @@
 				<table class="table  table-striped table-bordered">
 					<tr>
 						<th>Email<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
+						<th>Data Registo<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Contacto<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Estado<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 					</tr>
-					<tr ng-repeat = "visitor in fairVisitorsIDs">
-						<td>{{visitor.visitorID}}</td>
-						<td>912312312</td>
-						<td>
+					<tr ng-repeat = "visitor in visitors">
+						<td>{{visitor[0].email}}</td>
+						<td>{{visitor[0].createdAt | asDate | date:'longDate'}}</td>
+						<td>{{visitor[0].contact}}</td>
+
+						<td ng-if="checkBlocked(visitor[0].blocked)">
 							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align">Activo	</button>
 						</td>
+						<td ng-if="!checkBlocked(visitor[0].blocked)">
+							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">Inactivo	</button>
+						</td>
+
 					</tr>
 				</table>
 			</div>

@@ -140,12 +140,18 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
         return;
 
     $('.inputTags').tagsinput({
-       maxTags: 5
-   }); 
+     maxTags: 5
+ }); 
 
     $scope.username = $localStorage.get('userEmail');
     $scope.userID = $localStorage.get('userID');
     $scope.listfairs = listfairs;
+
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+        }
+    }
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -165,22 +171,34 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
     $scope.loadPastFairs = function(){
         $scope.listfairs = listfairs;
+        for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+            if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+                $scope.listfairs.splice(i, 1);
+            }
+        }
+
         var pastFairs=[];
         var curdate = new Date();
         for(i = 0; i < $scope.listfairs.length; i++) {
             var fairDate = new Date($scope.listfairs[i].endDate);
             if( fairDate < curdate)
             {
-             pastFairs.push($scope.listfairs[i]);
-         }
-     }
-     $scope.listfairs=pastFairs;
-     console.log($scope.listfairs.length);
+               pastFairs.push($scope.listfairs[i]);
+           }
+       }
+       $scope.listfairs=pastFairs;
+       console.log($scope.listfairs.length);
 
- };
+   };
 
- $scope.loadNextFairs = function(){
+   $scope.loadNextFairs = function(){
     $scope.listfairs = listfairs;
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+        }
+    }
+
     var nextFairs=[];
     var curdate = new Date();
     for(i = 0; i < $scope.listfairs.length; i++) {
@@ -196,6 +214,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
 $scope.loadCurrentFairs = function(){
     $scope.listfairs = listfairs;
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+        }
+    }
+
     var nextFairs=[];
     var curdate = new Date();
     for(i = 0; i < $scope.listfairs.length; i++) {
@@ -213,6 +237,7 @@ $scope.loadCurrentFairs = function(){
 
 $scope.newFair = function(userID)
 {
+    console.log(userID);
     var organizerID = userID;
     document.getElementById('mapFile').onchange = function () {
       var mapFileName = this.value.replace(/^.*[\\\/]/, '');
@@ -229,17 +254,43 @@ $scope.newFair = function(userID)
 });
 
 module.controller('fairVisitorsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
-   $scope.username = $localStorage.get('userEmail');
-   var fairID = $stateParams.fairID;
-   $scope.fair = liveFairApi.getLiveFair(fairID);
-   $scope.fairVisitorsIDs = liveFairApi.getLiveFairVisitors(fairID);
+ $scope.username = $localStorage.get('userEmail');
+ var fairID = $stateParams.fairID;
+ $scope.fair = liveFairApi.getLiveFair(fairID);
+ liveFairApi.getLiveFairVisitors(fairID).$promise.then(function(visitorsIDs) {
+    console.log(visitorsIDs);
+
+    $scope.visitors = [];
+
+    visitorsIDs.forEach(function(e){
+        $scope.visitors.push(liveFairApi.getProfile(e.visitorID));
+    });
+
+    console.log($scope.visitors);   
+    });
+
+    $scope.checkBlocked=function(result)
+    {
+        if(result==true)
+            return true;
+        else
+            return false;
+    };
+});
+
+
+module
+.filter("asDate", function () {
+    return function (input) {
+        return new Date(input);
+    }
 });
 
 module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
-   $scope.username = $localStorage.get('userEmail');
-   var fairID = $stateParams.fairID;
-   $scope.fair = liveFairApi.getLiveFair(fairID);
-   $scope.fairCompanies = liveFairApi.getLiveFairStands(fairID);
+ $scope.username = $localStorage.get('userEmail');
+ var fairID = $stateParams.fairID;
+ $scope.fair = liveFairApi.getLiveFair(fairID);
+ $scope.fairCompanies = liveFairApi.getLiveFairStands(fairID);
 });
 
 
@@ -263,34 +314,34 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
          $scope.showDescription = false;
 
          if($scope.fair.map == null)
-             $scope.showMap = false;*/
-     };
+           $scope.showMap = false;*/
+   };
 
-     $scope.chooseInterests = function() {
-        var myPopup = $ionicPopup.show({
-            templateUrl: "interestsPopup.html",
-            title: 'Adesão',
-            scope: $scope,
-            buttons: [
-            { text: $translate.instant('cancel') },
-            {
-                text: '<b>' + $translate.instant('btnAderir') + '</b>',
-                type: 'button-positive',
-                onTap: function(e) {
-                    console.log("tapped submit button");
-                }
+   $scope.chooseInterests = function() {
+    var myPopup = $ionicPopup.show({
+        templateUrl: "interestsPopup.html",
+        title: 'Adesão',
+        scope: $scope,
+        buttons: [
+        { text: $translate.instant('cancel') },
+        {
+            text: '<b>' + $translate.instant('btnAderir') + '</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+                console.log("tapped submit button");
             }
-            ]
-        });
-    };
+        }
+        ]
+    });
+};
 
-    $scope.loadStands = function(fairID) {
-        $state.go('menu.fairStands', {fairID: fairID});
-    };
+$scope.loadStands = function(fairID) {
+    $state.go('menu.fairStands', {fairID: fairID});
+};
 
-    $scope.loadEvents = function(fairID) {
-        $state.go('menu.fairProgram', {fairID: fairID});
-    }
+$scope.loadEvents = function(fairID) {
+    $state.go('menu.fairProgram', {fairID: fairID});
+}
 
 });
 
