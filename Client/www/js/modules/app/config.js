@@ -356,7 +356,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cantCreateStandEventMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
 		'cantRemoveStandEventTitle': "Lamentamos",
 		'cantRemoveStandEventMessage': "O cancelamento do evento falhou. Por favor tente novamente mais tarde",
-		'email': "Email"
+		'email': "Email",
+		'home': "Ecrã inicial"
 	});
 
 	$translateProvider.translations('en', {
@@ -496,7 +497,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'cantCreateStandEventMessage': "Event creation failed. Please try again later.",
 		'cantRemoveStandEventTitle': "We're sorry",
 		'cantRemoveStandEventMessage': "Event cancelling failed. Please try again later.",
-		'email': "Email"
+		'email': "Email",
+		'home': "Home"
 	});
 
 	$translateProvider.useLocalStorage();
