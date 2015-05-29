@@ -57,10 +57,10 @@
 						<td>{{visitor[0].createdAt | asDate | date:'longDate'}}</td>
 						<td>{{visitor[0].contact}}</td>
 
-						<td ng-if="checkBlocked(visitor[0].blocked)">
+						<td ng-if="!checkBlocked(visitor[0].blocked)">
 							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align">Activo	</button>
 						</td>
-						<td ng-if="!checkBlocked(visitor[0].blocked)">
+						<td ng-if="checkBlocked(visitor[0].blocked)">
 							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">Inactivo	</button>
 						</td>
 
