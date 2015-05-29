@@ -16,9 +16,12 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         var userID = "";
         $localForage.getItem('userID').then(function(response) {
                 userID = response;
-                liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID);
-                contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
-                alert("Contacto adicionado");
+                liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID).$promise
+                    .then(function(profile) {
+                        contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
+                        alert("Contacto adicionado");
+                    }, function(error) {}
+                );
             }, function(response) {
                 utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
                 $state.go('menu.listfairs');
@@ -61,7 +64,8 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                 }
             }, function(error) {
                 $scope.failedToResolve = true; 
-        });
+            }
+        );
     }
 
     $scope.fetchCompanyInterests = function(companyID) {
