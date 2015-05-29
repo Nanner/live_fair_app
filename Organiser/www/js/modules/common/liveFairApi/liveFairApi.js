@@ -120,6 +120,21 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             );
         },
 
+         newLiveFairEvent: function(EventLocation, StartTime, EndTime, Speakers, Subject, LiveFairID) {
+            return $http.post(server.url + '/livefair/event/', {eventLocation: EventLocation, startTime: StartTime, endTime: EndTime,
+                speakers: Speakers, subject: Subject, liveFairEventsID: LiveFairID})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
         incrementCounter: function(companyId) {
             return IncrementCounter.save({companyID: companyId});
         }

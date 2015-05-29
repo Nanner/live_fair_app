@@ -24,8 +24,23 @@ module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
 
 });
 
-module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils) {
-    var getEventsFromSameDateMillis = function(millis, events) {
+module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, calendar, liveFairApi, schedule, utils,$localStorage) {
+   $scope.username = $localStorage.get('userEmail');
+    $scope.userID = $localStorage.get('userID');
+    $scope.fairID = $stateParams.fairID;
+
+    console.log(schedule);
+
+    $scope.schedule=schedule;
+
+    $scope.newEvent = function(fairID)
+{
+  var sDate = new Date($scope.sdate);
+  var eDate = new Date($scope.edate);
+  liveFairApi.newLiveFairEvent($scope.local, sDate, eDate, $scope.speakers, $scope.subject, fairID);
+};
+
+   /* var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
         var eventTimes = _.keys(events);
@@ -130,7 +145,7 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
                 ]
             });
     }
-
+*/
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi, $localStorage) {
@@ -167,6 +182,11 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
     $scope.loadFairCompanies=function(fairID)
     {
         $state.go('companies', {fairID: fairID});
+    };
+
+    $scope.loadFairProgram=function(fairID)
+    {
+        $state.go('program', {fairID: fairID});
     };
 
     $scope.loadPastFairs = function(){
