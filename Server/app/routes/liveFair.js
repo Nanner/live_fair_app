@@ -40,6 +40,15 @@ var LiveFairSchema = Joi.object().keys({
     interestList: Joi.array().items(Joi.string()).required()
 });
 
+var LiveFairEventSchema = Joi.object().keys({
+    eventLocation:Joi.string().required(),
+    startTime:Joi.date().required(),
+    endTime:Joi.date().required(),
+    speakers:Joi.string().required(),
+    subject:Joi.string().required(),
+    liveFairEventsID:Joi.string().required()
+});
+
 module.exports = function(server){
     server.route({
         method: 'GET',
@@ -135,7 +144,7 @@ module.exports = function(server){
                 reply(
                     Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
                     .map(function(company) {
-                        return Company.find({where: {companyID: company.companyCompanyID,approved:true}});
+                        return Company.find({where: {companyID: company.companyCompanyID}});
                     }).then(function(companies) {
                         return JSON.stringify(companies);
                     }).error(function(err){
@@ -345,7 +354,7 @@ server.route({
                 email:request.auth.credentials.dataValues.email,
                 userID:UserID
             }}).then(function (params) {
-                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID" AND stands.approved = "TRUE"',
+                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID"',
                 { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
                 {
@@ -927,6 +936,23 @@ server.route({
            strategy: 'token'
        },
        handler: function (request, reply) {
+           
+        var Schematest = {
+            eventLocation:request.payload.eventLocation,
+            startTime:request.payload.startTime,
+            endTime:request.payload.endTime,
+            speakers:request.payload.speakers,
+            subject:request.payload.subject,
+            liveFairEventsID:request.payload.liveFairEventsID
+        };   
+        
+        var validate = Joi.validate(Schematest,LiveFairEventSchema);
+
+
+        if(validate.error!==null){
+            throw new Error(validate.error.message);
+        }
+        else{  
         var eventLoc = request.payload.eventLocation;
         var eventsD = request.payload.startTime;
         var eventeD = request.payload.endTime;
@@ -952,6 +978,6 @@ server.route({
             console.log(error.message)
         });
 
-    }}});
+    }}}});
 
 };
