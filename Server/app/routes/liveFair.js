@@ -135,7 +135,7 @@ module.exports = function(server){
                 reply(
                     Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
                     .map(function(company) {
-                        return Company.find({where: {companyID: company.companyCompanyID}});
+                        return Company.find({where: {companyID: company.companyCompanyID,approved:true}});
                     }).then(function(companies) {
                         return JSON.stringify(companies);
                     }).error(function(err){
@@ -346,14 +346,14 @@ server.route({
                 email:request.auth.credentials.dataValues.email,
                 userID:UserID
             }}).then(function (params) {
-                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID"',
+                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID" AND stands.approved = "TRUE"',
                 { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
                 {
                  return JSON.stringify(companies);
              }).error(function(err){
                  console.log(err);
-                 return Boom.notFound('Live Fair User Matches not found');
+                 return Boom.notFound('No Matches found');
              }));
             }).error(function(err){
                return Boom.unauthorized(err); 
@@ -475,7 +475,7 @@ server.route({
                         'liveFairLiveFairID': LiveFairID,
                         'companyCompanyID': UserID,
                         'visitorCounter': 0,
-                        'approved': false
+                        'approved': true
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
