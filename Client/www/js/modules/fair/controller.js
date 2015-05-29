@@ -153,6 +153,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar, server, $ionicScrollDelegate) {
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
+    $scope.days = {};
 
     liveFairApi.getLiveFairStands(liveFairID).$promise
         .then(function(stands) {
@@ -405,7 +406,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
             return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
         });
 
-        $scope.selectedDay = $scope.scheduleDays[0];
+        $scope.days.selectedDay = $scope.scheduleDays[0];
     };
 
     $scope.initializeProgram = function() {
