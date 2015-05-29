@@ -155,6 +155,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.month = "";
     $scope.description = true;
     $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
     $scope.userType = "";
     $scope.participating = false;
     $scope.matches = "";
@@ -182,6 +183,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
                                 $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
+                                fillImagePath();
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
@@ -198,6 +200,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
                                 $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
+                                fillImagePath();
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
@@ -215,6 +218,13 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 liveFairApi.logout();
             }
         );
+    };
+
+    function fillImagePath() {
+        for(i = 0; i < $scope.fairStands.length; i++) {
+            $scope.fairStands[i].logoImage = server.url + "/Users/" + $scope.fairStands[i].companyID +"/image";
+            console.log($scope.fairStands[i].logoImage);
+        }
     };
 
     $scope.chooseInterests = function() {
@@ -327,8 +337,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.showSuggestedStands = function(){
         $scope.tabOption = 3;
     };
-
-    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
     $scope.loadProfile = function(id) {
         $state.go('menu.profile', {fairID: liveFairID, companyID: id});
