@@ -638,6 +638,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     $scope.scheduledEvents = schedule;
     $scope.showDelete = false;
     $scope.showDeleteButton = false;
+    $scope.days = {};
     $localForage.getItem('userID').then(function(userID) {
         if(userID === $scope.companyID) {
             $scope.showDeleteButton = true;
@@ -716,12 +717,12 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
             return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
         });
 
-        $scope.selectedDay = $scope.scheduleDays[0];
+        $scope.days.selectedDay = $scope.scheduleDays[0];
     };
 
     $scope.loadProgram($scope.scheduledEvents);
 
-    $scope.selectedDay = $scope.scheduleDays[0];
+    $scope.days.selectedDay = $scope.scheduleDays[0];
 
     $scope.loadEvent = function (fairName, event) {
         $scope.liveFairCompanyEvent = event;
@@ -782,7 +783,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                     return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
                 });
 
-                $scope.selectedDay = $scope.scheduleDays[0];
+                $scope.days.selectedDay = $scope.scheduleDays[0];
 
                 $localForage.setItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID, $scope.scheduledEvents);
 

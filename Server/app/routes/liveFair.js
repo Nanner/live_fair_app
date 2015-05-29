@@ -699,13 +699,6 @@ server.route({
                 var liveFairID=request.params.livefairID;
                 var companyID=request.params.companyID;
                 
-                Users.find({
-                    where:{
-                        email:request.auth.credentials.dataValues.email,
-                        userID:companyID,
-                        type:request.auth.credentials.dataValues.email,
-                        type:'company'
-                }}).then(function name(params) {
                     var Schematest={
                     location: request.payload.location,
                     startTime: request.payload.startTime,
@@ -742,7 +735,6 @@ server.route({
                 }})
                 .then(function(result) {
                     reply(JSON.stringify('Evento criado com sucesso'));
-                });
                 }).error(function(err) {
                   reply(Boom.unauthorized(err));  
                 }).catch(function(error) {
