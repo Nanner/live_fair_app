@@ -176,18 +176,15 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.loadFairProfile = function() {
 
         $localForage.getItem('isAuthenticated').then(function(response) {
-                if(response === true) {
+                if(response == true) {
                     $scope.loggedIn = true;
-                } else if(response === false) {
+                    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+                } else if(response == false) {
                     $scope.loggedIn = false;
                 }
             }, function(response) {}
         );
-
-        if($scope.loggedIn) {
-            $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
-        }
-
+        
         $localForage.getItem('userType').then(function(response) {
                 $scope.userType = response;
                 $localForage.getItem('userID').then(function(responseID) {
