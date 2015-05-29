@@ -222,12 +222,16 @@ module.exports = function(server){
                 }}).then(function (user) {
                     var Schematest={
                     email:request.payload.email,
-                    contact:request.payload.contact,
                     address:request.payload.address,
                     website:request.payload.website,
                     companyName:request.payload.companyName,
-                    description:request.payload.description
                 };
+                
+                if(request.payload.contact)
+                    Schematest['contact']=request.payload.contact;
+
+                if(request.payload.description)
+                    Schematest['description']=request.payload.description;
                 
                 var validate = Joi.validate(Schematest,EditSchema);
                 
@@ -236,12 +240,7 @@ module.exports = function(server){
                     throw new Error(validate.error.message);
                 }
                 else{
-                    console.log(request.payload);
-                    return User.update({
-                        'email':request.payload.email,
-                        'description':request.payload.description,
-                        'contact':request.payload.contact
-                    }, {transaction: t,
+                    return User.update(Schematest, {transaction: t,
                         where:{
                             userID : UserID
                         }})
