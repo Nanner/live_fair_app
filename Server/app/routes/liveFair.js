@@ -150,7 +150,6 @@ module.exports = function(server){
         path: '/livefairs/{id}/visitors',
         config:{
             auth: {
-                mode: 'optional',
                 strategy: 'token'
             },
             handler: function (request, reply) {
@@ -527,12 +526,12 @@ server.route({
                 var userType = user.type;
                 if(userType == "visitor") {
 
-                   console.log('estou aqui');
+  
                     VisitorLiveFair.destroy({where:{
                        'liveFairLiveFairID': LiveFairID,
                         'visitorVisitorID': UserID
                    }}).then(function(){
-                        console.log('estou aqui');
+
                          LiveFairVisitorInterest.destroy({
                             where:{
                                 'liveFairIDref':LiveFairID,
@@ -715,7 +714,7 @@ server.route({
                 else{
 
                     var ID = uuid.v4();
-                    console.log(ID+"\n");
+
                     return CompanyEvents.create({
                         'companyEventsID':ID,
                         'location':Schematest.location,
@@ -821,7 +820,7 @@ server.route({
                         type:'company'
                 }}).then(function (user) {
                                     var ID = uuid.v4();
-                console.log(ID+"\n");
+
                 return CompanyEvents.destroy({where:{
                     'companyEventsID':eventID
                 }}, {transaction: t})
