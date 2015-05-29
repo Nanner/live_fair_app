@@ -48,6 +48,7 @@
 				<table class="table table-striped table-bordered">
 					<tr>
 						<th>Nome<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
+						<th>Morada<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Email<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Website<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Visitantes<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
@@ -55,13 +56,14 @@
 					</tr>
 					<tr ng-repeat="company in fairCompanies">
 						<td>{{company.companyName}}</td>
-						<td>amt@gmail.com</td>
-						<td>{{company.website}}</td>
+						<td>{{company.address}}</td>
+						<td>{{companies[0][$index].email}}</td>
+						<td><a ng-href="{{company.website}}" target="_blank">{{company.website}}<a></td>
 						<td>{{company.visitorCounter}}</td>
-						<td ng-if="checkBlocked(visitor[0].blocked)">
+						<td ng-if="!checkBlocked(companies[0][$index].blocked)">
 							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align">Activo	</button>
 						</td>
-						<td ng-if="!checkBlocked(visitor[0].blocked)">
+						<td ng-if="checkBlocked(companies[0][$index].blocked)">
 							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">Inactivo	</button>
 						</td>
 					</tr>

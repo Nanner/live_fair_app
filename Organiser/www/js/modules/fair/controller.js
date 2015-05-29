@@ -290,9 +290,28 @@ module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, u
  $scope.username = $localStorage.get('userEmail');
  var fairID = $stateParams.fairID;
  $scope.fair = liveFairApi.getLiveFair(fairID);
- $scope.fairCompanies = liveFairApi.getLiveFairStands(fairID);
-});
 
+  liveFairApi.getLiveFairStands(fairID).$promise.then(function(fairCompanies) {
+
+    $scope.fairCompanies = fairCompanies;
+    $scope.companies = [];
+
+    fairCompanies.forEach(function(e){
+        $scope.companies.push(liveFairApi.getProfile(e.companyID));
+    });
+
+    console.log($scope.companies);   
+    });
+
+
+    $scope.checkBlocked=function(result)
+    {
+        if(result==true)
+            return true;
+        else
+            return false;
+    };
+});
 
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi,$translate) {
 
