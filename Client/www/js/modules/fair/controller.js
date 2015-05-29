@@ -410,6 +410,18 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 },
             ]
         });
+    };
+
+    $scope.showOwnStandEvents = function(fairID) {
+        $localForage.getItem('userID').then(function(userID) {
+            if(!userID) {
+                utils.showAlert($translate.instant('ownStandEventsProblem'), $translate.instant('error'));
+            }
+            else
+                $state.go('menu.standProgram', {fairID: fairID, companyID: userID});
+        }, function(error) {
+            utils.showAlert($translate.instant('ownStandEventsProblem'), $translate.instant('error'));
+        });
     }
 });
 
@@ -425,10 +437,10 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
                     $scope.stands = data;
                     $scope.fairName = utils.getFairName();
                 }, function(error) {
-                    utils.showAlert($translate.instant('notPossibleMatches'), "Erro");
+                    utils.showAlert($translate.instant('notPossibleMatches'), $translate.instant('error'));
             });
         }, function(response) {
-            utils.showAlert($translate.instant('sessionExpired'), "Error");
+            utils.showAlert($translate.instant('sessionExpired'), $translate.instant('error'));
             $state.go('menu.home');
             liveFairApi.logout();
         }
@@ -579,6 +591,8 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 });
 
 module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils, $localForage) {
+    $scope.companyID = $stateParams.companyID;
+
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];

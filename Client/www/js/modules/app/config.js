@@ -345,7 +345,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'homeScreen': "Início",
 		'login': "Iniciar sessão",
 		'registration': "Registo",
-		'standProgram': "Programação de stand"
+		'standProgram': "Programação de stand",
+		'error': "Erro",
+		'ownStandEventsProblem': "Problema a carregar eventos. Tente novamente mais tarde",
+		'btnViewOwnStandEvents': "Listar eventos próprios"
 	});
 
 	$translateProvider.translations('en', {
@@ -475,7 +478,10 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'homeScreen': "Home",
 		'login': "Login",
 		'registration': "Registration",
-		'standProgram': "Stand program"
+		'standProgram': "Stand program",
+		'error': "Error",
+		'ownStandEventsProblem': "Problem loading events. Please try again later.",
+		'btnViewOwnStandEvents': "View own stand events"
 	});
 
 	$translateProvider.useLocalStorage();
