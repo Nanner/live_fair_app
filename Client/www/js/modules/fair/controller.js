@@ -441,7 +441,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         }, function(error) {
             utils.showAlert($translate.instant('ownStandEventsProblem'), $translate.instant('error'));
         });
-    }
+    };
 });
 
 module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
@@ -611,6 +611,14 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
 
 module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $ionicPopup, calendar, liveFairApi, _, schedule, utils, $localForage) {
     $scope.companyID = $stateParams.companyID;
+    $scope.scheduledEvents = schedule;
+    $scope.showDelete = false;
+    $scope.showDeleteButton = false;
+    $localForage.getItem('userID').then(function(userID) {
+        if(userID === $scope.companyID) {
+            $scope.showDeleteButton = true;
+        }
+    });
 
     var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
@@ -687,7 +695,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         $scope.selectedDay = $scope.scheduleDays[0];
     };
 
-    $scope.loadProgram(schedule);
+    $scope.loadProgram($scope.scheduledEvents);
 
     $scope.selectedDay = $scope.scheduleDays[0];
 
@@ -714,9 +722,52 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                     onTap: function (e) {
                         console.log("tapped button");
                     }
-                },
+                }
             ]
         });
+    };
+
+    $scope.removeStandEvent = function(eventID) {
+        liveFairApi.removeStandEvent($stateParams.fairID, $stateParams.companyID, eventID).$promise
+            .then(function() {
+                $scope.scheduledEvents = _.filter($scope.scheduledEvents, function(event) {
+                    return event.companyEventsID !== eventID;
+                });
+
+                $scope.schedule = _.chain($scope.scheduledEvents)
+                    .sortBy(function (event) {
+                        return event.startTime;
+                    })
+                    .groupBy(function (event) {
+                        return event.startTime;
+                    }).value();
+
+                $scope.scheduleDays = _.chain($scope.scheduledEvents)
+                    .sortBy(function (event) {
+                        return event.startTime;
+                    })
+                    .map(function (event) {
+                        var time = new Date(event.startTime);
+                        return (Date.parse(utils.getDayMonthYearDate(time)));
+                    })
+                    .unique()
+                    .value();
+
+                $scope.scheduleOrganizedByDay = [];
+                _.forEach($scope.scheduleDays, function (day) {
+                    return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
+                });
+
+                $scope.selectedDay = $scope.scheduleDays[0];
+
+                $localForage.setItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID, $scope.scheduledEvents);
+
+            }, function(error) {
+                $ionicPopup.alert({
+                    title: $translate.instant('cantRemoveStandEventTitle'),
+                    template: '<p class="text-center">' + $translate.instant("cantRemoveStandEventMessage") + '</p>'
+                });
+            });
     }
 });
 

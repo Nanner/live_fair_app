@@ -24,23 +24,23 @@
 
             <ion-refresher pulling-text="Pull to refresh" on-refresh="reloadProgram()">
             </ion-refresher>
-            <label class="item item-input item-select item-positive">
+            <div class="item item-input item-select item-positive padding" style="padding-left: 2%;" ng-hide="!scheduleDays.length || failedToResolve">
+                <button class="button button-icon button-calm icon ion-trash-a" ng-click="showDelete = !showDelete;" ng-show="showDeleteButton"></button>
                 <div class="input-label">
                     {{ 'programDay' | translate }}
                 </div>
                 <select ng-model="selectedDay">
                     <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
                 </select>
-            </label>
-            <ion-list show-delete="true" ng-hide="!scheduleDays.length || failedToResolve">
+            </div>
+            <ion-list ng-hide="!scheduleDays.length || failedToResolve" show-delete="showDelete">
                 <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
                     <ion-item class="item item-divider event-time item-borderless">
                         <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
                     </ion-item>
                     <ion-item class="item item-text-wrap" ng-click="loadEvent(fair.name, event)" ng-repeat="event in eventTime.eventTimeEvents">
                         {{event.subject}}
-                        <ion-delete-button class="ion-ios-minus-outline"
-                                           ng-click="eventTime.eventTimeEvents.splice($index, 1)">
+                        <ion-delete-button class="ion-trash-a" ng-click="removeStandEvent(event.companyEventsID)">
                         </ion-delete-button>
                     </ion-item>
                 </div>
