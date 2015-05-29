@@ -151,14 +151,22 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar, server, $ionicScrollDelegate) {
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
+
+    liveFairApi.getLiveFairStands(liveFairID).$promise
+        .then(function(stands) {
+            $scope.fairStands = stands;
+            fillImagePath();
+        }, function(error) {}
+    );
+
     $scope.hideMap = false;
     $scope.month = "";
     $scope.description = true;
-    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
     $scope.userType = "";
     $scope.participating = false;
     $scope.matches = "";
     $scope.mapSource = "";
+    $scope.loggedIn = false;
     $scope.tabOption = 1;
 
     $scope.toggleHideMap = function() {
@@ -166,6 +174,17 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     };
 
     $scope.loadFairProfile = function() {
+
+        $localForage.getItem('isAuthenticated').then(function(response) {
+                if(response == true) {
+                    $scope.loggedIn = true;
+                    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+                } else if(response == false) {
+                    $scope.loggedIn = false;
+                }
+            }, function(response) {}
+        );
+        
         $localForage.getItem('userType').then(function(response) {
                 $scope.userType = response;
                 $localForage.getItem('userID').then(function(responseID) {
@@ -181,7 +200,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
-                                $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
@@ -197,7 +215,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
-                                $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
@@ -215,6 +232,13 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 liveFairApi.logout();
             }
         );
+    };
+
+    function fillImagePath() {
+        $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
+        for(i = 0; i < $scope.fairStands.length; i++) {
+            $scope.fairStands[i].logoImagePath = server.url + "/Users/" + $scope.fairStands[i].companyID +"/image";
+        }
     };
 
     $scope.chooseInterests = function() {
@@ -330,8 +354,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $scope.tabOption = 3;
         $ionicScrollDelegate.resize();
     };
-
-    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
 
     $scope.loadProfile = function(id) {
         $state.go('menu.profile', {fairID: liveFairID, companyID: id});
@@ -476,18 +498,18 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
 
 
-        $scope.loadFairs = function() {
-            utils.showLoadingPopup();
-            liveFairApi.getLiveFairs().$promise
-                .then(function(liveFairs) {
-                    $scope.listfairs = liveFairs;
-                    utils.hideLoadingPopup();
-                    $scope.failedToResolve = false;
-                }, function(error) {
-                    utils.hideLoadingPopup();
-                    $scope.failedToResolve = true;
-            });
-        }
+    $scope.loadFairs = function() {
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairs().$promise
+            .then(function(liveFairs) {
+                $scope.listfairs = liveFairs;
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = false;
+            }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.failedToResolve = true;
+        });
+    }
 
     $scope.startDate = "";
     $scope.endDate = "";

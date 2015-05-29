@@ -4,7 +4,6 @@
         <!-- Content -->
         <div class="fair-container" ng-init="loadFairProfile()">
             <h2 class="fair-title"> {{fair.name}} </h2>
-            <!--isto vai sair, ficar numa tab que abre a localizacao-->
             <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.local}} </h4>
         </div>
 
@@ -53,7 +52,7 @@
                 <div class="list">
                     <div ng-repeat="stand in fairStands">
                         <a class="item list-inset item-thumbnail-left" ng-click="loadProfile(stand.companyID)">
-                            <img no-image ng-src="{{stand.logoImage}}">
+                            <img no-image ng-src="{{stand.logoImagePath}}">
                             <h2>{{stand.companyName}}</h2>
                             <p>{{stand.website}}</p>
                         </a>
@@ -135,7 +134,7 @@
 
         </div>
 
-        <div class="padding">
+        <div class="padding" ng-show="loggedIn">
             <div ng-show="participating">
                 <button nav-clear ng-click="getMatches(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
                     {{ 'matches' | translate }}
