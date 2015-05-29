@@ -40,6 +40,15 @@ var LiveFairSchema = Joi.object().keys({
     interestList: Joi.array().items(Joi.string()).required()
 });
 
+var LiveFairEventSchema = Joi.object().keys({
+    eventLocation:Joi.string().required(),
+    startTime:Joi.date().required(),
+    endTime:Joi.date().required(),
+    speakers:Joi.string().required(),
+    subject:Joi.string().required(),
+    liveFairEventsID:Joi.string().required()
+});
+
 module.exports = function(server){
     server.route({
         method: 'GET',
@@ -927,6 +936,23 @@ server.route({
            strategy: 'token'
        },
        handler: function (request, reply) {
+           
+        var Schematest = {
+            eventLocation:request.payload.eventLocation,
+            startTime:request.payload.startTime,
+            endTime:request.payload.endTime,
+            speakers:request.payload.speakers,
+            subject:request.payload.subject,
+            liveFairEventsID:request.payload.liveFairEventsID
+        };   
+        
+        var validate = Joi.validate(Schematest,LiveFairEventSchema);
+
+
+        if(validate.error!==null){
+            throw new Error(validate.error.message);
+        }
+        else{  
         var eventLoc = request.payload.eventLocation;
         var eventsD = request.payload.startTime;
         var eventeD = request.payload.endTime;
@@ -952,6 +978,6 @@ server.route({
             console.log(error.message)
         });
 
-    }}});
+    }}}});
 
 };
