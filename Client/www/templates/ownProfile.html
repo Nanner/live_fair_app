@@ -13,7 +13,6 @@
 
             <div class="profile-title-container">
                 <h4 class="profile-name"> {{standProfileInfo[1].companyName}} </h4>
-                <a class="stand-website" ng-show="existsWebsite" href="{{standProfileInfo[1].website}}" ng-click="incrementCounter(standProfileInfo.id)">{{ 'webpage' | translate }}</a>
             </div>
         </div>
 
@@ -27,12 +26,6 @@
                 <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}: </span></strong> {{standProfileInfo[1].address || 'ownNoAddress' | translate}} </p>
                 <p> <strong> <span class="item-info-desc"> {{ 'email' | translate }}: </span></strong> {{standProfileInfo[0].email || 'ownNoAddress' | translate}} </p>
             </div>
-        </div>
-
-        <div class="profile-btn-Container">
-            <button nav-clear class="save-contact-btn button button-calm">
-                {{ 'btnOwnStandEvents' | translate }}
-            </button>
         </div>
 
     </ion-content>
