@@ -1,0 +1,135 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top  blue-navbar" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/livefairs"> <img style="max-width:40px; margin-top: -7px; border:3px solid white;" src="images\LiveFair.jpg" ></a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#/livefairs">My Live Fairs</a>
+				</li>
+				<li>
+					<a>{{username}}</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container -->
+</nav>
+
+<div class="container">
+	<!-- Page Heading -->
+	<div class="row page-header">
+		<div class="col-lg-12 text-center">
+			<div class="btn-group top-5" data-toggle="buttons">
+				<button class="btn btn-success" data-toggle="modal" data-target="#newFairModal">Novo Evento</button>
+			</div>
+		</div>
+	</div>
+	<!-- /.row -->
+
+	<!-- Projects Row -->
+	<div class="row">
+			<div class="col-lg-3 text-center">
+
+			</div>
+			<div class="col-lg-6 text-center">
+					<table class="table  table-striped table-bordered">
+					<tr>
+						<th>Hora<span aria-hidden="true"></span></th>
+						<th>Evento<span aria-hidden="true"></span></th>
+						<th>Local<span aria-hidden="true"></span></th>
+					</tr>
+					<tr ng-repeat = "event in schedule">
+						<td>{{event.startTime  | asDate | date:'shortTime'}}</td>
+						<td><b>{{event.subject}}</b><br>
+							{{event.speakers}}
+						</td>
+						<td>{{event.eventLocation}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-lg-3 text-center">
+
+			</div>
+	</div>
+	<!-- /.row -->
+
+
+	<div class="modal fade" id="newFairModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Novo Evento</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-tag"></span></span>
+									<input type="text" class="form-control" placeholder="Tema do Evento" ng-model="subject">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-envelope"></span></span>
+									<input type="text" class="form-control" placeholder="Oradores do Evento" ng-model="speakers">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-star"></span></span>
+									<input type="text" class="form-control" placeholder="Local do Evento" ng-model="local">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-calendar"></span></span>
+									<input placeholder="Hora Início" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" class="form-control" ng-model="sdate">
+									<input placeholder="Hora Fim" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" class="form-control" ng-model="edate">
+								</div>
+							</div>
+						</div>
+
+						<br>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="newEvent(fairID)">Criar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+</div>
+
+<!-- Footer -->
+		<footer>
+			<div class="row text-center">
+				<div class="col-lg-12">
+					<img class="img-footer" src="images\LiveFair.jpg" alt="" width="80" height="60">
+					<img class="img-footer left-5" src="images\Lettuce.jpg" alt="" width="60" height="60">
+				</div>
+			</div>
+			<!-- /.row -->
+		</footer>

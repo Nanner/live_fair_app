@@ -35,6 +35,21 @@ module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 					templateUrl: "templates/companies.html",
 					controller: "fairCompaniesCtrl"
 				})
+		.state('program', {
+					url: "/:fairID/program",
+					templateUrl: "templates/program.html",
+					controller: "fairProgramCtrl",
+		resolve: {
+				schedule: function(liveFairApi, $stateParams) {
+					return liveFairApi.getLiveFairSchedule($stateParams.fairID).$promise
+						.then(function(schedule) {
+							return schedule;
+						}, function(error) {
+							return "failed to resolve";
+						});
+				}
+			}
+				})
 		/*.state('menu.register', {
 			url: "/register",
 			views: {

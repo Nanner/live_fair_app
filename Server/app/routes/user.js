@@ -26,7 +26,7 @@ var EditSchema = Joi.object().keys({
     email: Joi.string().email().required(),
     contact: Joi.string().regex(/(^\+\d{12}$)|(^\d{9,10}$)/),
     address: Joi.string().required(),
-    website: Joi.string().regex(/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
+    website: Joi.string().regex(/^((http(?:s)?\:\/\/)?[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/).required(),
     companyName: Joi.string().required(),
     description:Joi.string()
 });
@@ -56,7 +56,7 @@ module.exports = function(server){
         path: '/register',
         config:{
             auth: {
-                mode: 'optional',
+               mode: 'optional',
                strategy: 'token'
            },
         handler: function(request, reply) {
@@ -196,7 +196,8 @@ module.exports = function(server){
                     companyID: UserID
                 }}).then(function(company)
             {
-                reply.file('./images/profiles/'+company.logoImage);
+                console.log(company.logoImage);
+                reply.file('./app/images/profiles/'+company.logoImage);
             });
         }}
     });
@@ -206,21 +207,30 @@ module.exports = function(server){
         path: '/Users/{UserID}/update',
         config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
             var UserID = request.params.UserID;
             if (request.method === 'post') {
                 
-                var Schematest={
+                
+                User.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:UserID
+                }}).then(function (user) {
+                    var Schematest={
                     email:request.payload.email,
-                    contact:request.payload.contact,
                     address:request.payload.address,
                     website:request.payload.website,
                     companyName:request.payload.companyName,
-                    description:request.payload.description
                 };
+                
+                if(request.payload.contact)
+                    Schematest['contact']=request.payload.contact;
+
+                if(request.payload.description)
+                    Schematest['description']=request.payload.description;
                 
                 var validate = Joi.validate(Schematest,EditSchema);
                 
@@ -229,12 +239,7 @@ module.exports = function(server){
                     throw new Error(validate.error.message);
                 }
                 else{
-                    console.log(request.payload);
-                    return User.update({
-                        'email':request.payload.email,
-                        'description':request.payload.description,
-                        'contact':request.payload.contact
-                    }, {transaction: t,
+                    return User.update(Schematest, {transaction: t,
                         where:{
                             userID : UserID
                         }})
@@ -253,8 +258,10 @@ module.exports = function(server){
                 }})
                 .then(function(result) {
                     reply(JSON.stringify('Alteração Registo Bem Sucedida'));
-                })
-                .catch(function(error) {
+                });
+                }).error(function (err) {
+                    reply(Boom.unauthorized(err));
+                }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
                 });
         }
@@ -284,17 +291,22 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
-            var validateSchema={password:request.payload.password,oldPassword:request.payload.oldPassword};
+            var UserID = request.params.UserID;
+            
+             User.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:UserID
+                }}).then(function (user) {
+                                var validateSchema={password:request.payload.password,oldPassword:request.payload.oldPassword};
             var result=Joi.validate(validateSchema,ChangePasswordSchema);
             if(result.error!==null){
                 throw new Error(result.error.message);
             }
             else{
-                var UserID = request.params.UserID;
                 var passHash=crypto.createHash('sha512');
                 var oldPassHash=crypto.createHash('sha512');
                 oldPassHash.update(request.payload.oldPassword);
@@ -310,6 +322,10 @@ module.exports = function(server){
                     reply(Boom.badRequest(error.message));
                 }));
             }
+           }).error(function (err) {
+               reply(Boom.unauthorized(err));
+           });
+            
         }}
     });
     
@@ -321,11 +337,18 @@ module.exports = function(server){
                strategy: 'token'
            },
             handler: function (request, reply) {
+            var UserID = request.params.UserID;
             if(!request.payload.image || !request.payload.imageName){
                throw new Error('Missing critical fields');
             }
             else{
-                var UserID = request.params.UserID;
+                
+                  User.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:UserID
+                }}).then(function (User) {
+                  
                 reply (Company.update({
                     'logoImage':request.payload.imageName
                 },{
@@ -343,7 +366,12 @@ module.exports = function(server){
                     return JSON.stringify('Ficheiro Guardado com sucesso');
                 }).catch(function(error) {
                     reply(Boom.badRequest(error.message));
-                }));
+                })); 
+                }).error(function (err) {
+                   reply(Boom.unauthorized(err)); 
+                });
+                
+                
             }
         }}
     });
@@ -353,7 +381,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorites',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -380,7 +407,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorite/{CompanyID}',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -471,7 +497,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/recommendations',
         config:{
             auth: {
-                mode:'optional',
 				strategy: 'token'
 			},
             handler: function (request, reply) {

@@ -1,6 +1,6 @@
 var module = angular.module('profileModule');
 
-module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, utils, contacts, camera, liveFairApi) {
+module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, server, utils, contacts, camera, liveFairApi) {
     
     if($stateParams.fairID) {
         $scope.fairID = $stateParams.fairID;
@@ -38,6 +38,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.newPassword = "";
     $scope.confirmNewPassword = "";
     $scope.interestsList = "";
+    $scope.imgSource = "";
 
     var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
     var messageToDisplay = [0,0,0,0,0];
@@ -47,6 +48,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
             .then(function(profile) {
+                $scope.imgSource = server.url + "/Users/" + profileID +"/image";
                 $scope.standProfileInfo = profile;
                 console.log(profile);
                 $scope.failedToResolve = false;
@@ -178,7 +180,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     }
 
     $scope.validateWebsiteCallback = function() {
-        var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;     
+        var pattern = /^((http(?:s)?\:\/\/)?[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
         if($scope.standProfileInfo[1].website.length === 0) {
             $scope.valWebsite = "neutral-icon";
             messageToDisplay[2] = 0;

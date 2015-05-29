@@ -94,7 +94,6 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
 
     $scope.validateEmailCallback = function() {
         var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
         if(!$scope.mail || $scope.mail.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[3] = 0;
@@ -111,7 +110,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     }
 
     $scope.validateWebsiteCallback = function() {
-        var pattern = /^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
+        var pattern = /^((http(?:s)?\:\/\/)?[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/;
         if($scope.website.length === 0) {
             $scope.valWebsite = "neutral-icon";
             messageToDisplay[4] = 0;
