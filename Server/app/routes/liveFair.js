@@ -919,5 +919,40 @@ server.route({
 
     }}}});
 
+server.route({
+    method: 'POST',
+    path: '/livefair/event/',
+    config:{
+        auth: {
+           mode: 'optional',
+           strategy: 'token'
+       },
+       handler: function (request, reply) {
+        var eventLoc = request.payload.eventLocation;
+        var eventsD = request.payload.startTime;
+        var eventeD = request.payload.endTime;
+        var eventStart = new Date(eventsD);
+        var eventEnd = new Date(eventeD);
+        var eventSpe = request.payload.speakers;
+        var eventSub = request.payload.subject;
+        var fairID = request.payload.liveFairEventsID;
+
+        LiveFairEvents.create({
+         'eventLocation':eventLoc,
+         'startTime':eventStart,
+         'endTime':eventEnd,
+         'speakers':eventSpe,
+         'subject':eventSub,
+         'liveFairEventsID':fairID
+     })
+        .then(function(result) {
+            reply(JSON.stringify('Evento Live Fair criado com sucesso'));
+        })
+        .catch(function(error) {
+            reply(Boom.badRequest(error.message));
+            console.log(error.message)
+        });
+
+    }}});
 
 };
