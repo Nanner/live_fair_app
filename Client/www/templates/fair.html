@@ -82,11 +82,11 @@
                             <div class="input-label">
                                 {{ 'programDay' | translate }}
                             </div>
-                            <select ng-model="selectedDay">
+                            <select ng-model="days.selectedDay">
                                 <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
                             </select>
                         </label>
-                        <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                        <div ng-repeat = "eventTime in scheduleOrganizedByDay[days.selectedDay]">
                             <div class="item item-divider event-time item-borderless">
                                 <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
                             </div>
