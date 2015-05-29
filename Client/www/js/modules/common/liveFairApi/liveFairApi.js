@@ -25,6 +25,8 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
 
     var NoSubscription = $resource(server.url + '/livefairs/:fairID/interests/:userID/cancel', {fairID: '@fairID', userID: '@userID'});
 
+    var DeleteStandEvent = $resource(server.url + '/livefairs/:fairID/companies/:companyID/events/:eventID/delete', {fairID: '@fairID', companyID: '@companyID', eventID: '@eventID'});
+
     var api = {
 
         login: function(username, password) {
@@ -337,6 +339,10 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                 }
             );
             return deferred.promise;
+        },
+
+        removeStandEvent: function(liveFairID, companyID, eventID) {
+            return DeleteStandEvent.save({fairID: liveFairID, companyID: companyID, eventID: eventID});
         }
     };
 

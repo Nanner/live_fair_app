@@ -56,7 +56,7 @@ module.exports = function(server){
         path: '/register',
         config:{
             auth: {
-                mode: 'optional',
+               mode: 'optional',
                strategy: 'token'
            },
         handler: function(request, reply) {
@@ -207,7 +207,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/update',
         config:{
             auth: {
-               mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -222,12 +221,16 @@ module.exports = function(server){
                 }}).then(function (user) {
                     var Schematest={
                     email:request.payload.email,
-                    contact:request.payload.contact,
                     address:request.payload.address,
                     website:request.payload.website,
                     companyName:request.payload.companyName,
-                    description:request.payload.description
                 };
+                
+                if(request.payload.contact)
+                    Schematest['contact']=request.payload.contact;
+
+                if(request.payload.description)
+                    Schematest['description']=request.payload.description;
                 
                 var validate = Joi.validate(Schematest,EditSchema);
                 
@@ -236,12 +239,7 @@ module.exports = function(server){
                     throw new Error(validate.error.message);
                 }
                 else{
-                    console.log(request.payload);
-                    return User.update({
-                        'email':request.payload.email,
-                        'description':request.payload.description,
-                        'contact':request.payload.contact
-                    }, {transaction: t,
+                    return User.update(Schematest, {transaction: t,
                         where:{
                             userID : UserID
                         }})
@@ -293,7 +291,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/update/password',
         config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
         handler: function (request, reply) {
@@ -384,7 +381,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorites',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -411,7 +407,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/favorite/{CompanyID}',
          config:{
             auth: {
-                mode:'optional',
                strategy: 'token'
            },
             handler: function (request, reply) {
@@ -502,7 +497,6 @@ module.exports = function(server){
         path: '/Users/{UserID}/recommendations',
         config:{
             auth: {
-                mode:'optional',
 				strategy: 'token'
 			},
             handler: function (request, reply) {

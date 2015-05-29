@@ -24,26 +24,27 @@
 
             <ion-refresher pulling-text="Pull to refresh" on-refresh="reloadProgram()">
             </ion-refresher>
-            <div class="list" ng-hide="!scheduleDays.length || failedToResolve">
-                <label class="item item-input item-select item-positive">
-                    <div class="input-label">
-                        {{ 'programDay' | translate }}
-                    </div>
-                    <select ng-model="selectedDay">
-                        <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
-                    </select>
-                </label>
-                <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
-                    <div class="item item-divider event-time item-borderless">
-                        <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
-                    </div>
-                    <div ng-repeat="event in eventTime.eventTimeEvents">
-                        <div class="item item-text-wrap" ng-click="loadEvent(fair.name, event)">
-                            {{event.subject}}
-                        </div>
-                    </div>
+            <div class="item item-input item-select item-positive padding" style="padding-left: 2%;" ng-hide="!scheduleDays.length || failedToResolve">
+                <button class="button button-icon button-calm icon ion-trash-a" ng-click="showDelete = !showDelete;" ng-show="showDeleteButton"></button>
+                <div class="input-label">
+                    {{ 'programDay' | translate }}
                 </div>
+                <select ng-model="selectedDay">
+                    <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
+                </select>
             </div>
+            <ion-list ng-hide="!scheduleDays.length || failedToResolve" show-delete="showDelete">
+                <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                    <ion-item class="item item-divider event-time item-borderless">
+                        <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
+                    </ion-item>
+                    <ion-item class="item item-text-wrap" ng-click="loadEvent(fair.name, event)" ng-repeat="event in eventTime.eventTimeEvents">
+                        {{event.subject}}
+                        <ion-delete-button class="ion-trash-a" ng-click="removeStandEvent(event.companyEventsID)">
+                        </ion-delete-button>
+                    </ion-item>
+                </div>
+            </ion-list>
 
             <script id="eventPopup.html" type="text/ng-template">
                 <div class="list card item-text-wrap">
@@ -67,11 +68,11 @@
                         </p>
                         <p>
                             <strong>{{ 'place' | translate }}:</strong>
-                            <p>{{liveFairCompanyEvent.location}}</p>
+                        <p>{{liveFairCompanyEvent.location}}</p>
                         </p>
                         <p>
                             <strong>{{ 'speakers' | translate }}:</strong>
-                            <p>{{liveFairCompanyEvent.speakers}}</p>
+                        <p>{{liveFairCompanyEvent.speakers}}</p>
                         </p>
                     </div>
                 </div>

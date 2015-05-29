@@ -40,6 +40,15 @@ var LiveFairSchema = Joi.object().keys({
     interestList: Joi.array().items(Joi.string()).required()
 });
 
+var LiveFairEventSchema = Joi.object().keys({
+    eventLocation:Joi.string().required(),
+    startTime:Joi.date().required(),
+    endTime:Joi.date().required(),
+    speakers:Joi.string().required(),
+    subject:Joi.string().required(),
+    liveFairEventsID:Joi.string().required()
+});
+
 module.exports = function(server){
     server.route({
         method: 'GET',
@@ -50,7 +59,7 @@ module.exports = function(server){
                 strategy: 'token'
             },
             handler: function (request, reply) {
-                reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
+                reply(LiveFair.findAll({order:'"startDate" ASC'}).then(function(liveFairs)
                 {
                     return JSON.stringify(liveFairs);
                 }).error(function(err){
@@ -135,7 +144,7 @@ module.exports = function(server){
                 reply(
                     Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
                     .map(function(company) {
-                        return Company.find({where: {companyID: company.companyCompanyID,approved:true}});
+                        return Company.find({where: {companyID: company.companyCompanyID}});
                     }).then(function(companies) {
                         return JSON.stringify(companies);
                     }).error(function(err){
@@ -150,7 +159,6 @@ module.exports = function(server){
         path: '/livefairs/{id}/visitors',
         config:{
             auth: {
-                mode: 'optional',
                 strategy: 'token'
             },
             handler: function (request, reply) {
@@ -346,7 +354,7 @@ server.route({
                 email:request.auth.credentials.dataValues.email,
                 userID:UserID
             }}).then(function (params) {
-                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID" AND stands.approved = "TRUE"',
+                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID"',
                 { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
                 {
@@ -527,12 +535,12 @@ server.route({
                 var userType = user.type;
                 if(userType == "visitor") {
 
-                   console.log('estou aqui');
+  
                     VisitorLiveFair.destroy({where:{
                        'liveFairLiveFairID': LiveFairID,
                         'visitorVisitorID': UserID
                    }}).then(function(){
-                        console.log('estou aqui');
+
                          LiveFairVisitorInterest.destroy({
                             where:{
                                 'liveFairIDref':LiveFairID,
@@ -715,7 +723,7 @@ server.route({
                 else{
 
                     var ID = uuid.v4();
-                    console.log(ID+"\n");
+
                     return CompanyEvents.create({
                         'companyEventsID':ID,
                         'location':Schematest.location,
@@ -821,7 +829,7 @@ server.route({
                         type:'company'
                 }}).then(function (user) {
                                     var ID = uuid.v4();
-                console.log(ID+"\n");
+
                 return CompanyEvents.destroy({where:{
                     'companyEventsID':eventID
                 }}, {transaction: t})
@@ -919,5 +927,57 @@ server.route({
 
     }}}});
 
+server.route({
+    method: 'POST',
+    path: '/livefair/event/',
+    config:{
+        auth: {
+           mode: 'optional',
+           strategy: 'token'
+       },
+       handler: function (request, reply) {
+           
+        var Schematest = {
+            eventLocation:request.payload.eventLocation,
+            startTime:request.payload.startTime,
+            endTime:request.payload.endTime,
+            speakers:request.payload.speakers,
+            subject:request.payload.subject,
+            liveFairEventsID:request.payload.liveFairEventsID
+        };   
+        
+        var validate = Joi.validate(Schematest,LiveFairEventSchema);
+
+
+        if(validate.error!==null){
+            throw new Error(validate.error.message);
+        }
+        else{  
+        var eventLoc = request.payload.eventLocation;
+        var eventsD = request.payload.startTime;
+        var eventeD = request.payload.endTime;
+        var eventStart = new Date(eventsD);
+        var eventEnd = new Date(eventeD);
+        var eventSpe = request.payload.speakers;
+        var eventSub = request.payload.subject;
+        var fairID = request.payload.liveFairEventsID;
+
+        LiveFairEvents.create({
+         'eventLocation':eventLoc,
+         'startTime':eventStart,
+         'endTime':eventEnd,
+         'speakers':eventSpe,
+         'subject':eventSub,
+         'liveFairEventsID':fairID
+     })
+        .then(function(result) {
+            reply(JSON.stringify('Evento Live Fair criado com sucesso'));
+        })
+        .catch(function(error) {
+            reply(Boom.badRequest(error.message));
+            console.log(error.message)
+        });
+
+    }}}});
 
 };

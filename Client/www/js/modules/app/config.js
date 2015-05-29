@@ -131,7 +131,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 								});
 						});
 				}
-			}
+			},
+			cache: false
 		})
 		.state('menu.ownProfile', {
 			url: "/companies/:companyID",
@@ -346,8 +347,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'login': "Iniciar sessão",
 		'registration': "Registo",
 		'standProgram': "Programação de stand",
+		'error': "Erro",
+		'ownStandEventsProblem': "Problema a carregar eventos. Tente novamente mais tarde",
+		'btnViewOwnStandEvents': "Eventos próprios",
 		'impCancelarParticipacao': "Foi impossível cancelar a sua participação",
 		'pCancelarParticipacao': "A sua participação foi cancelada",
+		'cantCreateStandEventTitle': "Lamentamos",
+		'cantCreateStandEventMessage': "Criação de evento falhou. Por favor tente novamente mais tarde",
+		'cantRemoveStandEventTitle': "Lamentamos",
+		'cantRemoveStandEventMessage': "O cancelamento do evento falhou. Por favor tente novamente mais tarde",
 		'email': "Email"
 	});
 
@@ -479,8 +487,15 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'login': "Login",
 		'registration': "Registration",
 		'standProgram': "Stand program",
+		'error': "Error",
+		'ownStandEventsProblem': "Problem loading events. Please try again later.",
+		'btnViewOwnStandEvents': "Own events",
 		'impCancelarParticipacao': "It was no possible to delete your subscription",
 		'pCancelarParticipacao': "Your participation has been suspended",
+		'cantCreateStandEventTitle': "We're sorry",
+		'cantCreateStandEventMessage': "Event creation failed. Please try again later.",
+		'cantRemoveStandEventTitle': "We're sorry",
+		'cantRemoveStandEventMessage': "Event cancelling failed. Please try again later.",
 		'email': "Email"
 	});
 
