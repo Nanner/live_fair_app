@@ -9,7 +9,7 @@
 
             <!--editar o container, botao de opçoes interfere com formataçao-->
             <div class="profile-img-container">
-                <img no-image class="fair-map" ng-src="{{standProfileInfo.logo}}"/>
+                <img no-image class="fair-map" ng-src="{{imgSource}}"/>
             </div>
 
             <div class="profile-title-container">
@@ -29,6 +29,7 @@
                 <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[0].description || 'lackInfoCompany' | translate}} </span> </p>
                 <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:    </span></strong> <span class="item-info-content">{{standProfileInfo[0].contact     || 'lackInfoCompany' | translate}}     </span> </p>
                 <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[1].address     || 'lackInfoCompany' | translate}}     </span> </p>
+                <p> <strong> <span class="item-info-desc"> {{ 'email' | translate }}:  </span></strong> <span class="item-info-content">{{standProfileInfo[0].email     || 'lackInfoCompany' | translate}}     </span> </p>
               </div>
 
             <div class="item item-divider item-positive">

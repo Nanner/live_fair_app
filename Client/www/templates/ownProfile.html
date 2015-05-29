@@ -8,7 +8,7 @@
 
             <!--editar o container, botao de opçoes interfere com formataçao-->
             <div class="profile-img-container">
-                <img no-image class="fair-map" ng-src="{{standProfileInfo[1].logo}}"/>
+                <img no-image class="fair-map" ng-src="{{imgSource}}"/>
             </div>
 
             <div class="profile-title-container">
@@ -25,6 +25,7 @@
                 <p> <strong> <span class="item-info-desc"> {{ 'aboutus' | translate }}: </span></strong> {{standProfileInfo[0].description || 'ownNoAboutUs' | translate}} </p>
                 <p> <strong> <span class="item-info-desc"> {{ 'phone' | translate }}:   </span></strong> {{standProfileInfo[0].contact || 'ownNoContact' | translate}} </p>
                 <p> <strong> <span class="item-info-desc"> {{ 'address' | translate }}: </span></strong> {{standProfileInfo[1].address || 'ownNoAddress' | translate}} </p>
+                <p> <strong> <span class="item-info-desc"> {{ 'email' | translate }}: </span></strong> {{standProfileInfo[0].email || 'ownNoAddress' | translate}} </p>
             </div>
         </div>
 

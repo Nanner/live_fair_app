@@ -22,13 +22,13 @@ INSERT INTO "public"."visitor" ("visitorID","Photo","createdAt","updatedAt") VAL
 INSERT INTO "public"."visitor" ("visitorID","Photo","createdAt","updatedAt") VALUES ('79a2da11-a664-45f1-8fee-3357dbae2670',NULL,'13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."company" ("companyID","companyName","logoImage","website","visitorCounter","createdAt","updatedAt","address") 
-VALUES ('1cb7eee5-30bf-4a9a-91ef-cba731368403','AMT Consulting','amt.png','http://www.amt-consulting.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto A');
+VALUES ('1cb7eee5-30bf-4a9a-91ef-cba731368403','AMT Consulting','blabla.jpg','http://www.amt-consulting.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto A');
 INSERT INTO "public"."company" ("companyID","companyName","logoImage","website","visitorCounter","createdAt","updatedAt","address") 
-VALUES ('5ead1699-b712-458b-a6ab-47e301647df2','Glintt','glintt.png','http://www.glintt.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto B');
+VALUES ('5ead1699-b712-458b-a6ab-47e301647df2','Glintt','blabla.jpg','http://www.glintt.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto B');
 INSERT INTO "public"."company" ("companyID","companyName","logoImage","website","visitorCounter","createdAt","updatedAt","address") 
-VALUES ('aeb93c10-e1d1-4198-9c26-a486ea805eec','Altran','altran.png','http://www.altran.pt/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto C');
+VALUES ('aeb93c10-e1d1-4198-9c26-a486ea805eec','Altran','blabla.jpg','http://www.altran.pt/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto C');
 INSERT INTO "public"."company" ("companyID","companyName","logoImage","website","visitorCounter","createdAt","updatedAt","address") 
-VALUES ('907f9410-6252-4bc1-b880-668e99cb8be5','Deloitte','del.png','http://www.deloitte.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto D');
+VALUES ('907f9410-6252-4bc1-b880-668e99cb8be5','Deloitte','blabla.jpg','http://www.deloitte.com/',0,'13.05.2015 23:07:00','13.05.2015 23:07:00','Porto D');
  
 INSERT INTO "public"."companyEvents" ("companyEventsID","location","startTime","endTime","speakers","subject","createdAt","updatedAt") 
 VALUES ('8da8aa78-e7e3-4dd7-b0c9-194ed939cec6','FEUP - Auditório 1','15.05.2009 16:17:00','15.05.2009 16:17:00','Diogo Santos','Apresentacao LGP','13.05.2015 23:07:00','13.05.2015 23:07:00');
@@ -37,7 +37,7 @@ INSERT INTO "public"."organizer" ("organizerID","organizerName","createdAt","upd
 VALUES ('3fde43a0-ca0a-4abe-ad37-841b58b4ca73','FEUP','13.05.2015 23:07:00','13.05.2015 23:07:00');
  
 INSERT INTO "public"."liveFair" ("liveFairID","name","description","startDate","endDate","local","address","city","map","createdAt","updatedAt","organizerOrganizerID") 
-VALUES ('67118f9f-561a-8025-850a-ac0ea5b29880','FEUP Carreer Fair','Oportunidade dos alunos contactarem empresas','15.05.2015 00:00:00','15.05.2015 00:00:00','FEUP','Rua Roberto Frias','Porto','feupcarreerfair.png','13.05.2015 23:07:00','13.05.2015 23:07:00','3fde43a0-ca0a-4abe-ad37-841b58b4ca73');
+VALUES ('67118f9f-561a-8025-850a-ac0ea5b29880','FEUP Carreer Fair','Oportunidade dos alunos contactarem empresas','15.05.2015 00:00:00','15.05.2015 00:00:00','FEUP','Rua Roberto Frias','Porto','blabla.jpg','13.05.2015 23:07:00','13.05.2015 23:07:00','3fde43a0-ca0a-4abe-ad37-841b58b4ca73');
 
 INSERT INTO "public"."connection" ("liked","sharedContact","createdAt","updatedAt","visitorVisitorID","companyCompanyID") 
 VALUES (True,True,'13.05.2015 23:07:00','13.05.2015 23:07:00','0cad5dd2-3dac-41e4-ad48-ba8548318350','1cb7eee5-30bf-4a9a-91ef-cba731368403');

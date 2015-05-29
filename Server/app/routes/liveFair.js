@@ -26,6 +26,20 @@ var CompanyEventSchema = Joi.object().keys({
     subject: Joi.string().required()
 });
 
+var LiveFairSchema = Joi.object().keys({
+    organiserID: Joi.string().required(),
+    name: Joi.string().required(),
+    description: Joi.string().required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
+    endTime: Joi.date().required(),
+    local: Joi.string().required(),
+    address: Joi.string().required(),
+    city: Joi.string().required(),
+    map: Joi.string().required(),
+    interestList: Joi.array().items(Joi.string()).required()
+});
+
 module.exports = function(server){
     server.route({
         method: 'GET',
@@ -36,7 +50,7 @@ module.exports = function(server){
                 strategy: 'token'
             },
             handler: function (request, reply) {
-                reply(LiveFair.findAll({order:'"liveFairID" DESC'}).then(function(liveFairs)
+                reply(LiveFair.findAll({order:'"startDate" ASC'}).then(function(liveFairs)
                 {
                     return JSON.stringify(liveFairs);
                 }).error(function(err){
@@ -73,13 +87,13 @@ module.exports = function(server){
                 strategy: 'token'
             },
             handler: function (request, reply) {
-                var LiveFairID = request.params.UserID;
+                var LiveFairID = request.params.id;
                 LiveFair.find({where:
                     {
-                        map: LiveFairID
+                        liveFairID: LiveFairID
                     }}).then(function(livefair)
                     {
-                        reply.file('./images/maps/'+livefair.map);
+                        reply.file('./app/images/livefairmaps/'+livefair.map);
                     }).error(function(err){
                         return Boom.notFound('Live Fair map not found');
                     });
@@ -121,7 +135,7 @@ module.exports = function(server){
                 reply(
                     Stands.findAll({where: {liveFairLiveFairID: liveFairId}})
                     .map(function(company) {
-                        return Company.find({where: {companyID: company.companyCompanyID}});
+                        return Company.find({where: {companyID: company.companyCompanyID,approved:true}});
                     }).then(function(companies) {
                         return JSON.stringify(companies);
                     }).error(function(err){
@@ -326,17 +340,24 @@ server.route({
         },
         handler: function (request, reply) {
             var LiveFairID=request.params.liveFairid;
-            var UserID=request.params.UserID;
-
-            reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID"',
+            var UserID=request.params.UserID; 
+            
+            Users.find({where:{
+                email:request.auth.credentials.dataValues.email,
+                userID:UserID
+            }}).then(function (params) {
+                reply( sequelize.query('SELECT DISTINCT ON (company."companyID") company."companyID",company."companyName",company."logoImage",company.address,company.website,"user".contact,"user".description FROM stands,company,"liveFairCompanyInterest","liveFairVisitorInterest","user" WHERE "liveFairCompanyInterest"."interestIDref"="liveFairVisitorInterest"."interestIDref" AND "liveFairCompanyInterest"."liveFairIDref"=? AND "liveFairVisitorInterest"."visitorIDref"=? AND company."companyID"="liveFairCompanyInterest"."companyIDref" AND "user"."userID"=company."companyID" AND stands."companyCompanyID"=company."companyID" AND stands.approved = "TRUE"',
                 { replacements: [LiveFairID,UserID], type: sequelize.QueryTypes.SELECT }
                 ).then(function(companies)
                 {
                  return JSON.stringify(companies);
              }).error(function(err){
                  console.log(err);
-                 return Boom.notFound('Live Fair User Matches not found');
+                 return Boom.notFound('No Matches found');
              }));
+            }).error(function(err){
+               return Boom.unauthorized(err); 
+            }); 
         }}
     });
 
@@ -419,6 +440,7 @@ server.route({
 
             Users.find({
                 where:{
+                    email:request.auth.credentials.dataValues.email,
                     userID:UserID
                 }
             }).then(function(user) {
@@ -453,7 +475,7 @@ server.route({
                         'liveFairLiveFairID': LiveFairID,
                         'companyCompanyID': UserID,
                         'visitorCounter': 0,
-                        'approved': false
+                        'approved': true
                     }).then(function(){
                         var interests=request.payload.interests;
                         for(var i = 0; i<interests.length; i++){
@@ -473,6 +495,8 @@ server.route({
                 else {
                     throw new Error('Wrong user type');
                 }
+            }).error(function (err) {
+                return Boom.unauthorized(err);
             });
         }}
     });
@@ -492,6 +516,7 @@ server.route({
 
              Users.find({
                 where:{
+                    email:request.auth.credentials.dataValues.email,
                     userID:UserID
                 }
             }).then(function(user) {
@@ -540,6 +565,8 @@ server.route({
                 else {
                     throw new Error('Wrong user type');
                 }
+            }).error(function (err) {
+                return Boom.unauthorized(err);
             });
         }}
     });
@@ -663,8 +690,15 @@ server.route({
 
                 var liveFairID=request.params.livefairID;
                 var companyID=request.params.companyID;
-
-                var Schematest={
+                
+                Users.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:companyID,
+                        type:request.auth.credentials.dataValues.email,
+                        type:'company'
+                }}).then(function name(params) {
+                    var Schematest={
                     location: request.payload.location,
                     startTime: request.payload.startTime,
                     endTime: request.payload.endTime,
@@ -673,6 +707,7 @@ server.route({
                 };
 
                 var validate = Joi.validate(Schematest,CompanyEventSchema);
+
 
                 if(validate.error!==null){
                     throw new Error(validate.error.message);
@@ -699,8 +734,10 @@ server.route({
                 }})
                 .then(function(result) {
                     reply(JSON.stringify('Evento criado com sucesso'));
-                })
-                .catch(function(error) {
+                });
+                }).error(function(err) {
+                  reply(Boom.unauthorized(err));  
+                }).catch(function(error) {
                     reply(Boom.badRequest(error));
                 });
             }}
@@ -716,9 +753,17 @@ server.route({
         },
         handler: function(request, reply) {
 
+            var companyID=request.params.companyID;
             var eventID=request.params.eventID;
 
-            var Schematest={
+            Users.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:companyID,
+                        type:request.auth.credentials.dataValues.email,
+                        type:'company'
+            }}).then(function (user) {
+                            var Schematest={
                 location: request.payload.location,
                 startTime: request.payload.startTime,
                 endTime: request.payload.endTime,
@@ -744,10 +789,13 @@ server.route({
                 })
                 .then(function(user) {
                    reply(JSON.stringify('Edição evento bem sucedida'));
-               }).catch(function(error) {
+               });
+            }}).error(function (err) {
+                Boom.auauthorized(err);
+            }).catch(function(error) {
                 reply(Boom.badRequest(error));
             });
-           }}}
+           }}
        });
 
 server.route({
@@ -762,9 +810,17 @@ server.route({
 
             return sequelize.transaction(function(t) {
 
+                var companyID=request.params.companyID;
                 var eventID=request.params.eventID;
 
-                var ID = uuid.v4();
+                Users.find({
+                    where:{
+                        email:request.auth.credentials.dataValues.email,
+                        userID:companyID,
+                        type:request.auth.credentials.dataValues.email,
+                        type:'company'
+                }}).then(function (user) {
+                                    var ID = uuid.v4();
                 console.log(ID+"\n");
                 return CompanyEvents.destroy({where:{
                     'companyEventsID':eventID
@@ -775,8 +831,12 @@ server.route({
                 }}, {transaction: t}).then(function(events){
                    reply(JSON.stringify('Evento apagado com sucesso'));
                });
+               });
+
+
+            }).error(function (err) {
+                Boom.aunothorized(err);
             });
-                
             });
         }}
     });
@@ -790,13 +850,34 @@ server.route({
            strategy: 'token'
        },
        handler: function (request, reply) {
+           
+       var Schematest={
+           organiserID: request.payload.organiserID,
+           name: request.payload.name,
+           description: request.payload.description,
+           startDate: request.payload.startDate,
+           endDate: request.payload.endDate,
+           local: request.payload.local,
+           address: request.payload.address,
+           city: request.payload.city,
+           map: request.payload.map,
+           interestList: request.payload.interestList
+        };
+        
+        var validate = Joi.validate(Schematest,LiveFairSchema);
+
+
+        if(validate.error!==null){
+            throw new Error(validate.error.message);
+        }
+        else{
         var fairOrgID = request.payload.organiserID;
         var fairName = request.payload.name;
         var fairDesc = request.payload.description;
         var fairDSstr = request.payload.startDate;
         var fairDS = new Date(fairDSstr);
-        var fairDE = new Date(fairDEstr);
         var fairDEstr = request.payload.endDate;
+        var fairDE = new Date(fairDEstr);
         var fairLoc = request.payload.local;
         var fairAdd = request.payload.address;
         var fairCit = request.payload.city;
@@ -810,7 +891,7 @@ server.route({
          'name':fairName,
          'description':fairDesc,
          'startDate':fairDS,
-         'endDate':fairDS,
+         'endDate':fairDE,
          'local':fairLoc,
          'address':fairAdd,
          'city':fairCit,
@@ -833,10 +914,10 @@ server.route({
         })
         .catch(function(error) {
             reply(Boom.badRequest(error.message));
-            console.log(error.message)
+            console.log(error.message);
         });
 
-    }}});
+    }}}});
 
 
 };
