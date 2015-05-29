@@ -147,6 +147,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
     $scope.userID = $localStorage.get('userID');
     $scope.listfairs = listfairs;
 
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+     }
+    }
+
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
             $scope.listfairs[i].month = utils.getMonthName($scope.listfairs[i].month);
@@ -165,6 +171,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
     $scope.loadPastFairs = function(){
         $scope.listfairs = listfairs;
+        for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+     }
+    }
+
         var pastFairs=[];
         var curdate = new Date();
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -181,6 +193,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
  $scope.loadNextFairs = function(){
     $scope.listfairs = listfairs;
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+     }
+    }
+
     var nextFairs=[];
     var curdate = new Date();
     for(i = 0; i < $scope.listfairs.length; i++) {
@@ -196,6 +214,12 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
 
 $scope.loadCurrentFairs = function(){
     $scope.listfairs = listfairs;
+    for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
+        if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
+            $scope.listfairs.splice(i, 1);
+     }
+    }
+
     var nextFairs=[];
     var curdate = new Date();
     for(i = 0; i < $scope.listfairs.length; i++) {
@@ -213,6 +237,7 @@ $scope.loadCurrentFairs = function(){
 
 $scope.newFair = function(userID)
 {
+    console.log(userID);
     var organizerID = userID;
     document.getElementById('mapFile').onchange = function () {
       var mapFileName = this.value.replace(/^.*[\\\/]/, '');
