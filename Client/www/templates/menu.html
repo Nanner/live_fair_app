@@ -19,6 +19,9 @@
 			<ion-side-menu side="right">
 				<ion-content scroll="true">
 					<ion-list>
+						<ion-item nav-clear menu-close ng-click="loadHome()">
+							{{ 'home' | translate }}
+						</ion-item>
 						<ion-item ng-repeat="x in items" nav-clear menu-close ng-click="selectItem($index)">
 							{{x.name}}
 						</ion-item>
