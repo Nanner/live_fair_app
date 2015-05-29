@@ -19,8 +19,11 @@ module.controller('loginCtrl', function ($scope, $state, $stateParams, liveFairA
             $state.go('menu.listfairs');
         });
 
-        $scope.$on('event:auth-login-failed', function(e, status) {
-            utils.showAlert("Utilizador ou password errados", "Falha no login");
+        $scope.$on('event:auth-login-failed', function(event, status) {
+            if (!event.defaultPrevented) {
+                event.defaultPrevented = true;
+                utils.showAlert("Utilizador ou password errados", "Falha no login");
+            }
         });
     }
 });
