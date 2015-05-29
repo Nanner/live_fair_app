@@ -29,12 +29,12 @@
                 <div class="input-label">
                     {{ 'programDay' | translate }}
                 </div>
-                <select ng-model="selectedDay">
+                <select ng-model="days.selectedDay">
                     <option ng-repeat="day in scheduleDays" value="{{day}}">{{day | date:'dd-MM-yyyy'}}</option>
                 </select>
             </div>
             <ion-list ng-hide="!scheduleDays.length || failedToResolve" show-delete="showDelete">
-                <div ng-repeat = "eventTime in scheduleOrganizedByDay[selectedDay]">
+                <div ng-repeat = "eventTime in scheduleOrganizedByDay[days.selectedDay]">
                     <ion-item class="item item-divider event-time item-borderless">
                         <strong>{{eventTime.eventTime | date:'HH:mm'}}</strong>
                     </ion-item>
