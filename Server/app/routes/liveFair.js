@@ -87,13 +87,13 @@ module.exports = function(server){
                 strategy: 'token'
             },
             handler: function (request, reply) {
-                var LiveFairID = request.params.UserID;
+                var LiveFairID = request.params.id;
                 LiveFair.find({where:
                     {
-                        map: LiveFairID
+                        liveFairID: LiveFairID
                     }}).then(function(livefair)
                     {
-                        reply.file('./images/maps/'+livefair.map);
+                        reply.file('./app/images/livefairmaps/'+livefair.map);
                     }).error(function(err){
                         return Boom.notFound('Live Fair map not found');
                     });

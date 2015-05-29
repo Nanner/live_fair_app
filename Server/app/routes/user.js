@@ -196,7 +196,8 @@ module.exports = function(server){
                     companyID: UserID
                 }}).then(function(company)
             {
-                reply.file('./images/profiles/'+company.logoImage);
+                console.log(company.logoImage);
+                reply.file('./app/images/profiles/'+company.logoImage);
             });
         }}
     });

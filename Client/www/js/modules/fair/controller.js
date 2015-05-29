@@ -148,7 +148,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
     }
 });
 
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar) {
+module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar, server) {
     var liveFairID = $stateParams.fairID;
     $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.hideMap = false;
@@ -158,7 +158,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.userType = "";
     $scope.participating = false;
     $scope.matches = "";
-
+    $scope.mapSource = "";
     $scope.tabOption = 1;
 
     $scope.toggleHideMap = function() {
@@ -181,6 +181,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
+                                $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
@@ -196,6 +197,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
+                                $scope.mapSource = server.url + "/livefairs/" + liveFairID +"/map";
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
