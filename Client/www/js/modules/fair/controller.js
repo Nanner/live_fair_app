@@ -557,7 +557,7 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
                         var startDateConverted = Number(new Date($scope.startDate));
                         var endDateConverted = Number(new Date($scope.endDate));
                         for (var i = 0; i < $scope.listfairs.length; i++) {
-                            fairDate = $scope.listfairs[i].date.substring(0, 10);
+                            fairDate = $scope.listfairs[i].startDate.substring(0, 10);
                             fairDateConverted = Number(new Date(fairDate));
                             if (fairDateConverted >= startDateConverted && fairDateConverted <= endDateConverted) {
                                 tempArray.push($scope.listfairs[i]);

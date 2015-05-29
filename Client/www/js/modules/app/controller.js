@@ -4,15 +4,21 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
     $scope.username = "AMT Consulting";
 
     $scope.items = [
-        {path: "menu.home", name: "Home"},
-        {path: "menu.login", name: "Login"},
-        {path: "menu.register", name: "Registo"},
         {path: "menu.listfairs", name: "Feiras"},
         {path: "menu.searchFairs", name: "Pesquisa"}
     ];
 
     $localForage.getItem('userType').then(function(result) {
         $rootScope.userType = result || "";
+    });
+
+    $localForage.getItem('isAuthenticated').then(function(result) {
+        if(result === true)
+            $rootScope.isAuthenticated = true;
+        else
+            $rootScope.isAuthenticated = false;
+    }, function(error) {
+        $rootScope.isAuthenticated = false;
     });
 
     $scope.toggleRight = function() {
@@ -31,6 +37,34 @@ module.controller('toogleCtrl', function($scope, $ionicSideMenuDelegate, $rootSc
             disableBack: true
         });
         $state.go("menu.settings");
+    };
+
+    $scope.loadHome = function() {
+        $localForage.getItem('isAuthenticated').then(function(result) {
+            if(result === true)
+                $rootScope.isAuthenticated = true;
+            else
+                $rootScope.isAuthenticated = false;
+
+            if($rootScope.isAuthenticated) {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
+                $state.go("menu.listfairs");
+            }
+            else {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
+                $state.go("menu.home");
+            }
+        }, function(error) {
+            $rootScope.isAuthenticated = false;
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go("menu.home");
+        });
     };
 
     $scope.loadProfile = function() {
