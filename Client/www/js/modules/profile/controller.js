@@ -245,6 +245,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
 
     $scope.incrementCounter = function(id) { 
         liveFairApi.incrementCounter($scope.fairID, id);
+        console.log("Incremented Counter");
     }
 
     $scope.saveChanges = function() {
