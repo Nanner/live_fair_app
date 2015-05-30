@@ -177,7 +177,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
         if(!existsNotValidField && !existsEmptyField) {
             if(!$scope.termsAcceptance) {
                 $ionicLoading.hide();
-                utils.showAlert(messages[6], 'Termos de uso');
+                utils.showAlert(messages[6], $translate.instant('termsAndConditions'));
             } else {
                 var passwordEncrypted = CryptoJS.SHA256($scope.password).toString();
                 var usertype = "";
@@ -189,11 +189,11 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
                 liveFairApi.register($scope.mail, passwordEncrypted, usertype, $scope.address, $scope.name, $scope.website).
                     then(function(data) {
                         $ionicLoading.hide();
-                        utils.showAlert(data, "Sucesso");
+                        utils.showAlert($translate.instant('successfulRegisterMessage'), $translate.instant('success'));
                         $state.go('menu.login');
                     }, function(error) {
                         $ionicLoading.hide();
-                        utils.showAlert(messages[7], "Erro");
+                        utils.showAlert(messages[7], $translate.instant('error'));
                     });
             }
         }
