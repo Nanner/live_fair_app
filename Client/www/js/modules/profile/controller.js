@@ -251,7 +251,6 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
 
     $scope.incrementCounter = function(id) { 
         liveFairApi.incrementCounter($scope.fairID, id);
-        console.log("Incremented Counter");
     }
 
     $scope.saveChanges = function() {
@@ -279,7 +278,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         if(!existsEmptyField && !existsNotValidField) {
             liveFairApi.editProfile($scope.standProfileInfo[0].userID, $scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].description, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[1].address, $scope.standProfileInfo[0].email, $scope.standProfileInfo[1].website).
                 then(function(data) {
-                    utils.showAlert(data, "Sucesso");
+                    utils.showAlert($translate.instant('successfulEditProfile'), $translate.instant('success'));
                     $state.go("menu.ownProfile", {companyID: $scope.standProfileInfo[0].userID});
                 }, function(error) {
                     liveFairApi.getProfile($scope.standProfileInfo[0].userID).$promise
@@ -332,7 +331,7 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
                 console.log(error);
             });
         }, function(response) {
-            utils.showAlert($translate.instant('sessionExpired'), "Error");
+            utils.showAlert($translate.instant('sessionExpired'), $translate.instant('error'));
             $state.go('menu.home');
             liveFairApi.logout();
         }

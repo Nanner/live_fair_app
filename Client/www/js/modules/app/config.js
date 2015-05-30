@@ -365,7 +365,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'confirmFairCancel': "Tem a certeza que deseja cancelar a sua participação?",
 		'companyStats': "Estatísticas da empresa",
 		'successfulRegisterMessage': "Registo bem sucedido!",
-		'editProfile': "Editar perfil"
+		'editProfile': "Editar perfil",
+		'successfulEditProfile': "Perfil atualizado"
 	});
 
 	$translateProvider.translations('en', {
@@ -513,7 +514,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'confirmFairCancel': "Are you sure you want to cancel your participation?",
 		'companyStats': "Company statistics",
 		'successfulRegisterMessage': "Successful register!",
-		'editProfile': "Edit profile"
+		'editProfile': "Edit profile",
+		'successfulEditProfile': "Profile updated"
 	});
 
 	$translateProvider.useLocalStorage();
