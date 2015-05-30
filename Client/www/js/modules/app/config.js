@@ -26,7 +26,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 					templateUrl: "templates/home.html",
 					controller: "homeCtrl"
 				}
-			}
+			},
+			cache: false
 		})
 		.state('menu.login', {
 			url: "/login",

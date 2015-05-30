@@ -1,5 +1,5 @@
 <ion-view title="{{'homeScreen' | translate}}">
-    <ion-content scroll='true'>
+    <ion-content scroll='true' ng-init="checkAuthenticated()">
 
         <!-- Template content -->
         <div class="home-container">
@@ -7,7 +7,7 @@
                 <img style="max-width: 45%" src="img/livefairapp.png">
             </div>
             <br><br>
-            <div class="home-existing-user padding-top">
+            <div class="home-existing-user padding-top" ng-hide="isAuthenticated">
                 <div class="center"> {{ 'existingUser' | translate }} </div>
                 <div class="myBtn-Container">
                     <button nav-clear ng-click="loadLogin()" class="login-btn button button-outline button-calm"> <strong> {{ 'enter' | translate }} </strong> </button>
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="home-registerBtn-container">
+        <div class="home-registerBtn-container" ng-hide="isAuthenticated">
             <div class="padding-horizontal">
                 <button nav-clear ng-click="loadRegistration()" class="button button-block button-calm"> <strong> {{ 'register' | translate }} </strong> </button>
                 <button class="button button-block button-stable button-positive" ng-click="loadFairListing()"> <strong> {{ 'enterAsVisitor' | translate }} </strong> </button>
