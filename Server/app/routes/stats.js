@@ -10,6 +10,7 @@ var Organizer = require('../models').Organizer;
 var Stands = require('../models').Stands;
 var LiveFairVisitorInterest = require('../models').LiveFairVisitorInterest;
 var Connection = require('../models').Connection;
+var VisitorLiveFair = require('../models').VisitorLiveFair;
 
 module.exports = function(server){
 	 server.route({
@@ -49,12 +50,15 @@ module.exports = function(server){
             handler: function (request, reply) {
                 var LiveFairID = request.params.livefairid;
                 var CompanyID = request.params.companyid;
-                  sequelize.query('SELECT interest.interest, count(distinct("liveFairVisitorInterest"."visitorIDref"))FROM interest,"liveFairCompanyInterest","liveFairVisitorInterest"WHERE"liveFairCompanyInterest"."liveFairIDref" IS NOT NULL AND "liveFairCompanyInterest"."companyIDref" IS NOT NULL AND "liveFairCompanyInterest"."interestIDref" IS NOT NULL AND "liveFairVisitorInterest"."liveFairIDref" IS NOT NULL AND "liveFairVisitorInterest"."visitorIDref" IS NOT NULL AND "liveFairVisitorInterest"."interestIDref" IS NOT NULL AND "liveFairCompanyInterest"."liveFairIDref" = ? AND "liveFairVisitorInterest"."liveFairIDref" = ? AND "liveFairCompanyInterest"."companyIDref" = ? AND "liveFairVisitorInterest"."interestIDref" = "liveFairCompanyInterest"."interestIDref" AND interest."interestID" = "liveFairVisitorInterest"."interestIDref" AND interest."interestID" = "liveFairCompanyInterest"."interestIDref" GROUP BY interest."interestID"',
+                
+                  sequelize.query('SELECT count(distinct("liveFairVisitorInterest"."visitorIDref"))FROM interest,"liveFairCompanyInterest","liveFairVisitorInterest"WHERE"liveFairCompanyInterest"."liveFairIDref" IS NOT NULL AND "liveFairCompanyInterest"."companyIDref" IS NOT NULL AND "liveFairCompanyInterest"."interestIDref" IS NOT NULL AND "liveFairVisitorInterest"."liveFairIDref" IS NOT NULL AND "liveFairVisitorInterest"."visitorIDref" IS NOT NULL AND "liveFairVisitorInterest"."interestIDref" IS NOT NULL AND "liveFairCompanyInterest"."liveFairIDref" = ? AND "liveFairVisitorInterest"."liveFairIDref" = ? AND "liveFairCompanyInterest"."companyIDref" = ?AND "liveFairVisitorInterest"."interestIDref" = "liveFairCompanyInterest"."interestIDref" AND interest."interestID" = "liveFairVisitorInterest"."interestIDref" AND interest."interestID" = "liveFairCompanyInterest"."interestIDref"  GROUP BY "liveFairVisitorInterest"."visitorIDref"',
+                        { replacements: [LiveFairID,LiveFairID,CompanyID], type: sequelize.QueryTypes.SELECT }).then(function (interestCount) {
+                            sequelize.query('SELECT interest.interest, count(distinct("liveFairVisitorInterest"."visitorIDref"))FROM interest,"liveFairCompanyInterest","liveFairVisitorInterest"WHERE"liveFairCompanyInterest"."liveFairIDref" IS NOT NULL AND "liveFairCompanyInterest"."companyIDref" IS NOT NULL AND "liveFairCompanyInterest"."interestIDref" IS NOT NULL AND "liveFairVisitorInterest"."liveFairIDref" IS NOT NULL AND "liveFairVisitorInterest"."visitorIDref" IS NOT NULL AND "liveFairVisitorInterest"."interestIDref" IS NOT NULL AND "liveFairCompanyInterest"."liveFairIDref" = ? AND "liveFairVisitorInterest"."liveFairIDref" = ? AND "liveFairCompanyInterest"."companyIDref" = ? AND "liveFairVisitorInterest"."interestIDref" = "liveFairCompanyInterest"."interestIDref" AND interest."interestID" = "liveFairVisitorInterest"."interestIDref" AND interest."interestID" = "liveFairCompanyInterest"."interestIDref" GROUP BY interest."interestID"',
                         { replacements: [LiveFairID,LiveFairID,CompanyID], type: sequelize.QueryTypes.SELECT }
-                        ).then(function(interestCount) {
-                            LiveFairVisitorInterest.count({
+                        ).then(function(interestCountTotal) {
+                            VisitorLiveFair.count({
                                 where:{
-                                   liveFairIDref: LiveFairID
+                                   liveFairLiveFairID: LiveFairID
                                 }
                             }).then(function(visitorCount){
                                 var visitorInterestCounter=0;
@@ -62,13 +66,16 @@ module.exports = function(server){
                                     visitorInterestCounter+=parseInt(interestCount[i].count);
                                 }
                                 var percentil;
+                                console.log(visitorCount);
                                 if(visitorCount===0)
                                     percentil=0;
                                 else
-                                    percentil=visitorInterestCounter/visitorCount*100;
-                                reply([interestCount,{totalHits:visitorInterestCounter},{percentage:percentil}]);
+                                    percentil = Math.round((visitorInterestCounter/visitorCount) * 1000)/10;
+                                reply([interestCountTotal,{totalHits:visitorInterestCounter},{percentage:percentil}]);
                             }); 
-                }).error(function(err){
+                });
+                        })
+                  .error(function(err){
                    return Boom.notFound('Stats not found');
                 }); 
         }}
