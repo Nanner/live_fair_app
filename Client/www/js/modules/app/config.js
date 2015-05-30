@@ -367,7 +367,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'successfulRegisterMessage': "Registo bem sucedido!",
 		'editProfile': "Editar perfil",
 		'successfulEditProfile': "Perfil atualizado",
-		'matches': "Matching de empresas"
+		'matches': "Matching de empresas",
+		'noMatchedStands': "Ainda não existem matches para si"
 	});
 
 	$translateProvider.translations('en', {
@@ -517,7 +518,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'successfulRegisterMessage': "Successful register!",
 		'editProfile': "Edit profile",
 		'successfulEditProfile': "Profile updated",
-		'matches': "Company matches"
+		'matches': "Company matches",
+		'noMatchedStands': "You haven't been matched with any stands yet"
 	});
 
 	$translateProvider.useLocalStorage();
