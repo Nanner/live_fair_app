@@ -382,7 +382,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                     type: 'button-positive',
                     onTap: function(e) {
                         var liveFairID = $stateParams.fairID;
-                        $scope.interestsList = utils.getInterestsList();
+                        $scope.interestsList = (utils.getInterestsList() || []);
                         var interestsIDS = [];
                         for(i = 0; i < $scope.interestsList.length; i++) {
                             if($scope.interestsList[i].checked)
