@@ -348,7 +348,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     };
 });
 
-module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $localForage, liveFairApi, utils) {
+module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $localForage, liveFairApi, utils, _) {
     var liveFairID = $stateParams.fairID;
     var companyID = "";
     $scope.websiteVisitors = "";
@@ -362,6 +362,11 @@ module.controller('statisticsCtrl', function ($scope, $state, $stateParams, $loc
                 $scope.websiteVisitors = webVisitors[1];
                 liveFairApi.getCompanyMatchesStats(liveFairID, companyID).then(function(match) {
                         $scope.matches = match;
+                        var matchCounts = match[0];
+                        $scope.matches[0] = _.sortBy(matchCounts, function(e) {
+                            return e.count;
+                        })
+                            .reverse();
                         liveFairApi.getCompanyLikes(liveFairID, companyID).then(function(likes) {
                                 $scope.likes = likes[0].count;
                                 liveFairApi.getContactsEstablished(liveFairID, companyID).then(function(contacts) {
