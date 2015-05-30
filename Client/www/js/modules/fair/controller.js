@@ -447,7 +447,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     }
 
     $scope.changedCheckbox = function() {
-        console.log($scope.interestsList);
         for(i = 0; i < $scope.interestsList.length; i++) {
             if(! $scope.interestsList[i].checked)
                 $scope.interestsList[i].checked = false;
@@ -616,12 +615,16 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
 module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
     var liveFairID = $stateParams.fairID;
     $scope.stands = "";
-    $scope.fairName = "";
+    $scope.fair = {};
+
+    liveFairApi.getLiveFair(liveFairID).$promise
+        .then(function(liveFair){
+            $scope.fair.fairName = liveFair.name;
+        });
 
     $localForage.getItem('userID').then(function(response) {
             var userID = response;
             liveFairApi.getMatches(liveFairID, userID).$promise.then(function(data) {
-                console.log(data);
                 $scope.stands = data;
                 $scope.fairName = utils.getFairName();
             }, function(error) {
