@@ -784,6 +784,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     $scope.showDelete = false;
     $scope.showDeleteButton = false;
     $scope.days = {};
+    $scope.failedToResolve = false;
     $localForage.getItem('userID').then(function(userID) {
         if(userID === $scope.companyID) {
             $scope.showDeleteButton = true;
@@ -805,6 +806,51 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
     };
 
     $scope.reloadProgram = function() {
+        $scope.failedToResolve = ($scope.scheduledEvents === "failed to resolve");
+        if ($scope.failedToResolve) {
+            return;
+        }
+
+        var companyID = $stateParams.companyID;
+        liveFairApi.getProfile(companyID).$promise.then(function(profile) {
+            $localForage.setItem("profile_" + companyID, profile).then(function() {
+                $scope.companyName = profile[1].companyName;
+                $scope.failedToResolve = false;
+            });
+        }, function(error) {
+            $localForage.getItem("profile_" + companyID).then(function(profile) {
+                if(profile) {
+                    $scope.companyName = profile[1].companyName;
+                }
+                else {
+                    $scope.failedToResolve = true;
+                }
+            }, function(error) {
+                $scope.failedToResolve = true;
+            });
+        });
+
+        var liveFairID = $stateParams.fairID;
+        liveFairApi.getLiveFair(liveFairID).$promise
+            .then(function(liveFair){
+                $localForage.setItem(liveFairID, liveFair).then(function() {
+                    $scope.fair = liveFair;
+                    $scope.failedToResolve = false;
+                });
+            }, function(error) {
+                $localForage.getItem(liveFairID).then(function(liveFair) {
+                    if(liveFair) {
+                        $scope.fair = liveFair;
+                        $scope.failedToResolve = false;
+                    }
+                    else {
+                        $scope.failedToResolve = true;
+                    }
+                }, function(error) {
+                    $scope.failedToResolve = true;
+                });
+            });
+
         liveFairApi.getLiveFairStandSchedule($stateParams.fairID, $stateParams.companyID).$promise
             .then(function(program) {
                 $localForage.setItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID, program)
@@ -813,7 +859,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
                         $scope.$broadcast('scroll.refreshComplete');
                     });
             }, function(error) {
-                return $localForage.getItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID)
+                $localForage.getItem("schedule_" + $stateParams.fairID + "_" + $stateParams.companyID)
                     .then(function(program) {
                         $scope.loadProgram(program);
                         $scope.$broadcast('scroll.refreshComplete');
@@ -829,14 +875,6 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         if ($scope.failedToResolve) {
             return;
         }
-
-        var companyID = $stateParams.companyID;
-        liveFairApi.getProfile(companyID).$promise.then(function(profile) {
-            $scope.companyName = profile[1].companyName;
-        });
-
-        var liveFairID = $stateParams.fairID;
-        $scope.fair = liveFairApi.getLiveFair(liveFairID);
 
         $scope.schedule = _.chain(unparsedProgram)
             .sortBy(function (event) {
@@ -865,9 +903,7 @@ module.controller('standProgramCtrl', function ($scope, $state, $stateParams, $i
         $scope.days.selectedDay = $scope.scheduleDays[0];
     };
 
-    $scope.loadProgram($scope.scheduledEvents);
-
-    $scope.days.selectedDay = $scope.scheduleDays[0];
+    $scope.reloadProgram();
 
     $scope.loadEvent = function (fairName, event) {
         $scope.liveFairCompanyEvent = event;

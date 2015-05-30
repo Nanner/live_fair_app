@@ -1,14 +1,14 @@
 var module = angular.module('profileModule');
 
 module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicPopup, $translate, $localStorage, $localForage, server, utils, contacts, camera, liveFairApi) {
-    
+
     if($stateParams.fairID) {
         $scope.fairID = $stateParams.fairID;
     }
     if($stateParams.companyID) {
         $scope.companyID = $stateParams.companyID;
     }
-    
+
     $scope.existsWebsite = true;
     $scope.standProfileInfo = "";
 
@@ -48,34 +48,85 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     var emptyFields = [1,1,1,1];
 
     $scope.loadProfile = function(type) {
+        utils.showLoadingPopup();
         var profileID = $stateParams.companyID;
         liveFairApi.getProfile(profileID).$promise
             .then(function(profile) {
-                $scope.imgSource = server.url + "/Users/" + profileID +"/image";
-                $scope.standProfileInfo = profile;
-                console.log(profile);
-                $scope.failedToResolve = false;
-                $scope.checkIfWebsiteIsAvailable();
-                if(type == "own") {
-                    $scope.initEmptyField();
-                    $scope.checkIfOwner(profileID);
-                } else if(type == "nown") {
-                    $scope.fetchCompanyInterests(profileID);
-                }
+                $localForage.setItem("profile_" + profileID, profile).then(function() {
+                    $scope.imgSource = server.url + "/Users/" + profileID +"/image";
+                    $scope.standProfileInfo = profile;
+                    $scope.failedToResolve = false;
+                    $scope.checkIfWebsiteIsAvailable();
+                    if(type == "own") {
+                        $scope.initEmptyField();
+                        $scope.checkIfOwner(profileID);
+                    } else if(type == "nown") {
+                        $scope.fetchCompanyInterests(profileID);
+                    }
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
             }, function(error) {
-                $scope.failedToResolve = true; 
+                $localForage.getItem("profile_" + profileID).then(function(profile) {
+                    if(profile) {
+                        $scope.imgSource = server.url + "/Users/" + profileID +"/image";
+                        $scope.standProfileInfo = profile;
+                        $scope.failedToResolve = false;
+                        $scope.checkIfWebsiteIsAvailable();
+                        if(type == "own") {
+                            $scope.initEmptyField();
+                            $scope.checkIfOwner(profileID);
+                        } else if(type == "nown") {
+                            $scope.fetchCompanyInterests(profileID);
+                        }
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                    else {
+                        $scope.failedToResolve = true;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                }, function(error) {
+                    $scope.failedToResolve = true;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
             }
         );
-    }
+    };
 
     $scope.fetchCompanyInterests = function(companyID) {
         var fairID = $stateParams.fairID;
+        utils.showLoadingPopup();
         liveFairApi.getCompanyInterests(fairID, companyID).$promise
             .then(function(interests) {
-                console.log(interests);
-                $scope.interestsList = interests;
+                $localForage.setItem('interests_' + fairID + "_" + companyID, interests).then(function(){
+                    $scope.failedToResolve = false;
+                    $scope.interestsList = interests;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
             }, function(error) {
-                console.log("Erro a receber interesses");
+                $localForage.getItem('interests_' + fairID + "_" + companyID).then(function(interests) {
+                    if(interests) {
+                        $scope.failedToResolve = false;
+                        $scope.interestsList = interests;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                    else {
+                        $scope.failedToResolve = true;
+                        $scope.interestsList = [];
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                }, function(error) {
+                    $scope.failedToResolve = true;
+                    $scope.interestsList = [];
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                })
             }
         );
     }
@@ -164,12 +215,12 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                 $scope.valName = "red-icon";
                 messageToDisplay[0] = 1;
                 emptyFields[0] = 0;
-            }            
+            }
         }
     }
 
     $scope.validateEmailCallback = function() {
-        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;    
+        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if($scope.standProfileInfo[0].email.length === 0) {
             $scope.valEmail = "neutral-icon";
             messageToDisplay[1] = 0;
@@ -181,7 +232,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         } else {
             $scope.valEmail = "red-icon";
             messageToDisplay[1] = 1;
-            emptyFields[1] = 0;           
+            emptyFields[1] = 0;
         }
     }
 
@@ -201,7 +252,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             emptyFields[2] = 0;
         }
     }
-    
+
     $scope.validateAddressCallback = function() {
         if($scope.standProfileInfo[1].address.length === 0) {
             $scope.valAddress = "red-icon";
@@ -210,7 +261,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             $scope.valAddress = "green-icon";
             emptyFields[3] = 0;
         }
-    } 
+    }
 
     $scope.validatePhoneCallback = function() {
         var pattern = /(^\+\d{12}$)|(^\d{9,10}$)/;
@@ -228,17 +279,17 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
 
     $scope.uploadPhoto = function() {
         var options = {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL,// gets base64-encoded image
-          //destinationType: Camera.DestinationType.FILE_URI,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          allowEdit: false,
-          encodingType: Camera.EncodingType.JPEG,
-          targetWidth: 200,
-          targetHeight: 200,
-          popoverOptions: CameraPopoverOptions,
-          saveToPhotoAlbum: false,
-          mediaType: Camera.MediaType.ALLMEDIA
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,// gets base64-encoded image
+            //destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: false,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 200,
+            targetHeight: 200,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false,
+            mediaType: Camera.MediaType.ALLMEDIA
         };
 
         camera.getPicture().then(function(result) {
@@ -249,7 +300,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         });
     }
 
-    $scope.incrementCounter = function(id) { 
+    $scope.incrementCounter = function(id) {
         liveFairApi.incrementCounter($scope.fairID, id);
     }
 
@@ -269,7 +320,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             for(i = 0; i < messageToDisplay.length; i++) {
                 if(messageToDisplay[i] === 1) {
                     existsNotValidField = true;
-                    utils.showAlert(messages[i], 'Informação errada');                  
+                    utils.showAlert(messages[i], 'Informação errada');
                     break;
                 }
             }
@@ -286,9 +337,9 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
                             $scope.standProfileInfo = profile;
                             $scope.validate();
                         }, function(error) {
-                    });
+                        });
                     utils.showAlert("Error", "Error");
-            });
+                });
         }
     };
 
