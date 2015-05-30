@@ -108,6 +108,8 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
             $scope.standProfileInfo[0].contact = "";
         } if(! $scope.standProfileInfo[1].logoImage || $scope.standProfileInfo[1].logoImage === null) {
             $scope.standProfileInfo[1].logoImage = "";
+        } if(! $scope.standProfileInfo[0].description || $scope.standProfileInfo[0].description === null) {
+            $scope.standProfileInfo[0].description = "";
         }
     }
 
