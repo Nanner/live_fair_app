@@ -99,6 +99,7 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
             promises.push($localForage.removeItem('userEmail'));
             promises.push($localForage.removeItem('userType'));
             promises.push($localForage.setItem('isAuthenticated', false));
+            promises.push($localForage.clear());
             $q.all(promises).then(function() {
                 $localStorage.remove('token');
                 $rootScope.isAuthenticated = false;
