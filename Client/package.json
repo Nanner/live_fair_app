@@ -19,7 +19,8 @@
     "org.apache.cordova.console",
     "com.ionic.keyboard",
     "org.apache.cordova.camera",
-    "org.apache.cordova.contacts"
+    "org.apache.cordova.contacts",
+    "cordova-plugin-splashscreen"
   ],
   "cordovaPlatforms": [
     "android"
