@@ -2,12 +2,24 @@
     <ion-content scroll='true'>
 
         <!-- Content -->
-        <div class="fair-container" ng-init="loadFairProfile()">
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="loadFairProfile()">
+        </ion-refresher>
+
+        <div ng-show="resolving.failedToResolve">
+            <br><br>
+            <div class="card">
+                <div class="item item-assertive item-placeholder item-text-wrap text-center">
+                    {{ 'failedToResolve' | translate }}
+                </div>
+            </div>
+        </div>
+
+        <div class="fair-container" ng-init="loadFairProfile()" ng-hide="resolving.failedToResolve">
             <h2 class="fair-title"> {{fair.name}} </h2>
             <h4 class="fair-subtitle"> {{ 'em' | translate }} {{fair.local}} </h4>
         </div>
 
-        <div class="fair-tabs-container">
+        <div class="fair-tabs-container" ng-hide="resolving.failedToResolve">
             <div class="buttons-container">
                 <button class="button button-calm item-input-wrapper" ng-click="showInfoPage()" ng-class="{active : tabOption === 1}">
                     <strong>{{ 'fairInformation' | translate }}</strong>
@@ -21,7 +33,7 @@
             </div>
         </div>
 
-        <div class="fair-tabs-container">
+        <div class="fair-tabs-container" ng-hide="resolving.failedToResolve">
 
             <div class="card information-tab" ng-show="tabOption === 1">
 
@@ -134,7 +146,7 @@
 
         </div>
 
-        <div class="padding" ng-show="loggedIn">
+        <div class="padding" ng-show="loggedIn && !resolving.failedToResolve">
             <div ng-show="participating">
                 <button nav-clear ng-click="getMatches(fair.liveFairID)" ng-show="userType == 'visitor'" class="item button button-block button-clear button-outline button-positive">
                     {{ 'matches' | translate }}

@@ -173,16 +173,7 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
 
 module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, $translate, $localForage, utils, liveFairApi, calendar, server, $ionicScrollDelegate) {
     var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
     $scope.days = {};
-
-    liveFairApi.getLiveFairStands(liveFairID).$promise
-        .then(function(stands) {
-            $scope.fairStands = stands;
-            fillImagePath();
-        }, function(error) {}
-    );
-
     $scope.hideMap = false;
     $scope.month = "";
     $scope.description = true;
@@ -192,23 +183,125 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     $scope.mapSource = "";
     $scope.loggedIn = false;
     $scope.tabOption = 1;
+    $scope.listfairs = "";
+    $scope.sortOption = 0;
+    $scope.resolving = {};
 
     $scope.toggleHideMap = function() {
         $scope.hideMap = true;
     };
 
     $scope.loadFairProfile = function() {
+        // Load fair information
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFair(liveFairID).$promise
+            .then(function(liveFair){
+                $localForage.setItem(liveFairID, liveFair).then(function() {
+                    $scope.fair = liveFair;
+                    $scope.resolving.failedToResolve = false;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            }, function(error) {
+                $localForage.getItem(liveFairID).then(function(liveFair) {
+                    if(liveFair) {
+                        $scope.fair = liveFair;
+                        $scope.resolving.failedToResolve = false;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                    else {
+                        $scope.resolving.failedToResolve = true;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                }, function(error) {
+                    $scope.resolving.failedToResolve = true;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            });
 
+        // Load fair stands
+        utils.showLoadingPopup();
+        liveFairApi.getLiveFairStands(liveFairID).$promise
+            .then(function(stands) {
+                $localForage.setItem(liveFairID + "_stands", stands).then(function() {
+                    $scope.fairStands = stands;
+                    fillImagePath();
+                    $scope.resolving.failedToResolve = false;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            }, function(error) {
+                $localForage.getItem(liveFairID + "_stands").then(function(stands){
+                    if(stands) {
+                        $scope.fairStands = stands;
+                        fillImagePath();
+                        $scope.resolving.failedToResolve = false;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                    else {
+                        $scope.resolving.failedToResolve = true;
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
+                    }
+                }, function(error) {
+                    $scope.resolving.failedToResolve = true;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
+            });
+
+        // Load fair program
+        utils.showLoadingPopup();
+        $scope.initializeProgram();
+
+        // Load interests
+        utils.showLoadingPopup();
         $localForage.getItem('isAuthenticated').then(function(response) {
                 if(response == true) {
                     $scope.loggedIn = true;
-                    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
+                    liveFairApi.getLiveFairInterests(liveFairID).$promise.then(function(interests) {
+                        $localForage.setItem(liveFairID + "_interests", interests).then(function() {
+                            $scope.interestsList = interests;
+                            $scope.resolving.failedToResolve = false;
+                            utils.hideLoadingPopup();
+                            $scope.$broadcast('scroll.refreshComplete');
+                        });
+                    }, function(error) {
+                        $localForage.getItem(liveFairID + "_interests").then(function(interests) {
+                            if(interests) {
+                                $scope.interestsList = interests;
+                                $scope.resolving.failedToResolve = false;
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
+                            }
+                            else {
+                                $scope.resolving.failedToResolve = true;
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
+                            }
+                        }, function(error) {
+                            $scope.resolving.failedToResolve = true;
+                            utils.hideLoadingPopup();
+                            $scope.$broadcast('scroll.refreshComplete');
+                        });
+                    });
                 } else if(response == false) {
                     $scope.loggedIn = false;
+                    utils.hideLoadingPopup();
+                    $scope.$broadcast('scroll.refreshComplete');
                 }
-            }, function(response) {}
+            }, function(response) {
+                utils.hideLoadingPopup();
+                $scope.$broadcast('scroll.refreshComplete');
+            }
         );
 
+        // Check if participating
+        utils.showLoadingPopup();
         $localForage.getItem('userType').then(function(response) {
                 $scope.userType = response;
                 $localForage.getItem('userID').then(function(responseID) {
@@ -224,9 +317,13 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
                             });
                         } else if($scope.userType === 'visitor') {
                             liveFairApi.checkIfVisitorParticipatingFair(userID, liveFairID).then(function(data) {
@@ -239,18 +336,26 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                                 }
 
                                 $scope.month = utils.getMonthName($scope.fair.month);
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
                             }, function(error) {
                                 console.log(error);
                                 $scope.participating = false;
+                                utils.hideLoadingPopup();
+                                $scope.$broadcast('scroll.refreshComplete');
                             });
                         }
                     }, function(response) {
+                        utils.hideLoadingPopup();
+                        $scope.$broadcast('scroll.refreshComplete');
                         utils.showAlert($translate.instant('sessionExpired'), "Error");
                         $state.go('menu.home');
                         liveFairApi.logout();
                     }
                 );
-            }, function(response) {
+            }, function(error) {
+                utils.hideLoadingPopup();
+                $scope.$broadcast('scroll.refreshComplete');
                 utils.showAlert($translate.instant('sessionExpired'), "Error");
                 $state.go('menu.home');
                 liveFairApi.logout();
@@ -354,8 +459,6 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $state.go('menu.fairStands', {fairID: fairID});
     };
 
-    $scope.listfairs = "";
-    $scope.sortOption = 0;
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
     };
@@ -443,21 +546,32 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 $localForage.setItem("schedule_" + $stateParams.fairID, program)
                     .then(function() {
                         $scope.loadProgram(program);
+                        $scope.resolving.failedToResolve = false;
+                        utils.hideLoadingPopup();
                         $scope.$broadcast('scroll.refreshComplete');
                     });
             }, function(error) {
                 return $localForage.getItem("schedule_" + $stateParams.fairID)
                     .then(function(program) {
-                        $scope.loadProgram(program);
-                        $scope.$broadcast('scroll.refreshComplete');
+                        if(program) {
+                            $scope.loadProgram(program);
+                            $scope.resolving.failedToResolve = false;
+                            utils.hideLoadingPopup();
+                            $scope.$broadcast('scroll.refreshComplete');
+                        }
+                        else {
+                            $scope.resolving.failedToResolve = true;
+                            utils.hideLoadingPopup();
+                            $scope.$broadcast('scroll.refreshComplete');
+                        }
                     }, function(error) {
                         $scope.loadProgram("failed to resolve");
+                        $scope.resolving.failedToResolve = true;
+                        utils.hideLoadingPopup();
                         $scope.$broadcast('scroll.refreshComplete');
                     });
             });
     };
-
-    $scope.initializeProgram();
 
     $scope.loadEvent = function(fairName, event) {
         $scope.liveFairEvent = event;
