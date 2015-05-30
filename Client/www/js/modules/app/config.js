@@ -368,7 +368,16 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'editProfile': "Editar perfil",
 		'successfulEditProfile': "Perfil atualizado",
 		'matches': "Matching de empresas",
-		'noMatchedStands': "Ainda não existem matches para si"
+		'noMatchedStands': "Ainda não existem matches para si",
+		'registerFillEverything': "Por favor preencha todos os campos",
+		'registerNeedTermsAcceptance': "Para proceguir deverá aceitar os termos de uso",
+		'registerFailed': "Lamentamos mas não foi possível realizar o registo com sucesso",
+		'registerUrlInvalid': "Url do website é inválido",
+		'registerEmailInvalid': "Email com formato inválido",
+		'registerPasswordsNoMatch' : "As passwords não correspondem",
+		'registerPasswordsSize': "As password devem ter no mínimo 8 caracteres",
+		'registerNameOnlyLetters': "Nome só deve conter letras",
+		'profilePhoneValidation': "O contacto deve ter 9 digitos"
 	});
 
 	$translateProvider.translations('en', {
@@ -519,7 +528,16 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'editProfile': "Edit profile",
 		'successfulEditProfile': "Profile updated",
 		'matches': "Company matches",
-		'noMatchedStands': "You haven't been matched with any stands yet"
+		'noMatchedStands': "You haven't been matched with any stands yet",
+		'registerFillEverything': "Please fill every fields",
+		'registerNeedTermsAcceptance': "To continue you must accept usage terms",
+		'registerFailed': "You're sorry but it was not possible for you to register with success",
+		'registerUrlInvalid': "The website Url you provided is not valid",
+		'registerEmailInvalid': "The email you gave is not valid",
+		'registerPasswordsNoMatch' : "Passwords does not match",
+		'registerPasswordsSize': "Password must have at least 8 characters",
+		'registerNameOnlyLetters': "Name must only contain letters",
+		'profilePhoneValidation': "Contact must have 9 digits"
 	});
 
 	$translateProvider.useLocalStorage();

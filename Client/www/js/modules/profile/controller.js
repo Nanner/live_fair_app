@@ -43,7 +43,7 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
     $scope.interestsList = "";
     $scope.imgSource = "";
 
-    var messages = ["Nome só pode conter letras", "Email com formato inválido", "URL do website é inválido", "O contacto deve ter 9 digitos", "Por favor preencha todos os campos"];
+    var messages = [$translate.instant('registerNameOnlyLetters'), $translate.instant('registerEmailInvalid'), $translate.instant('registerUrlInvalid'), $translate.instant('profilePhoneValidation'), $translate.instant('registerFillEverything')];
     var messageToDisplay = [0,0,0,0,0];
     var emptyFields = [1,1,1,1];
 

@@ -21,7 +21,7 @@ module.controller('registerCtrl', function ($scope, $state, $stateParams, utils,
     $scope.valWebsite = "neutral-icon";
     $scope.valAddress = "neutral-icon";
 
-    var messages = ["Nome só pode conter letras", "A password tem que ter no mínimo 8 caracteres", "As passwords não correspondem", "Email com formato inválido", "URL do website é inválido", "Por favor preencha todos os campos", "Para prosseguir deverá aceitar os termos de uso", "Lamentamos mas não foi possível realizar o registo com sucesso"];
+    var messages = [$translate.instant('registerNameOnlyLetters'), $translate.instant('registerPasswordsSize'), $translate.instant('registerPasswordsNoMatch'), $translate.instant('registerEmailInvalid'), $translate.instant('registerUrlInvalid'), $translate.instant('registerFillEverything'), $translate.instant('registerNeedTermsAcceptance'), $translate.instant('registerFailed')];
 
     var messageToDisplay = [0,0,0,0,0,0,0,0];
     var emptyFields = [1,1,1,1,1,1];
