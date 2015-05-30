@@ -91,11 +91,12 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, $io
 
 });
 
-module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi) {
+module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localForage) {
 
     $scope.listfairs = "";
     $scope.existingFairs = "";
     $scope.sortOption = 0;
+    $scope.resolving = {};
 
     $scope.formatMonth = function() {
         for(i = 0; i < $scope.listfairs.length; i++) {
@@ -111,14 +112,34 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, utils
         utils.showLoadingPopup();
         liveFairApi.getLiveFairs().$promise
             .then(function(liveFairs) {
-                console.log(liveFairs);
-                $scope.listfairs = liveFairs;
-                $scope.existingFairs = liveFairs;
-                utils.hideLoadingPopup();
-                $scope.failedToResolve = false;
+                $localForage.setItem("liveFairs", liveFairs)
+                    .then(function() {
+                        $scope.listfairs = liveFairs;
+                        $scope.existingFairs = liveFairs;
+                        utils.hideLoadingPopup();
+                        $scope.resolving.failedToResolve = false;
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
             }, function(error) {
-                utils.hideLoadingPopup();
-                $scope.failedToResolve = true;
+                $localForage.getItem("liveFairs")
+                    .then(function(liveFairs) {
+                        if(liveFairs) {
+                            $scope.listfairs = liveFairs;
+                            $scope.existingFairs = liveFairs;
+                            utils.hideLoadingPopup();
+                            $scope.resolving.failedToResolve = false;
+                            $scope.$broadcast('scroll.refreshComplete');
+                        }
+                        else {
+                            utils.hideLoadingPopup();
+                            $scope.resolving.failedToResolve = true;
+                            $scope.$broadcast('scroll.refreshComplete');
+                        }
+                    }, function(error) {
+                        utils.hideLoadingPopup();
+                        $scope.resolving.failedToResolve = true;
+                        $scope.$broadcast('scroll.refreshComplete');
+                    });
             });
     };
 
@@ -187,7 +208,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
                 }
             }, function(response) {}
         );
-        
+
         $localForage.getItem('userType').then(function(response) {
                 $scope.userType = response;
                 $localForage.getItem('userID').then(function(responseID) {
@@ -333,8 +354,8 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
         $state.go('menu.fairStands', {fairID: fairID});
     };
 
-        $scope.listfairs = "";
-        $scope.sortOption = 0;
+    $scope.listfairs = "";
+    $scope.sortOption = 0;
     $scope.loadEvents = function(fairID) {
         $state.go('menu.fairProgram', {fairID: fairID});
     };
@@ -486,11 +507,11 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
     $localForage.getItem('userID').then(function(response) {
             var userID = response;
             liveFairApi.getMatches(liveFairID, userID).$promise.then(function(data) {
-                    console.log(data);
-                    $scope.stands = data;
-                    $scope.fairName = utils.getFairName();
-                }, function(error) {
-                    utils.showAlert($translate.instant('notPossibleMatches'), $translate.instant('error'));
+                console.log(data);
+                $scope.stands = data;
+                $scope.fairName = utils.getFairName();
+            }, function(error) {
+                utils.showAlert($translate.instant('notPossibleMatches'), $translate.instant('error'));
             });
         }, function(response) {
             utils.showAlert($translate.instant('sessionExpired'), $translate.instant('error'));
@@ -518,8 +539,8 @@ module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ion
             }, function(error) {
                 utils.hideLoadingPopup();
                 $scope.failedToResolve = true;
-        });
-    }
+            });
+    };
 
     $scope.startDate = "";
     $scope.endDate = "";

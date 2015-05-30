@@ -2,7 +2,7 @@
     <ion-content scroll='true' ng-init="loadFairs()">
 
 
-        <div class="fair-container" ng-init="formatMonth()" ng-hide="failedToResolve">
+        <div class="fair-container" ng-init="formatMonth()">
             <div class="listFairs-logo-container">
                 <div class="listFairs-container1">
                     <div class="searchFairs-logo item-image">
@@ -12,42 +12,44 @@
             </div>
         </div>
 
-            <div class="fair-list-button-container">
-                <button class="button button-light fair-list-button">
-                    {{ 'listfairs' | translate}}
-                </button>
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="loadFairs()">
+        </ion-refresher>
+        <div class="fair-list-button-container" ng-hide="resolving.failedToResolve">
+            <button class="button button-light fair-list-button">
+                {{ 'listfairs' | translate}}
+            </button>
 
-                <button class="button button-calm button-Recente pull-right fair-list-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
-                    <strong>{{ 'sortByDate' | translate }}</strong>
-                </button>
+            <button class="button button-calm button-Recente pull-right fair-list-options-button" ng-click="sortFairsByDate()" ng-class="{active : sortOption === 2}">
+                <strong>{{ 'sortByDate' | translate }}</strong>
+            </button>
 
-                <button class="button button-calm button-AZ pull-right fair-list-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
-                    <strong>A-Z</strong>
-                </button>
+            <button class="button button-calm button-AZ pull-right fair-list-options-button" ng-click="sortFairsByName()" ng-class="{active : sortOption === 1}">
+                <strong>A-Z</strong>
+            </button>
 
-                <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="resetSort()">
-                    <strong>{{ 'clean' | translate }}</strong>
-                </button>
+            <button class="button button-calm button-Recente pull-right fair-search-options-button" ng-click="resetSort()">
+                <strong>{{ 'clean' | translate }}</strong>
+            </button>
 
-            </div>
+        </div>
 
-            <div class="list list-fair-container" ng-show="listfairs.length && !failedToResolve">
+        <div class="list list-fair-container" ng-show="listfairs.length && !resolving.failedToResolve">
 
-                <div class="item item-text-wrap" ng-repeat="fair in listfairs" ng-click="loadFair(fair.liveFairID)">
-                    <div>
-                        <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
-                        <br>
-                        <p class="text-right calm"><strong class="calm">{{fair.address}}, {{fair.city}}</strong></p>
-
-                    </div>
+            <div class="item item-text-wrap" ng-repeat="fair in listfairs" ng-click="loadFair(fair.liveFairID)">
+                <div>
+                    <p><strong style="color: darkblue;">{{fair.name}}</strong><strong class="positive" style="float: right;">{{fair.startDate | date:'dd/MM'}} - {{fair.endDate | date:'dd/MM/yy'}}</strong></p>
+                    <br>
+                    <p class="text-right calm"><strong class="calm">{{fair.address}}, {{fair.city}}</strong></p>
 
                 </div>
+
             </div>
+        </div>
 
 
 
 
-        <div ng-show="failedToResolve">
+        <div ng-show="resolving.failedToResolve">
             <br><br>
             <div class="card">
                 <div class="item item-assertive item-placeholder item-text-wrap text-center">
@@ -56,7 +58,7 @@
             </div>
         </div>
 
-        <div class="card" ng-show="!listfairs.length && !failedToResolve">
+        <div class="card" ng-show="!listfairs.length && !resolving.failedToResolve">
             <div class="item item-positive item-placeholder item-text-wrap text-center">
                 {{ 'noLiveFairs' | translate }}
             </div>
