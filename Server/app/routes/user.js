@@ -216,7 +216,6 @@ module.exports = function(server){
 
                     User.find({
                         where:{
-                            email:request.auth.credentials.dataValues.email,
                             userID:UserID
                         }}).then(function (user) {
                         var Schematest={
