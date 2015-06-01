@@ -364,22 +364,33 @@ $scope.logout = function()
     $state.go('login');
 };
 
-$scope.editComp = function (comp)
-{
-    liveFairApi.editProfile(comp.companyID, $scope.companie.companyName, $scope.companies.description,
-     $scope.companies.contact, $scope.companie.address, $scope.companie.email, $scope.companie.website);
-};
 
 });
 
 
-module.controller('ModalInstanceCtrl', function ($scope, $modalInstance, companie,companies)
+module.controller('ModalInstanceCtrl', function ($state,$scope, $modalInstance, companie,companies, liveFairApi)
 {
 $scope.companie = companie;
 $scope.companies = companies;
  $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+
+
+$scope.editComp = function (comp)
+{   
+    console.log($scope.companies.email);
+    console.log($scope.companies.description);
+    console.log($scope.companies.contact);
+    console.log(comp.companyID);
+    console.log($scope.companie.companyName);
+    console.log($scope.companie.website);
+    console.log($scope.companie.address);
+    liveFairApi.editProfile(comp.companyID, $scope.companie.companyName, $scope.companies.description,
+     $scope.companies.contact, $scope.companie.address, $scope.companies.email, $scope.companie.website);
+    $state.reload();
+    $modalInstance.dismiss('cancel');
+};
 
 
 });
@@ -409,4 +420,22 @@ module.controller('CompanieController', function($scope, $timeout, $modal, $log)
     };
 
 
+});
+
+module.filter('orderObjectBy', function(){
+ return function(input, attribute) {
+    if (!angular.isObject(input)) return input;
+
+    var array = [];
+    for(var objectKey in input) {
+        array.push(input[objectKey]);
+    }
+
+    array.sort(function(a, b){
+        a = parseInt(a[attribute]);
+        b = parseInt(b[attribute]);
+        return a - b;
+    });
+    return array;
+ }
 });

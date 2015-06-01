@@ -1,8 +1,12 @@
 var module = angular.module('starter');
 
-module.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+module.config(function($stateProvider, $urlRouterProvider, $httpProvider,jwtInterceptorProvider) {
 
-	$httpProvider.interceptors.push('authInterceptor');
+	jwtInterceptorProvider.tokenGetter = function($localStorage) {
+        return $localStorage.get('token');
+    };
+
+    $httpProvider.interceptors.push('jwtInterceptor');
 
 	$stateProvider
 		.state('livefairs', {
