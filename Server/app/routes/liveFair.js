@@ -32,7 +32,6 @@ var LiveFairSchema = Joi.object().keys({
     description: Joi.string().required(),
     startDate: Joi.date().required(),
     endDate: Joi.date().required(),
-    endTime: Joi.date().required(),
     local: Joi.string().required(),
     address: Joi.string().required(),
     city: Joi.string().required(),
