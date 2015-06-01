@@ -329,6 +329,59 @@ module.exports = function(server){
             }}
     });
 
+server.route({
+        method: 'POST',
+        path: '/Users/state',
+        config:{
+            auth: {
+                strategy: 'token'
+            },
+            handler: function (request, reply) {
+                var UserID = request.payload.userid;
+                var UserState = request.payload.state;
+                if(UserState==true)
+                {
+                 User.find({
+                    where:{
+                        userID:UserID
+                    }}).then(function (user) {
+                        reply(User.update({
+                            'blocked':false
+                        },{
+                            where:{
+                                userID:UserID
+                            }
+                        }).catch(function(error) {
+                            reply(Boom.badRequest(error.message));
+                        }));
+                }).error(function (err) {
+                    reply(Boom.unauthorized(err));
+                });
+                }
+                else{ 
+                    User.find({
+                    where:{
+                        userID:UserID
+                    }}).then(function (user) {
+                        reply(User.update({
+                            'blocked':true
+                        },{
+                            where:{
+                                userID:UserID
+                            }
+                        }).catch(function(error) {
+                            reply(Boom.badRequest(error.message));
+                        }));
+                }).error(function (err) {
+                    reply(Boom.unauthorized(err));
+                });
+
+                }
+               
+
+            }}
+    });
+
     server.route({
         method: 'POST',
         path: '/Users/{UserID}/update/image',
@@ -375,6 +428,8 @@ module.exports = function(server){
                 }
             }}
     });
+
+
 
     server.route({
         method: 'GET',
