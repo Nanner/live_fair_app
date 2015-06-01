@@ -17,9 +17,13 @@
 				<li>
 					<a href="#/livefairs">My Live Fairs</a>
 				</li>
-				<li>
-					<a>{{username}}</a>
-				</li>
+			</ul >
+			<ul class="nav navbar-nav navbar-right"><li class="dropdown" >
+				<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{username}} <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a ng-click="logout()">Logout</a></li>
+				</ul>
+			</li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -53,24 +57,87 @@
 						<th>Website<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Visitantes<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 						<th>Estado<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
+						<th>Editar<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></th>
 					</tr>
 					<tr ng-repeat="company in fairCompanies">
 						<td>{{company.companyName}}</td>
 						<td>{{company.address}}</td>
-						<td>{{companies[0][$index].email}}</td>
+						<td>{{companies[$index][0].email}}</td>
 						<td><a ng-href="{{company.website}}" target="_blank">{{company.website}}<a></td>
 						<td>{{company.visitorCounter}}</td>
-						<td ng-if="!checkBlocked(companies[0][$index].blocked)">
-							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align">Activo	</button>
+						<td ng-if="!checkBlocked(companies[$index][0].blocked)">
+							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ng-click="changeState(companies[$index][0].userID,companies[$index][0].blocked)">Activo</button>
 						</td>
-						<td ng-if="checkBlocked(companies[0][$index].blocked)">
-							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">Inactivo	</button>
+						<td ng-if="checkBlocked(companies[$index][0].blocked)">
+							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align" ng-click="changeState(companies[$index][0].userID,companies[$index][0].blocked)">Inactivo</button>
+						</td>
+						<td ng-controller="CompanieController">
+						<button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+  							<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="open(company,companies[$index][0])"></span>
+						</button>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
 		<!-- /.row -->	
+
+		 <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar {{companie.companyName}}</h4>
+                    </div>
+                    <div class="modal-body">
+                           	<form>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-tag"></span></span>
+									<input type="text" class="form-control" ng-model="companie.companyName">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-envelope"></span></span>
+									<input type="text" class="form-control" ng-model="companie.address">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-envelope"></span></span>
+									<input type="text" class="form-control" ng-model="companie.website">
+								</div>
+							</div>
+						</div>
+							<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="input-group">
+									<span class="input-group-addon"><span class=" glyphicon glyphicon-envelope"></span></span>
+									<input type="text" class="form-control" ng-model="companies.contact">
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<textarea  type="textarea" class="form-control" ng-model="companies.description"></textarea>
+								</div>
+							</div>
+						</div>
+						</form>
+                    </div>
+                    <div class="modal-footer">
+                    	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancelar</button>
+							<button type="button" class="btn btn-success" ng-controller="fairCompaniesCtrl" ng-click="editComp(companie)">Editar</button>
+                    </div>
+        </script>
 
 		<hr>
 

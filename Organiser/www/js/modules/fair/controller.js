@@ -1,45 +1,31 @@
 var module = angular.module('fairModule');
 
-module.controller('fairStandsCtrl', function ($scope, $state, $stateParams, liveFairApi) {
-    var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
-    $scope.fairStands = liveFairApi.getLiveFairStands(liveFairID);
-
-
-    //$scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
-
-    $scope.loadProfile = function(id) {
-        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
-    }
-
-});
-
-module.controller('presentStrandCtrl', function ($scope, $state, $stateParams) {
-
-    $scope.fairStands = {name: "FEUP CARRER FAIR", stands: [{id: 1, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 2, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"},{id: 3, stand: "AMT Consulting", standNumber: 15, logo: "img/Amt consulting.png"}]};
-
-    $scope.loadProfile = function(id) {
-        $state.transitionTo('menu.profile', $stateParams, { reload: true, inherit: false, notify: true });
-    }
-
-});
 
 module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, calendar, liveFairApi, schedule, utils,$localStorage) {
-   $scope.username = $localStorage.get('userEmail');
-    $scope.userID = $localStorage.get('userID');
-    $scope.fairID = $stateParams.fairID;
+if(!$localStorage.get('userEmail'))
+    $state.go('login');
 
-    console.log(schedule);
+ $scope.username = $localStorage.get('userEmail');
+ $scope.userID = $localStorage.get('userID');
+ $scope.fairID = $stateParams.fairID;
 
-    $scope.schedule=schedule;
+ console.log(schedule);
 
-    $scope.newEvent = function(fairID)
-{
+ $scope.schedule=schedule;
+
+ $scope.newEvent = function(fairID)
+ {
   var sDate = new Date($scope.sdate);
   var eDate = new Date($scope.edate);
   liveFairApi.newLiveFairEvent($scope.local, sDate, eDate, $scope.speakers, $scope.subject, fairID);
+  $state.reload();
 };
 
+$scope.logout = function()
+{
+    liveFairApi.logout();
+    $state.go('login');
+};
    /* var getEventsFromSameDateMillis = function(millis, events) {
         var date = new Date(millis);
         var eventsFromSameDate = [];
@@ -145,18 +131,31 @@ module.controller('fairProgramCtrl', function ($scope, $state, $stateParams, cal
                 ]
             });
     }
-*/
+    */
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi, $localStorage) {
+
+ if(!$localStorage.get('userEmail'))
+    $state.go('login');
 
     $scope.failedToResolve = listfairs == "failed to resolve";
     if($scope.failedToResolve)
         return;
 
+
+$scope.logout = function()
+{
+    liveFairApi.logout();
+    $state.go('login');
+};
+
+    $(".alert-message").alert();
+window.setTimeout(function() { $(".alert-message").alert('close'); }, 2000);
+
     $('.inputTags').tagsinput({
-     maxTags: 5
- }); 
+       maxTags: 5
+   }); 
 
     $scope.username = $localStorage.get('userEmail');
     $scope.userID = $localStorage.get('userID');
@@ -203,15 +202,15 @@ module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listf
             var fairDate = new Date($scope.listfairs[i].endDate);
             if( fairDate < curdate)
             {
-               pastFairs.push($scope.listfairs[i]);
-           }
-       }
-       $scope.listfairs=pastFairs;
-       console.log($scope.listfairs.length);
+             pastFairs.push($scope.listfairs[i]);
+         }
+     }
+     $scope.listfairs=pastFairs;
+     console.log($scope.listfairs.length);
 
-   };
+ };
 
-   $scope.loadNextFairs = function(){
+ $scope.loadNextFairs = function(){
     $scope.listfairs = listfairs;
     for(var i =  $scope.listfairs.length - 1; i >= 0; i--) {
         if( $scope.listfairs[i].organizerOrganizerID != $scope.userID) {
@@ -270,14 +269,18 @@ $scope.newFair = function(userID)
   var eDate = new Date($scope.edate);
   liveFairApi.newLiveFair(organizerID, $scope.name, $scope.description, sDate, 
     eDate, $scope.local,$scope.address, $scope.city, "noimage.jpg",interestsList);
+  $state.reload();
 };
 });
 
 module.controller('fairVisitorsCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
- $scope.username = $localStorage.get('userEmail');
- var fairID = $stateParams.fairID;
- $scope.fair = liveFairApi.getLiveFair(fairID);
- liveFairApi.getLiveFairVisitors(fairID).$promise.then(function(visitorsIDs) {
+    if(!$localStorage.get('userEmail'))
+    $state.go('login');
+  
+   $scope.username = $localStorage.get('userEmail');
+   var fairID = $stateParams.fairID;
+   $scope.fair = liveFairApi.getLiveFair(fairID);
+   liveFairApi.getLiveFairVisitors(fairID).$promise.then(function(visitorsIDs) {
     console.log(visitorsIDs);
 
     $scope.visitors = [];
@@ -287,15 +290,29 @@ module.controller('fairVisitorsCtrl', function ($scope, $state, $stateParams, ut
     });
 
     console.log($scope.visitors);   
-    });
+});
 
-    $scope.checkBlocked=function(result)
-    {
-        if(result==true)
-            return true;
-        else
-            return false;
-    };
+$scope.changeState = function(userID, userState)
+{
+    liveFairApi.changeState(userID,userState);
+    $state.reload();
+};
+
+   $scope.checkBlocked=function(result)
+   {
+    if(result==true)
+        return true;
+    else
+        return false;
+};
+
+
+
+$scope.logout = function()
+{
+    liveFairApi.logout();
+    $state.go('login');
+};
 });
 
 
@@ -307,11 +324,14 @@ module
 });
 
 module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, utils, liveFairApi, $localStorage) {
- $scope.username = $localStorage.get('userEmail');
- var fairID = $stateParams.fairID;
- $scope.fair = liveFairApi.getLiveFair(fairID);
+   if(!$localStorage.get('userEmail'))
+    $state.go('login');
 
-  liveFairApi.getLiveFairStands(fairID).$promise.then(function(fairCompanies) {
+   $scope.username = $localStorage.get('userEmail');
+   var fairID = $stateParams.fairID;
+   $scope.fair = liveFairApi.getLiveFair(fairID);
+
+   liveFairApi.getLiveFairStands(fairID).$promise.then(function(fairCompanies) {
 
     $scope.fairCompanies = fairCompanies;
     $scope.companies = [];
@@ -321,161 +341,72 @@ module.controller('fairCompaniesCtrl', function ($scope, $state, $stateParams, u
     });
 
     console.log($scope.companies);   
-    });
 
-
-    $scope.checkBlocked=function(result)
-    {
-        if(result==true)
-            return true;
-        else
-            return false;
-    };
-});
-
-module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi,$translate) {
-
-    var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
-    $scope.hideMap = false;
-    $scope.month = "";
-    $scope.description = true;
-    $scope.interestsList = liveFairApi.getLiveFairInterests(liveFairID);
-
-    $scope.toggleHideMap = function() {
-        $scope.hideMap = true;
-    };
-
-    $scope.loadFairProfile = function() {
-        $scope.month = utils.getMonthName($scope.fair.month);
-
-        /*if($scope.fair.description == null)
-         $scope.showDescription = false;
-
-         if($scope.fair.map == null)
-           $scope.showMap = false;*/
-   };
-
-   $scope.chooseInterests = function() {
-    var myPopup = $ionicPopup.show({
-        templateUrl: "interestsPopup.html",
-        title: 'Adesão',
-        scope: $scope,
-        buttons: [
-        { text: $translate.instant('cancel') },
-        {
-            text: '<b>' + $translate.instant('btnAderir') + '</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                console.log("tapped submit button");
-            }
-        }
-        ]
-    });
-};
-
-$scope.loadStands = function(fairID) {
-    $state.go('menu.fairStands', {fairID: fairID});
-};
-
-$scope.loadEvents = function(fairID) {
-    $state.go('menu.fairProgram', {fairID: fairID});
-}
 
 });
 
-module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi) {
+$scope.changeState = function(userID, userState)
+{
+    liveFairApi.changeState(userID,userState);
+    $state.reload();
+};
+   $scope.checkBlocked=function(result)
+   {
+    if(result==true)
+        return true;
+    else
+        return false;
+};
 
-    $scope.startDate = "";
-    $scope.endDate = "";
-    $scope.searchName = "";
-    $scope.searchLocation = "";
-    $scope.listfairs = "";
-    $scope.existingFairs = liveFairApi.getLiveFairs();
+$scope.logout = function()
+{
+    liveFairApi.logout();
+    $state.go('login');
+};
 
-    var actualDate = new Date();
-    var day = actualDate.getUTCDate();
-    var month = actualDate.getMonth() + 1;
-    var year = actualDate.getFullYear();
+$scope.editComp = function (comp)
+{
+    liveFairApi.editProfile(comp.companyID, $scope.companie.companyName, $scope.companies.description,
+     $scope.companies.contact, $scope.companie.address, $scope.companie.email, $scope.companie.website);
+};
 
-    $scope.filterByDate = function() {
-        var myPopup = $ionicPopup.show({
-            templateUrl: "templates/searchFairs-datePopUp.html",
-            scope: $scope,
-            buttons: [
-            {
-                text: '<b>Limpar</b>',
-                    onTap: function(e) { //lets clean date filters
-                        $scope.listfairs = $scope.existingFairs;
-                        $scope.startDate = "";
-                        $scope.endDate = "";
-                    }
-                },
+});
+
+
+module.controller('ModalInstanceCtrl', function ($scope, $modalInstance, companie,companies)
+{
+$scope.companie = companie;
+$scope.companies = companies;
+ $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
+
+});
+
+module.controller('CompanieController', function($scope, $timeout, $modal, $log) {
+
+    // MODAL WINDOW
+    $scope.open = function (companie,companies) {
+
+    console.log(companie);
+    console.log(companies);
+        var modalInstance = $modal.open({
+          controller: "ModalInstanceCtrl",
+          templateUrl: 'myModalContent.html',
+            resolve: {
+                companie: function()
                 {
-                    text: '<b>Ok</b>',
-                    type: 'button-positive',
-                    onTap: function(e) { //lets filter this stuff
-                        var tempArray = [];
-                        $scope.listfairs = $scope.existingFairs;
-                        $scope.startDate = utils.getStartDate();
-                        $scope.endDate = utils.getEndDate();
-                        startDateConverted = Number(new Date($scope.startDate));
-                        endDateConverted = Number(new Date($scope.endDate));
-                        for(var i = 0; i < $scope.listfairs.length; i++) {
-                            fairDate = $scope.listfairs[i].date.substring(0,10);
-                            fairDateConverted = Number(new Date(fairDate));
-                            if(fairDateConverted >= startDateConverted && fairDateConverted <= endDateConverted) {
-                                tempArray.push($scope.listfairs[i]);
-                            }
-                        }
-                        $scope.listfairs = tempArray;
-                    }
+                    return companie;
                 },
-                ]
-            });
-}
-
-$scope.verifyDate = function() {
-    actualDateConverted = Number(actualDate);
-    if($scope.startDate !== "") {
-        startDateConverted = Number(new Date($scope.startDate));
-        if(startDateConverted < actualDateConverted) {
-            if(day < 10 && (day.length < 2 || day.length === undefined)) {
-                day = "0" + day;
+                 companies: function()
+                {
+                    return companies;
+                }
             }
-            if(month < 10 && (month.length < 2 || month.length === undefined)) {
-                month = "0" + month;
-            }
-            $scope.startDate = year + "-" + month + "-" + day;
-            utils.setStartDate($scope.startDate);
-        } else {
-            utils.setStartDate($scope.startDate);
-        }
-    }
+             });
 
-    if($scope.endDate !== "") {
-        endDateConverted = Number(new Date($scope.endDate));
-        if(endDateConverted < actualDateConverted) {
-            if(day < 10 && (day.length < 2 || day.length === undefined)) {
-                day = "0" + day;
-            }
-            if(month < 10 && (month.length < 2 || month.length === undefined)) {
-                month = "0" + month;
-            }
-            $scope.endDate = year + "-" + month + "-" + day;
-            utils.setEndDate($scope.endDate);
-        } else {
-            utils.setEndDate($scope.endDate);
-        }
-    }
-}
+    };
 
-$scope.loadFair = function(fairID){
-    $state.go('menu.fair', {fairID: fairID});
-}
-
-$scope.getFairs = function() {
-    $scope.listfairs = $scope.existingFairs;
-}
 
 });

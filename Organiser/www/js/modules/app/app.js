@@ -18,6 +18,7 @@ angular.module('starter',
         'fairModule',
         'ionic',
         'bootstrap-tagsinput',
+        'ui.bootstrap',
         'ngCordova',
         'ngResource',
         'http-auth-interceptor'

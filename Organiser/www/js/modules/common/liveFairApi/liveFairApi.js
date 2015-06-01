@@ -49,18 +49,23 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
                     //    console.log($localStorage.get('userID'));
                     //    return config;
                     //});
+                $rootScope.$broadcast('event:auth-loginConfirmed');
                 })
                 .error(function (data, status, headers, config) {
                     $rootScope.$broadcast('event:auth-login-failed', status);
                 });
         },
-        logout: function(user) {
-            $http.post('https://logout', {}, { ignoreAuthModule: true })
-                .finally(function(data) {
-                    $localStorage.remove('authorizationToken');
-                    delete $http.defaults.headers.common.Authorization;
-                    $rootScope.$broadcast('event:auth-logout-complete');
-                });
+         logout: function() {
+                $localStorage.remove('token');
+                $localStorage.remove('userEmail');
+                $localStorage.remove('userType');
+                $localStorage.remove('userID');
+                $rootScope.isAuthenticated = false;
+                $rootScope.userEmail = "";
+                $rootScope.userType = "";
+           
+            delete $http.defaults.headers.common.Authorization;
+
         },
         loginCancelled: function() {
             authService.loginCancelled();
@@ -108,6 +113,33 @@ module.factory('liveFairApi', function($rootScope, $resource, $http, $q, server,
         newLiveFair: function(OrganiserID, Name, Description, DateStart, DateEnd, LocationSend,Address, City, Map, InterestList) {
             return $http.post(server.url + '/livefairs/new/', {organiserID: OrganiserID, name: Name, description: Description,
                 startDate: DateStart, endDate: DateEnd, local: LocationSend, address: Address, city:City, map:Map, interestList: InterestList})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+         changeState: function(userID, userState) {
+            return $http.post(server.url + '/Users/state', {userid: userID, state: userState})
+            .then(function(response) {
+                if(response.status === 200) {
+                    return response.data;
+                } else {
+                    return $q.reject(response.data);
+                }
+            }, function(response) {
+                    return $q.reject(response.data);
+                }
+            );
+        },
+
+         editProfile: function(userID, name, descritionToSend, contactToSend, addressToSend, emailToSend, websiteToSend) {
+            return $http.post(server.url + '/Users/' + userID + '/update', {companyName: name, email: emailToSend, address: addressToSend, contact: contactToSend, website: websiteToSend, description: descritionToSend})
             .then(function(response) {
                 if(response.status === 200) {
                     return response.data;

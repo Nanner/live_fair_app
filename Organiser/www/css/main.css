@@ -1,3 +1,18 @@
+ul.dropdown-menu {
+    background-color:  white;
+}
+
+.table td {
+   text-align: center;   
+}
+
+.table th {
+   text-align: center;   
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover
+{
+   background-color:  #084c8d;
+}
 
 .blue-navbar{
 	background-color: #1a3d58 !important;

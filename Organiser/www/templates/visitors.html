@@ -17,9 +17,13 @@
 				<li>
 					<a href="#/livefairs">My Live Fairs</a>
 				</li>
-				<li>
-					<a>{{username}}</a>
-				</li>
+			</ul >
+			<ul class="nav navbar-nav navbar-right"><li class="dropdown" >
+				<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{username}} <span class="caret"></span></a>
+				<ul class="dropdown-menu" role="menu">
+					<li><a ng-click="logout()">Logout</a></li>
+				</ul>
+			</li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -58,10 +62,10 @@
 						<td>{{visitor[0].contact}}</td>
 
 						<td ng-if="!checkBlocked(visitor[0].blocked)">
-							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align">Activo	</button>
+							<button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ng-click="changeState(visitor[0].userID,visitor[0].blocked)">Activo	</button>
 						</td>
 						<td ng-if="checkBlocked(visitor[0].blocked)">
-							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align">Inactivo	</button>
+							<button type="button" class="btn btn-danger btn-xs" aria-label="Left Align" ng-click="changeState(visitor[0].userID,visitor[0].blocked)">Inactivo	</button>
 						</td>
 
 					</tr>
