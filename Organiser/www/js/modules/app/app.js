@@ -21,6 +21,7 @@ angular.module('starter',
         'ui.bootstrap',
         'ngCordova',
         'ngResource',
-        'http-auth-interceptor'
+        'http-auth-interceptor',
+        'angular-jwt'
     ]
 );
