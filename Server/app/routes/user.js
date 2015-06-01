@@ -66,7 +66,6 @@
                             password:request.payload.password,
                             type:request.payload.type
                         };
-                        console.log(request.payload);
                         if(request.payload.address)
                             Schematest['address']=request.payload.address;
     
@@ -130,7 +129,6 @@
                             reply(JSON.stringify('Registo Bem Sucedido'));
                         })
                         .catch(function(error) {
-                            console.log(error);
                             reply(Boom.badRequest(error));
                         });
                 }}
@@ -196,7 +194,6 @@
                         companyID: UserID
                     }}).then(function(company)
                     {
-                        console.log(company.logoImage);
                         reply.file('./app/images/profiles/'+company.logoImage);
                     });
                 }}
