@@ -15,7 +15,7 @@
 		<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li>
-					<a href="#/livefairs">My Live Fairs</a>
+					<a href="#/livefairs">As minhas Live Fairs</a>
 				</li>
 			</ul >
 			<ul class="nav navbar-nav navbar-right"><li class="dropdown" >
@@ -54,8 +54,8 @@
 						<th>Evento<span aria-hidden="true"></span></th>
 						<th>Local<span aria-hidden="true"></span></th>
 					</tr>
-					<tr ng-repeat = "event in schedule | orderBy:'startTime':false"">
-						<td>{{event.startTime  | asDate | date:'shortTime'}}</td>
+					<tr ng-repeat = "event in schedule | orderBy:'startTime':false">
+						<td>{{event.startTime  | asDate | date:'M/d/yyyy - H:mm'}}</td>
 						<td><b>{{event.subject}}</b><br>
 							{{event.speakers}}
 						</td>
