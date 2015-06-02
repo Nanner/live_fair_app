@@ -3,6 +3,7 @@
     var sequelize = require('../models').sequelize;
     var uuid = require('node-uuid');
     var Joi = require('joi');
+    var fs = require('fs');
     
     var LiveFair = require('../models').LiveFair;
     var LiveFairEvents = require('../models').LiveFairEvents;
@@ -882,6 +883,21 @@
                         var fairMap = request.payload.map;
                         var ID=uuid.v4();
                         var fairInterest = request.payload.interestList;
+
+                        var imageBuffer = decodeBase64Image(request.payload.image);
+                        console.log(imageBuffer);
+
+                         fs.writeFile("./app/images/livefairmaps/"+request.payload.map,imageBuffer.data,function(err){
+                                    if(err)
+                                    {   console.log(err);
+                                        return Boom.badRequest(err.message);
+                                    }
+                                    else
+                                    {
+                                        console.log("Ficheiro Submetido");
+                                    }
+    
+                                });
     
                         LiveFair.create({
                             'liveFairID':ID,
@@ -969,3 +985,17 @@
                     }}}});
     
     };
+
+function decodeBase64Image(dataString) {
+  var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
+    response = {};
+
+  if (matches.length !== 3) {
+    return new Error('Invalid input string');
+  }
+
+  response.type = matches[1];
+  response.data = new Buffer(matches[2], 'base64');
+
+  return response;
+}
