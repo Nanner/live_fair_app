@@ -26,112 +26,6 @@ $scope.logout = function()
     liveFairApi.logout();
     $state.go('login');
 };
-   /* var getEventsFromSameDateMillis = function(millis, events) {
-        var date = new Date(millis);
-        var eventsFromSameDate = [];
-        var eventTimes = _.keys(events);
-        for(var i = 0; i < eventTimes.length; i++) {
-            var eventTime = eventTimes[i];
-            var eventDate = new Date(eventTime);
-            if(eventDate.getDate() == date.getDate() && eventDate.getMonth() == date.getMonth() && eventDate.getFullYear() == date.getFullYear()) {
-                eventsFromSameDate.push({eventTime: eventTime, eventTimeEvents: events[eventTime]});
-            }
-        }
-        return eventsFromSameDate;
-    };
-
-    $scope.failedToResolve = schedule == "failed to resolve";
-    if($scope.failedToResolve)
-        return;
-
-    var liveFairID = $stateParams.fairID;
-    $scope.fair = liveFairApi.getLiveFair(liveFairID);
-
-    $scope.schedule = _.chain(schedule)
-    .sortBy(function(event) {
-        return event.time;
-    })
-    .groupBy(function(event) {
-        return event.time;
-    }).value();
-
-    $scope.scheduleDays = _.chain(schedule)
-    .sortBy(function(event) {
-        return event.time;
-    })
-    .map(function(event) {
-        var time = new Date(event.time);
-        return (Date.parse(utils.getDayMonthYearDate(time)));
-    })
-    .unique()
-    .value();
-
-    $scope.scheduleOrganizedByDay = [];
-    _.forEach($scope.scheduleDays, function(day) {
-        return $scope.scheduleOrganizedByDay[day] = getEventsFromSameDateMillis(parseInt(day), $scope.schedule);
-    });
-
-    $scope.selectedDay = $scope.scheduleDays[0];
-
-    $scope.loadEvent = function(fairName, event) {
-
-        //var ihour;
-        //var fhour;
-        //var iminute;
-        //var fminute;
-        //
-        //if(starHour < 10) {
-        //    ihour = "0" + starHour;
-        //} else {
-        //    ihour = "" + starHour;
-        //}
-        //
-        //if(startMinute < 10) {
-        //    iminute = "0" + startMinute;
-        //} else {
-        //    iminute = "" + startMinute;
-        //}
-        //
-        //if(endHour < 10) {
-        //    fhour = "0" + endHour;
-        //} else {
-        //    fhour = "" + endHour;
-        //}
-        //
-        //if(endMinute < 10) {
-        //    fminute = "0" + endMinute;
-        //} else {
-        //    fminute = "" + endMinute;
-        //}
-
-        //$scope.event = {id: id, eventName: eventName, fairName: fairName, startHour: ihour, startMinute: iminute, endHour: fhour, endMinute: fminute, day: day, month: month, year: year, place: place};
-        $scope.liveFairEvent = event;
-
-        var myPopup = $ionicPopup.show({
-            templateUrl: "eventPopup.html",
-            title: fairName,
-            scope: $scope,
-            buttons: [
-            {
-                text: '<b>Sync</b>',
-                type: 'button-balanced',
-                onTap: function(e) {
-                        //Create event in phone's calendar
-                        var eventNotes = fairName + " \nSpeakers: " + $scope.liveFairEvent.Speakers;
-                        calendar.createEventInteractively(fairName, $scope.liveFairEvent.Subject, $scope.liveFairEvent.Speakers, $scope.liveFairEvent.time, $scope.liveFairEvent.endTime);
-                    }
-                },
-                {
-                    text: '<b>Ok</b>',
-                    type: 'button-positive',
-                    onTap: function(e) {
-                        console.log("tapped button");
-                    }
-                },
-                ]
-            });
-    }
-    */
 });
 
 module.controller('listFairsCtrl', function ($scope, $state, $stateParams, listfairs, utils, liveFairApi, $localStorage) {
@@ -253,22 +147,34 @@ $scope.loadCurrentFairs = function(){
     console.log($scope.listfairs.length);
 };
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+
 
 $scope.newFair = function(userID)
 {
     console.log(userID);
     var organizerID = userID;
-    document.getElementById('mapFile').onchange = function () {
-      var mapFileName = this.value.replace(/^.*[\\\/]/, '');
-  };
-
+    var filename = $('#imgInp').val().replace(/^.*[\\\/]/, '');
+    console.log($scope.map);
   var interestsList = $(".inputTags").tagsinput('items');
   console.log(interestsList);
-
   var sDate = new Date($scope.sdate);
   var eDate = new Date($scope.edate);
   liveFairApi.newLiveFair(organizerID, $scope.name, $scope.description, sDate, 
-    eDate, $scope.local,$scope.address, $scope.city, "noimage.jpg",interestsList);
+    eDate, $scope.local,$scope.address, $scope.city, filename,interestsList,$scope.map);
   $state.reload();
 };
 });
@@ -439,3 +345,22 @@ module.filter('orderObjectBy', function(){
     return array;
  }
 });
+
+module.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);

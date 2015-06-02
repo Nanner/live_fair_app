@@ -54,7 +54,7 @@
 						<th>Evento<span aria-hidden="true"></span></th>
 						<th>Local<span aria-hidden="true"></span></th>
 					</tr>
-					<tr ng-repeat = "event in schedule">
+					<tr ng-repeat = "event in schedule | orderBy:'startTime':false"">
 						<td>{{event.startTime  | asDate | date:'shortTime'}}</td>
 						<td><b>{{event.subject}}</b><br>
 							{{event.speakers}}
