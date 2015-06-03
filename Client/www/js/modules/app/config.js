@@ -377,7 +377,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registerPasswordsNoMatch' : "As passwords não correspondem",
 		'registerPasswordsSize': "As password devem ter no mínimo 8 caracteres",
 		'registerNameOnlyLetters': "Nome só deve conter letras",
-		'profilePhoneValidation': "O contacto deve ter 9 digitos"
+		'profilePhoneValidation': "O contacto deve ter 9 digitos",
+		'addedContact': "Contacto adicionado com sucesso"
 	});
 
 	$translateProvider.translations('en', {
@@ -537,7 +538,8 @@ module.config(function($stateProvider, $urlRouterProvider, $translateProvider, $
 		'registerPasswordsNoMatch' : "Passwords does not match",
 		'registerPasswordsSize': "Password must have at least 8 characters",
 		'registerNameOnlyLetters': "Name must only contain letters",
-		'profilePhoneValidation': "Contact must have 9 digits"
+		'profilePhoneValidation': "Contact must have 9 digits",
+		'addedContact': "Contact successfully addded to your phonebook"
 	});
 
 	$translateProvider.useLocalStorage();

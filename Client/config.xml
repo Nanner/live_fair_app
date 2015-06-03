@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.livefairapp717119" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>liveFairApp</name>
+  <name>live Fair</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Feiras de empresas, seja de negócios, trabalho ou para consumidores, deverão ser uma oportunidade de aproximar as pessoas das empresas que contribuem para melhorar a sua vida. No entanto, espaços complicados, multidões de visitantes e bancas complicadas ou pouco apelativas levam a que este objetivo nem sempre se concretize. Surge então este projeto, Live Fair App, uma aplicação móvel para apoiar visitantes, empresas e organizadores durante estes eventos.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="ei11089@fe.up.pt" href="http://lettuce.solutions/">
+      Daniel Moreira,
+      Diogo Santos,
+      Nuno Martinho,
+      Pedro Faria,
+      Pedro Rocha,
+      Tiago Miranda
     </author>
   <content src="index.html"/>
   <access origin="*"/>

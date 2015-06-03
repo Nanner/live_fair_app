@@ -16,12 +16,17 @@ module.controller('profileCtrl', function ($scope, $state, $stateParams, $ionicP
         var userID = "";
         $localForage.getItem('userID').then(function(response) {
                 userID = response;
-                liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID).$promise
-                    .then(function(profile) {
-                        contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
-                        alert("Contacto adicionado");
-                    }, function(error) {}
-                );
+                if(!userID) {
+                    contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
+                    utils.showAlert($translate.instant('addedContact'), $translate.instant('success'));
+                } else {
+                    liveFairApi.IncrementContact(userID, $scope.standProfileInfo[1].companyID).$promise
+                        .then(function(profile) {
+                            contacts.addContact($scope.standProfileInfo[1].companyName, $scope.standProfileInfo[0].contact, $scope.standProfileInfo[0].email, $scope.standProfileInfo.website, $scope.standProfileInfo[1].address);
+                            utils.showAlert($translate.instant('addedContact'), $translate.instant('success'));
+                        }, function(error) {} 
+                    );
+                }
             }, function(response) {
                 utils.showAlert($translate.instant('notOpenOwnProfile'), "Error");
                 $state.go('menu.listfairs');
