@@ -112,13 +112,13 @@ VALUES ('4d300c1d-8a36-4a3b-974b-eee8569236d3','SAP HANA','13.05.2015 23:07:00',
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
 VALUES ('e474128f-468c-43ef-9af2-a3c7ef5658a4','Success Factors','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
-VALUES ('534316d9-1232-418e-a47e-d8b4680de699','Engenharia Informática','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES ('534316d9-1232-418e-a47e-d8b4680de699','Engenharia Informática','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
-VALUES ('c3e8609c-5cab-4cd2-94ce-a65197063621','Engenharia e Gestão Industrial','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES ('c3e8609c-5cab-4cd2-94ce-a65197063621','Engenharia e Gestão Industrial','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
-VALUES ('826baa18-539d-461a-97b6-e3efa6eed5b7','SAP','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES ('826baa18-539d-461a-97b6-e3efa6eed5b7','SAP','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."interest" ("interestID","interest","createdAt","updatedAt","liveFairLiveFairID") 
-VALUES ('77d531d7-036f-4fb5-8133-f906cdb68560','Engenharia Eletrotécnica e de Computadores','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES ('77d531d7-036f-4fb5-8133-f906cdb68560','Engenharia Eletrotécnica e de Computadores','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 
 INSERT INTO "public"."liveFairInterest" ("createdAt","updatedAt","liveFairLiveFairID","interestInterestID") 
 VALUES ('13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf','d01e69b5-be9d-4439-8b10-514d72eca7d9');
@@ -141,66 +141,66 @@ INSERT INTO "public"."liveFairInterest" ("createdAt","updatedAt","liveFairLiveFa
 VALUES ('13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f','77d531d7-036f-4fb5-8133-f906cdb68560');
 
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (0,'Hall de Entrada','26.11.2015 09:00:00','26.11.2015 09:30:00','N/A','Acreditação, Café e Acolhimento e Área de Exposição','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Hall de Entrada','26.11.2015 09:00:00','26.11.2015 09:30:00','N/A','Acreditação, Café e Acolhimento e Área de Exposição','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (1,'Auditório B','26.11.2015 09:30:00','26.11.2015 09:45:00','João Fonseca','Boas-Vindas e Introdução','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório B','26.11.2015 09:30:00','26.11.2015 09:45:00','João Fonseca','Boas-Vindas e Introdução','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (2,'Auditório A','26.11.2015 09:15:00','26.11.2015 11:15:00','Hasso Plattner','International Speaker','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório A','26.11.2015 09:15:00','26.11.2015 11:15:00','Hasso Plattner','International Speaker','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (3,'Auditório A','26.11.2015 11:15:00','26.11.2015 11:45:00','N/A','Coffe Break e Área de Exposição','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório A','26.11.2015 11:15:00','26.11.2015 11:45:00','N/A','Coffe Break e Área de Exposição','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (4,'Auditório C','26.11.2015 11:45:00','26.11.2015 12:45:00','Frank Hopp','Bitsn Bites Showcase','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório C','26.11.2015 11:45:00','26.11.2015 12:45:00','Frank Hopp','Bitsn Bites Showcase','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (5,'Auditório C','26.11.2015 12:45:00','26.11.2015 14:15:00','N/A','Almoço','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório C','26.11.2015 12:45:00','26.11.2015 14:15:00','N/A','Almoço','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (6,'Auditório D','26.11.2015 14:15:00','26.11.2015 17:30:00','N/A','Workshops','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório D','26.11.2015 14:15:00','26.11.2015 17:30:00','N/A','Workshops','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (7,'Auditório A','26.11.2015 17:30:00','26.11.2015 18:00:00','Margarida Silva','Sessão de Encerramento','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
+VALUES (DEFAULT,'Auditório A','26.11.2015 17:30:00','26.11.2015 18:00:00','Margarida Silva','Sessão de Encerramento','13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf');
 
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (8,'Corredor B','17.11.2015 08:30:00','17.11.2015 09:30:00','N/A','Check In','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 08:30:00','17.11.2015 09:30:00','N/A','Check In','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (9,'Corredor B','17.11.2015 10:00:00','17.11.2015 11:30:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 10:00:00','17.11.2015 11:30:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (10,'Corredor B','17.11.2015 11:30:00','17.11.2015 12:30:00','N/A','FEUPitch 1','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 11:30:00','17.11.2015 12:30:00','N/A','FEUPitch 1','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (11,'Corredor B','17.11.2015 12:30:00','17.11.2015 14:00:00','N/A','FEUPitch 2','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 12:30:00','17.11.2015 14:00:00','N/A','FEUPitch 2','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (12,'Corredor B','17.11.2015 10:00:00','17.11.2015 14:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 10:00:00','17.11.2015 14:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (13,'Corredor B','17.11.2015 09:30:00','17.11.2015 17:30:00','N/A','Exhibition & Carrer Advisoty Booth','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 09:30:00','17.11.2015 17:30:00','N/A','Exhibition & Carrer Advisoty Booth','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (14,'Corredor B','17.11.2015 14:00:00','17.11.2015 20:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 14:00:00','17.11.2015 20:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (15,'Corredor B','17.11.2015 14:30:00','17.11.2015 18:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 14:30:00','17.11.2015 18:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (16,'Corredor B','17.11.2015 18:00:00','17.11.2015 20:00:00','N/A','Alumni On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','17.11.2015 18:00:00','17.11.2015 20:00:00','N/A','Alumni On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (17,'Corredor B','18.11.2015 08:30:00','18.11.2015 09:30:00','N/A','Check In','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 08:30:00','18.11.2015 09:30:00','N/A','Check In','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (18,'Corredor B','18.11.2015 10:00:00','18.11.2015 13:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 10:00:00','18.11.2015 13:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (19,'Corredor B','18.11.2015 10:00:00','18.11.2015 14:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 10:00:00','18.11.2015 14:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (20,'Corredor B','18.11.2015 09:30:00','18.11.2015 17:30:00','N/A','Exhibition & Carrer Advisoty Booth','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 09:30:00','18.11.2015 17:30:00','N/A','Exhibition & Carrer Advisoty Booth','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (21,'Corredor B','18.11.2015 14:00:00','18.11.2015 20:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 14:00:00','18.11.2015 20:00:00','N/A','Chat Room & Speed Talk','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (22,'Corredor B','18.11.2015 14:00:00','18.11.2015 18:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 14:00:00','18.11.2015 18:00:00','N/A','On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (23,'Corredor B','18.11.2015 18:30:00','18.11.2015 20:00:00','N/A','Alumni On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','18.11.2015 18:30:00','18.11.2015 20:00:00','N/A','Alumni On-the-spot Job Interview','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (24,'Corredor B','19.11.2015 19:30:00','19.11.2015 18:00:00','BEST Porto','BEST Competition','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 19:30:00','19.11.2015 18:00:00','BEST Porto','BEST Competition','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (25,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','JuniFEUP','Successful Entrepreneurs','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','JuniFEUP','Successful Entrepreneurs','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (26,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','Ordem dos Engenheiros','Professional Recognition of the engineers','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','Ordem dos Engenheiros','Professional Recognition of the engineers','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (27,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','Students Testemonials','International Traneeshipos','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','Students Testemonials','International Traneeshipos','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (28,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','N/A','LinkedIn: The importance of the social network when searching for a job','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','N/A','LinkedIn: The importance of the social network when searching for a job','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 INSERT INTO "public"."liveFairEvents" ("id","eventLocation","startTime","endTime","speakers","subject","createdAt","updatedAt","liveFairEventsID") 
-VALUES (29,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','N/A','Career Abroad: how to cope with all the changes','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
+VALUES (DEFAULT,'Corredor B','19.11.2015 17:30:00','19.11.2015 18:00:00','N/A','Career Abroad: how to cope with all the changes','13.05.2015 23:07:00','13.05.2015 23:07:00','7763d30f-2662-47f5-b43d-41a6ce5ba66f');
 
 INSERT INTO "public"."stands" ("standLocation","approved","createdAt","updatedAt","liveFairLiveFairID","companyCompanyID","visitorCounter") 
 VALUES ('42',True,'13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537',40);
@@ -228,61 +228,61 @@ INSERT INTO "public"."companyEvents" ("companyEventsID","location","startTime","
 VALUES ('df0560e6-5c96-422f-9332-fb552dabac80','Auditório A','26.11.2015 09:00:00','26.11.2015 09:30:00','João Fonseca','Boas-Vindas e Introdução','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyEvents" ("id","liveFairIDref","companyIDref","companyEventsIDref","createdAt","updatedAt") 
-VALUES (0,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','384bd320-98ae-48dd-9ba6-1977e37b8af2','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','384bd320-98ae-48dd-9ba6-1977e37b8af2','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyEvents" ("id","liveFairIDref","companyIDref","companyEventsIDref","createdAt","updatedAt") 
-VALUES (1,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','15f4fe42-d52a-4447-b6d8-0309c38b2e4a','13.05.2015 23:07:00','13.05.2015 23:07:00');
-
-INSERT INTO "public"."liveFairCompanyEvents" ("id","liveFairIDref","companyIDref","companyEventsIDref","createdAt","updatedAt") 
-VALUES (2,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','8c4813d2-ec42-4928-8e4e-cdbee1db3032','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','15f4fe42-d52a-4447-b6d8-0309c38b2e4a','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyEvents" ("id","liveFairIDref","companyIDref","companyEventsIDref","createdAt","updatedAt") 
-VALUES (3,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','df0560e6-5c96-422f-9332-fb552dabac80','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','8c4813d2-ec42-4928-8e4e-cdbee1db3032','13.05.2015 23:07:00','13.05.2015 23:07:00');
+
+INSERT INTO "public"."liveFairCompanyEvents" ("id","liveFairIDref","companyIDref","companyEventsIDref","createdAt","updatedAt") 
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','df0560e6-5c96-422f-9332-fb552dabac80','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (0,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (1,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (2,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','66304d61-e932-4761-b3ac-19b84532c537','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (3,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (4,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','a9b323e8-fece-4979-829b-fa3f5367e1b1','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (5,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (6,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (7,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (8,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (9,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9362c456-876e-4679-b246-3ae5a40ed214','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (10,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (11,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (12,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (13,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','77d531d7-036f-4fb5-8133-f906cdb68560','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','66304d61-e932-4761-b3ac-19b84532c537','77d531d7-036f-4fb5-8133-f906cdb68560','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (14,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (15,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (16,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','a9b323e8-fece-4979-829b-fa3f5367e1b1','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (17,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','534316d9-1232-418e-a47e-d8b4680de699','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (18,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','c3e8609c-5cab-4cd2-94ce-a65197063621','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairCompanyInterest" ("id","liveFairIDref","companyIDref","interestIDref","createdAt","updatedAt") 
-VALUES (19,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'7763d30f-2662-47f5-b43d-41a6ce5ba66f','9362c456-876e-4679-b246-3ae5a40ed214','826baa18-539d-461a-97b6-e3efa6eed5b7','13.05.2015 23:07:00','13.05.2015 23:07:00');
 
 INSERT INTO "public"."visitor_liveFair" ("createdAt","updatedAt","liveFairLiveFairID","visitorVisitorID") 
 VALUES ('13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8');
@@ -302,42 +302,42 @@ INSERT INTO "public"."visitor_liveFair" ("createdAt","updatedAt","liveFairLiveFa
 VALUES ('13.05.2015 23:07:00','13.05.2015 23:07:00','df0a9750-31f8-4cf7-853e-c6d9093a8dbf','e26f0790-23f1-4bef-969c-b72562622a1a');
 
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (0,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (1,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (2,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','98eb038b-0c4e-48d1-8138-551644ec65f8','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (3,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','d8657fc3-d3ba-4fff-a309-b5ef826a7dbc','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','d8657fc3-d3ba-4fff-a309-b5ef826a7dbc','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (4,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','d8657fc3-d3ba-4fff-a309-b5ef826a7dbc','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','d8657fc3-d3ba-4fff-a309-b5ef826a7dbc','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (5,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (6,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (7,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1063a7a6-7b71-4336-9477-aa12eae3f1db','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (8,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (9,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (10,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','9df91e19-71fb-41d1-a172-c4dc19abfbd4','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (11,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1ca3587c-73c9-442e-8f92-3fd77c0fc9ab','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1ca3587c-73c9-442e-8f92-3fd77c0fc9ab','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (12,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1ca3587c-73c9-442e-8f92-3fd77c0fc9ab','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1ca3587c-73c9-442e-8f92-3fd77c0fc9ab','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (13,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (14,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','4e428b70-9aa7-42c4-b6c4-8f85b5ff0d6c','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (15,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','1280f5d9-b1ba-4278-ab51-b533772c4e15','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (16,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','f68d01e5-68d5-429e-aabd-7c6e6c6f1c11','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','f68d01e5-68d5-429e-aabd-7c6e6c6f1c11','d01e69b5-be9d-4439-8b10-514d72eca7d9','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (17,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','f68d01e5-68d5-429e-aabd-7c6e6c6f1c11','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','f68d01e5-68d5-429e-aabd-7c6e6c6f1c11','693e021e-be18-4f45-828c-eb0cab73d2db','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (18,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','e26f0790-23f1-4bef-969c-b72562622a1a','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','e26f0790-23f1-4bef-969c-b72562622a1a','e474128f-468c-43ef-9af2-a3c7ef5658a4','13.05.2015 23:07:00','13.05.2015 23:07:00');
 INSERT INTO "public"."liveFairVisitorInterest" ("id","liveFairIDref","visitorIDref","interestIDref","createdAt","updatedAt") 
-VALUES (19,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','e26f0790-23f1-4bef-969c-b72562622a1a','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
+VALUES (DEFAULT,'df0a9750-31f8-4cf7-853e-c6d9093a8dbf','e26f0790-23f1-4bef-969c-b72562622a1a','4d300c1d-8a36-4a3b-974b-eee8569236d3','13.05.2015 23:07:00','13.05.2015 23:07:00');
