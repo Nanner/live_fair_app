@@ -612,7 +612,7 @@ module.controller('fairCtrl', function($scope, $state, $stateParams, $ionicPopup
     };
 });
 
-module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage) {
+module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liveFairApi, utils, $translate, $localForage, server) {
     var liveFairID = $stateParams.fairID;
     $scope.stands = "";
     $scope.fair = {};
@@ -620,13 +620,14 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
     liveFairApi.getLiveFair(liveFairID).$promise
         .then(function(liveFair){
             $scope.fair.fairName = liveFair.name;
-        });
+    });
 
     $localForage.getItem('userID').then(function(response) {
             var userID = response;
             liveFairApi.getMatches(liveFairID, userID).$promise.then(function(data) {
                 $scope.stands = data;
                 $scope.fairName = utils.getFairName();
+                fillImagePath();
             }, function(error) {
                 utils.showAlert($translate.instant('notPossibleMatches'), $translate.instant('error'));
             });
@@ -637,11 +638,17 @@ module.controller('fairMatchesCtrl', function ($scope, $state, $stateParams, liv
         }
     );
 
+    function fillImagePath() {
+        for(i = 0; i < $scope.stands.length; i++) {
+            $scope.stands[i].logoImagePath = server.url + "/Users/" + $scope.stands[i].companyID +"/image";
+        }
+    };
+
+
     $scope.loadProfile = function(id) {
         $state.go('menu.profile', {fairID: liveFairID, companyID: id});
     };
 });
-
 
 module.controller('searchFairCtrl', function ($scope, $state, $stateParams, $ionicPopup, utils, liveFairApi, $translate) {
 
